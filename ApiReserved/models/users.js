@@ -55,7 +55,7 @@ User.update=function(userData,callback) {
     if(connection){
         var sql="UPDATE usuarios SET nombre="+connection.escape(userData.nombre)+","+
                 "apellidos="+connection.escape(userData.apellidos)+","+
-                "contraseña="+connection.escape(userData.contraseña)+","+
+                "password="+connection.escape(userData.password)+","+
                 "email="+connection.escape(userData.email)+","+
                 "telefono="+connection.escape(userData.telefono)+","+
                 "direccion="+connection.escape(userData.direccion)+

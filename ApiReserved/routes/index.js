@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User=require("../models/users");
+var Comments=require("../models/comments");
 
 /* GET  Todos los Usuarios */
 router.get('/users', function(req, res, next) {
@@ -19,7 +20,7 @@ router.post('/users',function(req,res,next){
     var userData={
         IdUsuario:null,
         nick:req.body.nick,
-        contraseña:req.body.contraseña,
+        password:req.body.password,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         email:req.body.email,
@@ -53,7 +54,7 @@ router.get('/users/:id', function(req, res, next) {
 router.put('/users/:id',function(req,res,next){
     var userData={
         id:req.params.id,
-        contraseña:req.body.contraseña,
+        password:req.body.password,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         email:req.body.email,
@@ -74,6 +75,60 @@ router.put('/users/:id',function(req,res,next){
 /* DELETE Borrar un usuario */
 router.delete("/users/:id",function(req,res,next){
     User.remove(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Comentarios de un Usuario */
+router.get('/users/:id/comments', function(req, res, next) {
+
+    Comments.findCommentsUser(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Comentarios de un Restaurante */
+router.get('/restaurant/:id/comments', function(req, res, next) {
+
+    Comments.findCommentsRestaurant(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* POST Crear un comentario */
+router.post('/comment',function(req,res,next){
+    var commentData={
+        IdComentario:null,
+        contenido:req.body.contenido,
+        fecha:req.body.fecha,
+        usuarioc:req.body.usuarioc,
+        restaurantec:req.body.restaurantec,
+    };
+
+    Comments.insert(commentData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* DELETE Borrar un comentario */
+router.delete("/comments/:id",function(req,res,next){
+    Comments.remove(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
         }else{
