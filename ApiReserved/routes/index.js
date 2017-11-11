@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User=require("../models/users");
 var Comments=require("../models/comments");
+var Restaurant=require("../models/restaurants");
 
 /* GET  Todos los Usuarios */
 router.get('/users', function(req, res, next) {
@@ -136,6 +137,119 @@ router.delete("/comments/:id",function(req,res,next){
         }
     })
 });
+
+/* GET  Todos los Restaurantes */
+router.get('/restaurants', function(req, res, next) {
+
+    Restaurant.all(function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Restaurante por su Id */
+router.get('/restaurants/:id', function(req, res, next) {
+
+    Restaurant.findOneById(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Restaurantes por nombre */
+router.get('/restaurants/:name', function(req, res, next) {
+
+    Restaurant.findRestaurantName(req.params.name,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Restaurantes por Tipo de comida */
+router.get('/restaurants/type/:type', function(req, res, next) {
+
+    Restaurant.findRestaurantType(req.params.type,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* POST Crear un Restaurante */
+router.post('/restaurants',function(req,res,next){
+    var restaurantData={
+        IdRestaurante:null,
+        nombre:req.body.nombre,
+        password:req.body.password,
+        horario:req.body.horario,
+        descripcion:req.body.descripcion,
+        direccion:req.body.direccion,
+        telefono:req.body.telefono,
+        ciudad:req.body.ciudad,
+        imagenes:req.body.imagenes,
+        aforo:req.body.aforo,
+        tipoComida:req.body.tipoComida
+    };
+
+    Restaurant.insert(restaurantData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/* PUT Modificar un Restaurante */
+router.put('/restaurants/:id',function(req,res,next){
+    var restaurantData={
+        id:req.params.id,
+        nombre:req.body.nombre,
+        password:req.body.password,
+        horario:req.body.horario,
+        descripcion:req.body.descripcion,
+        direccion:req.body.direccion,
+        telefono:req.body.telefono,
+        ciudad:req.body.ciudad,
+        imagenes:req.body.imagenes,
+        aforo:req.body.aforo,
+        tipoComida:req.body.tipoComida
+    };
+
+    Restaurant.update(restaurantData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/* DELETE Borrar un Restaurante */
+router.delete("/restaurants/:id",function(req,res,next){
+    Restaurant.remove(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
 
 /* Prueba CONEXION */
 /*
