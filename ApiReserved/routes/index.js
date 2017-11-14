@@ -3,6 +3,7 @@ var router = express.Router();
 var User=require("../models/users");
 var Comments=require("../models/comments");
 var Restaurant=require("../models/restaurants");
+var Reservations=require("../models/reservations");
 
 /* GET  Todos los Usuarios */
 router.get('/users', function(req, res, next) {
@@ -248,6 +249,55 @@ router.delete("/restaurants/:id",function(req,res,next){
         }
     })
 });
+
+/* GET Reservas de un Usuario */
+router.get('/user/:id/reservations', function(req, res, next) {
+
+    Reservations.findUserReserve(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* POST Crear una reserva */
+router.post('/user/:id/reservations',function(req,res,next){
+    var ReservationData={
+        IdReserva:null,
+        dia:req.body.dia,
+        hora:req.body.hora,
+        comensales:req.body.comensales,
+        usuarior:req.params.id,
+        restauranter:req.body.restauranter
+    };
+
+    var AforoData={
+        IdAforo:req.body.restauranter,
+        dia:req.body.dia,
+        turno:req.body.turno,
+        idrestaurante:req.body.restauranter,
+        comensales:req.body.comensales
+    };
+
+    Reservations.insertReservation(ReservationData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+    Reservations.updateAforo(AforoData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
 
 
 
