@@ -187,6 +187,18 @@ router.get('/restaurants/type/:type', function(req, res, next) {
     })
 });
 
+/* GET Aforo de Restaurante en un turno */
+router.get('/restaurants/:id/capacity', function(req, res, next) {
+
+    Restaurant.seecapacity(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 /* POST Crear un Restaurante */
 router.post('/restaurants',function(req,res,next){
     var restaurantData={
@@ -264,9 +276,11 @@ router.get('/user/:id/reservations', function(req, res, next) {
 
 /* POST Crear una reserva */
 router.post('/user/:id/reservations',function(req,res,next){
+
     var ReservationData={
         IdReserva:null,
         dia:req.body.dia,
+        turno:req.body.turno,
         hora:req.body.hora,
         comensales:req.body.comensales,
         usuarior:req.params.id,
@@ -286,18 +300,47 @@ router.post('/user/:id/reservations',function(req,res,next){
             res.json(500,error);
         }else{
             res.json(200,data);
+            aux=1;
         }
     })
-    Reservations.updateAforo(AforoData,function(error,data){
+
+        Reservations.updateAforo(AforoData,function(error,data){
+            if (error){
+                res.json(500,error);
+            }else{
+                res.json(200,data);
+            }
+        })
+
+});
+
+/* DELETE Borrar una Reserva */
+
+router.delete("/user/:iduser/reservations/:id",function(req,res,next){
+    var ReservationData={
+        dia:req.body.dia,
+        turno:req.body.turno,
+        restaurante:req.body.restaurante
+    };
+
+    Reservations.removeAforo(req.params.id,ReservationData,function(error,data){
         if (error){
             res.json(500,error);
         }else{
             res.json(200,data);
         }
     })
+
+    Reservations.remove(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+
 });
-
-
 
 
 

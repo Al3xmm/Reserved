@@ -65,6 +65,20 @@ Restaurants.findRestaurantType=function(type, callback){
     }
 }
 
+/* Mostar aforo de un restaurante en un turno */
+Restaurants.seecapacity=function(id,callback){
+    if (connection){
+        var sql="SELECT dia,turno,aforo FROM aforo_libre WHERE idRestaurante="+connection.escape(id);
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
 /* Crear un Restaurante */
 Restaurants.insert=function(restaurantData,callback){
     if(connection){

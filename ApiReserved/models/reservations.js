@@ -42,13 +42,41 @@ Reservation.insertReservation=function(ReservationData,callback){
 //Este metodo lo que hace es crear una fila en aforo_libre o modificar una existente ajustando el aforo de un restaurante ese dia a ese turno
 Reservation.updateAforo=function(AforoData,callback){
     if(connection){
-        var sql=("INSERT INTO aforo_libre values (" + AforoData.IdAforo + ",'" + AforoData.dia + "','" + AforoData.turno + "',(SELECT aforo FROM restaurantes where IdRestaurante="+AforoData.idrestaurante+")," + AforoData.idrestaurante + ") ON DUPLICATE KEY update aforo=aforo-" + AforoData.comensales);
+        var sql=("INSERT INTO aforo_libre values (" + AforoData.IdAforo + ",'" + AforoData.dia + "','" + AforoData.turno + "',(SELECT aforo-"+AforoData.comensales+" FROM restaurantes where IdRestaurante="+AforoData.idrestaurante+")," + AforoData.idrestaurante + ") ON DUPLICATE KEY update aforo=aforo-" + AforoData.comensales);
+        connection.query(sql,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,result.insertid);
+            }
+        })
+    }
+}
+
+/* Elimina una reserva */
+
+Reservation.remove=function(Id,callback){
+    if(connection){
+        var sql= "DELETE FROM reservas WHERE idReserva=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Reserva eliminada");
+            }
+        })
+    }
+}
+
+Reservation.removeAforo=function(Id,ReservationData,callback){
+    if(connection){
+        var sql="UPDATE aforo_libre set aforo=aforo+(SELECT comensales from reservas where Idreserva="+connection.escape(Id)+") WHERE idaforo="+ReservationData.restaurante+" AND dia='"+ReservationData.dia+"' AND turno='"+ReservationData.turno+"'";
         connection.query(sql,function(error,result){
             if (error){
                 console.log(sql);
                 throw error;
             }else{
-                return callback(null,result.insertid);
+                //return callback(null,"Aforo actualizado");
             }
         })
     }
