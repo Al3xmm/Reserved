@@ -65,7 +65,7 @@ Restaurants.findRestaurantType=function(type, callback){
     }
 }
 
-/* Mostar aforo de un restaurante en un turno */
+/* Mostar aforo de un restaurante */
 Restaurants.seecapacity=function(id,callback){
     if (connection){
         var sql="SELECT dia,turno,aforo FROM aforo_libre WHERE idRestaurante="+connection.escape(id);

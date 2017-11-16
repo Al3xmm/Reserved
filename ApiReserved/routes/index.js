@@ -4,6 +4,7 @@ var User=require("../models/users");
 var Comments=require("../models/comments");
 var Restaurant=require("../models/restaurants");
 var Reservations=require("../models/reservations");
+var Product=require("../models/products");
 
 /* GET  Todos los Usuarios */
 router.get('/users', function(req, res, next) {
@@ -338,8 +339,17 @@ router.delete("/user/:iduser/reservations/:id",function(req,res,next){
             res.json(200,data);
         }
     })
+});
 
-
+/* Mostrar todos los Productos de un Restaurante*/
+router.get("/restaurants/:id/products", function(req, res, next){
+    Product.findByRestaurantId(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
 });
 
 
