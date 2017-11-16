@@ -352,7 +352,56 @@ router.get("/restaurants/:id/products", function(req, res, next){
     })
 });
 
+/* Borrar un producto de un restaurante*/
+router.delete('/restaurants/:id/products/:idproducto', function(req, res, next){
+    Product.remove(req.params.id, req.params.idproducto, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
+/* Crear un producto en un restaurante*/
+router.post('/restaurants/:id/products', function(req, res, next){
+  var productData={
+      IdProducto: null,
+      Nombre: req.body.nombre,
+      Precio: req.body.precio,
+      Tipo: req.body.tipo,
+      Descripcion: req.body.descripcion,
+      RestauranteP: req.body.restauranteP
+  };
+
+    Product.insert(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* Modifica un producto en un restaurante*/
+router.put('restaurants/:id/products/:producto', function(req, res, next){
+    var productData={
+        IdProducto: req.body.idProducto,
+        Nombre: req.body.nombre,
+        Precio: req.body.precio,
+        Tipo: req.body.tipo,
+        Descripcion: req.body.descripcion,
+        RestauranteP: req.body.restauranteP
+    };
+
+    Product.update(id, productData, function(error, callback){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 /* Prueba CONEXION */
 /*
