@@ -341,6 +341,34 @@ router.delete("/user/:iduser/reservations/:id",function(req,res,next){
     })
 });
 
+/* PUT Modificar una reserva */
+router.put('/users/:id/reservation/:idreservation',function(req,res,next){
+    var reservationData={
+        IdAforo:req.body.restauranter,
+        dia:req.body.dia,
+        hora:req.body.hora,
+        turno:req.body.turno,
+        idrestaurante:req.body.restauranter,
+        comensales:req.body.comensales
+    };
+
+    Reservations.update(reservationData,req.params.idreservation,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+    Reservations.updatereservation(reservationData,req.params.idreservation,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
 /* Mostrar todos los Productos de un Restaurante*/
 router.get("/restaurants/:id/products", function(req, res, next){
     Product.findByRestaurantId(req.params.id, function(error,data){

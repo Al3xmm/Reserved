@@ -82,4 +82,33 @@ Reservation.removeAforo=function(Id,ReservationData,callback){
     }
 }
 
+/* Modificar una reserva */
+
+/*Aqui modificamos el aforo dependiendo de como cambien los comensales*/
+Reservation.update=function(ReservationData,idreserva,callback){
+    if(connection){
+        var sql="UPDATE aforo_libre set aforo=aforo+(SELECT comensales from reservas where idreserva="+connection.escape(idreserva)+")-"+ReservationData.comensales+" where idaforo="+ReservationData.IdAforo+" AND dia='"+ReservationData.dia+"' AND turno='"+ReservationData.turno+"'";
+        connection.query(sql,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                //return callback(null,"Aforo actualizado");
+            }
+        })
+    }
+}
+
+Reservation.updatereservation=function(ReservationData,idreserva,callback){
+    if(connection){
+        var sql="UPDATE reservas SET comensales="+ReservationData.comensales+", hora='"+ReservationData.hora+"' WHERE idreserva="+connection.escape(idreserva);
+        connection.query(sql,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,"Reserva actualizada");
+            }
+        })
+    }
+}
+
 module.exports=Reservation;
