@@ -169,10 +169,10 @@ router.post('/:id/products', function(req, res, next){
       Precio: req.body.precio,
       Tipo: req.body.tipo,
       Descripcion: req.body.descripcion,
-      RestauranteP: req.body.restauranteP
+      RestauranteP: req.body.restaurantep
   };
 
-    Product.insert(req.params.id, function(error,data){
+    Product.insert(productData, function(error,data){
         if (error){
             res.json(500,error);
         }else{
@@ -182,17 +182,15 @@ router.post('/:id/products', function(req, res, next){
 });
 
 /* Modifica un producto en un restaurante*/
-router.put('/:id/products/:producto', function(req, res, next){
+router.put('/:id/products/:idproducto', function(req, res, next){
     var productData={
-        IdProducto: req.body.idProducto,
         Nombre: req.body.nombre,
         Precio: req.body.precio,
         Tipo: req.body.tipo,
-        Descripcion: req.body.descripcion,
-        RestauranteP: req.body.restauranteP
+        Descripcion: req.body.descripcion
     };
 
-    Product.update(id, productData, function(error, callback){
+    Product.update(req.params.id,req.params.idproducto,productData, function(error, callback){
         if (error){
             res.json(500,error);
         }else{
@@ -200,5 +198,4 @@ router.put('/:id/products/:producto', function(req, res, next){
         }
     })
 });
-
 module.exports = router;

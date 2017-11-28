@@ -41,10 +41,9 @@ Products.remove = function(id,product,callback){
 }
 
 /* Crear un producto en un restaurante*/
-Products.insert = function(id,callback){
+Products.insert = function(productData,callback){
     if (connection){
-      var sql = ("INSERT INTO productos SET ?");
-      connection.query(sql,function(error,result){
+      connection.query("INSERT INTO productos SET ?",productData,function(error,result){
           if (error){
               throw error;
           }else{
@@ -54,16 +53,18 @@ Products.insert = function(id,callback){
     }
 }
 
+
 /* Modifica un producto en un restaurante*/
-Products.update = function(id, productData,callback){
+Products.update = function(id,idproducto, productData,callback){
     if(connection){
-        var sql="UPDATE productos SET Nombre="+connection.escape(productData.nombre)+","+
-                "Precio="+connecion.escape(productData.precio)+","+
-                "Tipo="+connecion.escape(productData.tipo)+","+
-                "Descripcion="+connecion.escape(productData.descripcion)+","+
-                "RestauranteP="+connecion.escape(productData.restauranteP)+
-                "WHERE IdProducto="+productData.id+"AND RestauranteP = "+connection.escape(id);
-        connection.query(sql,function(error,result){
+        var sql="UPDATE productos SET Nombre="+connection.escape(productData.Nombre)+","+
+                "Precio="+connection.escape(productData.Precio)+","+
+                "Tipo="+connection.escape(productData.Tipo)+","+
+                "Descripcion="+connection.escape(productData.Descripcion)+","+
+                "WHERE IdProducto="+connection.escape(idproducto)+"AND RestauranteP = "+connection.escape(id);
+               
+
+                connection.query(sql,function(error,result){
             if(error){
                 throw error;
             }else{
