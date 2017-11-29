@@ -10,6 +10,24 @@ connection=mysql.createConnection({
 
 var Products={};
 
+/* Mostrar todos los restaurantes segun el plato HACER*/
+Products.findByRestaurantByNameProduct = function(nombreproducto,callback){
+    if (connection){
+      var sql = ("SELECT r.Nombre FROM productos p,restaurantes r WHERE p.Nombre="+connection.escape(nombreproducto));
+
+      console.log(sql);
+
+      connection.query(sql,function(error,rows){
+          if (error){
+              throw error;
+          }
+          else{
+              return callback(null,rows);
+          }
+      })
+    }
+}
+
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){
     if (connection){
@@ -57,12 +75,11 @@ Products.insert = function(productData,callback){
 /* Modifica un producto en un restaurante*/
 Products.update = function(id,idproducto, productData,callback){
     if(connection){
-        var sql="UPDATE productos SET Nombre="+connection.escape(productData.Nombre)+","+
-                "Precio="+connection.escape(productData.Precio)+","+
-                "Tipo="+connection.escape(productData.Tipo)+","+
-                "Descripcion="+connection.escape(productData.Descripcion)+","+
-                "WHERE IdProducto="+connection.escape(idproducto)+"AND RestauranteP = "+connection.escape(id);
-               
+        var sql= ("UPDATE productos SET nombre="+connection.escape(productData.Nombre)+","+
+                "precio="+connection.escape(productData.Precio)+","+
+                "tipo="+connection.escape(productData.Tipo)+","+
+                "descripcion="+connection.escape(productData.Descripcion)+
+                "WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id));
 
                 connection.query(sql,function(error,result){
             if(error){

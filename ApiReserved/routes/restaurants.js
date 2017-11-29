@@ -139,6 +139,19 @@ router.get('/:id/comments', function(req, res, next) {
     })
 });
 
+/* Mostrar todos los restaurantes segun el nombre del plato */
+router.get("/product/:nombreproducto", function(req, res, next){
+  console.log(req.params.nombreproducto);
+    Product.findByRestaurantByNameProduct(req.params.nombreproducto, function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 /* Mostrar todos los Productos de un Restaurante*/
 router.get("/:id/products", function(req, res, next){
     Product.findByRestaurantId(req.params.id, function(error,data){
@@ -190,7 +203,7 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Descripcion: req.body.descripcion
     };
 
-    Product.update(req.params.id,req.params.idproducto,productData, function(error, callback){
+    Product.update(req.params.id,req.params.idproducto,productData, function(error, data){
         if (error){
             res.json(500,error);
         }else{

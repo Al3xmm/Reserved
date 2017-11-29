@@ -51,7 +51,7 @@ Restaurants.findRestaurantName=function(name, callback){
     }
 }
 
-/* Mostar restaurantes por su Nombre */
+/* Mostar restaurantes por su Tipo */
 Restaurants.findRestaurantType=function(type, callback){
     if (connection){
         var sql=("SELECT * FROM restaurantes WHERE tipoComida LIKE"+connection.escape(type));
