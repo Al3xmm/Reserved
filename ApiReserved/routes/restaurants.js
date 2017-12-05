@@ -4,6 +4,9 @@ var Restaurant=require("../models/restaurants");
 var Comments=require("../models/comments");
 var Product=require("../models/products");
 
+var bcrypt=require('bcrypt');
+var salt=bcrypt.genSaltSync(10);
+
 /* GET  Todos los Restaurantes */
 router.get('/', function(req, res, next) {
 
@@ -66,10 +69,12 @@ router.get('/:id/capacity', function(req, res, next) {
 
 /* POST Crear un Restaurante */
 router.post('/',function(req,res,next){
+
+    var hash=bcrypt.hashSync(req.body.password,salt);
     var restaurantData={
         IdRestaurante:null,
         nombre:req.body.nombre,
-        password:req.body.password,
+        password:hash,
         horario:req.body.horario,
         descripcion:req.body.descripcion,
         direccion:req.body.direccion,

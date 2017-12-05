@@ -4,6 +4,9 @@ var User=require("../models/users");
 var Comments=require("../models/comments");
 var Reservations=require("../models/reservations");
 
+var bcrypt=require('bcrypt');
+var salt=bcrypt.genSaltSync(10);
+
 /* GET  Todos los Usuarios */
 router.get('/', function(req, res, next) {
 
@@ -18,10 +21,12 @@ router.get('/', function(req, res, next) {
 
 /* POST Crear un usuario */
 router.post('/',function(req,res,next){
+
+    var hash=bcrypt.hashSync(req.body.password,salt);
     var userData={
         IdUsuario:null,
         nick:req.body.nick,
-        password:req.body.password,
+        password:hash,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         email:req.body.email,
