@@ -207,4 +207,40 @@ router.put('/:id/reservation/:idreservation',function(req,res,next){
 
 });
 
+
+/*Metodo para cuando un usuario hace un login guardarlo */
+router.post('/:id/usercontrol',function(req,res,next){
+
+
+    var ControlData={
+        idcontrolu:null,
+        fecha:req.body.fecha,
+        usuarioid:req.params.id
+
+    };
+    
+
+
+
+    UserControl.insert(ControlData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/*Metodo que te sale el ultimo login  de un usuario*/
+router.get('/:id/usercontrol',function(req,res,next){
+  UserControl.findUserControl(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
 module.exports = router;
