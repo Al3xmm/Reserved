@@ -1,7 +1,64 @@
 var express = require('express');
 var router = express.Router();
+var passport=require('passport');
 
 var Comments=require("../models/comments");
+var User=require("../models/users");
+
+
+// Index para loguearse con las diferentes RRSS
+router.get('/', function(req, res) {
+    res.render('index.html'); // load the index.ejs file
+});
+
+// Ruta para ver el perfil
+router.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile.html', {
+        user : req.user // get the user out of session and pass to template
+    });
+});
+
+// Ruta para hacer logout
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+/****************GOOGLE ROUTES ************************/
+router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+// the callback after google has authenticated the user
+router.get('/auth/google/callback',
+        passport.authenticate('google', {
+                successRedirect : '/profile',
+                failureRedirect : '/'
+}));
+
+/***************** FACEBOOK ROUTES *************************/
+
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email']}));
+
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect : '/profile',
+        failureRedirect : '/'
+}));
+
+
+  // ruta middleware para comprobar si un usuario esta logueado
+  function isLoggedIn(req, res, next) {
+
+      // si el usuario esta autenticado, continua sin problema
+      if (req.isAuthenticated())
+          return next();
+
+      // si no lo esta redirige a index
+      res.redirect('/');
+  }
+
+
+
+
 
 /* POST Crear un comentario */
 router.post('/comment',function(req,res,next){

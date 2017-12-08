@@ -10,6 +10,49 @@ connection=mysql.createConnection({
 
 var User={};
 
+/*Buscar un usuario de RRSS por su ID*/
+User.findById=function(id,callback){
+    if (connection){
+        connection.query("SELECT * FROM rrss WHERE idUsuario="+connection.escape(id),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
+/*Login del Usuario de RRSS*/
+User.findOne=function(idgoogle,callback){
+    if (connection){
+        connection.query("SELECT * FROM rrss WHERE idUsuario="+connection.escape(idgoogle),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
+/* Crear un usuario con RRSS */
+User.insertGoogle=function(userData,callback){
+    if(connection){
+        connection.query("INSERT INTO rrss SET ?",userData,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,result.insertid);
+            }
+        })
+    }
+}
+
 /* Mostar todos los usuarios */
 User.all= function(callback){
     if (connection){
