@@ -3,6 +3,7 @@ var router = express.Router();
 var Restaurant=require("../models/restaurants");
 var Comments=require("../models/comments");
 var Product=require("../models/products");
+var Employee=require("../models/employees");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -216,4 +217,88 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         }
     })
 });
+
+
+/*Todos los empleados de un restaurante */
+
+router.get('/:id/employee',function(req,res,next){
+  Employee.findEmployee(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+/* GET por id de empleado */
+
+router.get('/:id/employee/:idempleado', function(req, res, next){
+
+    Employee.findEmployeeById(req.params.idempleado,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
+router.delete("/:id/employee/:idempleado",function(req,res,next){
+    Employee.remove(req.params.idempleado,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+router.post('/:id/employee',function(req,res,next){
+
+    var hash=bcrypt.hashSync(req.body.password,salt);
+    var employeeData={
+        IdEmpleado:null,
+        nick:req.body.nick,
+        password:hash,
+        tipoempleado:req.body.tipoempleado,
+        empleador:req.params.id
+    };
+
+    Employee.insert(employeeData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/* PUT Modificar un usuario */
+router.put('/:id/employee/:idempleado',function(req,res,next){
+
+    var employeeData={
+      IdEmpleado:req.params.idempleado,
+        nick:req.body.nick,
+        password:req.body.password,
+        tipoempleado:req.body.tipoempleado,
+        empleador:req.params.id
+    };
+
+
+
+    Employee.update(employeeData,req.params.idempleado,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+
 module.exports = router;
