@@ -90,6 +90,49 @@ router.delete("/comments/:id",function(req,res,next){
     })
 });
 
+/* POST Crear un pedido */
+router.post('/orders', function(req,res,next){
+
+    var OrderData={
+        IdPedido:null,
+        reservap:req.body.reservap,
+        asignare:req.body.asignare,
+        cuentatotal:req.body.cuentatotal,
+        mesa:req.body.mesa
+    };
+
+    Orders.insert(OrderData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+            aux=1;
+        }
+    })
+});
+
+/* POST Crear un producto de pedido */
+router.post('/orders/:id/orderproducts/', function(req,res,next){
+
+    var OrderProductData={
+        IdProductoDePedido:null,
+        pedidop:req.params.id,
+        productop:req.body.productop,
+        tipoproducto:req.body.tipoproducto,
+        hora:req.body.hora
+    };
+
+    Orders.insertOrderProduct(OrderProductData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+            aux=1;
+        }
+    })
+});
+
+
 /* Prueba CONEXION */
 /*
 router.get('/users', function(req, res, next) {
