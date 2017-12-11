@@ -111,6 +111,36 @@ router.post('/orders', function(req,res,next){
     })
 });
 
+/* DELETE Eliminar un pedido */
+router.delete('/orders/:id', function(req,res,next){
+  Orders.remove(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+/* PUT Modificar un pedido */
+router.put('orders/:id', function(req,res,next){
+  var OrderData={
+      IdPedido:req.params.id,
+      reservap:req.body.reservap,
+      asignare:req.body.asignare,
+      cuentatotal:req.body.cuentatotal,
+      mesa:req.body.mesa
+  };
+
+  Order.update(OrderData, function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+});
+
 /* POST Crear un producto de pedido */
 router.post('/orders/:id/orderproducts/', function(req,res,next){
 
@@ -130,6 +160,17 @@ router.post('/orders/:id/orderproducts/', function(req,res,next){
             aux=1;
         }
     })
+});
+
+/* DELETE Eliminar un producto de pedido */
+router.delete('/orders/:id/orderproducts/:product', function(req,res,next){
+  Orders.removeOrderProduct(req.params.id, req.params.product,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
 });
 
 
