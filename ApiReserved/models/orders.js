@@ -10,7 +10,7 @@ connection=mysql.createConnection({
 
 var Order={};
 
-/* Mostrar la cuenta de un pedido (productos e importe)*/
+/* Mostrar productos de un pedido*/
 Order.findOrderProducts = function(id, callback){
   if(connection){
       var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.Nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
@@ -37,6 +37,33 @@ Order.insert = function(OrderData, callback){
   }
 }
 
+/* Eliminar un pedido */
+Order.remove = function(id, callback){
+  if(connection){
+    connection.query("DELETE from pedidos where IdPedido = "+connection.escape(id),function(error,result){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,"Pedido eliminado");
+        }
+    })
+  }
+}
+
+/* Modificar un pedido (Probar) */
+Order.update = function(OrderData, callback){
+  if(connection){
+      var sql = "UPDATE pedidos set AsignarE = "+connection.escape(OrderData.asignare)+", CuentaTotal = "+connection.escape(OrderData.cuentatotal)+" , Mesa = "+connection.escape(OrderData.mesa)+ " where IdPedido = "+OrderData.IdPedido;
+      connection.query(sql,function(error,result){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,"Pedido actualizado");
+          }
+      })
+  }
+}
+
 /* Crear un producto de pedido (meter un producto en un pedido) */
 Order.insertOrderProduct = function(OrderProductData, callback){
   if(connection){
@@ -47,6 +74,19 @@ Order.insertOrderProduct = function(OrderProductData, callback){
               return callback(null,"Producto de pedido creado");
           }
       })
+  }
+}
+
+/* Eliminar un producto de pedido (Falta probar)*/
+Order.removeOrderProduct = function(id, product, callback){
+  if(connection){
+    connection.query("DELETE from productosdepedido where PedidoP = "+connection.escape(id)+" and ProductoP = "+connection.escape(product),function(error,result){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,"Producto de pedido eliminado");
+        }
+    })
   }
 }
 
