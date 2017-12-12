@@ -13,9 +13,9 @@ module.exports=function(passport){
   // Guarda el segundo parametro de la funcion "done" en la sesion para ser utilizado luego por el deserializeuser
     passport.serializeUser(function(user, done) {
       if(prueba==true){
-          done(null, user.idgoogle);
+          done(null, user.idUsuario);
       }else{
-          done(null, user[0].idgoogle);
+          done(null, user[0].IdUsuario);
       }
         prueba=false;
 
