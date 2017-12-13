@@ -1,12 +1,14 @@
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy=require('passport-facebook').Strategy;
-
 var LocalStrategy   = require('passport-local').Strategy;
 
 var configAuth = require('./auth');
 
 var User=require("../models/users");
+
+var bcrypt=require('bcrypt');
+var salt=bcrypt.genSaltSync(10);
 
 var prueba=false;
 var tipoUsuario=0;
@@ -61,7 +63,10 @@ function(req, nick, password, done) { // callback with email and password from o
                 return done(null, false, req.flash('loginMessage', 'Usuario no encontrado.'));
             }
 
-            if(data[0].Password!=password){
+            var dbpass=data[0].Password;
+            var comparepass=bcrypt.compareSync(password, dbpass);
+
+            if(comparepass==false){
               return done(null, false, req.flash('loginMessage', 'Contraseña erronea.'));
             }
             console.log(data);
@@ -100,10 +105,13 @@ function(req, nick, password, done) { // callback with email and password from o
               } else {
                   // if there is no user with that email
                   // create the user
+                  var passhash=bcrypt.hashSync(password,salt);
+                  var idhash=bcrypt.hashSync(nick,salt);
+
                   var localData={
-                    idUsuario:'abcd',
+                    idUsuario:idhash,
                     nick:nick,
-                    password:password,
+                    password:passhash,
                     email:req.body.email
                   };
 
