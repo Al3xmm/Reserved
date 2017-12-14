@@ -47,5 +47,20 @@ UserControl.findUserControl = function(id,callback){
     }
 }
 
+/* Eliminar un Usuario */
+UserControl.remove=function(Id,callback){
+    if(connection){
+        var sql= "DELETE FROM controlusuarios WHERE usuarioid=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Control de usuario eliminado");
+            }
+        })
+    }
+}
+
+
 
 module.exports=UserControl;

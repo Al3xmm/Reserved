@@ -200,6 +200,135 @@ router.delete('/orders/:id/orderproducts/:product', function(req,res,next){
   })
 });
 
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARAR-PREPARANDO  */
+/*:idpp Id de produco de pedido :idp  ID de producto*/
+router.put('/orders/:id/orderproducts/:idpp/preparando/:idp', function(req, res, next){
+
+        Orders.CambiaEstadoPP(req.params.id,req.params.idpp,req.params.idp,function(error,data){
+            if (error){
+                res.json(500,error);
+            }else{
+                res.json(200,data);
+                aux=1;
+            }
+        })
+    });
+
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARANDO-PREPARADO  */
+/*:idpp Id de produco de pedido :idp  ID de producto*/
+router.put('/orders/:id/orderproducts/:idpp/preparado/:idp', function(req, res, next){
+
+      Orders.CambiaEstadoPP2(req.params.id,req.params.idpp,req.params.idp,function(error,data){
+              if (error){
+                    res.json(500,error);
+                }else{
+                    res.json(200,data);
+                    aux=1;
+                }
+            })
+        });
+  /*CAMBIA ESTADO DE UN PRODUCTO: PREPARADO-SERVIDO  */
+  /*:idpp Id de produco de pedido :idp  ID de producto*/
+  router.put('/orders/:id/orderproducts/:idpp/servido/:idp', function(req, res, next){
+
+        Orders.CambiaEstadoPS(req.params.id,req.params.idpp,req.params.idp,function(error,data){
+                    if (error){
+                        res.json(500,error);
+                    }else{
+                        res.json(200,data);
+                        aux=1;
+                    }
+                })
+            });
+
+
+/* GET facturas */
+
+router.get('/orders/:idusuario/bill', function(req, res, next){
+
+    Orders.findOrderbyBill(req.params.idusuario,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET facturas por nombre de restaurante */
+
+router.get('/orders/:idusuario/bill/name/:nombre', function(req, res, next){
+
+
+    Orders.findOrderbyBillbyName(req.params.idusuario,req.params.nombre,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET facturas filtrado por precio */
+
+router.get('/orders/:idusuario/bill/filter/:cuentainicial/:cuentafinal', function(req, res, next){
+
+    Orders.findOrderbyBillFilterPrice(req.params.idusuario,req.params.cuentainicial,req.params.cuentafinal,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET facturas filtrado por precio minimo*/
+
+router.get('/orders/:idusuario/bill/min/:cuenta', function(req, res, next){
+
+    Orders.findOrderbyBillFilterPriceUnder(req.params.idusuario,req.params.cuenta,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET facturas filtrado por precio minimo*/
+
+router.get('/orders/:idusuario/bill/max/:cuenta', function(req, res, next){
+
+    Orders.findOrderbyBillFilterPriceOver(req.params.idusuario,req.params.cuenta,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* Avisar empleado*/
+
+router.get('/orders/:id/employee/:idempleado', function(req, res, next){
+
+    Orders.OrdersEmployee(req.params.id,req.params.idempleado,function(error,data){
+
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
+
 
 /* Prueba CONEXION */
 /*

@@ -10,7 +10,7 @@ connection=mysql.createConnection({
 
 var Products={};
 
-/* Mostrar todos los restaurantes segun el plato HACER*/
+/* Mostrar todos los restaurantes segun el plato */
 Products.findByRestaurantByNameProduct = function(nombreproducto,callback){
     if (connection){
       var sql = ("SELECT r.Nombre FROM productos p,restaurantes r WHERE p.Nombre="+connection.escape(nombreproducto));
@@ -27,6 +27,25 @@ Products.findByRestaurantByNameProduct = function(nombreproducto,callback){
       })
     }
 }
+
+/* Mostrar los productos segun su tipo */
+Products.findProductsByType = function(id,tipo,callback){
+    if (connection){
+      var sql = ("SELECT p.nombre,p.tipo FROM productos p WHERE restaurantep="+connection.escape(id)+"AND tipo="+connection.escape(tipo));
+
+
+
+      connection.query(sql,function(error,rows){
+          if (error){
+              throw error;
+          }
+          else{
+              return callback(null,rows);
+          }
+      })
+    }
+}
+
 
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){

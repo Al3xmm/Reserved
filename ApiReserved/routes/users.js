@@ -243,4 +243,14 @@ router.get('/:id/usercontrol',function(req,res,next){
   })
 });
 
+router.delete('/:id/usercontrol',function(req,res,next){
+  UserControl.remove(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
 module.exports = router;

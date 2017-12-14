@@ -218,6 +218,16 @@ router.put('/:id/products/:idproducto', function(req, res, next){
     })
 });
 
+/* Mostrar los productos segun su tipo */
+router.get("/:id/products/:type", function(req, res, next){
+    Product.findProductsByType(req.params.id,req.params.type, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 /*Todos los empleados de un restaurante */
 
@@ -245,7 +255,7 @@ router.get('/:id/employee/:idempleado', function(req, res, next){
     })
 });
 
-
+//Eliminar un empleado
 router.delete("/:id/employee/:idempleado",function(req,res,next){
     Employee.remove(req.params.idempleado,function(error,data){
         if (error){
@@ -256,6 +266,7 @@ router.delete("/:id/employee/:idempleado",function(req,res,next){
     })
 });
 
+//Crear un empleado
 router.post('/:id/employee',function(req,res,next){
 
     var hash=bcrypt.hashSync(req.body.password,salt);
