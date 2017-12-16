@@ -4,6 +4,7 @@ var Restaurant=require("../models/restaurants");
 var Comments=require("../models/comments");
 var Product=require("../models/products");
 var Employee=require("../models/employees");
+var Images=require("../models/images");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -311,5 +312,58 @@ router.put('/:id/employee/:idempleado',function(req,res,next){
 
 });
 
+//Mostrar imagenes por id
+router.get('/:id/images/:idimagen',function(req,res,next){
+  Images.findImageId(req.params.id,req.params.idimagen,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+
+
+//Mostrar imagenes por restaurante
+router.get('/:id/images/',function(req,res,next){
+  Images.findImagenRestaurant(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+
+//Crear una imagen
+router.post('/:id/images',function(req,res,next){
+    var imageData={
+        IdImagenes:null,
+        url:req.body.url,
+        imagenesr:req.params.id
+    };
+
+    Images.insert(imageData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+//Eliminar un empleado
+router.delete("/:id/images/:idimagen",function(req,res,next){
+    Images.remove(req.params.id,req.params.idimagen,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 module.exports = router;
