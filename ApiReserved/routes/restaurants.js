@@ -355,7 +355,7 @@ router.post('/:id/images',function(req,res,next){
 
 });
 
-//Eliminar un empleado
+//Eliminar una imagen
 router.delete("/:id/images/:idimagen",function(req,res,next){
     Images.remove(req.params.id,req.params.idimagen,function(error,data){
         if (error){
