@@ -77,6 +77,7 @@ router.post('/',function(req,res,next){
         IdRestaurante:null,
         nombre:req.body.nombre,
         password:hash,
+        email:req.body.email,
         horario:req.body.horario,
         descripcion:req.body.descripcion,
         direccion:req.body.direccion,
@@ -84,7 +85,8 @@ router.post('/',function(req,res,next){
         ciudad:req.body.ciudad,
         imagenes:req.body.imagenes,
         aforo:req.body.aforo,
-        tipoComida:req.body.tipoComida
+        tipoComida:req.body.tipoComida,
+        coordenadas:req.body.coordenadas
     };
 
     Restaurant.insert(restaurantData,function(error,data){
@@ -103,6 +105,7 @@ router.put('/:id',function(req,res,next){
         id:req.params.id,
         nombre:req.body.nombre,
         password:req.body.password,
+        email:req.body.email,
         horario:req.body.horario,
         descripcion:req.body.descripcion,
         direccion:req.body.direccion,
@@ -110,7 +113,8 @@ router.put('/:id',function(req,res,next){
         ciudad:req.body.ciudad,
         imagenes:req.body.imagenes,
         aforo:req.body.aforo,
-        tipoComida:req.body.tipoComida
+        tipoComida:req.body.tipoComida,
+        coordenadas:req.body.coordenadas
     };
 
     Restaurant.update(restaurantData,function(error,data){
@@ -231,7 +235,6 @@ router.get("/:id/products/:type", function(req, res, next){
 });
 
 /*Todos los empleados de un restaurante */
-
 router.get('/:id/employee',function(req,res,next){
   Employee.findEmployee(req.params.id,function(error,data){
       if (error){
@@ -243,7 +246,6 @@ router.get('/:id/employee',function(req,res,next){
 });
 
 /* GET por id de empleado */
-
 router.get('/:id/employee/:idempleado', function(req, res, next){
 
     Employee.findEmployeeById(req.params.idempleado,function(error,data){

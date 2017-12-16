@@ -95,8 +95,9 @@ Restaurants.insert=function(restaurantData,callback){
 /* Modificar un restaurante */
 Restaurants.update=function(restaurantData,callback) {
     if(connection){
-        var sql="UPDATE restaurantes SET nombre="+connection.escape(restaurantData.nombre)+","+
+            var sql="UPDATE restaurantes SET nombre="+connection.escape(restaurantData.nombre)+","+
                 "password="+connection.escape(restaurantData.password)+","+
+                "email="+connection.escape(restaurantData.email)+","+
                 "horario="+connection.escape(restaurantData.horario)+","+
                 "descripcion="+connection.escape(restaurantData.descripcion)+","+
                 "direccion="+connection.escape(restaurantData.direccion)+","+
@@ -104,8 +105,9 @@ Restaurants.update=function(restaurantData,callback) {
                 "ciudad="+connection.escape(restaurantData.ciudad)+","+
                 "imagenes="+connection.escape(restaurantData.imagenes)+","+
                 "aforo="+connection.escape(restaurantData.aforo)+","+
-                "tipoComida="+connection.escape(restaurantData.tipoComida)+
-                "WHERE idRestaurante="+restaurantData.id;
+                "tipoComida="+connection.escape(restaurantData.tipoComida)+","+
+                "coordenadas="+connection.escape(restaurantData.coordenadas)+
+                " WHERE idRestaurante="+restaurantData.id;
         connection.query(sql,function(error,result){
             if(error){
                 throw error;
