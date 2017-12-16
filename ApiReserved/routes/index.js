@@ -4,6 +4,7 @@ var passport=require('passport');
 
 var Comments=require("../models/comments");
 var User=require("../models/users");
+var Orders=require("../models/orders");
 
 
 // process the signup form
@@ -117,6 +118,31 @@ router.delete("/comments/:id",function(req,res,next){
     })
 });
 
+/* GET pedidos */
+router.get('/orders', function(req, res, next) {
+
+    Orders.all(function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET pedidos por su Id */
+router.get('/orders/:id', function(req, res, next) {
+
+    Orders.findOneById(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
 /* POST Crear un pedido */
 router.post('/orders', function(req,res,next){
 
@@ -150,7 +176,7 @@ router.delete('/orders/:id', function(req,res,next){
 });
 
 /* PUT Modificar un pedido */
-router.put('orders/:id', function(req,res,next){
+router.put('/orders/:id', function(req,res,next){
   var OrderData={
       IdPedido:req.params.id,
       reservap:req.body.reservap,
@@ -159,7 +185,7 @@ router.put('orders/:id', function(req,res,next){
       mesa:req.body.mesa
   };
 
-  Order.update(OrderData, function(error,data){
+  Orders.update(OrderData, function(error,data){
     if (error){
         res.json(500,error);
     }else{
@@ -167,6 +193,7 @@ router.put('orders/:id', function(req,res,next){
     }
   })
 });
+
 
 /* POST Crear un producto de pedido */
 router.post('/orders/:id/orderproducts/', function(req,res,next){

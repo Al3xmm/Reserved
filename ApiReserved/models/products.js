@@ -93,12 +93,51 @@ Products.insert = function(productData,callback){
 
 /* Modifica un producto en un restaurante*/
 Products.update = function(id,idproducto, productData,callback){
+  var coma=false;
+
     if(connection){
-        var sql= ("UPDATE productos SET nombre="+connection.escape(productData.Nombre)+","+
-                "precio="+connection.escape(productData.Precio)+","+
-                "tipo="+connection.escape(productData.Tipo)+","+
-                "descripcion="+connection.escape(productData.Descripcion)+
-                "WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id));
+        var sql= "UPDATE productos SET "
+
+        if(productData.Nombre != undefined)
+        {
+          sql += " nombre="+connection.escape(productData.Nombre);
+          coma=true;
+        }
+
+        if(productData.Precio != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql +=  "precio="+connection.escape(productData.Precio);
+          coma=true;
+        }
+
+        if(productData.Tipo != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql +=  "tipo="+connection.escape(productData.Tipo);
+          coma=true;
+        }
+
+        if(productData.Informacion != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql += "informacion="+connection.escape(productData.Informacion);
+          coma=true;
+        }
+
+    sql +=  "WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id);
 
                 connection.query(sql,function(error,result){
             if(error){

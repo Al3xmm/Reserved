@@ -10,6 +10,35 @@ connection=mysql.createConnection({
 
 var Order={};
 
+
+/* Mostar todos los pedidos */
+Order.all= function(callback){
+    if (connection){
+        connection.query("SELECT CuentaTotal,Mesa FROM pedidos",function (error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
+/* Mostar un pedido buscado por su Id */
+Order.findOneById=function(id, callback){
+    if (connection){
+        var sql=("SELECT CuentaTotal FROM pedidos WHERE IdPedido ="+connection.escape(id));
+        connection.query(sql,function(error,row){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,row);
+            }
+        })
+    }
+}
+
+
 /* Mostrar productos de un pedido*/
 Order.findOrderProducts = function(id, callback){
   if(connection){
@@ -228,10 +257,46 @@ Order.remove = function(id, callback){
   }
 }
 
-/* Modificar un pedido (Probar) */
+/* Modificar un pedido*/
 Order.update = function(OrderData, callback){
+
   if(connection){
-      var sql = "UPDATE pedidos set AsignarE = "+connection.escape(OrderData.asignare)+", CuentaTotal = "+connection.escape(OrderData.cuentatotal)+" , Mesa = "+connection.escape(OrderData.mesa)+ " where IdPedido = "+OrderData.IdPedido;
+    var coma=false;
+
+      var sql = "UPDATE pedidos set ";
+      if(OrderData.asignare != undefined)
+      {
+        sql += "AsignarE = "+connection.escape(OrderData.asignare);
+        coma=true;
+      }
+
+      if(OrderData.asignare != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+
+        sql += "CuentaTotal = "+connection.escape(OrderData.cuentatotal);
+        coma=true;
+      }
+
+      if(OrderData.mesa != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+
+        sql += "Mesa = "+connection.escape(OrderData.mesa);
+        coma=true;
+      }
+
+      sql += "where IdPedido = "+OrderData.IdPedido;
+      console.log(sql);
+
       connection.query(sql,function(error,result){
           if (error){
               throw error;
@@ -241,6 +306,7 @@ Order.update = function(OrderData, callback){
       })
   }
 }
+
 
 /* Crear un producto de pedido (meter un producto en un pedido) */
 Order.insertOrderProduct = function(OrderProductData, callback){
