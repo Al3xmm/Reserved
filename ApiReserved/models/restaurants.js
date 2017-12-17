@@ -13,7 +13,7 @@ var Restaurants={};
 /* Mostar todos los restaurantes */
 Restaurants.all= function(callback){
     if (connection){
-        connection.query("SELECT * FROM restaurantes",function (error,rows){
+        connection.query("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes",function (error,rows){
             if (error){
                 throw error;
             }else{
@@ -26,7 +26,7 @@ Restaurants.all= function(callback){
 /* Mostar un restaurante buscado por su Id */
 Restaurants.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT * FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
+        var sql=("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;
@@ -40,7 +40,7 @@ Restaurants.findOneById=function(id, callback){
 /* Mostar restaurantes por su Nombre */
 Restaurants.findRestaurantName=function(name, callback){
     if (connection){
-        var sql=("SELECT * FROM restaurantes WHERE nombre LIKE"+connection.escape('%'+name+'%'));
+        var sql=("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE nombre LIKE"+connection.escape('%'+name+'%'));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -54,7 +54,7 @@ Restaurants.findRestaurantName=function(name, callback){
 /* Mostar restaurantes por su Tipo */
 Restaurants.findRestaurantType=function(type, callback){
     if (connection){
-        var sql=("SELECT * FROM restaurantes WHERE tipoComida LIKE"+connection.escape(type));
+        var sql=("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE tipoComida LIKE"+connection.escape(type));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

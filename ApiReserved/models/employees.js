@@ -12,7 +12,7 @@ var Employee={};
 
 Employee.findEmployee = function(id,callback){
     if (connection){
-      var sql = ("SELECT * FROM empleados WHERE empleador="+connection.escape(id));
+      var sql = ("SELECT nick,tipoempleado FROM empleados WHERE empleador="+connection.escape(id));
 
 
       connection.query(sql,function(error,rows){
@@ -29,7 +29,7 @@ Employee.findEmployee = function(id,callback){
 Employee.findEmployeeById=function(idempleado, callback){
     if (connection){
 
-        var sql=("SELECT * FROM empleados WHERE idempleado="+connection.escape(idempleado));
+        var sql=("SELECT nick,tipoempleado FROM empleados WHERE idempleado="+connection.escape(idempleado));
         console.log(sql);
         connection.query(sql,function(error,row){
             if (error){

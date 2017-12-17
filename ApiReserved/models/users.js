@@ -160,7 +160,7 @@ User.remove=function(Id,callback){
 /* Mostar todos los usuarios */
 User.all= function(callback){
     if (connection){
-        connection.query("SELECT * FROM usuarios",function (error,rows){
+        connection.query("SELECT nombre FROM usuarios",function (error,rows){
             if (error){
                 throw error;
             }else{
@@ -186,7 +186,7 @@ User.insert=function(userData,callback){
 /* Mostar un usuario buscado por su Id */
 User.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT * FROM usuarios WHERE idUsuario="+connection.escape(id));
+        var sql=("SELECT nombre FROM usuarios WHERE idUsuario="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;

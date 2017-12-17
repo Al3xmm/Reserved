@@ -50,7 +50,7 @@ Products.findProductsByType = function(id,tipo,callback){
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){
     if (connection){
-      var sql = ("SELECT * FROM productos WHERE RestauranteP ="+connection.escape(id));
+      var sql = ("SELECT p.nombre,p.precio,p.tipo FROM productos WHERE RestauranteP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;

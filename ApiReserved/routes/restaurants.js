@@ -5,6 +5,7 @@ var Comments=require("../models/comments");
 var Product=require("../models/products");
 var Employee=require("../models/employees");
 var Images=require("../models/images");
+var Visit=require("../models/visitrestaurant");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -367,5 +368,18 @@ router.delete("/:id/images/:idimagen",function(req,res,next){
         }
     })
 });
+
+
+//Mostrar visitas a un restautante
+router.get('/:id/visit',function(req,res,next){
+  Visit.findVisitRestaurant(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
 
 module.exports = router;

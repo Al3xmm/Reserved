@@ -3,6 +3,7 @@ var router = express.Router();
 var User=require("../models/users");
 var Comments=require("../models/comments");
 var Reservations=require("../models/reservations");
+var Visit=require("../models/visitrestaurant");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -218,7 +219,7 @@ router.post('/:id/usercontrol',function(req,res,next){
         usuarioid:req.params.id
 
     };
-    
+
 
 
 
@@ -252,5 +253,58 @@ router.delete('/:id/usercontrol',function(req,res,next){
       }
   })
 });
+
+//Mostrar visitas de un usuario
+router.get('/:id/visit',function(req,res,next){
+  Visit.findVisitUser(req.params.id,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+//Mostrar visitas de un usuario aun restaurante concreto
+router.get('/:id/visit/:idrestaurante',function(req,res,next){
+  Visit.findVisit(req.params.id,req.params.idrestaurante,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+//Crear una visita
+router.post('/:id/visit/:idrestaurante',function(req,res,next){
+    var visitData={
+        IdVisita:null,
+        usuarioId:req.params.id,
+        fecha:req.body.fecha,
+        restauranteId:req.params.idrestaurante
+    };
+
+    Visit.insert(visitData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+//Eliminar una visita
+router.delete("/:id/visit/:idvisita",function(req,res,next){
+    Visit.remove(req.params.id,req.params.idvisita,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 
 module.exports = router;

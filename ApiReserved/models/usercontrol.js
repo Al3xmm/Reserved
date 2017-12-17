@@ -33,7 +33,7 @@ UserControl.insert = function(ControlData,callback){
 
 UserControl.findUserControl = function(id,callback){
     if (connection){
-      var sql = ("SELECT * FROM controlusuarios WHERE usuarioid="+connection.escape(id));
+      var sql = ("SELECT fecha FROM controlusuarios WHERE usuarioid="+connection.escape(id));
 
 
       connection.query(sql,function(error,rows){
