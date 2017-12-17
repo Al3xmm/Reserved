@@ -10,6 +10,35 @@ connection=mysql.createConnection({
 
 var User={};
 
+/*Sacar el usuario de RRSS*/
+User.takeIdrrss=function(id,callback){
+    if (connection){
+        connection.query("SELECT * FROM usuarios WHERE idrrss="+connection.escape(id),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+/*Login del Usuario de LOCAL*/
+User.takeIdlocal=function(nick,callback){
+    if (connection){
+        connection.query("SELECT * FROM usuarios WHERE nick="+connection.escape(nick),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
 /*Login del Usuario de LOCAL*/
 User.findOneLocal=function(nick,callback){
     if (connection){
@@ -38,23 +67,8 @@ User.insertLocal=function(userData,callback){
     }
 }
 
-/*Buscar un usuario de RRSS por su ID*/
-User.findByIdRrss=function(id,callback){
-    if (connection){
-        connection.query("SELECT * FROM rrss WHERE idUsuario="+connection.escape(id),function (error,row){
-            if (error){
-                throw error;
-            }else if(row!=""){
-                return callback(null,row);
-            }else{
-                return callback(null,null);
-            }
-        })
-    }
-}
-
-/*Buscar un usuario  por su ID*/
-User.findByIdLocal=function(id,callback){
+/*Buscar un usuario por su ID*/
+User.findById=function(id,callback){
     if (connection){
         connection.query("SELECT * FROM usuarios WHERE idUsuario="+connection.escape(id),function (error,row){
             if (error){
@@ -71,7 +85,7 @@ User.findByIdLocal=function(id,callback){
 /*Login del Usuario de RRSS*/
 User.findOne=function(idgoogle,callback){
     if (connection){
-        connection.query("SELECT * FROM rrss WHERE idUsuario="+connection.escape(idgoogle),function (error,row){
+        connection.query("SELECT * FROM usuarios WHERE idrrss="+connection.escape(idgoogle),function (error,row){
             if (error){
                 throw error;
             }else if(row!=""){
@@ -86,7 +100,7 @@ User.findOne=function(idgoogle,callback){
 /* Crear un usuario con RRSS */
 User.insertGoogle=function(userData,callback){
     if(connection){
-        connection.query("INSERT INTO rrss SET ?",userData,function(error,result){
+        connection.query("INSERT INTO usuarios SET ?",userData,function(error,result){
             if (error){
                 throw error;
             }else{
@@ -95,6 +109,53 @@ User.insertGoogle=function(userData,callback){
         })
     }
 }
+/* Modifica un usuario logueado */
+User.update=function(userData,callback) {
+    if(connection){
+        console.log(userData.password);
+        var sql="UPDATE usuarios SET "
+
+        if(userData.password!=""){
+          sql+="password="+connection.escape(userData.password);
+        }
+
+        if(userData.password!="" && userData.email!=""){
+          sql+=",";
+        }
+
+        if(userData.email!=""){
+          sql+="email="+connection.escape(userData.email);
+        }
+
+        sql+="WHERE idUsuario="+userData.id;
+
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Usuario actualizado");
+            }
+        })
+    }
+}
+
+/* Eliminar un Usuario Logueado*/
+User.remove=function(Id,callback){
+    if(connection){
+        var sql= "DELETE FROM usuarios WHERE idUsuario=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Usuario eliminado");
+            }
+        })
+    }
+}
+
+
+
+/************************************************************************************/
 
 /* Mostar todos los usuarios */
 User.all= function(callback){
@@ -135,57 +196,5 @@ User.findOneById=function(id, callback){
         })
     }
 }
-
-/* Modificar un usuario */
-User.update=function(userData,callback) {
-    if(connection){
-        var sql="UPDATE usuarios SET nombre="+connection.escape(userData.nombre)+","+
-                "apellidos="+connection.escape(userData.apellidos)+","+
-                "password="+connection.escape(userData.password)+","+
-                "email="+connection.escape(userData.email)+","+
-                "telefono="+connection.escape(userData.telefono)+","+
-                "direccion="+connection.escape(userData.direccion)+
-                "WHERE idUsuario="+userData.id;
-        connection.query(sql,function(error,result){
-            if(error){
-                throw error;
-            }else{
-                return callback(null,"Usuario actualizado");
-            }
-        })
-    }
-}
-
-/* Eliminar un Usuario */
-User.remove=function(Id,callback){
-    if(connection){
-        var sql= "DELETE FROM usuarios WHERE idUsuario=" + connection.escape(Id);
-        connection.query(sql,function(error,result){
-            if(error){
-                throw error;
-            }else{
-                return callback(null,"Usuario eliminado");
-            }
-        })
-    }
-}
-
-/* PROBAR CONEXION */
-/*
-User.connect=function(callback){
-    if(connection){
-        var sql="SELECT 1+1";
-        connection.query(sql,function(error,row){
-                if(error){
-                    return callback(error,null);
-                }
-                return callback(null,"Conexión establecida con mysql, resultado: "+JSON.stringify(row));
-        })
-    }else{
-        return callback("No se puede conectar",null);
-    }
-}
-*/
-
 
 module.exports=User;

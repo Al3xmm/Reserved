@@ -7,19 +7,49 @@ var User=require("../models/users");
 var Orders=require("../models/orders");
 
 
-// process the signup form
+// formulario de registro
 router.post('/signup', passport.authenticate('local-signup', {
    successRedirect : '/profile', // redirect to the secure profile section
    failureRedirect : '/signup', // redirect back to the signup page if there is an error
    failureFlash : true // allow flash messages
 }));
 
-// process the login form
+// formulario de login
 router.post('/login', passport.authenticate('local-login', {
     successRedirect : '/profile', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
+
+// formulario modificacion usuario
+router.post('/updateprofileuser', function(req,res,next){
+
+    var passhash=bcrypt.hashSync(req.body.password,salt);
+    if(req.body.password!=""){
+      var userData={
+          id:req.user[0].idUsuario,
+          password:passhash,
+          email:req.body.email
+      };
+    }else{
+      var userData={
+          id:req.user[0].idUsuario,
+          password:req.body.password,
+          email:req.body.email
+      };
+    }
+
+
+    User.update(userData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+          res.render('profile.html', {
+              user : req.user // get the user out of session and pass to template
+          });
+        }
+    })
+});
 
 
 // Index para loguearse con las diferentes RRSS
@@ -52,10 +82,27 @@ router.get('/signup', function(req, res) {
     res.render('signup.html', { message: req.flash('signupMessage') });
 });
 
+router.get('/updateprofile', isLoggedIn, function(req, res) {
+    // render the page and pass in any flash data if it exists
+    res.render('updateprofile.html');
+});
+
+router.get('/deleteprofile',isLoggedIn,function(req,res){
+  User.remove(req.user[0].idUsuario,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+        req.logout();
+        res.redirect('/');
+      }
+  })
+
+})
+
 /****************GOOGLE ROUTES ************************/
 router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-// the callback after google has authenticated the user
+// el callback despues de que se haya autenticado el usuario de google
 router.get('/auth/google/callback',
         passport.authenticate('google', {
                 successRedirect : '/profile',
@@ -83,9 +130,6 @@ router.get('/auth/facebook/callback',
       // si no lo esta redirige a index
       res.redirect('/');
   }
-
-
-
 
 
 /* POST Crear un comentario */

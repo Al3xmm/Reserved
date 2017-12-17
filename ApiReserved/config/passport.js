@@ -13,15 +13,15 @@ var salt=bcrypt.genSaltSync(10);
 var prueba=false;
 var tipoUsuario=0;
 
+
 module.exports=function(passport){
 
   // Guarda el segundo parametro de la funcion ("done") en la sesion para ser utilizado luego por el deserializeuser
     passport.serializeUser(function(user, done) {
-
       if(prueba==true){
           done(null, user.idUsuario);
       }else{
-          done(null, user[0].IdUsuario);
+          done(null, user[0].idUsuario);
       }
         prueba=false;
 
@@ -29,16 +29,9 @@ module.exports=function(passport){
 
     // Comprueba que el primer parametro de la funcion (id) que es el parametro guardado en la sesión, corresponde con uno que exista en la DB
     passport.deserializeUser(function(id, done) {
-      if(tipoUsuario==0){
-        User.findByIdRrss(id, function(err, user) {
+        User.findById(id, function(err, user) {
             done(err, user);
         });
-      }
-      if(tipoUsuario==1){
-        User.findByIdLocal(id, function(err, user) {
-            done(err, user);
-        });
-      }
 
     });
 
@@ -63,14 +56,13 @@ function(req, nick, password, done) { // callback with email and password from o
                 return done(null, false, req.flash('loginMessage', 'Usuario no encontrado.'));
             }
 
-            var dbpass=data[0].Password;
+            var dbpass=data[0].password;
             var comparepass=bcrypt.compareSync(password, dbpass);
 
             if(comparepass==false){
               return done(null, false, req.flash('loginMessage', 'Contraseña erronea.'));
             }
-            console.log(data);
-            tipoUsuario=1;
+            //tipoUsuario=1;
             return done(null,data);
           }
       });
@@ -106,11 +98,10 @@ function(req, nick, password, done) { // callback with email and password from o
                   // if there is no user with that email
                   // create the user
                   var passhash=bcrypt.hashSync(password,salt);
-                  var idhash=bcrypt.hashSync(nick,salt);
 
                   var localData={
-                    idUsuario:idhash,
                     nick:nick,
+                    nombre:nick,
                     password:passhash,
                     email:req.body.email
                   };
@@ -120,9 +111,18 @@ function(req, nick, password, done) { // callback with email and password from o
                           console.log("ERROR al insertar el user local");
                       }else{
                           console.log("user local INSERTADO");
-                          prueba=true;
-                          tipoUsuario=1;
-                          return done(null, localData);
+                          User.takeIdlocal(localData.nick,function(error,data){
+                            prueba=true;
+                            //tipoUsuario=0;
+                            var sessionsave={
+                              idUsuario:data[0].idUsuario,
+                              nick:nick,
+                              nombre:nick,
+                              password:passhash,
+                              email:req.body.email
+                            }
+                            return done(null, sessionsave);
+                          })
                       }
                   });
               }
@@ -154,25 +154,36 @@ function(req, nick, password, done) { // callback with email and password from o
                 }else{
                   if (data) {
                       // if a user is found, log them in
-                      tipoUsuario=0;
+                      //tipoUsuario=0;
                       return done(null, data);
                   } else {
                       // if the user isnt in our database, create a new user
+                      var nickaux=profile.displayName+profile.id;
 
                       var googleData={
-                        idUsuario:profile.id,
-                        token:token,
-                        email:profile.emails[0].value,
-                        nombre:profile.displayName
+                        nick:nickaux,
+                        nombre:profile.displayName,
+                        idrrss:profile.id,
+                        tokenrrss:token,
+                        email:profile.emails[0].value
                       };
                       User.insertGoogle(googleData,function(error,data){
                           if (error){
                               console.log("ERROR al insertar el user google");
                           }else{
                               console.log("user google INSERTADO");
-                              prueba=true;
-                              tipoUsuario=0;
-                              return done(null, googleData);
+                              User.takeIdrrss(googleData.idrrss,function(error,data){
+                                prueba=true;
+                                //tipoUsuario=0;
+                                console.log()
+                                var sessionsave={
+                                  nick:data[0].nick,
+                                  idUsuario:data[0].idUsuario,
+                                  idrrss:data[0].idRRSS,
+                                  tokenrrss:data[0].tokenRRSS
+                                }
+                                return done(null, sessionsave);
+                              })
                           }
                       })
                   }
@@ -204,24 +215,33 @@ function(req, nick, password, done) { // callback with email and password from o
                       res.json(500,error);
                   }else{
                     if (data) {
-                        tipoUsuario=0;
+                        //tipoUsuario=0;
                         return done(null, data); // user found, return that user
                     } else {
                         //facebook no nos pasa email(?)
-                        console.log(profile.id);
+                        var nickaux=profile.displayName+profile.id;
+
                         var facebookData={
-                          idUsuario:profile.id,
-                          token:token,
-                          nombre:profile.displayName
+                          nick:nickaux,
+                          nombre:profile.displayName,
+                          idrrss:profile.id,
+                          tokenrrss:token,
                         };
                         User.insertGoogle(facebookData,function(error,data){
                             if (error){
                                 console.log("ERROR al insertar el user facebook");
                             }else{
                                 console.log("user facebook INSERTADO");
-                                prueba=true;
-                                tipoUsuario=0;
-                                return done(null, facebookData);
+                                User.takeIdrrss(facebookData.idrrss,function(error,data){
+                                  prueba=true;
+                                  var sessionsave={
+                                    nick:data[0].nick,
+                                    idUsuario:data[0].idUsuario,
+                                    idrrss:data[0].idrrss,
+                                    tokenrrss:data[0].tokenrrss
+                                  }
+                                  return done(null, sessionsave);
+                                })
                             }
                         })
                     }

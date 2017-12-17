@@ -19,15 +19,20 @@
     <div class="row">
 
         <!-- GOOGLE INFORMATION -->
-        <div class="col-sm-6">
+        <div class="jumbotron text-center">
             <div class="well">
                 <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
 
                     <p>
-                        <strong>id</strong>: <%= user[0].IdUsuario %><br>
-                        <strong>token</strong>: <%= user[0].Token %><br>
-                        <strong>email</strong>: <%= user[0].Email %><br>
-                        <strong>name</strong>: <%= user[0].Nombre %>
+                        <strong>id</strong>: <%= user[0].idUsuario %><br>
+                        <strong>Nick</strong>: <%= user[0].nick %><br>
+                        <strong>Nombre</strong>: <%= user[0].nombre %><br>
+                        <strong>email</strong>: <%= user[0].email %><br>
+                        <strong>token(RRSS)</strong>: <%= user[0].tokenrrss %><br>
+                        <br>
+                        <a href="/updateprofile" class="btn btn-default"><span class="fa fa-user"></span>Modificar Perfil</a>
+                        <br>
+                        <a href="/deleteprofile" class="btn btn-default"><span class="fa fa-user"></span>Eliminar Perfil</a>
                     </p>
 
             </div>
