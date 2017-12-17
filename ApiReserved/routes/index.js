@@ -6,19 +6,22 @@ var Comments=require("../models/comments");
 var User=require("../models/users");
 var Orders=require("../models/orders");
 
+var bcrypt=require('bcrypt');
+var salt=bcrypt.genSaltSync(10);
+
 
 // formulario de registro
 router.post('/signup', passport.authenticate('local-signup', {
-   successRedirect : '/profile', // redirect to the secure profile section
-   failureRedirect : '/signup', // redirect back to the signup page if there is an error
-   failureFlash : true // allow flash messages
+   successRedirect : '/profile',
+   failureRedirect : '/signup',
+   failureFlash : true
 }));
 
 // formulario de login
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect : '/profile',
+    failureRedirect : '/login',
+    failureFlash : true
 }));
 
 // formulario modificacion usuario
@@ -45,7 +48,7 @@ router.post('/updateprofileuser', function(req,res,next){
             res.json(500,error);
         }else{
           res.render('profile.html', {
-              user : req.user // get the user out of session and pass to template
+              user : req.user
           });
         }
     })
@@ -54,13 +57,14 @@ router.post('/updateprofileuser', function(req,res,next){
 
 // Index para loguearse con las diferentes RRSS
 router.get('/', function(req, res) {
-    res.render('index.html'); // load the index.ejs file
+    res.render('index.html');
 });
 
 // Ruta para ver el perfil
 router.get('/profile', isLoggedIn, function(req, res) {
+    console.log(req.user[0]);
     res.render('profile.html', {
-        user : req.user // get the user out of session and pass to template
+        user : req.user
     });
 });
 
@@ -73,17 +77,17 @@ router.get('/logout', function(req, res) {
 /*****************REGISTRO LOCAL ROUTES **********************/
 
 router.get('/login', function(req, res) {
-    // render the page and pass in any flash data if it exists
+
     res.render('login.html', { message: req.flash('loginMessage') });
 });
 
 router.get('/signup', function(req, res) {
-    // render the page and pass in any flash data if it exists
+
     res.render('signup.html', { message: req.flash('signupMessage') });
 });
 
 router.get('/updateprofile', isLoggedIn, function(req, res) {
-    // render the page and pass in any flash data if it exists
+
     res.render('updateprofile.html');
 });
 
@@ -120,17 +124,18 @@ router.get('/auth/facebook/callback',
 }));
 
 
-  // ruta middleware para comprobar si un usuario esta logueado
-  function isLoggedIn(req, res, next) {
+// ruta middleware para comprobar si un usuario esta logueado
+function isLoggedIn(req, res, next) {
 
-      // si el usuario esta autenticado, continua sin problema
-      if (req.isAuthenticated())
-          return next();
+    // si el usuario esta autenticado, continua sin problema
+    if (req.isAuthenticated())
+        return next();
 
-      // si no lo esta redirige a index
-      res.redirect('/');
-  }
+    // si no lo esta redirige a index
+    res.redirect('/');
+}
 
+/************************************************************************/
 
 /* POST Crear un comentario */
 router.post('/comment',function(req,res,next){

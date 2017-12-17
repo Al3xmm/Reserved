@@ -38,20 +38,18 @@ module.exports=function(passport){
 /********************** LOGIN LOCAL *******************************/
 
 passport.use('local-login', new LocalStrategy({
-    // by default, local strategy uses username and password, we will override with email
+
     usernameField : 'nick',
     passwordField : 'password',
-    passReqToCallback : true // allows us to pass back the entire request to the callback
+    passReqToCallback : true
 },
-function(req, nick, password, done) { // callback with email and password from our form
-      // find a user whose email is the same as the forms email
-      // we are checking to see if the user trying to login already exists
+function(req, nick, password, done) { // callback con el nick y la password del formulario
+      // con esta funcion buscamos si el usuario existe ya o no
       User.findOneLocal(nick, function(error, data) {
-          // if there are any errors, return the error
           if (error){
               res.json(500,error);
           }else{
-          // check to see if theres already a user with that email
+          // si no devuelve nada, el usuario no existe
             if(!data){
                 return done(null, false, req.flash('loginMessage', 'Usuario no encontrado.'));
             }
@@ -62,7 +60,6 @@ function(req, nick, password, done) { // callback with email and password from o
             if(comparepass==false){
               return done(null, false, req.flash('loginMessage', 'Contraseña erronea.'));
             }
-            //tipoUsuario=1;
             return done(null,data);
           }
       });
@@ -74,29 +71,24 @@ function(req, nick, password, done) { // callback with email and password from o
 /******************* REGISTRO LOCAL *******************************/
 
   passport.use('local-signup', new LocalStrategy({
-      // by default, local strategy uses username and password, we will override with email
+
       usernameField : 'nick',
       passwordField : 'password',
-      passReqToCallback : true // allows us to pass back the entire request to the callback
+      passReqToCallback : true
   },
   function(req, nick, password, done) {
 
-      // asynchronous
-      // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
+        // con esta funcion buscamos si el usuario existe ya o no
         User.findOneLocal(nick, function(error, data) {
-            // if there are any errors, return the error
             if (error){
                 res.json(500,error);
             }else{
-            // check to see if theres already a user with that email
+            // si devuelve una columna es que el usuario ya existe y no se puede crearm con el mismo nick
               if (data) {
-                  return done(null, false, req.flash('signupMessage', 'That nick is already taken.'));
+                  return done(null, false, req.flash('signupMessage', 'Este nick ya está en uso.'));
               } else {
-                  // if there is no user with that email
-                  // create the user
+                  // si el nick no esta en uso, creamos el usuario
                   var passhash=bcrypt.hashSync(password,salt);
 
                   var localData={
@@ -143,21 +135,18 @@ function(req, nick, password, done) { // callback with email and password from o
     },
     function(token, refreshToken, profile, done) {
 
-        // make the code asynchronous
-        // User.findOne won't fire until we have all our data back from Google
         process.nextTick(function() {
 
-            // try to find the user based on their google id
+            // mira si el usuario ya entro anteriormente
             User.findOne(profile.id, function(error, data) {
                 if (error){
                     res.json(500,error);
                 }else{
                   if (data) {
-                      // if a user is found, log them in
-                      //tipoUsuario=0;
+                      // si ya esta en la bbdd se loguea
                       return done(null, data);
                   } else {
-                      // if the user isnt in our database, create a new user
+                      // si no esta, lo crea
                       var nickaux=profile.displayName+profile.id;
 
                       var googleData={
@@ -174,8 +163,6 @@ function(req, nick, password, done) { // callback with email and password from o
                               console.log("user google INSERTADO");
                               User.takeIdrrss(googleData.idrrss,function(error,data){
                                 prueba=true;
-                                //tipoUsuario=0;
-                                console.log()
                                 var sessionsave={
                                   nick:data[0].nick,
                                   idUsuario:data[0].idUsuario,
@@ -197,26 +184,23 @@ function(req, nick, password, done) { // callback with email and password from o
   /***************************OAUTH FACEBOOK *******************************/
 
   passport.use(new FacebookStrategy({
-          // pull in our app id and secret from our auth.js file
+
           clientID        : configAuth.facebookAuth.clientID,
           clientSecret    : configAuth.facebookAuth.clientSecret,
           callbackURL     : configAuth.facebookAuth.callbackURL
 
       },
-      // facebook will send back the token and profile
       function(token, refreshToken, profile, done) {
 
-          // asynchronous
           process.nextTick(function() {
 
-              // find the user in the database based on their facebook id
+              // buscar al usuario de fb en la bbd
               User.findOne(profile.id, function(error, data) {
                   if (error){
                       res.json(500,error);
                   }else{
                     if (data) {
-                        //tipoUsuario=0;
-                        return done(null, data); // user found, return that user
+                        return done(null, data); // usuario encontrado, se loguea
                     } else {
                         //facebook no nos pasa email(?)
                         var nickaux=profile.displayName+profile.id;

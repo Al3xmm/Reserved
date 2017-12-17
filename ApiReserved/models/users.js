@@ -10,7 +10,7 @@ connection=mysql.createConnection({
 
 var User={};
 
-/*Sacar el usuario de RRSS*/
+/*Sacar el usuario de RRSS por su id*/
 User.takeIdrrss=function(id,callback){
     if (connection){
         connection.query("SELECT * FROM usuarios WHERE idrrss="+connection.escape(id),function (error,row){
@@ -24,7 +24,7 @@ User.takeIdrrss=function(id,callback){
         })
     }
 }
-/*Login del Usuario de LOCAL*/
+/*Busca al Usuario de LOCAL por el nick*/
 User.takeIdlocal=function(nick,callback){
     if (connection){
         connection.query("SELECT * FROM usuarios WHERE nick="+connection.escape(nick),function (error,row){
@@ -39,7 +39,7 @@ User.takeIdlocal=function(nick,callback){
     }
 }
 
-/*Login del Usuario de LOCAL*/
+/*Busca al Usuario de LOCAL por el nick*/
 User.findOneLocal=function(nick,callback){
     if (connection){
         connection.query("SELECT * FROM usuarios WHERE nick="+connection.escape(nick),function (error,row){
@@ -70,7 +70,7 @@ User.insertLocal=function(userData,callback){
 /*Buscar un usuario por su ID*/
 User.findById=function(id,callback){
     if (connection){
-        connection.query("SELECT * FROM usuarios WHERE idUsuario="+connection.escape(id),function (error,row){
+        connection.query("SELECT idUsuario,nombre,nick,email,idRRSS,tokenRRSS FROM usuarios WHERE idUsuario="+connection.escape(id),function (error,row){
             if (error){
                 throw error;
             }else if(row!=""){
