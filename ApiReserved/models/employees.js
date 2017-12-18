@@ -54,15 +54,53 @@ Employee.insert=function(employeeData,callback){
 }
 
 Employee.update=function(employeeData,id,callback) {
-    if(connection){
-        var sql="UPDATE empleados SET nick="+connection.escape(employeeData.nick)+","+
-                "password="+connection.escape(employeeData.password)+","+
-                "tipoempleado="+connection.escape(employeeData.tipoempleado)+","+
-                "empleador="+connection.escape(employeeData.empleador)+
-                    "WHERE idEmpleado="+connection.escape(id);
+  var coma=false;
 
-                    console.log(sql);
-        connection.query(sql,function(error,result){
+    if(connection){
+        var sql= "UPDATE empleados SET "
+
+        if(employeeData.nick != undefined)
+        {
+          sql += " nick="+connection.escape(employeeData.nick);
+          coma=true;
+        }
+
+        if(employeeData.password != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql +=  "password="+connection.escape(employeeData.password);
+          coma=true;
+        }
+
+        if(employeeData.tipoempleado != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql +=  "tipoempleado="+connection.escape(employeeData.tipoempleado);
+          coma=true;
+        }
+
+        if(employeeData.empleador != undefined)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql += "empleador="+connection.escape(employeeData.empleador);
+          coma=true;
+        }
+
+    sql +=  "WHERE idEmpleado="+connection.escape(id);
+
+            connection.query(sql,function(error,result){
             if(error){
                 throw error;
             }else{

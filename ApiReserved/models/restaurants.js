@@ -93,29 +93,148 @@ Restaurants.insert=function(restaurantData,callback){
 }
 
 /* Modificar un restaurante */
-Restaurants.update=function(restaurantData,callback) {
-    if(connection){
-            var sql="UPDATE restaurantes SET nombre="+connection.escape(restaurantData.nombre)+","+
-                "password="+connection.escape(restaurantData.password)+","+
-                "email="+connection.escape(restaurantData.email)+","+
-                "horario="+connection.escape(restaurantData.horario)+","+
-                "descripcion="+connection.escape(restaurantData.descripcion)+","+
-                "direccion="+connection.escape(restaurantData.direccion)+","+
-                "telefono="+connection.escape(restaurantData.telefono)+","+
-                "ciudad="+connection.escape(restaurantData.ciudad)+","+
-                "imagenes="+connection.escape(restaurantData.imagenes)+","+
-                "aforo="+connection.escape(restaurantData.aforo)+","+
-                "tipoComida="+connection.escape(restaurantData.tipoComida)+","+
-                "coordenadas="+connection.escape(restaurantData.coordenadas)+
-                " WHERE idRestaurante="+restaurantData.id;
-        connection.query(sql,function(error,result){
-            if(error){
-                throw error;
-            }else{
-                return callback(null,"Restaurante actualizado");
-            }
-        })
-    }
+Restaurants.update=function(id,restaurantData,callback) {
+  var coma=false;
+  if(connection){
+      var sql= "UPDATE restaurantes SET "
+
+      if(restaurantData.nombre != undefined)
+      {
+        sql += " nombre="+connection.escape(restaurantData.nombre);
+        coma=true;
+      }
+
+      if(restaurantData.password != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql +=  "contraseña="+connection.escape(restaurantData.password);
+        coma=true;
+      }
+
+      if(restaurantData.email != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql +=  "email="+connection.escape(restaurantData.email);
+        coma=true;
+      }
+
+      if(restaurantData.horario != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "horario="+connection.escape(restaurantData.horario);
+        coma=true;
+      }
+
+      if(restaurantData.descripcion != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "descripcion="+connection.escape(restaurantData.descripcion);
+        coma=true;
+      }
+
+      if(restaurantData.direccion != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "direccion="+connection.escape(restaurantData.direccion);
+        coma=true;
+      }
+
+      if(restaurantData.telefono != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "telefono="+connection.escape(restaurantData.telefono);
+        coma=true;
+      }
+
+      if(restaurantData.ciudad != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "ciudad="+connection.escape(restaurantData.ciudad);
+        coma=true;
+      }
+
+      if(restaurantData.imagenes != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "imagenes="+connection.escape(restaurantData.imagenes);
+        coma=true;
+      }
+
+      if(restaurantData.aforo != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "aforo="+connection.escape(restaurantData.aforo);
+        coma=true;
+      }
+
+      if(restaurantData.tipoComida != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "tipoComida="+connection.escape(restaurantData.tipoComida);
+        coma=true;
+      }
+
+      if(restaurantData.coordenadas != undefined)
+      {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql += "coordenadas="+connection.escape(restaurantData.coordenadas);
+        coma=true;
+      }
+
+  sql +=  "WHERE idRestaurante="+connection.escape(id);
+
+          connection.query(sql,function(error,result){
+          if(error){
+              throw error;
+          }else{
+              return callback(null,"Restaurante actualizado");
+          }
+      })
+  }
 }
 
 /* Eliminar un Restaurante */

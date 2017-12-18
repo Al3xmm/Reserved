@@ -118,7 +118,7 @@ router.put('/:id',function(req,res,next){
         coordenadas:req.body.coordenadas
     };
 
-    Restaurant.update(restaurantData,function(error,data){
+    Restaurant.update(req.params.id,restaurantData,function(error,data){
         if (error){
             res.json(500,error);
         }else{
