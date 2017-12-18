@@ -152,7 +152,7 @@ router.get('/:id/comments', function(req, res, next) {
 });
 
 /* Mostrar todos los restaurantes segun el nombre del plato */
-router.get("/product/:nombreproducto", function(req, res, next){
+router.get("/products/:nombreproducto", function(req, res, next){
   console.log(req.params.nombreproducto);
     Product.findByRestaurantByNameProduct(req.params.nombreproducto, function(error,data){
 
@@ -193,8 +193,8 @@ router.post('/:id/products', function(req, res, next){
       Nombre: req.body.nombre,
       Precio: req.body.precio,
       Tipo: req.body.tipo,
-      Descripcion: req.body.descripcion,
-      RestauranteP: req.body.restaurantep
+      Informacion: req.body.informacion,
+      RestauranteP: req.params.id
   };
 
     Product.insert(productData, function(error,data){

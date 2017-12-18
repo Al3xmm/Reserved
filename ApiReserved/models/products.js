@@ -13,7 +13,7 @@ var Products={};
 /* Mostrar todos los restaurantes segun el plato */
 Products.findByRestaurantByNameProduct = function(nombreproducto,callback){
     if (connection){
-      var sql = ("SELECT r.Nombre FROM productos p,restaurantes r WHERE p.Nombre="+connection.escape(nombreproducto));
+      var sql = ("SELECT r.Nombre FROM productos p,restaurantes r WHERE p.nombre="+connection.escape(nombreproducto));
 
       console.log(sql);
 
@@ -50,7 +50,7 @@ Products.findProductsByType = function(id,tipo,callback){
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){
     if (connection){
-      var sql = ("SELECT p.nombre,p.precio,p.tipo FROM productos WHERE RestauranteP ="+connection.escape(id));
+      var sql = ("SELECT idProducto,nombre,precio,tipo FROM productos WHERE RestauranteP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -139,7 +139,7 @@ Products.update = function(id,idproducto, productData,callback){
 
     sql +=  "WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id);
 
-                connection.query(sql,function(error,result){
+            connection.query(sql,function(error,result){
             if(error){
                 throw error;
             }else{

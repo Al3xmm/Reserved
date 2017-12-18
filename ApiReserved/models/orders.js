@@ -27,7 +27,7 @@ Order.all= function(callback){
 /* Mostar un pedido buscado por su Id */
 Order.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT CuentaTotal FROM pedidos WHERE IdPedido ="+connection.escape(id));
+        var sql=("SELECT CuentaTotal,Mesa FROM pedidos WHERE IdPedido ="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;
@@ -42,7 +42,7 @@ Order.findOneById=function(id, callback){
 /* Mostrar productos de un pedido*/
 Order.findOrderProducts = function(id, callback){
   if(connection){
-      var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.Nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
+      var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -133,7 +133,7 @@ Order.insertOrderProduct = function(OrderProductData, callback){
 /* GET de productos de pedido por tipo de producto */
 Order.findOrderProductsbyType = function(id,tipo, callback){
   if(connection){
-      var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.Nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id)+"and pp.TipoProducto="+connection.escape(tipo));
+      var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id)+"and pp.TipoProducto="+connection.escape(tipo));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -193,10 +193,6 @@ Order.findOrderbyBillFilterPrice = function(id,cuentainicial,cuentafinal, callba
 /* GET facturas filtrado por precio minimo */
 Order.findOrderbyBillFilterPriceUnder = function(id,cuentainicial, callback){
   if(connection){
-
-
-
-
       var sql = ("select p.cuentatotal from  pedidos p,reservas r where r.UsuarioR = "+connection.escape(id)+"and r.IdReserva=p.Reservap and p.cuentatotal >="+connection.escape(cuentainicial));
 
       connection.query(sql,function(error,rows){
@@ -213,10 +209,6 @@ Order.findOrderbyBillFilterPriceUnder = function(id,cuentainicial, callback){
 /* GET facturas filtrado por precio maximo */
 Order.findOrderbyBillFilterPriceOver = function(id,cuentainicial, callback){
   if(connection){
-
-
-
-
       var sql = ("select p.cuentatotal from  pedidos p,reservas r where r.UsuarioR = "+connection.escape(id)+"and r.IdReserva=p.Reservap and p.cuentatotal <="+connection.escape(cuentainicial));
 
       connection.query(sql,function(error,rows){
@@ -306,7 +298,6 @@ Order.update = function(OrderData, callback){
       })
   }
 }
-
 
 /* Crear un producto de pedido (meter un producto en un pedido) */
 Order.insertOrderProduct = function(OrderProductData, callback){
