@@ -1,13 +1,14 @@
 var mysql=require("mysql");
 
+var configDB=require("../config/configdb");
+
 /* Conectar con la DB */
 connection=mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "reserved"
+        host: configDB.dbreserved.host,
+        user: configDB.dbreserved.user,
+        password: configDB.dbreserved.password,
+        database: configDB.dbreserved.database
 });
-
 var Comments={};
 
 /* Mostar los comentarios de un usuario */

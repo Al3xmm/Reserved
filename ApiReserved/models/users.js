@@ -1,11 +1,13 @@
 var mysql=require("mysql");
 
+var configDB=require("../config/configdb");
+
 /* Conectar con la DB */
 connection=mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "reserved"
+        host: 'no',
+        user: configDB.dbreserved.user,
+        password: 'pene',
+        database: configDB.dbreserved.database
 });
 
 var User={};
@@ -160,7 +162,7 @@ User.remove=function(Id,callback){
 /* Mostar todos los usuarios */
 User.all= function(callback){
     if (connection){
-        connection.query("SELECT nombre FROM usuarios",function (error,rows){
+        connection.query("SELECT nombre, nick, email FROM usuarios",function (error,rows){
             if (error){
                 throw error;
             }else{
@@ -186,7 +188,7 @@ User.insert=function(userData,callback){
 /* Mostar un usuario buscado por su Id */
 User.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT nombre FROM usuarios WHERE idUsuario="+connection.escape(id));
+        var sql=("SELECT nombre, nick, email FROM usuarios WHERE idUsuario="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;
