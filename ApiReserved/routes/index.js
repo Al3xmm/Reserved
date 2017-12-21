@@ -243,6 +243,29 @@ router.put('/orders/:id', function(req,res,next){
   })
 });
 
+/* GET productos de pedido */
+router.get('/orders/:id/orderproducts', function(req, res, next) {
+
+    Orders.findOrderProducts(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET productos de pedido por tipo de producto */
+router.get('/orders/:id/orderproducts/:tipo', function(req, res, next) {
+
+    Orders.findOrderProductsbyType(req.params.id, req.params.tipo,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 /* POST Crear un producto de pedido */
 router.post('/orders/:id/orderproducts/', function(req,res,next){
