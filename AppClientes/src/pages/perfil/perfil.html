@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mi Perfil</ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-grid>
+        <ion-item *ngFor="let item of userService.infouser">
+          <ion-col>
+            Nick: {{item.nombre}}
+            <p>
+              <br>
+              Nombre: {{item.nombre}}
+              <br>
+              email: {{item.email}}
+            </p>
+          </ion-col>
+        </ion-item>
+      </ion-grid>
+
+</ion-content>
+

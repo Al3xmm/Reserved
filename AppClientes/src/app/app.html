@@ -1,0 +1,30 @@
+<ion-menu [content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <button ion-item (click)="openPage(perfil)">
+          Perfil
+        </button>
+        <button ion-item (click)="openPage(registro)">
+          Registro
+        </button>
+        <button ion-item (click)="openPage(restaurantes)">
+          Restaurantes
+        </button>
+        <button ion-item (click)="closeMenu()">
+          Cerrar Menú
+        </button>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+
+<ion-nav #content [root]="rootPage"></ion-nav>
+

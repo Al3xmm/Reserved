@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+
+      <ion-title>
+        Inicia Sesión
+      </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="login_user()">
+    <ion-item>
+      <ion-label>Nick</ion-label>
+      <ion-input type="text" [(ngModel)]="user.nick" name="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+    </ion-item>
+    
+    <button ion-button [disabled]="user.nick.length<3 || user.password.length<3" type="submit" block>Login</button>
+  </form>
+
+  <ion-grid>
+   <p>
+    No tienes cuenta? <a (click)="showRegistroPage()">Regístrate</a>
+   </p>  
+  </ion-grid>
+
+
+</ion-content>
