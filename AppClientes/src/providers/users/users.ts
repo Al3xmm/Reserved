@@ -83,10 +83,9 @@ export class UsersProvider {
       })
   }
 
-  user_profile(id){
+  user_profile(id,token){
     let url="api/users/";
-    
-    this.http.get(url+id).subscribe(data=>{
+    this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{
       this.infouser=data;
     });
 

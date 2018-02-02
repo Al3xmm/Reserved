@@ -1,3 +1,4 @@
+import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 import { RegistroPage } from './../registro/registro';
 import { UsersProvider } from './../../providers/users/users';

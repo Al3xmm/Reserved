@@ -14,7 +14,9 @@ export class PerfilPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, public userService:UsersProvider) {
     storage.get('idUsuario').then((val) => {
-      userService.user_profile(val);
+      storage.get('token').then((val2) => {
+        userService.user_profile(val,val2);
+      });
     });
   }
 

@@ -1,3 +1,4 @@
+import { RestaurantPage } from './../pages/restaurant/restaurant';
 
 import { AllrestaurantsPage } from './../pages/allrestaurants/allrestaurants';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,7 +23,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     PerfilPage,
     RegistroPage,
-    AllrestaurantsPage
+    AllrestaurantsPage,
+    RestaurantPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     PerfilPage,
     RegistroPage,
-    AllrestaurantsPage
+    AllrestaurantsPage,
+    RestaurantPage
     
   ],
   providers: [

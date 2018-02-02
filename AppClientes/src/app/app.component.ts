@@ -11,6 +11,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { LoginPage } from '../pages/login/login';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
+import { Storage } from '@ionic/storage';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,7 +25,7 @@ export class MyApp {
 
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl:MenuController,private alertCtrl:AlertController, public userservice:UsersProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl:MenuController,private alertCtrl:AlertController, public userservice:UsersProvider, public storage:Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -44,6 +47,16 @@ export class MyApp {
       }).present();
     }
     
+  }
+
+  closeSession(){
+    this.userservice.logueado=false;
+    this.userservice.login_correcto=false;
+    this.storage.set('idUsuario',"null");
+    this.storage.set('token',"null");
+    this.rootPage=LoginPage;
+    this.menuCtrl.close();
+
   }
 
   closeMenu(){
