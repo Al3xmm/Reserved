@@ -22,7 +22,7 @@ export class AllrestaurantsPage {
 
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
-    this.navCtrl.setRoot(RestaurantPage);
+    this.navCtrl.push(RestaurantPage);
   }
 
 }

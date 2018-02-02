@@ -58,10 +58,6 @@ export class MyApp {
     this.menuCtrl.close();
 
   }
-
-  closeMenu(){
-    this.menuCtrl.close();
-  }
   
 }
 
