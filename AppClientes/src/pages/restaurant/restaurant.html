@@ -15,6 +15,7 @@
 
 <ion-content padding>
     <ion-grid>
+        <h3>Información</h3>
         <ion-item *ngFor="let item of restaurantService.inforestaurante">
           <ion-col>
             Nombre: {{item.nombre}}
@@ -28,6 +29,18 @@
             </p>
           </ion-col>
         </ion-item>
+        <button ion-button (click)="ver_carta()">Ver Carta</button>
+        <button ion-button>Reservar</button>
+        <h3>Comentarios</h3>
+        <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">
+            <ion-col>
+              {{item2.nombre}} - {{item2.fecha}}
+              <p>
+                <br>
+                {{item2.contenido}}
+              </p>
+            </ion-col>
+          </ion-item>
       </ion-grid>
 
 </ion-content>

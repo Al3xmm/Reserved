@@ -9,6 +9,10 @@ export class RestaurantsProvider {
 
   restaurantes:any;
   inforestaurante:any;
+  comentariosrestaurante:any;
+  productosrestaurante:any;
+
+  restauranteactual:number;
 
   constructor(public http: HttpClient,public storage:Storage) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -28,6 +32,7 @@ export class RestaurantsProvider {
   }
 
   restaurante_id(id){
+    this.restauranteactual=id;
     let url="api/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
@@ -35,6 +40,24 @@ export class RestaurantsProvider {
       });
     });
     
+  }
+
+  comentarios_restaurante(id){
+    let url="api/restaurants/";
+    this.storage.get('token').then((val) => {
+      this.http.get(url+id+"/comments",{headers: {'token-acceso':val}}).subscribe(data=>{
+        this.comentariosrestaurante=data;
+      });
+    });
+  }
+
+  carta_restaurante(){
+    let url="api/restaurants/";
+    this.storage.get('token').then((val) => {
+      this.http.get(url+this.restauranteactual+"/products",{headers: {'token-acceso':val}}).subscribe(data=>{
+        this.productosrestaurante=data;
+      });
+    });
   }
 
 }

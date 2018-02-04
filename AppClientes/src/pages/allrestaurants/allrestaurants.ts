@@ -22,6 +22,7 @@ export class AllrestaurantsPage {
 
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
+    this.restaurantService.comentarios_restaurante(id);
     this.navCtrl.push(RestaurantPage);
   }
 

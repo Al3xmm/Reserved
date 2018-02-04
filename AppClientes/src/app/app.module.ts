@@ -1,3 +1,4 @@
+import { CartaPage } from './../pages/carta/carta';
 import { RestaurantPage } from './../pages/restaurant/restaurant';
 
 import { AllrestaurantsPage } from './../pages/allrestaurants/allrestaurants';
@@ -24,7 +25,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PerfilPage,
     RegistroPage,
     AllrestaurantsPage,
-    RestaurantPage
+    RestaurantPage,
+    CartaPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PerfilPage,
     RegistroPage,
     AllrestaurantsPage,
-    RestaurantPage
+    RestaurantPage,
+    CartaPage
     
   ],
   providers: [
