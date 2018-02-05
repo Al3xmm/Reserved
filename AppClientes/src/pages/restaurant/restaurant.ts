@@ -1,3 +1,4 @@
+import { ReservarPage } from './../reservar/reservar';
 import { CartaPage } from './../carta/carta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -19,6 +20,10 @@ export class RestaurantPage {
   ver_carta(){
     this.restaurantService.carta_restaurante();
     this.navCtrl.push(CartaPage);
+  }
+
+  reservar(){
+    this.navCtrl.push(ReservarPage);
   }
 
 }

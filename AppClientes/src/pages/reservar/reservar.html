@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Reservar</ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form>
+    <ion-item>
+      <ion-label>Día</ion-label>
+      <ion-input type="date" name="dia" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hora</ion-label>
+      <ion-input type="hour" name="hora" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Comensales</ion-label>
+      <ion-input type="number" name="comensales" required></ion-input>
+    </ion-item>
+    
+    <button ion-button type="submit" block>Reservar</button>
+  </form>
+
+
+</ion-content>
