@@ -18,6 +18,8 @@ export class UsersProvider {
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
 
+  reservasusuario:any;
+
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
     
   }
@@ -87,6 +89,19 @@ export class UsersProvider {
     let url="api/users/";
     this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{
       this.infouser=data;
+    });
+
+  }
+
+  mis_reservas(){
+    let url="api/users/";
+
+    this.storage.get('idUsuario').then((val) => {
+      this.storage.get('token').then((val2) => {
+        this.http.get(url+val+"/reservations",{headers: {'token-acceso':val2}}).subscribe(data=>{
+          this.reservasusuario=data;
+        });
+      });
     });
 
   }

@@ -1,8 +1,7 @@
-
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mi Perfil</ion-title>
+    <ion-title>Mis Reservas</ion-title>
 
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
@@ -16,19 +15,19 @@
 
 <ion-content padding>
     <ion-grid>
-        <ion-item *ngFor="let item of userService.infouser">
+        <ion-item *ngFor="let item of userService.reservasusuario">
           <ion-col>
-            Nick: {{item.nombre}}
+            Restaurante: {{item.nombre}}
             <p>
               <br>
-              Nombre: {{item.nombre}}
+              Dia: {{ item.dia | date : format : timezone}}
               <br>
-              email: {{item.email}}
+              Hora: {{item.hora}}
+              <br>
+              Comensales: {{item.comensales}}
             </p>
-            <button ion-button (click)="mis_reservas()">Mis reservas</button>
           </ion-col>
         </ion-item>
       </ion-grid>
 
 </ion-content>
-

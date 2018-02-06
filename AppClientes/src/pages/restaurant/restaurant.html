@@ -34,7 +34,7 @@
         <h3>Comentarios</h3>
         <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">
             <ion-col>
-              {{item2.nombre}} - {{item2.fecha}}
+              {{item2.nombre}} - {{ item2.fecha | date : format : timezone}}
               <p>
                 <br>
                 {{item2.contenido}}

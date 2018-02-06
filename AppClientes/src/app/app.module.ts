@@ -18,6 +18,7 @@ import { RegistroPage } from '../pages/registro/registro';
 import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { MisReservasPage } from '../pages/mis-reservas/mis-reservas';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AllrestaurantsPage,
     RestaurantPage,
     CartaPage,
-    ReservarPage
+    ReservarPage,
+    MisReservasPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AllrestaurantsPage,
     RestaurantPage,
     CartaPage,
-    ReservarPage
+    ReservarPage,
+    MisReservasPage
     
   ],
   providers: [
