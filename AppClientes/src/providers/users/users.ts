@@ -58,16 +58,16 @@ export class UsersProvider {
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
         //si entra, significa que el nick no existe.
-        if(resp==='Usuario no encontrado'){
+        if(resp==='Login incorrecto'){
           this.alertCtrl.create({
             title:"Error",
-            subTitle:"Usuario no encontrado",
+            subTitle:"Nick y/o contraseña incorrectos",
             buttons:["OK"]
           }).present();
-        }else if(resp==='Contraseña errónea'){
+        }else if(resp==='Login incorrecto'){
           this.alertCtrl.create({
             title:"Error",
-            subTitle:"Contraseña errónea",
+            subTitle:"Nick y/o contraseña incorrectos",
             buttons:["OK"]
           }).present();
         }else{

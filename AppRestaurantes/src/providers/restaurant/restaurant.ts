@@ -47,4 +47,37 @@ export class RestaurantProvider {
       })
   }
 
+  login_restaurant(data){
+    let url="api/loginrestaurant";
+
+    return this.http.post(url,data,{responseType:'json'})
+      .map(resp=>{
+        //si entra, significa que el nick no existe.
+        if(resp==='Login incorrecto'){
+          this.alertCtrl.create({
+            title:"Error",
+            subTitle:"Email y/o contraseña incorrectos",
+            buttons:["OK"]
+          }).present();
+        }else if(resp==='Login incorrecto'){
+          this.alertCtrl.create({
+            title:"Error",
+            subTitle:"Email y/o contraseña incorrectos",
+            buttons:["OK"]
+          }).present();
+        }else{
+          console.log("Login correcto");
+          this.logueado=true;
+          this.login_correcto=true;
+          //guardamos la informacion del usuario
+          this.session=resp;
+          //Guardar en el storage
+          this.storage.set('idRestaurante', this.session.idRestaurante);
+          this.storage.set('token', this.session.token);
+
+
+        }
+      })
+  }
+
 }
