@@ -24,6 +24,19 @@ export class RestaurantProvider {
 
   agregar_correcto=false;
 
+  //carta del restaurante logueado
+  cartarestaurante:any;
+
+  anyadir_producto=false;
+
+  modificar_producto=false;
+
+  //idproducto que queremos modificar
+  productoactual:any;
+
+  //informacion producto a modificar
+  infoproductoactual:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -113,6 +126,7 @@ export class RestaurantProvider {
 
   eliminar_empleado(id){
     let url="api/restaurants/";
+
     this.http.delete(url+this.session.idRestaurante+"/employee/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.mis_empleados();
     });
@@ -129,6 +143,56 @@ export class RestaurantProvider {
           this.agregar_correcto=true;
 
       })
+  }
+
+  mi_carta(){
+    let url="api/restaurants/";
+
+    this.http.get(url+this.session.idRestaurante+"/products",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.cartarestaurante=data;
+    });
+  }
+
+  eliminar_producto(id){
+    let url="api/restaurants/";
+
+    this.http.delete(url+this.session.idRestaurante+"/products/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.mi_carta();
+    });
+  }
+
+  add_producto(data){
+    let url="api/restaurants/";
+
+    return this.http.post(url+this.session.idRestaurante+"/products", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Producto Añadido");
+          this.mi_carta();
+          this.anyadir_producto=true;
+
+      })
+  }
+
+  modify_producto(data){
+    let url="api/restaurants/";
+
+    return this.http.put(url+this.session.idRestaurante+"/products/"+ this.productoactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Producto Actualizado");
+          this.mi_carta();
+          this.modificar_producto=true;
+
+      })
+
+  }
+
+  producto_id(id){
+    let url="api/restaurants/allproducts/";
+
+    this.http.get(url+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.infoproductoactual=data;
+    });
+
   }
 
 }

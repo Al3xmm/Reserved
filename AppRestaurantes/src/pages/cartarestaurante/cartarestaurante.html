@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Carta Restaurante</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-grid>
+        <button ion-button (click)="agregar_producto()" >Agregar Producto</button>
+        <ion-item *ngFor="let item of restaurantService.cartarestaurante">
+          <ion-col>
+            <p>
+              <br>
+              Nombre: {{item.nombre}}
+              <br>
+              Precio: {{item.precio}}
+              <br>
+              Tipo: {{item.tipo}}
+              <br>
+              Información: {{item.informacion}}
+              <br>
+              <button ion-button (click)="modificar_producto(item.idProducto)">Modificar</button>
+              <br>
+              <button ion-button (click)="eliminar_producto(item.idProducto)">Eliminar</button>
+            </p>
+          </ion-col>
+        </ion-item>
+      </ion-grid>
+
+</ion-content>

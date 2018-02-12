@@ -1,3 +1,6 @@
+import { ModificarproductoPage } from './../pages/modificarproducto/modificarproducto';
+import { AgregarproductoPage } from './../pages/agregarproducto/agregarproducto';
+import { CartarestaurantePage } from './../pages/cartarestaurante/cartarestaurante';
 import { AgregarempleadoPage } from './../pages/agregarempleado/agregarempleado';
 import { ListaempleadosPage } from './../pages/listaempleados/listaempleados';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +28,10 @@ import { IonicStorageModule } from '@ionic/storage';
     RestaurantePage,
     RegistroPage,
     ListaempleadosPage,
-    AgregarempleadoPage
+    AgregarempleadoPage,
+    CartarestaurantePage,
+    AgregarproductoPage,
+    ModificarproductoPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,10 @@ import { IonicStorageModule } from '@ionic/storage';
     RestaurantePage,
     RegistroPage,
     ListaempleadosPage,
-    AgregarempleadoPage
+    AgregarempleadoPage,
+    CartarestaurantePage,
+    AgregarproductoPage,
+    ModificarproductoPage
   ],
   providers: [
     StatusBar,

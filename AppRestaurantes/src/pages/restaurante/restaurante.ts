@@ -1,3 +1,4 @@
+import { CartarestaurantePage } from './../cartarestaurante/cartarestaurante';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -22,6 +23,11 @@ export class RestaurantePage {
   mis_empleados(){
     this.restaurantService.mis_empleados();
     this.navCtrl.push(ListaempleadosPage);
+  }
+
+  mi_carta(){
+    this.restaurantService.mi_carta();
+    this.navCtrl.push(CartarestaurantePage);
   }
 
 }

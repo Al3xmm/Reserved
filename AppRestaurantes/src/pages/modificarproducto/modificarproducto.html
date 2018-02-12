@@ -1,0 +1,42 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Modificar Producto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <form (ngSubmit)="modify_producto()">
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+          <ion-input type="text" [(ngModel)]="producto.nombre" name="name"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Precio</ion-label>
+          <ion-input type="number" [(ngModel)]="producto.precio" name="precio"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Descripción del producto</ion-label>
+          <ion-textarea [(ngModel)]="producto.informacion" name="informacion"></ion-textarea>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Tipo</ion-label>
+          <ion-select [(ngModel)]="producto.tipo" [ngModelOptions]="{standalone: true}">
+              <ion-option value="preparar">Preparar</ion-option>
+              <ion-option value="preparado">Preparado</ion-option>
+          </ion-select>
+        </ion-item>
+        <br>
+
+        <button ion-button type="submit" block>Modificar Producto</button>
+      </form>
+      <br>
+
+</ion-content>
