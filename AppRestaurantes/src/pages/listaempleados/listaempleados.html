@@ -1,0 +1,29 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Empleados</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <button ion-button (click)="agregar_empleado()" >Agregar Empleado</button>
+    <ion-item *ngFor="let item of restaurantService.empleadosrestaurante">
+      <ion-col>
+        <p>
+          <br>
+          Nombre: {{item.nick}}
+          <br>
+          Tipo: {{item.tipoempleado}}
+          <br>
+          <button ion-button (click)="eliminar_empleado(item.idEmpleado)">Eliminar Empleado</button>
+        </p>
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+  
+  </ion-content>

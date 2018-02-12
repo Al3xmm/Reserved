@@ -1,12 +1,8 @@
+import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RestaurantePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
+import { ListaempleadosPage } from '../listaempleados/listaempleados';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RestaurantePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private restaurantService: RestaurantProvider) {
+  
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RestaurantePage');
+  }
+
+  mis_empleados(){
+    this.restaurantService.mis_empleados();
+    this.navCtrl.push(ListaempleadosPage);
   }
 
 }

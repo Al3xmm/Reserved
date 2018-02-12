@@ -1,3 +1,5 @@
+import { AgregarempleadoPage } from './../pages/agregarempleado/agregarempleado';
+import { ListaempleadosPage } from './../pages/listaempleados/listaempleados';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -21,7 +23,9 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     LoginPage,
     RestaurantePage,
-    RegistroPage
+    RegistroPage,
+    ListaempleadosPage,
+    AgregarempleadoPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     LoginPage,
     RestaurantePage,
-    RegistroPage
+    RegistroPage,
+    ListaempleadosPage,
+    AgregarempleadoPage
   ],
   providers: [
     StatusBar,
