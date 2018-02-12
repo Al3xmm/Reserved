@@ -9,5 +9,7 @@ module.exports={
     'clientID'      : '1784731304871826',
     'clientSecret'  : '6526976fb90d31074413402706a1369f',
     'callbackURL'   : 'http://localhost:3000/auth/facebook/callback'
-  }
+  },
+
+  'secret': 'pizzaconpinia'
 };

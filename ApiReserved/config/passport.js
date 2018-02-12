@@ -113,6 +113,7 @@ function(req, nick, password, done) { // callback con el nick y la password del 
                               password:passhash,
                               email:req.body.email
                             }
+                            
                             return done(null, sessionsave);
                           })
                       }

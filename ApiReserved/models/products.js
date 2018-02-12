@@ -17,8 +17,6 @@ Products.findByRestaurantByNameProduct = function(nombreproducto,callback){
     if (connection){
       var sql = ("SELECT r.Nombre FROM productos p,restaurantes r WHERE p.nombre="+connection.escape(nombreproducto));
 
-      console.log(sql);
-
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -48,11 +46,25 @@ Products.findProductsByType = function(id,tipo,callback){
     }
 }
 
+/* Mostar un producto en concreto */
+Products.findProduct = function(id,callback){
+    if (connection){
+      connection.query("SELECT idProducto,nombre,precio,tipo,informacion FROM productos WHERE idProducto ="+connection.escape(id) ,function(error,row){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,row);
+          }
+      })
+    }
+}
+
+
 
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){
     if (connection){
-      var sql = ("SELECT idProducto,nombre,precio,tipo FROM productos WHERE RestauranteP ="+connection.escape(id));
+      var sql = ("SELECT idProducto,nombre,precio,tipo,informacion FROM productos WHERE RestauranteP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -100,13 +112,13 @@ Products.update = function(id,idproducto, productData,callback){
     if(connection){
         var sql= "UPDATE productos SET "
 
-        if(productData.Nombre != undefined)
+        if(productData.Nombre != "")
         {
           sql += " nombre="+connection.escape(productData.Nombre);
           coma=true;
         }
 
-        if(productData.Precio != undefined)
+        if(productData.Precio != "")
         {
           if(coma== true)
           {
@@ -117,7 +129,7 @@ Products.update = function(id,idproducto, productData,callback){
           coma=true;
         }
 
-        if(productData.Tipo != undefined)
+        if(productData.Tipo != "")
         {
           if(coma== true)
           {
@@ -128,7 +140,7 @@ Products.update = function(id,idproducto, productData,callback){
           coma=true;
         }
 
-        if(productData.Informacion != undefined)
+        if(productData.Informacion != "")
         {
           if(coma== true)
           {
@@ -139,7 +151,9 @@ Products.update = function(id,idproducto, productData,callback){
           coma=true;
         }
 
-    sql +=  "WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id);
+    sql +=  " WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id);
+
+    console.log(sql);
 
             connection.query(sql,function(error,result){
             if(error){

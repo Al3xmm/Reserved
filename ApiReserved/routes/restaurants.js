@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var path = require("path");
 var Restaurant=require("../models/restaurants");
 var Comments=require("../models/comments");
 var Product=require("../models/products");
@@ -10,17 +11,66 @@ var Visit=require("../models/visitrestaurant");
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
 
-/* GET  Todos los Restaurantes */
-router.get('/', function(req, res, next) {
+var multer  = require('multer');
+var upload = multer({ dest: 'images/' })
 
-    Restaurant.all(function(error,data){
-        if (error){
-            res.json(500,error);
-        }else{
-            res.json(200,data);
-        }
-    })
+var jwt = require('jsonwebtoken');
+var configJWT = require('../config/auth');
+
+//Comprobar token
+router.use(function(req, res, next) {
+  // check header or url parameters or post parameters for token
+  var token = req.headers['token-acceso'];
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token,configJWT.secret, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    // if there is no token
+    // return an error
+    res.json(200,"No token provided.");
+
+  }
 });
+
+
+
+/*
+//ver foto
+router.get('/:name', function (req, res) {
+    console.log(req.params.name);
+    res.sendfile(path.resolve('./images/'+req.params.name));
+});
+
+//subir foto
+router.post('/:id/upload',upload.single('imagensubir'), function(req, res) {
+  console.log(req.files.imagensubir);
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimage(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+*/
+
 
 /* GET Restaurante por su Id */
 router.get('/:id', function(req, res, next) {
@@ -68,36 +118,6 @@ router.get('/:id/capacity', function(req, res, next) {
             res.json(200,data);
         }
     })
-});
-
-/* POST Crear un Restaurante */
-router.post('/',function(req,res,next){
-
-    var hash=bcrypt.hashSync(req.body.password,salt);
-    var restaurantData={
-        IdRestaurante:null,
-        nombre:req.body.nombre,
-        password:hash,
-        email:req.body.email,
-        horario:req.body.horario,
-        descripcion:req.body.descripcion,
-        direccion:req.body.direccion,
-        telefono:req.body.telefono,
-        ciudad:req.body.ciudad,
-        imagenes:req.body.imagenes,
-        aforo:req.body.aforo,
-        tipoComida:req.body.tipoComida,
-        coordenadas:req.body.coordenadas
-    };
-
-    Restaurant.insert(restaurantData,function(error,data){
-        if (error){
-            res.json(500,error);
-        }else{
-            res.json(200,data);
-        }
-    })
-
 });
 
 /* PUT Modificar un Restaurante */
@@ -153,7 +173,6 @@ router.get('/:id/comments', function(req, res, next) {
 
 /* Mostrar todos los restaurantes segun el nombre del plato */
 router.get("/products/:nombreproducto", function(req, res, next){
-  console.log(req.params.nombreproducto);
     Product.findByRestaurantByNameProduct(req.params.nombreproducto, function(error,data){
 
         if (error){
@@ -186,6 +205,17 @@ router.delete('/:id/products/:idproducto', function(req, res, next){
     })
 });
 
+/*Mostrar un producto en concreto*/
+router.get("/allproducts/:id", function(req, res, next){
+    Product.findProduct(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 /* Crear un producto en un restaurante*/
 router.post('/:id/products', function(req, res, next){
   var productData={
@@ -201,7 +231,7 @@ router.post('/:id/products', function(req, res, next){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
+            res.json(200,"Producto anyadido");
         }
     })
 });
@@ -212,14 +242,14 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Nombre: req.body.nombre,
         Precio: req.body.precio,
         Tipo: req.body.tipo,
-        Descripcion: req.body.descripcion
+        Informacion: req.body.informacion
     };
 
     Product.update(req.params.id,req.params.idproducto,productData, function(error, data){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
+            res.json(200,"Producto actualizado");
         }
     })
 });
@@ -286,7 +316,7 @@ router.post('/:id/employee',function(req,res,next){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
+            res.json(200,"Empleado creado");
         }
     })
 

@@ -4,13 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fileUpload = require('express-fileupload');
+var multer  = require('multer');
+var jwt = require('jsonwebtoken');
 
 var passport = require('passport');
 require('./config/passport')(passport);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var restaurants = require('./routes/restaurants')
+var restaurants = require('./routes/restaurants');
 
 var app = express();
 var session      = require('express-session');
@@ -28,12 +31,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/images')));
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'reservasnutrias' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+app.use(fileUpload());
 
 //rutas de la API rest
 app.use('/',index);

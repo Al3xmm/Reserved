@@ -63,7 +63,7 @@ User.insertLocal=function(userData,callback){
             if (error){
                 throw error;
             }else{
-                return callback(null,result.insertid);
+                return callback(null,result.insertId);
             }
         })
     }
@@ -114,7 +114,6 @@ User.insertGoogle=function(userData,callback){
 /* Modifica un usuario logueado */
 User.update=function(userData,callback) {
     if(connection){
-        console.log(userData.password);
         var sql="UPDATE usuarios SET "
 
         if(userData.password!=""){

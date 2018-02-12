@@ -1,5 +1,6 @@
 var mysql=require("mysql");
 
+
 var configDB=require("../config/configdb");
 
 /* Conectar con la DB */
@@ -11,6 +12,35 @@ connection=mysql.createConnection({
 });
 
 var Images={};
+
+
+Images.uploadimage=function(file,img_name,id,callback){
+  if(connection){
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"){
+      file.mv('../ApiReserved/images/'+file.name, function(err) {
+         if (err){
+          throw err;
+         }
+
+        var imgData={
+            idImagenes:null,
+            url:img_name,
+            imagenesR:id
+        };
+
+          connection.query("INSERT INTO imagenes SET ?",imgData,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Imagen Subida");
+            }
+        })
+      });
+    } else {
+      res.json(200,"This format is not allowed , please upload file with '.png','.jpg'");
+    }
+  }
+}
 
 Images.findImagenRestaurant=function(id, callback){
     if (connection){

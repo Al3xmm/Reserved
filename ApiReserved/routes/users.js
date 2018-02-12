@@ -5,8 +5,37 @@ var Comments=require("../models/comments");
 var Reservations=require("../models/reservations");
 var Visit=require("../models/visitrestaurant");
 
+var passport=require('passport');
+
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
+
+var jwt = require('jsonwebtoken');
+var configJWT = require('../config/auth');
+
+//Comprobar token
+router.use(function(req, res, next) {
+  // check header or url parameters or post parameters for token
+  var token = req.headers['token-acceso'];
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token,configJWT.secret, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    // if there is no token
+    // return an error
+    res.json(200,"No token provided.");
+
+  }
+});
 
 /* GET  Todos los Usuarios */
 router.get('/', function(req, res, next) {
@@ -18,31 +47,6 @@ router.get('/', function(req, res, next) {
             res.json(200,data);
         }
     })
-});
-
-/* POST Crear un usuario */
-router.post('/',function(req,res,next){
-
-    var hash=bcrypt.hashSync(req.body.password,salt);
-    var userData={
-        IdUsuario:null,
-        nick:req.body.nick,
-        password:hash,
-        nombre:req.body.nombre,
-        apellidos:req.body.apellidos,
-        email:req.body.email,
-        telefono:req.body.telefono,
-        direccion:req.body.direccion
-    };
-
-    User.insert(userData,function(error,data){
-        if (error){
-            res.json(500,error);
-        }else{
-            res.json(200,data);
-        }
-    })
-
 });
 
 /* GET Usuario por su Id */

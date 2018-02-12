@@ -12,10 +12,25 @@ connection=mysql.createConnection({
 
 var Restaurants={};
 
+/*Busca el email del restaurante*/
+Restaurants.findEmail=function(email,callback){
+    if (connection){
+        connection.query("SELECT * FROM restaurantes WHERE email="+connection.escape(email),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
 /* Mostar todos los restaurantes */
 Restaurants.all= function(callback){
     if (connection){
-        connection.query("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes",function (error,rows){
+        connection.query("SELECT  idRestaurante,nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes",function (error,rows){
             if (error){
                 throw error;
             }else{

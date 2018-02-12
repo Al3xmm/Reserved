@@ -14,7 +14,7 @@ var Employee={};
 
 Employee.findEmployee = function(id,callback){
     if (connection){
-      var sql = ("SELECT nick,tipoempleado FROM empleados WHERE empleador="+connection.escape(id));
+      var sql = ("SELECT idEmpleado,nick,tipoempleado FROM empleados WHERE empleador="+connection.escape(id));
 
 
       connection.query(sql,function(error,rows){
