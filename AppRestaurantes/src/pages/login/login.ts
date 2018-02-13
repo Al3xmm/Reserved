@@ -1,3 +1,4 @@
+import { LoginempleadosPage } from './../loginempleados/loginempleados';
 import { RegistroPage } from './../registro/registro';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -28,6 +29,10 @@ export class LoginPage {
           this.navCtrl.setRoot(RestaurantePage);
         }
     });
+  }
+
+  login_empleados(){
+    this.navCtrl.push(LoginempleadosPage);
   }
 
 }

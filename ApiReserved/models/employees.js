@@ -12,6 +12,21 @@ connection=mysql.createConnection({
 
 var Employee={};
 
+Employee.loginEmployee = function(nick,callback){
+    if (connection){
+        connection.query("SELECT * FROM empleados WHERE nick="+connection.escape(nick),function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
+
 Employee.findEmployee = function(id,callback){
     if (connection){
       var sql = ("SELECT idEmpleado,nick,tipoempleado FROM empleados WHERE empleador="+connection.escape(id));

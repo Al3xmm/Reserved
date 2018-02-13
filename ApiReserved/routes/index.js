@@ -7,6 +7,7 @@ var User=require("../models/users");
 var Orders=require("../models/orders");
 var Images=require("../models/images");
 var Restaurant=require("../models/restaurants");
+var Employee=require("../models/employees");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -69,6 +70,48 @@ router.post('/addrestaurant',function(req,res,next){
     }
   });
 });
+
+//Login de empleados
+router.post('/loginempleado',function(req,res,next){
+  // con esta funcion buscamos si el usuario existe ya o no
+  Employee.loginEmployee(req.body.nick, function(error, data) {
+      if (error){
+          res.json(500,error);
+      }else{
+      // si no devuelve nada, el usuario no existe
+        if(data==null){
+            res.json(200,"Login incorrecto");
+        }else{
+          var dbpass=data[0].password;
+          var comparepass=bcrypt.compareSync(req.body.password, dbpass);
+
+          if(comparepass==false){
+              res.json(200,"Login incorrecto");
+          }else{
+            const payload={
+              idUsuario: data.idEmpleado,
+              nick:data.nick
+            };
+
+            var token = jwt.sign(payload,configJWT.secret, {
+              expiresIn: "24h" // expira en 24 horas
+            });
+
+            var salida={
+              idEmpleado:data[0].idEmpleado,
+              nick:data[0].nick,
+              tipoEmpleado:data[0].tipoEmpleado,
+              token:token
+            }
+
+            res.json(200,salida);
+          }
+        }
+      }
+  });
+});
+
+
 
 //Login del Restaurante
 router.post('/loginrestaurant',function(req,res,next){

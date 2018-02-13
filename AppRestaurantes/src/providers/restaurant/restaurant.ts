@@ -103,6 +103,42 @@ export class RestaurantProvider {
       })
   }
 
+  login_empleado(data){
+    let url="api/loginempleado";
+
+    return this.http.post(url,data,{responseType:'json'})
+    .map(resp=>{
+      
+      if(resp==='Login incorrecto'){
+        this.alertCtrl.create({
+          title:"Error",
+          subTitle:"Usuario y/o contraseña incorrectos",
+          buttons:["OK"]
+        }).present();
+      }else if(resp==='Login incorrecto'){
+        this.alertCtrl.create({
+          title:"Error",
+          subTitle:"Usuario y/o contraseña incorrectos",
+          buttons:["OK"]
+        }).present();
+      }else{
+        console.log("Login correcto");
+        this.logueado=true;
+        this.login_correcto=true;
+        //guardamos la informacion del usuario
+        this.session=resp;
+        //Guardar en el storage
+        this.storage.set('idEmpleado', this.session.idRestaurante);
+        this.storage.set('token', this.session.token);
+
+        //this.restaurant_profile(this.session.idRestaurante,this.session.token);
+
+
+      }
+    })
+  }
+
+
   restaurant_profile(id,token){
     let url="api/restaurants/";
     this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{

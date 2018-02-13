@@ -19,6 +19,7 @@ import { RestaurantProvider } from '../providers/restaurant/restaurant';
 import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { LoginempleadosPage } from '../pages/loginempleados/loginempleados';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AgregarempleadoPage,
     CartarestaurantePage,
     AgregarproductoPage,
-    ModificarproductoPage
+    ModificarproductoPage,
+    LoginempleadosPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AgregarempleadoPage,
     CartarestaurantePage,
     AgregarproductoPage,
-    ModificarproductoPage
+    ModificarproductoPage,
+    LoginempleadosPage
   ],
   providers: [
     StatusBar,
