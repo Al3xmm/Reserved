@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+
+      <ion-title>
+        Restaurantes
+      </ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-grid>
+  <ion-item *ngFor="let item of restaurantService.restaurantes">
+    <ion-col>
+      {{item.nombre}}
+      <p>
+       
+        <br>
+        <button ion-button (click)="ver_restaurante(item.idRestaurante)">Ver Restaurante</button>
+      </p>
+    </ion-col>
+  </ion-item>
+</ion-grid>
+
+</ion-content>
