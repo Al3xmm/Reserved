@@ -7,12 +7,14 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class RestaurantsProvider {
 
+
   restaurantes:any;
   inforestaurante:any;
   comentariosrestaurante:any;
   productosrestaurante:any;
-
-  restauranteactual:number;
+  busqueda:any;
+  busquedatipo:any;
+  restauranteactual:any;
 
   constructor(public http: HttpClient,public storage:Storage) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -22,7 +24,7 @@ export class RestaurantsProvider {
   mostrar_todos(){
 
     let url="api/allrestaurants";
-    
+
     this.http.get(url)
       .subscribe(data=>{
         //guardamos en la variable restaurantes el data que nos devuelve la petición a la API
@@ -39,7 +41,7 @@ export class RestaurantsProvider {
         this.inforestaurante=data;
       });
     });
-    
+
   }
 
   comentarios_restaurante(id){
@@ -56,10 +58,34 @@ export class RestaurantsProvider {
     this.storage.get('token').then((val) => {
       this.http.get(url+this.restauranteactual+"/products",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.productosrestaurante=data;
+        console.log(data);
       });
     });
   }
 
-  
+  buscar_restaurante(termino){
+    let url="api/restaurants/name/";
+    this.storage.get('token').then((val) => {
+      this.http.get(url+termino,{headers: {'token-acceso':val}}).subscribe(data=>{
+        this.busqueda=data;
+        //console.log(buscar);
+      });
+    });
+
+  }
+
+  buscar_tiporestaurante(termino){
+    let url="api/restaurants/type/";
+    this.storage.get('token').then((val) => {
+      this.http.get(url+termino,{headers: {'token-acceso':val}}).subscribe(data=>{
+        //this.busquedatipo=this.restaurantes;
+        this.busquedatipo = data;
+        console.log(this.busquedatipo);
+      });
+    });
+
+  }
+
+
 
 }

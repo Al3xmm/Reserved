@@ -2,8 +2,8 @@ import { MisReservasPage } from './../mis-reservas/mis-reservas';
 import { UsersProvider } from './../../providers/users/users';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { Storage } from '@ionic/storage';
+import { ModificarperfilPage } from './../modificarperfil/modificarperfil';
 
 
 @IonicPage()
@@ -25,6 +25,9 @@ export class PerfilPage {
   mis_reservas(){
     this.userService.mis_reservas();
     this.navCtrl.push(MisReservasPage);
+  }
+  modificarperfil(){
+    this.navCtrl.push(ModificarperfilPage);
   }
 
 }

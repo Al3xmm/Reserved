@@ -17,7 +17,7 @@ export class AllrestaurantsPage {
   }
 
   ionViewDidLoad() {
-    
+
   }
 
   ver_restaurante(id){
@@ -25,5 +25,6 @@ export class AllrestaurantsPage {
     this.restaurantService.comentarios_restaurante(id);
     this.navCtrl.push(RestaurantPage);
   }
+
 
 }

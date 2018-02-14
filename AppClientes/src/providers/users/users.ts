@@ -10,18 +10,18 @@ import { Storage } from '@ionic/storage';
 export class UsersProvider {
 
   login_correcto=false;
-
+  modificar_perfil=false;
   session:any;
-
+  nuevacomentario = false;
   logueado=false;
-
+  nuevareserva = false;
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
 
   reservasusuario:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
-    
+
   }
 
   add_user(data){
@@ -106,6 +106,35 @@ export class UsersProvider {
 
   }
 
+  modify_user(data){
+    let url="api/users/";
+    return this.http.put(url+this.session.idUsuario, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Perfil Actualizado");
+          this.modificar_perfil=true;
+
+      })
+
+  }
+  add_reserva(data){
+    let url = "api/users/";
+    return this.http.post(url+this.session.idUsuario+"/reservations",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
+    .map(resp=>{
+      console.log("Reserva nueva");
+      this.mis_reservas();
+      this.nuevareserva = true;
+    })
 
 
+  }
+  add_comentario(data){
+    let url = "api/comments/";
+    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
+    .map(resp=>{
+      console.log("Comentario creado");
+      this.nuevacomentario = true;
+    })
+
+
+  }
 }

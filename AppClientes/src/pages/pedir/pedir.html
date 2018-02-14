@@ -1,0 +1,42 @@
+<!--
+  Generated template for the PedirPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Iniciar pedido</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only
+              (click)="verpedido()">
+        <ion-icon name="restaurant"></ion-icon>
+        <ion-badge color="danger">{{pedidoService.plato.length}}</ion-badge>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+<ion-grid>
+<h3>Iniciar Pedido</h3>
+<ion-item *ngFor="let item of restaurantService.productosrestaurante">
+  <ion-col>
+    Nombre:{{item.nombre}}
+    <p>
+      <br>
+      Precio:{{item.precio}}
+    </p>
+  </ion-col>
+  <button ion-button block icon-left
+          (click)="pedidoService.agregarpedido(item)">
+    <ion-icon name ="restaurant"></ion-icon>
+    Agregar al pedido
+  </button>
+</ion-item>
+</ion-grid>
+
+</ion-content>

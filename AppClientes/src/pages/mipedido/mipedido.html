@@ -1,0 +1,42 @@
+<!--
+  Generated template for the MipedidoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button
+              (click)="viewCtrl.dismiss()">
+              Cerrar
+      </button>
+    </ion-buttons>
+
+
+    <ion-title>Mi pedido</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngFor="let item of pedidoService.plato; let i = index;">
+    <ion-col>
+      Nombre:{{item.nombre}}
+      <p>
+        <br>
+        Precio:{{item.precio}}
+      </p>
+    </ion-col>
+    <button ion-button
+            color="danger"
+            outline
+            block
+            small
+            (click)="pedidoService.eliminarplato(i)">
+      Eliminar
+    </button>
+  </ion-item>
+</ion-content>

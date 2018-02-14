@@ -63,9 +63,11 @@ router.get('/:id', function(req, res, next) {
 
 /* PUT Modificar un usuario */
 router.put('/:id',function(req,res,next){
+
+    var hash=bcrypt.hashSync(req.body.password,salt);
     var userData={
         id:req.params.id,
-        password:req.body.password,
+        password:hash,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         email:req.body.email,

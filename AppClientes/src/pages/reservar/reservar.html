@@ -16,20 +16,27 @@
 
 <ion-content padding>
 
-  <form>
+  <form (ngSubmit)= "add_reserva()">
     <ion-item>
       <ion-label>Día</ion-label>
-      <ion-input type="date" name="dia" required></ion-input>
+      <ion-input type="date" [(ngModel)]="reserva.dia" name="dia" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Hora</ion-label>
-      <ion-input type="hour" name="hora" required></ion-input>
+      <ion-input type="hour" [(ngModel)]="reserva.hora" name="hora" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Comensales</ion-label>
-      <ion-input type="number" name="comensales" required></ion-input>
+      <ion-input type="number" [(ngModel)]="reserva.comensales" name="comensales" required></ion-input>
     </ion-item>
-    
+    <ion-item>
+      <ion-label>Turno</ion-label>
+      <ion-select [(ngModel)]="reserva.turno" [ngModelOptions]="{standalone: true}">
+          <ion-option value="comida">Comida</ion-option>
+          <ion-option value="cena">Cena</ion-option>
+      </ion-select>
+    </ion-item>
+
     <button ion-button type="submit" block>Reservar</button>
   </form>
 

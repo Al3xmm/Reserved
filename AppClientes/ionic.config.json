@@ -8,7 +8,7 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://reserved.ovh:3000"
+      "proxyUrl": "http://reserved.ovh:8080"
     }
   ]
 }

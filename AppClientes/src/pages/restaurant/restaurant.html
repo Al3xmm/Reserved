@@ -31,6 +31,7 @@
         </ion-item>
         <button ion-button (click)="ver_carta()">Ver Carta</button>
         <button ion-button (click)="reservar()">Reservar</button>
+        <button ion-button (click)="iniciarpedido()">Iniciar Pedido</button>
         <h3>Comentarios</h3>
         <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">
             <ion-col>
@@ -41,6 +42,7 @@
               </p>
             </ion-col>
           </ion-item>
+          <button ion-button (click)="comentar()">Comentar</button>
       </ion-grid>
 
 </ion-content>
