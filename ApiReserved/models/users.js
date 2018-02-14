@@ -161,7 +161,7 @@ User.remove=function(Id,callback){
 /* Mostar todos los usuarios */
 User.all= function(callback){
     if (connection){
-        connection.query("SELECT nombre, nick, email FROM usuarios",function (error,rows){
+        connection.query("SELECT * FROM usuarios",function (error,rows){
             if (error){
                 throw error;
             }else{
