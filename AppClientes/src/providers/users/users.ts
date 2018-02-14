@@ -12,7 +12,7 @@ export class UsersProvider {
   login_correcto=false;
   modificar_perfil=false;
   session:any;
-  nuevacomentario = false;
+
   logueado=false;
   nuevareserva = false;
   //Guardamos la info del usuario que se acaba de loguear.
@@ -127,14 +127,5 @@ export class UsersProvider {
 
 
   }
-  add_comentario(data){
-    let url = "api/comments/";
-    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
-    .map(resp=>{
-      console.log("Comentario creado");
-      this.nuevacomentario = true;
-    })
-
-
-  }
+ 
 }

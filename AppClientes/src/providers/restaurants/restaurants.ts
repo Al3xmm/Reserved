@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
+import { UsersProvider } from '../users/users';
 
 
 @Injectable()
 export class RestaurantsProvider {
 
-
+  nuevacomentario = false;
   restaurantes:any;
   inforestaurante:any;
   comentariosrestaurante:any;
@@ -16,7 +17,7 @@ export class RestaurantsProvider {
   busquedatipo:any;
   restauranteactual:any;
 
-  constructor(public http: HttpClient,public storage:Storage) {
+  constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
     this.mostrar_todos();
   }
@@ -85,7 +86,17 @@ export class RestaurantsProvider {
     });
 
   }
+  add_comentario(data){
+    let url = "api/comment/";
+    return this.http.post(url,data, {headers: {'token-acceso':this.userService.session.token} , responseType:'text'})
+    .map(resp=>{
+      console.log("Comentario creado");
+      this.nuevacomentario = true;
+      this.comentarios_restaurante(this.restauranteactual);
+    })
 
+
+  }
 
 
 }
