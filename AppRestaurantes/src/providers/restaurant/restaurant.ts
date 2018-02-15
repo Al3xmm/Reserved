@@ -37,6 +37,9 @@ export class RestaurantProvider {
   //informacion producto a modificar
   infoproductoactual:any;
 
+  //comentarios hechos hacia mi restaurante
+  comentariosrestaurante:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -229,6 +232,22 @@ export class RestaurantProvider {
       this.infoproductoactual=data;
     });
 
+  }
+
+  mis_comentarios(){
+    let url="api/restaurants/";
+      this.http.get(url+this.session.idRestaurante+"/comments",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        this.comentariosrestaurante=data;
+      });
+  }
+  
+  denunciar_comentario(data){
+    let url="api/restaurants/denunciation";
+    return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Denuncia Creada");
+
+      })
   }
 
 }

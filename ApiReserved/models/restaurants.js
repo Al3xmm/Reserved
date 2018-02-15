@@ -268,4 +268,60 @@ Restaurants.remove=function(Id,callback){
     }
 }
 
+/* Crear una denuncia a un comentario */
+Restaurants.insertdenunciation=function(denunciaData,callback){
+    if(connection){
+        connection.query("INSERT INTO denunciaUsuario SET ?",denunciaData,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,denunciaData);
+            }
+        })
+    }
+}
+
+/* Mostar todas los denuncias en curso */
+Restaurants.seedenunciations= function(callback){
+    if (connection){
+        connection.query("select u.nick, r.nombre, c.contenido, idComentario from denunciaUsuario dc, usuarios u, restaurantes r, comentarios c where dc.usuarioU=u.idUsuario and dc.restauranteR=idRestaurante and dc.comentarioC=c.idComentario",function (error,rows){
+            if (error){
+                throw error;
+            }else{
+              console.log(rows);
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
+/* Eliminar un comentario de una denuncia */
+Restaurants.removedenunciation=function(Id,callback){
+    if(connection){
+        var sql= "DELETE FROM denunciaUsuario WHERE comentarioC=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                //return callback(null,"Restaurante eliminado");
+            }
+        })
+    }
+}
+
+Restaurants.removecomment=function(Id,callback){
+    if(connection){
+        var sql= "DELETE FROM comentarios WHERE idComentario=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Comentario y denuncia eliminado");
+            }
+        })
+    }
+}
+
+
+
 module.exports=Restaurants;

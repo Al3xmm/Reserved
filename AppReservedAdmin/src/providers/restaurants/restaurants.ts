@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
+import { UsersProvider } from '../users/users';
 
 
 @Injectable()
@@ -14,7 +15,9 @@ export class RestaurantsProvider {
 
   restauranteactual:number;
 
-  constructor(public http: HttpClient,public storage:Storage) {
+  denuncias:any;
+
+  constructor(public http: HttpClient,public storage:Storage, private userService:UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
     this.mostrar_todos();
   }
@@ -53,15 +56,34 @@ export class RestaurantsProvider {
 
  
   
-  borrar_restaurante(id)
-  {
+  borrar_restaurante(id){
     let url="api/restaurants/";
 
     this.storage.get('token').then((val) => {
-    this.http.delete(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
-      this.mostrar_todos();
+      this.http.delete(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
+        this.mostrar_todos();
+      });
     });
-  });
+
+  }
+
+  mostrar_denuncias(){
+    let url="api/restaurants/denunciation/all";
+    
+    this.http.get(url,{headers: {'token-acceso':this.userService.session.token}})
+      .subscribe(data=>{
+        //guardamos en la variable restaurantes el data que nos devuelve la petición a la API
+        this.denuncias=data;
+    });
+
+  }
+
+  borrar_comentario(id){
+    let url="api/restaurants/denunciation/";
+
+    this.http.delete(url+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      this.mostrar_denuncias();
+    });
 
   }
 

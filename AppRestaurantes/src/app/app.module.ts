@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { LoginempleadosPage } from '../pages/loginempleados/loginempleados';
+import { ComentariosPage } from '../pages/comentarios/comentarios';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginempleadosPage } from '../pages/loginempleados/loginempleados';
     CartarestaurantePage,
     AgregarproductoPage,
     ModificarproductoPage,
-    LoginempleadosPage
+    LoginempleadosPage,
+    ComentariosPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { LoginempleadosPage } from '../pages/loginempleados/loginempleados';
     CartarestaurantePage,
     AgregarproductoPage,
     ModificarproductoPage,
-    LoginempleadosPage
+    LoginempleadosPage,
+    ComentariosPage
   ],
   providers: [
     StatusBar,

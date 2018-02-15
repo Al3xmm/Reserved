@@ -16,8 +16,6 @@ import { UsuarioeliminadoPage } from '../usuarioeliminado/usuarioeliminado';
 export class AllusersPage {
 
   constructor(public navCtrl: NavController, public storage:Storage, public navParams: NavParams,private usersService:UsersProvider) {
-    
-
     usersService.mostrar_todos_usuarios();
   }
 

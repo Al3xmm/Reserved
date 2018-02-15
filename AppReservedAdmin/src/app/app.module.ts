@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { DenunciasPage } from '../pages/denuncias/denuncias';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AllusersPage,
     RestauranteliminadoPage,
     HomePage,
-    UsuarioeliminadoPage
+    UsuarioeliminadoPage,
+    DenunciasPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AllusersPage,
     RestauranteliminadoPage,
     HomePage,
-    UsuarioeliminadoPage
+    UsuarioeliminadoPage,
+    DenunciasPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,23 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Comentarios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item *ngFor="let item of restaurantService.comentariosrestaurante">
+      <ion-col>
+        {{item.nombre}} - {{ item.fecha | date : format : timezone}}
+        <p>
+          <br>
+          {{item.contenido}}
+        </p>
+      </ion-col>
+      <button ion-button (click)="denunciar_comentario(item.idComentario,item.idUsuario)">Denunciar</button>
+    </ion-item>
+
+</ion-content>

@@ -74,7 +74,6 @@ router.post('/:id/upload',upload.single('imagensubir'), function(req, res) {
 
 /* GET Restaurante por su Id */
 router.get('/:id', function(req, res, next) {
-
     Restaurant.findOneById(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
@@ -161,7 +160,6 @@ router.delete("/:id",function(req,res,next){
 
 /* GET Comentarios de un Restaurante */
 router.get('/:id/comments', function(req, res, next) {
-
     Comments.findCommentsRestaurant(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
@@ -410,6 +408,61 @@ router.get('/:id/visit',function(req,res,next){
       }
   })
 });
+
+//Crear una denuncia
+router.post('/denunciation',function(req,res,next){
+    var denunciaData={
+        usuarioU:req.body.usuarioU,
+        restauranteR:req.body.restauranteR,
+        comentarioC:req.body.comentarioC
+    };
+
+    Restaurant.insertdenunciation(denunciaData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/* GET  Todas las denuncias */
+
+router.get('/denunciation/all', function(req, res, next) {
+    Restaurant.seedenunciations(function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* DELETE Borrar una Reserva */
+
+router.delete("/denunciation/:id",function(req,res,next){
+
+    Restaurant.removedenunciation(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+    Restaurant.removecomment(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
+
+
 
 
 module.exports = router;

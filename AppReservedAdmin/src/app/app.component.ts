@@ -12,6 +12,7 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 import { Storage } from '@ionic/storage';
+import { DenunciasPage } from '../pages/denuncias/denuncias';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,6 +23,7 @@ export class MyApp {
 
   usuarios=AllusersPage;
 
+  denuncias=DenunciasPage
 
   home=HomePage;
 

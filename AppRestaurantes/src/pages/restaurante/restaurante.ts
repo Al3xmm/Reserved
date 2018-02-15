@@ -1,3 +1,4 @@
+import { ComentariosPage } from './../comentarios/comentarios';
 import { CartarestaurantePage } from './../cartarestaurante/cartarestaurante';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
@@ -28,6 +29,11 @@ export class RestaurantePage {
   mi_carta(){
     this.restaurantService.mi_carta();
     this.navCtrl.push(CartarestaurantePage);
+  }
+
+  mis_comentarios(){
+    this.restaurantService.mis_comentarios();
+    this.navCtrl.push(ComentariosPage);
   }
 
 }
