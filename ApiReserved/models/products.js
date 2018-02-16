@@ -45,11 +45,28 @@ Products.findProductsByType = function(id,tipo,callback){
       })
     }
 }
+/* Mostrar los productos segun su categoria */
+Products.findProductsByCategory = function(id,categoria,callback){
+    if (connection){
+      var sql = ("SELECT p.nombre,p.categoria FROM productos p WHERE restaurantep="+connection.escape(id)+"AND categoria="+connection.escape(categoria));
+
+
+
+      connection.query(sql,function(error,rows){
+          if (error){
+              throw error;
+          }
+          else{
+              return callback(null,rows);
+          }
+      })
+    }
+}
 
 /* Mostar un producto en concreto */
 Products.findProduct = function(id,callback){
     if (connection){
-      connection.query("SELECT idProducto,nombre,precio,tipo,informacion FROM productos WHERE idProducto ="+connection.escape(id) ,function(error,row){
+      connection.query("SELECT idProducto,nombre,precio,tipo,informacion,categoria FROM productos WHERE idProducto ="+connection.escape(id) ,function(error,row){
           if (error){
               throw error;
           }else{
@@ -64,7 +81,7 @@ Products.findProduct = function(id,callback){
 /* Mostrar todos los productos de un Restaurante*/
 Products.findByRestaurantId = function(id,callback){
     if (connection){
-      var sql = ("SELECT idProducto,nombre,precio,tipo,informacion FROM productos WHERE RestauranteP ="+connection.escape(id));
+      var sql = ("SELECT idProducto,nombre,precio,tipo,informacion,categoria FROM productos WHERE RestauranteP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -148,6 +165,16 @@ Products.update = function(id,idproducto, productData,callback){
             coma=false;
           }
           sql += "informacion="+connection.escape(productData.Informacion);
+          coma=true;
+        }
+        if(productData.Categoria != "")
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql += "categoria="+connection.escape(productData.Categoria);
           coma=true;
         }
 

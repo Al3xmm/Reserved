@@ -106,6 +106,17 @@ router.get('/type/:type', function(req, res, next) {
         }
     })
 });
+/* GET Restaurantes por Ciudad */
+router.get('/city/:city', function(req, res, next) {
+
+    Restaurant.findRestaurantCity(req.params.city,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 /* GET Aforo de Restaurante en un turno */
 router.get('/:id/capacity', function(req, res, next) {
@@ -222,6 +233,7 @@ router.post('/:id/products', function(req, res, next){
       Precio: req.body.precio,
       Tipo: req.body.tipo,
       Informacion: req.body.informacion,
+      Categoria: req.body.categoria,
       RestauranteP: req.params.id
   };
 
@@ -240,7 +252,8 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Nombre: req.body.nombre,
         Precio: req.body.precio,
         Tipo: req.body.tipo,
-        Informacion: req.body.informacion
+        Informacion: req.body.informacion,
+        Categoria: req.body.categoria
     };
 
     Product.update(req.params.id,req.params.idproducto,productData, function(error, data){
@@ -255,6 +268,16 @@ router.put('/:id/products/:idproducto', function(req, res, next){
 /* Mostrar los productos segun su tipo */
 router.get("/:id/products/:type", function(req, res, next){
     Product.findProductsByType(req.params.id,req.params.type, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+/* Mostrar los productos segun su categoria */
+router.get("/:id/products/:category", function(req, res, next){
+    Product.findProductsByCategory(req.params.id,req.params.category, function(error,data){
         if (error){
             res.json(500,error);
         }else{

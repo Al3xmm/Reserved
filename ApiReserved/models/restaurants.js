@@ -81,7 +81,19 @@ Restaurants.findRestaurantType=function(type, callback){
         })
     }
 }
-
+/* Mostar restaurantes por su ciudad */
+Restaurants.findRestaurantCity=function(city, callback){
+    if (connection){
+        var sql=("SELECT  nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE ciudad LIKE"+connection.escape(city));
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
 /* Mostar aforo de un restaurante */
 Restaurants.seecapacity=function(id,callback){
     if (connection){
