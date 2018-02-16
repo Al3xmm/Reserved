@@ -40,6 +40,10 @@ export class RestaurantProvider {
   //comentarios hechos hacia mi restaurante
   comentariosrestaurante:any;
 
+  //boolean para comprobar si se ha denunciado o ya estaba denunciado (el comentario)
+  denunciada=false;
+
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -245,7 +249,16 @@ export class RestaurantProvider {
     let url="api/restaurants/denunciation";
     return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
+        if(resp==='Denuncia ya realizada'){
+          this.alertCtrl.create({
+            title:"Error",
+            subTitle:"Denuncia ya realizada",
+            buttons:["OK"]
+          }).present();
+        }else{
           console.log("Denuncia Creada");
+          this.denunciada=true;
+        }
 
       })
   }

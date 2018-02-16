@@ -281,6 +281,21 @@ Restaurants.insertdenunciation=function(denunciaData,callback){
     }
 }
 
+/* Buscar denuncia */
+Restaurants.finddenunciation= function(denunciaData,callback){
+    if (connection){
+        connection.query("select * from denunciaUsuario where usuarioU="+denunciaData.usuarioU+" and restauranteR="+denunciaData.restauranteR+" and comentarioC="+denunciaData.comentarioC,function (error,row){
+            if (error){
+                throw error;
+            }else if(row!=""){
+                return callback(null,row);
+            }else{
+                return callback(null,null);
+            }
+        })
+    }
+}
+
 /* Mostar todas los denuncias en curso */
 Restaurants.seedenunciations= function(callback){
     if (connection){

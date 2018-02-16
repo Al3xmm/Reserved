@@ -417,14 +417,23 @@ router.post('/denunciation',function(req,res,next){
         comentarioC:req.body.comentarioC
     };
 
-    Restaurant.insertdenunciation(denunciaData,function(error,data){
+    Restaurant.finddenunciation(denunciaData,function(error,data){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
-        }
+          if(data!=null){
+            res.json(200,"Denuncia ya realizada");
+          }else{
+              Restaurant.insertdenunciation(denunciaData,function(error,data){
+                  if (error){
+                      res.json(500,error);
+                  }else{
+                      res.json(200,data);
+                  }
+              })
+          }
+      }
     })
-
 });
 
 /* GET  Todas las denuncias */

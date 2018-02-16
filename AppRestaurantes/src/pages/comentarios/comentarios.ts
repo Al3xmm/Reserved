@@ -20,11 +20,14 @@ export class ComentariosPage {
     this.denunciarcomentario.usuarioU=usuario;
     this.denunciarcomentario.restauranteR=this.restaurantService.session.idRestaurante;
     this.denunciarcomentario.comentarioC=comentario;
-    console.log(this.denunciarcomentario);
 
     this.restaurantService.denunciar_comentario(this.denunciarcomentario)
     .subscribe(()=>{
+      if(this.restaurantService.denunciada==true){
         this.navCtrl.push(RestaurantePage);
+        this.restaurantService.denunciada=false;
+      }
+        
     });;
     
   }
