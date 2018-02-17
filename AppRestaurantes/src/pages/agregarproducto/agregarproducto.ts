@@ -11,7 +11,7 @@ import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 })
 export class AgregarproductoPage {
 
-  producto={nombre: '', precio: '', tipo: '',informacion:'',restauranteP:''}
+  producto={nombre: '', precio: '', tipo: '',informacion:'',restauranteP:'',categoria:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider) {
   }

@@ -33,6 +33,17 @@
           </ion-select>
         </ion-item>
         <br>
+        <ion-item>
+          <ion-label>Categoría</ion-label>
+          <ion-select [(ngModel)]="producto.categoria" [ngModelOptions]="{standalone: true}">
+              <ion-option value="entrantes">Entrantes</ion-option>
+              <ion-option value="platos principales">Platos Principales</ion-option>
+              <ion-option value="menus">Menús</ion-option>
+              <ion-option value="bebidas">Bebidas</ion-option>
+              <ion-option value="postres">Postres</ion-option>
+          </ion-select>
+        </ion-item>
+        <br>
 
         <button ion-button [disabled]="producto.nombre.length<3" type="submit" block>Agregar Producto</button>
       </form>
