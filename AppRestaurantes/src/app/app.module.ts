@@ -1,3 +1,5 @@
+import { MostrarreservasPage } from './../pages/mostrarreservas/mostrarreservas';
+import { ReservasPage } from './../pages/reservas/reservas';
 import { ModificarproductoPage } from './../pages/modificarproducto/modificarproducto';
 import { AgregarproductoPage } from './../pages/agregarproducto/agregarproducto';
 import { CartarestaurantePage } from './../pages/cartarestaurante/cartarestaurante';
@@ -35,7 +37,9 @@ import { ComentariosPage } from '../pages/comentarios/comentarios';
     AgregarproductoPage,
     ModificarproductoPage,
     LoginempleadosPage,
-    ComentariosPage
+    ComentariosPage,
+    ReservasPage,
+    MostrarreservasPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { ComentariosPage } from '../pages/comentarios/comentarios';
     AgregarproductoPage,
     ModificarproductoPage,
     LoginempleadosPage,
-    ComentariosPage
+    ComentariosPage,
+    ReservasPage,
+    MostrarreservasPage
   ],
   providers: [
     StatusBar,

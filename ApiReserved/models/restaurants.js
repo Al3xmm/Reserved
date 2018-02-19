@@ -94,10 +94,40 @@ Restaurants.findRestaurantCity=function(city, callback){
         })
     }
 }
+
 /* Mostar aforo de un restaurante */
-Restaurants.seecapacity=function(id,callback){
+Restaurants.seecapacityall=function(id,callback){
     if (connection){
         var sql="SELECT dia,turno,aforo FROM aforo_libre WHERE idRestaurante="+connection.escape(id);
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
+
+/* Mostar aforo de un restaurante en un turno concreto*/
+Restaurants.seecapacity=function(id,capacityData,callback){
+    if (connection){
+        var sql="SELECT dia,turno,aforo FROM aforo_libre WHERE '"+capacityData.dia+"'=dia AND idRestaurante="+connection.escape(id);
+        connection.query(sql,function(error,row){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,row);
+            }
+        })
+    }
+}
+
+/* Mostrar reservas de un restaurante en un turno concreto */
+Restaurants.seereservations=function(id,dia,turno,callback){
+    if (connection){
+        var sql="select hora,comensales,nick from reservas,usuarios where usuarioR=idUsuario AND dia="+connection.escape(dia)+" AND turno="+connection.escape(turno)+" and restauranteR="+connection.escape(id);
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

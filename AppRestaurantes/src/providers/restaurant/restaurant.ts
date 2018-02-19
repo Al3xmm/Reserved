@@ -43,6 +43,12 @@ export class RestaurantProvider {
   //boolean para comprobar si se ha denunciado o ya estaba denunciado (el comentario)
   denunciada=false;
 
+  //info del aforo un dia en concreto
+  aforo:any;
+
+  //info de las reservas un dia en un turno concreto
+  reservas:any
+
 
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
@@ -261,6 +267,32 @@ export class RestaurantProvider {
         }
 
       })
+  }
+
+  see_reservas(data){
+    let url="api/restaurants/";
+
+    return this.http.post(url+this.session.idRestaurante+"/capacity", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Mostrando reservas");
+          this.aforo=resp;
+      })
+  }
+
+  mostrar_reservas(dia,turno){
+
+    let fecha=dia.split('-');
+    let anyo=fecha[0];
+    let mes=fecha[1];
+    let fecha2=fecha[2].split('T');
+    let aux=parseInt(fecha2[0]);
+    let day=aux+1;
+    let finishdate=anyo+"-"+mes+"-"+day;
+
+    let url="api/restaurants/";
+      this.http.get(url+this.session.idRestaurante+"/"+finishdate+"/"+turno+"/reservations",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        this.reservas=data;
+      });
   }
 
 }

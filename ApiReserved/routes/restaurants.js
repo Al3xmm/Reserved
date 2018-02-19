@@ -118,10 +118,38 @@ router.get('/city/:city', function(req, res, next) {
     })
 });
 
-/* GET Aforo de Restaurante en un turno */
-router.get('/:id/capacity', function(req, res, next) {
+/* GET Aforo de Restaurante */
+router.get('/:id/capacityall', function(req, res, next) {
 
-    Restaurant.seecapacity(req.params.id,function(error,data){
+    Restaurant.seecapacityall(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET Aforo de Restaurante en un turno */
+router.post('/:id/capacity', function(req, res, next) {
+
+  var capacityData={
+      dia:req.body.dia,
+  };
+
+    Restaurant.seecapacity(req.params.id,capacityData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET reservas de un restaurante */
+router.get('/:id/:dia/:turno/reservations', function(req, res, next) {
+
+    Restaurant.seereservations(req.params.id,req.params.dia,req.params.turno,function(error,data){
         if (error){
             res.json(500,error);
         }else{

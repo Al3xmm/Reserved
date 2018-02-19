@@ -1,3 +1,4 @@
+import { ReservasPage } from './../reservas/reservas';
 import { ComentariosPage } from './../comentarios/comentarios';
 import { CartarestaurantePage } from './../cartarestaurante/cartarestaurante';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
@@ -34,6 +35,10 @@ export class RestaurantePage {
   mis_comentarios(){
     this.restaurantService.mis_comentarios();
     this.navCtrl.push(ComentariosPage);
+  }
+
+  mis_reservas(){
+    this.navCtrl.push(ReservasPage);
   }
 
 }
