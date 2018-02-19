@@ -14,6 +14,7 @@ import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
   templateUrl: 'busqueda.html',
 })
 export class BusquedaPage {
+  busqueda = {nombre: ''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider) {
   }
@@ -22,14 +23,17 @@ export class BusquedaPage {
     console.log('ionViewDidLoad BusquedaPage');
   }
 
-  buscarpornombre(ev:any){
-    let val = ev.target.value;
-    console.log(val);
-    this.restaurantService.buscar_restaurante(val);
+  buscarpornombre(){
+    this.restaurantService.buscar_restaurante(this.busqueda.nombre);
   }
   buscarportipo(ev:any){
-    let val = ev.target.value;
-    this.restaurantService.buscar_tiporestaurante(val);
-    console.log(val);
+    let tipo = "asdas";
+    this.restaurantService.buscar_ciudadrestaurante(tipo);
+    //this.navCtrl.setRoot(AllusersPage);
+  }
+  buscarporciudad(){
+    let ciudad = "asdas";
+    this.restaurantService.buscar_ciudadrestaurante(ciudad);
+    //this.navCtrl.setRoot(AllusersPage);
   }
 }

@@ -21,6 +21,7 @@ export class RestaurantPage {
 
   ver_carta(){
     this.restaurantService.carta_restaurante();
+    
     this.navCtrl.push(CartaPage);
   }
 

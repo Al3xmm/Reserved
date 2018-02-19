@@ -14,8 +14,10 @@ export class RestaurantsProvider {
   comentariosrestaurante:any;
   productosrestaurante:any;
   busqueda:any;
+  busquedaciudad:any;
   busquedatipo:any;
   restauranteactual:any;
+  productoscategoria:any;
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -63,28 +65,37 @@ export class RestaurantsProvider {
       });
     });
   }
+  productos_porcategoria(category){
+    let url = "api/restaurants/";
+    this.http.get(url+this.restauranteactual+"/products/"+"category/"+category,{headers:{'token-acceso':this.userService.session.token}})
+    .subscribe(data=>{
+      this.productoscategoria =data;
+      console.log(this.productoscategoria);
+    })
+  }
+
 
   buscar_restaurante(termino){
     let url="api/restaurants/name/";
-    this.storage.get('token').then((val) => {
-      this.http.get(url+termino,{headers: {'token-acceso':val}}).subscribe(data=>{
+      this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.busqueda=data;
-        //console.log(buscar);
-      });
+        console.log(this.busqueda);
     });
-
   }
 
   buscar_tiporestaurante(termino){
     let url="api/restaurants/type/";
-    this.storage.get('token').then((val) => {
-      this.http.get(url+termino,{headers: {'token-acceso':val}}).subscribe(data=>{
-        //this.busquedatipo=this.restaurantes;
-        this.busquedatipo = data;
-        console.log(this.busquedatipo);
-      });
+      this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+        this.busqueda=data;
+        //console.log(buscar);
     });
-
+  }
+  buscar_ciudadrestaurante(termino){
+    let url="api/restaurants/city/";
+      this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+        this.busqueda=data;
+        //console.log(buscar);
+    });
   }
   add_comentario(data){
     let url = "api/comment/";

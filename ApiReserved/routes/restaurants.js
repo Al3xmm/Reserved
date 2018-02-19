@@ -95,7 +95,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* GET Restaurantes por nombre */
-router.get('/:name', function(req, res, next) {
+router.get('/name/:name', function(req, res, next) {
 
     Restaurant.findRestaurantName(req.params.name,function(error,data){
         if (error){
@@ -315,7 +315,7 @@ router.get("/:id/products/:type", function(req, res, next){
     })
 });
 /* Mostrar los productos segun su categoria */
-router.get("/:id/products/:category", function(req, res, next){
+router.get("/:id/products/category/:category", function(req, res, next){
     Product.findProductsByCategory(req.params.id,req.params.category, function(error,data){
         if (error){
             res.json(500,error);

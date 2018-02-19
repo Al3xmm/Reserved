@@ -9,14 +9,20 @@
         </button>
       </ion-buttons>
     </ion-navbar>
-  
+   <!-- *ngIf = "restaurantService.productoscategoria != ''"
+  [disabled]="restaurantService.productoscategoria==''" -->
+    <button ion-button (click)="entrantes()">Entrantes</button>
+    <button ion-button (click)="postres()">Postres</button>
+    <button ion-button (click)="platosprincipales()">Platos principales</button>
+    <button ion-button (click)="menus()">Menus</button>
+    <button ion-button (click)="bebidas()">Bebidas</button>
   </ion-header>
   
   
   <ion-content padding>
       <ion-grid>
           <h3>Productos</h3>
-          <ion-item *ngFor="let item of restaurantService.productosrestaurante">
+          <ion-item *ngFor="let item of restaurantService.productoscategoria">
             <ion-col>
               Nombre: {{item.nombre}}
               <p>
