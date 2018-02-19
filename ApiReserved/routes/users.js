@@ -38,9 +38,9 @@ router.use(function(req, res, next) {
 });
 
 /* GET  Todos los Usuarios */
-router.get('/', function(req, res, next) {
+router.get('/page/:page', function(req, res, next) {
 
-    User.all(function(error,data){
+    User.all(req.params.page,function(error,data){
         if (error){
             res.json(500,error);
         }else{
@@ -48,6 +48,20 @@ router.get('/', function(req, res, next) {
         }
     })
 });
+
+/* GET  Usuarios por nick */
+router.get('/find/:nick', function(req, res, next) {
+
+    User.findlikenick(req.params.nick,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
 
 /* GET Usuario por su Id */
 router.get('/:id', function(req, res, next) {

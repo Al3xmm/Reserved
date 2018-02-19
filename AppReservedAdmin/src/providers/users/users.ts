@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
 export class UsersProvider {
 
   login_correcto=false;
-  users:any;
+  users: any=[];
   session:any;
 
   logueado=false;
@@ -19,6 +19,14 @@ export class UsersProvider {
   infouser:any;
 
   reservasusuario:any;
+
+  //pagina de carga de los usuario
+  pagina:number=0;
+
+  //variable auxiliar para infinite scroll
+  usuarios: any;
+
+  mostrartodos:boolean=true;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
    
@@ -53,7 +61,6 @@ export class UsersProvider {
           this.storage.set('idUsuario', this.session.idUsuario);
           this.storage.set('token', this.session.token);
 
-
         }
       })
   }
@@ -61,15 +68,21 @@ export class UsersProvider {
  
 
   mostrar_todos_usuarios(){
-
-    let url="api/users";
-    this.storage.get('token').then((val) => {
-    this.http.get(url,{headers: {'token-acceso':val}})
-      .subscribe(data=>{
-        //guardamos en la variable restaurantes el data que nos devuelve la petición a la API
-        this.users=data;
+    let promesa=new Promise((resolve,reject)=>{
+      let url="api/users/page/";
+      this.http.get(url+this.pagina,{headers: {'token-acceso':this.session.token}})
+        .subscribe(data=>{
+          this.usuarios=data;
+          for(let i=0; i<this.usuarios.length; i++) {
+            this.users.push(this.usuarios[i]);
+          }
+          this.pagina+=1;
+          resolve();
+        });
     });
-  });
+
+    return promesa;
+
   }
 
   borrar_usuario(id)
@@ -80,6 +93,15 @@ export class UsersProvider {
     .subscribe(data=>{
       this.mostrar_todos_usuarios();
     });
+
+  }
+
+  find_usuario(nombre){
+    let url="api/users/find/";
+      this.http.get(url+nombre,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        this.users=data;
+        this.pagina=0;
+      });
 
   }
 

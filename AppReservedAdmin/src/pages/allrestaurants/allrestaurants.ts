@@ -11,19 +11,29 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 })
 export class AllrestaurantsPage {
 
+  restaurante={nombre: ''}
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider) {
     //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
-    //restaurantservice.mostrar_todos();
-  }
+    if(restaurantService.mostrartodos==true){
+      restaurantService.mostrar_todos();
+    }
+    restaurantService.mostrartodos=true;
 
-  ionViewDidLoad() {
     
   }
+
 
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
     this.restaurantService.comentarios_restaurante(id);
     this.navCtrl.push(RestaurantPage);
+  }
+
+  find_restaurante(){
+    this.restaurantService.find_restaurant(this.restaurante.nombre);
+    this.navCtrl.setRoot(AllrestaurantsPage);
+    this.restaurantService.mostrartodos=false;
   }
 
 

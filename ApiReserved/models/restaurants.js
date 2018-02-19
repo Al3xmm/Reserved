@@ -12,6 +12,20 @@ connection=mysql.createConnection({
 
 var Restaurants={};
 
+/*Mostrar un restaurante por su nombre */
+Restaurants.findlikename= function(nick,callback){
+    var nombre=nick;
+    if (connection){
+        connection.query("SELECT * FROM restaurantes where nombre like '%"+nombre+"%'",function (error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
 /*Busca el email del restaurante*/
 Restaurants.findEmail=function(email,callback){
     if (connection){

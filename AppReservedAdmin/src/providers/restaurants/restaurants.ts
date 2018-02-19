@@ -17,6 +17,8 @@ export class RestaurantsProvider {
 
   denuncias:any;
 
+  mostrartodos:boolean=true;
+
   constructor(public http: HttpClient,public storage:Storage, private userService:UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
     this.mostrar_todos();
@@ -85,6 +87,13 @@ export class RestaurantsProvider {
       this.mostrar_denuncias();
     });
 
+  }
+
+  find_restaurant(nombre){
+    let url="api/restaurants/find/";
+      this.http.get(url+nombre,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+        this.restaurantes=data;
+      });
   }
 
 }

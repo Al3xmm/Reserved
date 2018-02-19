@@ -71,6 +71,17 @@ router.post('/:id/upload',upload.single('imagensubir'), function(req, res) {
 });
 */
 
+/* GET  Restaurantes por nombre */
+router.get('/find/:nick', function(req, res, next) {
+
+    Restaurant.findlikename(req.params.nick,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 /* GET Restaurante por su Id */
 router.get('/:id', function(req, res, next) {

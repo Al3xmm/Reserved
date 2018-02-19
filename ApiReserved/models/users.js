@@ -159,9 +159,11 @@ User.remove=function(Id,callback){
 /************************************************************************************/
 
 /* Mostar todos los usuarios */
-User.all= function(callback){
+User.all= function(page,callback){
+    var aux=parseInt(page);
+    aux=aux*5;
     if (connection){
-        connection.query("SELECT * FROM usuarios",function (error,rows){
+        connection.query("SELECT * FROM usuarios limit "+aux+",5",function (error,rows){
             if (error){
                 throw error;
             }else{
@@ -170,6 +172,21 @@ User.all= function(callback){
         })
     }
 }
+
+/*Mostrar un usuario por nick */
+User.findlikenick= function(nick,callback){
+    var nombre=nick;
+    if (connection){
+        connection.query("SELECT * FROM usuarios where nick like '%"+nombre+"%'",function (error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
 
 /* Crear un usuario */
 User.insert=function(userData,callback){
