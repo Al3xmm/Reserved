@@ -193,6 +193,46 @@ router.post('/login',function(req,res,next){
   });
 });
 
+//Login del Aministrador
+router.post('/loginadmin',function(req,res,next){
+  // con esta funcion buscamos si el usuario existe ya o no
+  User.findOneLocal(req.body.nick, function(error, data) {
+      if (error){
+          res.json(500,error);
+      }else{
+      // si no devuelve nada, el usuario no existe
+        if(data==null){
+            res.json(200,"Login incorrecto");
+        }else{
+          var dbpass=data[0].password;
+          var comparepass=bcrypt.compareSync(req.body.password, dbpass);
+
+          if(comparepass==false || data[0].idUsuario!=7){
+              res.json(200,"Login incorrecto");
+          }else{
+            const payload={
+              idUsuario: data.idUsuario,
+              nick:data.nick
+            };
+
+            var token = jwt.sign(payload,configJWT.secret, {
+              expiresIn: "24h" // expira en 24 horas
+            });
+
+            var salida={
+              idUsuario:data[0].idUsuario,
+              nombre:data[0].nombre,
+              email:data[0].email,
+              token:token
+            }
+
+            res.json(200,salida);
+          }
+        }
+      }
+  });
+});
+
 /* POST Crear un usuario */
 router.post('/adduser',function(req,res,next){
 

@@ -34,7 +34,7 @@ export class UsersProvider {
  
 
   login_user(data){
-    let url="api/login";
+    let url="api/loginadmin";
 
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
