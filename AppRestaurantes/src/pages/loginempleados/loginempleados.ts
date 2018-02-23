@@ -1,3 +1,4 @@
+import { EmpleadoPage } from './../empleado/empleado';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -20,7 +21,7 @@ export class LoginempleadosPage {
     this.restaurantService.login_empleado(this.empleado)
       .subscribe(()=>{
         if(this.restaurantService.login_correcto==true){
-          this.navCtrl.setRoot(RestaurantePage);
+          this.navCtrl.setRoot(EmpleadoPage);
         }
     });
   }

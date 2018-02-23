@@ -1,3 +1,4 @@
+import { LoginrestaurantePage } from './../loginrestaurante/loginrestaurante';
 import { LoginempleadosPage } from './../loginempleados/loginempleados';
 import { RegistroPage } from './../registro/registro';
 import { Component } from '@angular/core';
@@ -18,21 +19,13 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private restaurantService:RestaurantProvider) {
   }
 
-  showRegistroPage() {
-    this.navCtrl.push(RegistroPage);
-  }
-
-  login_restaurant(){
-    this.restaurantService.login_restaurant(this.restaurant)
-      .subscribe(()=>{
-        if(this.restaurantService.login_correcto==true){
-          this.navCtrl.setRoot(RestaurantePage);
-        }
-    });
-  }
-
   login_empleados(){
     this.navCtrl.push(LoginempleadosPage);
   }
+
+  login_restaurante(){
+    this.navCtrl.push(LoginrestaurantePage);
+  }
+
 
 }
