@@ -4,6 +4,7 @@ var path = require("path");
 var Restaurant=require("../models/restaurants");
 var Comments=require("../models/comments");
 var Product=require("../models/products");
+var Category=require("../models/category");
 var Employee=require("../models/employees");
 var Images=require("../models/images");
 var Visit=require("../models/visitrestaurant");
@@ -121,6 +122,22 @@ router.get('/type/:type', function(req, res, next) {
 router.get('/city/:city', function(req, res, next) {
 
     Restaurant.findRestaurantCity(req.params.city,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+/* GET Restaurantes dada una ciudad, nombre y tipocomida */
+router.get('/find', function(req, res, next) {
+
+    var restaurantData={
+        nombre:req.body.nombre,
+        ciudad:req.body.ciudad,
+        tipoComida:req.body.tipoComida
+    };
+    Restaurant.findRestaurant(restaurantData,function(error,data){
         if (error){
             res.json(500,error);
         }else{
@@ -272,7 +289,6 @@ router.post('/:id/products', function(req, res, next){
       Precio: req.body.precio,
       Tipo: req.body.tipo,
       Informacion: req.body.informacion,
-      Categoria: req.body.categoria,
       RestauranteP: req.params.id
   };
 
@@ -291,8 +307,7 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Nombre: req.body.nombre,
         Precio: req.body.precio,
         Tipo: req.body.tipo,
-        Informacion: req.body.informacion,
-        Categoria: req.body.categoria
+        Informacion: req.body.informacion
     };
 
     Product.update(req.params.id,req.params.idproducto,productData, function(error, data){
@@ -314,7 +329,7 @@ router.get("/:id/products/:type", function(req, res, next){
         }
     })
 });
-/* Mostrar los productos segun su categoria */
+/* Mostrar los productos segun su categoria 
 router.get("/:id/products/category/:category", function(req, res, next){
     Product.findProductsByCategory(req.params.id,req.params.category, function(error,data){
         if (error){
@@ -323,7 +338,7 @@ router.get("/:id/products/category/:category", function(req, res, next){
             res.json(200,data);
         }
     })
-});
+});*/
 
 /*Todos los empleados de un restaurante */
 router.get('/:id/employee',function(req,res,next){
@@ -534,6 +549,71 @@ router.delete("/denunciation/:id",function(req,res,next){
 
 
 
+/* GET  categoria por nombre */
+router.get('/:id/products/category/name/:name', function(req, res, next) {
 
+    Category.findlikename(req.params.name,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET categoria por su Id */
+router.get('/:id/products/category/:id', function(req, res, next) {
+    Category.findOneById(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+/* PUT Modificar un category */
+router.put('/:id/products/category/:idcategoria',function(req,res,next){
+    var categoryData={
+        idCategoria:req.params.idcategoria,
+        nombre:req.body.nombre,
+        restauranteCad:req.params.id
+    };
+
+    Category.update(req.params.id,req.params.idcategoria, categoryData, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/* DELETE Borrar un Category */
+router.delete('/:id/products/category/:idcategoria',function(req,res,next){
+    Category.remove(req.params.id,req.params.idcategoria,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+/* Crear una categoria en un restaurante*/
+router.post('/:id/products/category', function(req, res, next){
+    var categoryData={
+        IdCategoria: null,
+        Nombre: req.body.nombre,
+        restauranteCat: req.params.id
+    };
+  
+      Category.insert(categoryData, function(error,data){
+          if (error){
+              res.json(500,error);
+          }else{
+              res.json(200,"Categoria anyadida");
+          }
+      })
+  });
 
 module.exports = router;
