@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { MiscategoriasPage } from './../miscategorias/miscategorias';
+import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
 
 
 @IonicPage()
@@ -31,9 +32,8 @@ export class RestaurantPage {
     this.navCtrl.push(ComentariosPage);
   }
   iniciarpedido(){
-    this.restaurantService.carta_restaurante();
-    console.log("probando");
-    this.navCtrl.push(PedirPage);
+    this.restaurantService.categorias_restaurante();
+    this.navCtrl.push(CategoriaspedidoPage);
   }
 
 }

@@ -19,6 +19,7 @@ export class RestaurantsProvider {
   restauranteactual:any;
   productoscategoria:any;
   allcategorias:any;
+  avanzada:any;
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -75,6 +76,13 @@ export class RestaurantsProvider {
     })
   }
 
+  busqueda_avanzada(data){
+    let url="api/restaurants/find/";
+      this.http.get(url+data,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+        this.avanzada=data;
+        console.log(this.avanzada);
+    });
+  }
 
   buscar_restaurante(termino){
     let url="api/restaurants/name/";

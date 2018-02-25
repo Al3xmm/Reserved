@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { CartaPage} from './../carta/carta';
+import { PedirPage} from './../pedir/pedir';
 
 @IonicPage()
 @Component({

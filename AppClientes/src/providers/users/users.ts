@@ -12,7 +12,7 @@ export class UsersProvider {
   login_correcto=false;
   modificar_perfil=false;
   session:any;
-
+  nuevopedido:any;
   logueado=false;
   nuevareserva = false;
   //Guardamos la info del usuario que se acaba de loguear.
@@ -125,6 +125,15 @@ export class UsersProvider {
       this.nuevareserva = true;
     })
 
+
+  }
+  add_pedido(data){
+    let url = "api/orders";
+    return this.http.post(url+this.session.idUsuario+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
+    .map(resp=>{
+      console.log("Pedido enviado");
+      this.nuevopedido = true;
+    })
 
   }
  

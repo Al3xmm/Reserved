@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>miscategorias</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+      <h3>Productos</h3>
+      <ion-item *ngFor="let item of restaurantService.allcategorias">
+        <ion-col>
+        {{item.nombre}}
+        </ion-col>
+        <button ion-button (click)="mis_productos(item.idCategoria)">Ver productos</button>
+      </ion-item>
+    </ion-grid>
+
+</ion-content>
