@@ -92,4 +92,19 @@ Category.remove = function(id,categoria,callback){
     }
 }
 
+/* Mostrar todos las categorias de un Restaurante*/
+Category.findByRestaurantId = function(id,callback){
+    if (connection){
+      var sql = ("SELECT idCategoria,nombre FROM categorias WHERE restauranteCat ="+connection.escape(id));
+      connection.query(sql,function(error,rows){
+          if (error){
+              throw error;
+          }
+          else{
+              return callback(null,rows);
+          }
+      })
+    }
+}
+
 module.exports = Category;

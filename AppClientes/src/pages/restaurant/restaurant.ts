@@ -5,7 +5,7 @@ import { ComentariosPage } from './../comentarios/comentarios';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
-
+import { MiscategoriasPage } from './../miscategorias/miscategorias';
 
 
 @IonicPage()
@@ -20,9 +20,8 @@ export class RestaurantPage {
   }
 
   ver_carta(){
-    this.restaurantService.carta_restaurante();
-    
-    this.navCtrl.push(CartaPage);
+    this.restaurantService.categorias_restaurante();
+    this.navCtrl.push(MiscategoriasPage);
   }
 
   reservar(){

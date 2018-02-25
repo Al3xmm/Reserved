@@ -16,26 +16,4 @@ export class CartaPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartaPage');
   }
-
-  entrantes(){
-        this.restaurantService.productos_porcategoria("entrantes");  
-  }
-
-  postres(){
-        this.restaurantService.productos_porcategoria("postres"); 
-  }
-
-  platosprincipales(){
-        this.restaurantService.productos_porcategoria("platos principales");
-  }
-
-  menus(){
-        this.restaurantService.productos_porcategoria("menus");   
-  }
-
-  bebidas(){
-   // for(let item of this.restaurantService.productosrestaurante){
-     // if(item.categoria == 'bebidas'){
-        this.restaurantService.productos_porcategoria("bebidas");
-  }
 }

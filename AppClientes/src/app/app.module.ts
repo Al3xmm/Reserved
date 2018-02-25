@@ -2,6 +2,7 @@ import { ReservarPage } from './../pages/reservar/reservar';
 import { CartaPage } from './../pages/carta/carta';
 import { BusquedaPage } from './../pages/busqueda/busqueda';
 import { MipedidoPage } from './../pages/mipedido/mipedido';
+import { MiscategoriasPage } from './../pages/miscategorias/miscategorias';
 import { PedirPage } from './../pages/pedir/pedir';
 import { ProductospedidoPage } from './../pages/productospedido/productospedido';
 import { RestaurantPage } from './../pages/restaurant/restaurant';
@@ -42,7 +43,8 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     MipedidoPage,
     BusquedaPage,
     ModificarperfilPage,
-    ComentariosPage
+    ComentariosPage,
+    MiscategoriasPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     MipedidoPage,
     BusquedaPage,
     ModificarperfilPage,
-    ComentariosPage
+    ComentariosPage,
+    MiscategoriasPage
   ],
   providers: [
     StatusBar,

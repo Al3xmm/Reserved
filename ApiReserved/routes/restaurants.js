@@ -330,7 +330,7 @@ router.get("/:id/products/:type", function(req, res, next){
         }
     })
 });
-/* Mostrar los productos segun su categoria
+/* Mostrar los productos segun su categoria */
 router.get("/:id/products/category/:category", function(req, res, next){
     Product.findProductsByCategory(req.params.id,req.params.category, function(error,data){
         if (error){
@@ -339,7 +339,7 @@ router.get("/:id/products/category/:category", function(req, res, next){
             res.json(200,data);
         }
     })
-});*/
+});
 
 /*Todos los empleados de un restaurante */
 router.get('/:id/employee',function(req,res,next){
@@ -638,5 +638,16 @@ router.post('/:id/products/category', function(req, res, next){
           }
       })
   });
+  
+ /* Mostrar todos las categorias de un Restaurante*/
+router.get("/:id/category", function(req, res, next){
+    Category.findByRestaurantId(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 module.exports = router;
