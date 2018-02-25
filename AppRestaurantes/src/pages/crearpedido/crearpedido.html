@@ -1,0 +1,26 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nuevo Pedido</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form (ngSubmit)="add_pedido()">
+        <ion-item>
+          <ion-label>Mesa</ion-label>
+          <ion-input type="number" [(ngModel)]="pedido.mesa" name="mesa" required></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Reserva</ion-label>
+          <ion-input type="text" [(ngModel)]="pedido.reservap" name="reservap"></ion-input>
+        </ion-item>
+        <br>
+        <button ion-button [disabled]="pedido.mesa.length<1" type="submit" block>Crear</button>
+      </form>
+
+</ion-content>

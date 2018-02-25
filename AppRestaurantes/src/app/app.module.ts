@@ -1,3 +1,4 @@
+import { CrearpedidoPage } from './../pages/crearpedido/crearpedido';
 import { MostrarreservasPage } from './../pages/mostrarreservas/mostrarreservas';
 import { ReservasPage } from './../pages/reservas/reservas';
 import { ModificarproductoPage } from './../pages/modificarproducto/modificarproducto';
@@ -43,7 +44,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     ReservasPage,
     MostrarreservasPage,
     LoginrestaurantePage,
-    EmpleadoPage
+    EmpleadoPage,
+    CrearpedidoPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     ReservasPage,
     MostrarreservasPage,
     LoginrestaurantePage,
-    EmpleadoPage
+    EmpleadoPage,
+    CrearpedidoPage
   ],
   providers: [
     StatusBar,

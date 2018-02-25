@@ -8,6 +8,7 @@ var Category=require("../models/category");
 var Employee=require("../models/employees");
 var Images=require("../models/images");
 var Visit=require("../models/visitrestaurant");
+var Orders=require("../models/orders");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -329,7 +330,7 @@ router.get("/:id/products/:type", function(req, res, next){
         }
     })
 });
-/* Mostrar los productos segun su categoria 
+/* Mostrar los productos segun su categoria
 router.get("/:id/products/category/:category", function(req, res, next){
     Product.findProductsByCategory(req.params.id,req.params.category, function(error,data){
         if (error){
@@ -606,12 +607,34 @@ router.post('/:id/products/category', function(req, res, next){
         Nombre: req.body.nombre,
         restauranteCat: req.params.id
     };
-  
+
       Category.insert(categoryData, function(error,data){
           if (error){
               res.json(500,error);
           }else{
               res.json(200,"Categoria anyadida");
+          }
+      })
+  });
+
+
+  /* POST Crear un pedido */
+  router.post('/orders', function(req,res,next){
+
+      var OrderData={
+          IdPedido:null,
+          reservap:req.body.reservap,
+          asignare:req.body.asignare,
+          cuentatotal:req.body.cuentatotal,
+          mesa:parseInt(req.body.mesa)
+      };
+      console.log(OrderData);
+      Orders.insert(OrderData,function(error,data){
+          if (error){
+              res.json(500,error);
+          }else{
+              res.json(200,data);
+              aux=1;
           }
       })
   });

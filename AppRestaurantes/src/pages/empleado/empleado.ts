@@ -1,3 +1,4 @@
+import { CrearpedidoPage } from './../crearpedido/crearpedido';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -11,8 +12,8 @@ export class EmpleadoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EmpleadoPage');
+  crear_pedido(){
+    this.navCtrl.push(CrearpedidoPage);
   }
 
 }

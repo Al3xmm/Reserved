@@ -450,28 +450,6 @@ router.get('/orders/:id', function(req, res, next) {
     })
 });
 
-
-/* POST Crear un pedido */
-router.post('/orders', function(req,res,next){
-
-    var OrderData={
-        IdPedido:null,
-        reservap:req.body.reservap,
-        asignare:req.body.asignare,
-        cuentatotal:req.body.cuentatotal,
-        mesa:req.body.mesa
-    };
-
-    Orders.insert(OrderData,function(error,data){
-        if (error){
-            res.json(500,error);
-        }else{
-            res.json(200,data);
-            aux=1;
-        }
-    })
-});
-
 /* DELETE Eliminar un pedido */
 router.delete('/orders/:id', function(req,res,next){
   Orders.remove(req.params.id,function(error,data){

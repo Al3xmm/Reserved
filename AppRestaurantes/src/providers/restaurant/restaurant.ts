@@ -295,4 +295,14 @@ export class RestaurantProvider {
       });
   }
 
+  add_pedido(data){
+    let url="api/restaurants/orders";
+
+    return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Pedido Creado");
+
+      })
+  }
+
 }
