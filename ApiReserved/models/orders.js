@@ -44,7 +44,7 @@ Order.findOneById=function(id, callback){
 /* Mostrar productos de un pedido*/
 Order.findOrderProducts = function(id, callback){
   if(connection){
-      var sql = ("select pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
+      var sql = ("select pp.idProductoDePedido, pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -54,6 +54,7 @@ Order.findOrderProducts = function(id, callback){
       })
   }
 }
+
 /*CAMBIA ESTADO DE UN PRODUCTO: PREPARAR-PREPARANDO  */
 /*:idpp Id de produco de pedido :idp  ID de producto*/
 Order.CambiaEstadoPP = function(id,idpp,idp, callback){
@@ -114,6 +115,36 @@ Order.insert = function(OrderData, callback){
             throw error;
         }else{
             return callback(null,"Pedido creado");
+        }
+    })
+  }
+}
+
+Order.findordersemployee=function(id,callback){
+  var date = new Date();
+  var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+  if(connection){
+    var sql="SELECT * FROM pedidos where asignarE="+connection.escape(id)+" AND dia='"+currentdate+"' AND finalizado=0";
+
+    connection.query(sql,function(error,rows){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,rows);
+        }
+    })
+  }
+}
+
+Order.closepedido=function(id,callback){
+  if(connection){
+    var sql="UPDATE pedidos set finalizado=1 where idPedido="+connection.escape(id);
+    connection.query(sql,function(error,row){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,row);
         }
     })
   }
@@ -314,10 +345,10 @@ Order.insertOrderProduct = function(OrderProductData, callback){
   }
 }
 
-/* Eliminar un producto de pedido (Falta probar)*/
+/* Eliminar un producto de pedido*/
 Order.removeOrderProduct = function(id, product, callback){
   if(connection){
-    connection.query("DELETE from productosdepedido where PedidoP = "+connection.escape(id)+" and ProductoP = "+connection.escape(product),function(error,result){
+    connection.query("DELETE from productosdepedido where PedidoP = "+connection.escape(id)+" and idProductoDePedido = "+connection.escape(product),function(error,result){
         if (error){
             throw error;
         }else{
@@ -326,6 +357,20 @@ Order.removeOrderProduct = function(id, product, callback){
     })
   }
 }
+
+/* Añadir precio de producto de pedido eliminado */
+Order.Addprecio = function(id, product, callback){
+  if(connection){
+    connection.query("UPDATE PEDIDOS,productos,productosdepedido set cuentaTotal=cuentaTotal+precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,"Precio reestablecido");
+        }
+    })
+  }
+}
+
 
 /* Modificar el estado de un producto de pedido */
 /*Order.updateOrderProduct = function(id, callback){

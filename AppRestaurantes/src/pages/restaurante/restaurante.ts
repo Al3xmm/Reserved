@@ -18,10 +18,6 @@ export class RestaurantePage {
   
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RestaurantePage');
-  }
-
   mis_empleados(){
     this.restaurantService.mis_empleados();
     this.navCtrl.push(ListaempleadosPage);

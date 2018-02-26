@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CrearpedidoPage {
 
-  pedido={reservap: '', asignare: '', cuentatotal:0 ,mesa:''}
+  pedido={reservap: '', asignare: '', cuentatotal:0 ,mesa:'',dia:'',finalizado:0}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantProvider) {
   }
@@ -22,12 +22,15 @@ export class CrearpedidoPage {
       this.pedido.reservap=null;
     }
 
-    console.log(this.pedido);
-
+    var date = new Date();
+    var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    this.pedido.dia=currentdate;
+  
     this.restaurantService.add_pedido(this.pedido)
       .subscribe(()=>{
           this.navCtrl.push(EmpleadoPage);
     });
+
   }
 
 }

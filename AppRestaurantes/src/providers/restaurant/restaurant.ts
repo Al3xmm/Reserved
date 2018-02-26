@@ -49,6 +49,15 @@ export class RestaurantProvider {
   //info de las reservas un dia en un turno concreto
   reservas:any
 
+  //Info de los pedidos en curso del empleado logueado
+  pedidosencurso:any
+
+  //Info con los productos del pedido que estamos viendo
+  productosdepedido:any
+
+  //Info donde estan todas las categorias de un restaurante
+  categoriasrestaurante:any
+
 
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
@@ -210,6 +219,24 @@ export class RestaurantProvider {
     });
   }
 
+  add_category(data){
+    let url="api/restaurants/";
+    return this.http.post(url+this.session.idRestaurante+"/products/category", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Categoria creada");
+      },err=>{
+        console.log(err);
+      })
+  }
+
+  see_category(){
+    let url="api/restaurants/";
+
+    this.http.get(url+this.session.idRestaurante+"/category",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.categoriasrestaurante=data;
+    });
+  }
+
   add_producto(data){
     let url="api/restaurants/";
 
@@ -303,6 +330,45 @@ export class RestaurantProvider {
           console.log("Pedido Creado");
 
       })
+  }
+
+  pedidos_en_curso(){
+    let url="api/restaurants/currentorders/";
+      this.http.get(url+this.session.idEmpleado,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        this.pedidosencurso=data;
+      });
+  }
+
+  cerrar_pedido(id){
+    let url="api/restaurants/currentorders/finish/";
+    this.http.get(url+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      console.log("Pedido cerrado");
+    });
+  }
+
+  info_pedido(id){
+    let url="api/restaurants/orders/";
+    this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.productosdepedido=data;
+    });
+  }
+
+  anyadir_precio_productodepedido(idpedido,idproducto){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+idpedido+"/deleteproduct/"+idproducto,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      //Precio cambiado
+    });
+
+    
+  }
+
+  eliminar_productodepedido(id,idproducto){
+    let url="api/restaurants/orders/";
+
+    this.http.delete(url+this.productosdepedido[0].PedidoP+"/orderproducts/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.anyadir_precio_productodepedido(this.productosdepedido[0].PedidoP, idproducto);
+      this.info_pedido(this.productosdepedido[0].PedidoP);
+    });
   }
 
 }

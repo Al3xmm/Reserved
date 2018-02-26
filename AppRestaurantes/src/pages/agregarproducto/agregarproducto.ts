@@ -14,6 +14,7 @@ export class AgregarproductoPage {
   producto={nombre: '', precio: '', tipo: '',informacion:'',restauranteP:'',categoria:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider) {
+    restaurantService.see_category();
   }
 
   add_producto(){

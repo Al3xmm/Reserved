@@ -63,7 +63,7 @@ Products.findProductsByCategory = function(id,categoria,callback){
       })
     }
 }
-/* Mostrar los productos segun su categoria 
+/* Mostrar los productos segun su categoria
 Products.findProductsByCategory = function(id,categoria,callback){
     if (connection){
       var sql = ("SELECT p.nombre,p.categoria FROM productos p WHERE restaurantep="+connection.escape(id)+"AND categoria="+connection.escape(categoria));
@@ -183,6 +183,17 @@ Products.update = function(id,idproducto, productData,callback){
             coma=false;
           }
           sql += "informacion="+connection.escape(productData.Informacion);
+          coma=true;
+        }
+
+        if(productData.Categoria != "")
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          sql +=  "categoria="+connection.escape(productData.Categoria);
           coma=true;
         }
 

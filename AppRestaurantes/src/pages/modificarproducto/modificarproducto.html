@@ -34,6 +34,13 @@
           </ion-select>
         </ion-item>
         <br>
+        <ion-item>
+          <ion-label>Categoría</ion-label>
+          <ion-select [(ngModel)]="producto.categoria" [ngModelOptions]="{standalone: true}">
+              <ion-option *ngFor="let item of restaurantService.categoriasrestaurante" [value]="item.idCategoria">{{item.nombre}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <br>
 
         <button ion-button type="submit" block>Modificar Producto</button>
       </form>

@@ -11,4 +11,22 @@
 
   <button ion-button (click)="crear_pedido()">Nuevo Pedido</button>
 
+  <ion-grid>
+    <br>
+    <h2>Pedidos en Curso</h2>
+    <br>
+    <ion-item *ngFor="let item of restaurantService.pedidosencurso">
+      <ion-col>
+        <p>
+          Pedido numero {{item.idPedido}}
+          <br>
+          Mesa: {{item.mesa}}
+        </p>
+        <button ion-button (click)="info_pedido(item.idPedido)">Ver</button>
+        <button ion-button (click)="cerrar_pedido(item.idPedido)">Terminar Pedido</button>
+        <br>
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+
 </ion-content>

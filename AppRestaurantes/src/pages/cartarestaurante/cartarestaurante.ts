@@ -12,12 +12,13 @@ import { AgregarproductoPage } from '../agregarproducto/agregarproducto';
 })
 export class CartarestaurantePage {
 
+  public buttonClicked: boolean = false;
+
+  categoria={nombre: ''}
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CartarestaurantePage');
-  }
 
   eliminar_producto(id){
     this.restaurantService.eliminar_producto(id);
@@ -32,6 +33,18 @@ export class CartarestaurantePage {
     this.restaurantService.producto_id(id);
     this.restaurantService.productoactual=id;
     this.navCtrl.push(ModificarproductoPage);
+  }
+
+  mostrar_formulario(){
+    this.buttonClicked = !this.buttonClicked;
+  }
+
+  crear_categoria(){
+    this.restaurantService.add_category(this.categoria)
+      .subscribe(()=>{
+        this.navCtrl.push(CartarestaurantePage);
+    });
+    
   }
 
 }

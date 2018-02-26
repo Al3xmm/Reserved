@@ -290,7 +290,8 @@ router.post('/:id/products', function(req, res, next){
       Precio: req.body.precio,
       Tipo: req.body.tipo,
       Informacion: req.body.informacion,
-      RestauranteP: req.params.id
+      RestauranteP: req.params.id,
+      Categoria:req.body.categoria
   };
 
     Product.insert(productData, function(error,data){
@@ -308,7 +309,8 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Nombre: req.body.nombre,
         Precio: req.body.precio,
         Tipo: req.body.tipo,
-        Informacion: req.body.informacion
+        Informacion: req.body.informacion,
+        Categoria:req.body.categoria
     };
 
     Product.update(req.params.id,req.params.idproducto,productData, function(error, data){
@@ -572,6 +574,7 @@ router.get('/:id/products/category/:id', function(req, res, next) {
         }
     })
 });
+
 /* PUT Modificar un category */
 router.put('/:id/products/category/:idcategoria',function(req,res,next){
     var categoryData={
@@ -600,6 +603,7 @@ router.delete('/:id/products/category/:idcategoria',function(req,res,next){
         }
     })
 });
+
 /* Crear una categoria en un restaurante*/
 router.post('/:id/products/category', function(req, res, next){
     var categoryData={
@@ -617,28 +621,6 @@ router.post('/:id/products/category', function(req, res, next){
       })
   });
 
-
-  /* POST Crear un pedido */
-  router.post('/orders', function(req,res,next){
-
-      var OrderData={
-          IdPedido:null,
-          reservap:req.body.reservap,
-          asignare:req.body.asignare,
-          cuentatotal:req.body.cuentatotal,
-          mesa:parseInt(req.body.mesa)
-      };
-      console.log(OrderData);
-      Orders.insert(OrderData,function(error,data){
-          if (error){
-              res.json(500,error);
-          }else{
-              res.json(200,data);
-              aux=1;
-          }
-      })
-  });
-  
  /* Mostrar todos las categorias de un Restaurante*/
 router.get("/:id/category", function(req, res, next){
     Category.findByRestaurantId(req.params.id, function(error,data){
@@ -649,5 +631,93 @@ router.get("/:id/category", function(req, res, next){
         }
     })
 });
+
+/* POST Crear un pedido */
+router.post('/orders', function(req,res,next){
+
+    var OrderData={
+        IdPedido:null,
+        reservap:req.body.reservap,
+        asignare:req.body.asignare,
+        cuentatotal:req.body.cuentatotal,
+        mesa:parseInt(req.body.mesa),
+        dia:req.body.dia,
+        finalizado:req.body.finalizado
+    };
+    console.log(OrderData);
+    Orders.insert(OrderData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+            aux=1;
+        }
+    })
+});
+
+/* GET Ver los pedidos en curso de un empleado */
+router.get("/currentorders/:id", function(req, res, next){
+
+    Orders.findordersemployee(req.params.id, function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* GET productos de pedido */
+router.get('/orders/:id/orderproducts', function(req, res, next) {
+
+    Orders.findOrderProducts(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* DELETE Eliminar un producto de pedido */
+router.delete('/orders/:id/orderproducts/:product', function(req,res,next){
+  Orders.removeOrderProduct(req.params.id, req.params.product,function(error,data){
+      if (error){
+          res.json(500,error);
+      }else{
+          res.json(200,data);
+      }
+  })
+});
+
+/* CAMBIAR precio total al eliminar un producto */
+router.get('/currentorders/:id/deleteproduct/:product',function(req,res,next){
+    Orders.Addprecio(req.params.id,req.params.product,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+
+/* Terminar un pedido */
+router.get('/currentorders/finish/:id',function(req,res,next){
+    console.log("entro");
+    Orders.closepedido(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+
+
+
 
 module.exports = router;
