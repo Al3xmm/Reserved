@@ -1,4 +1,5 @@
-import { EmpleadoPage } from './../empleado/empleado';
+import { CamareroPage } from './../camarero/camarero';
+import { CocineroPage } from './../cocinero/cocinero';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -21,7 +22,14 @@ export class LoginempleadosPage {
     this.restaurantService.login_empleado(this.empleado)
       .subscribe(()=>{
         if(this.restaurantService.login_correcto==true){
-          this.navCtrl.setRoot(EmpleadoPage);
+          if(this.restaurantService.session.tipoEmpleado=="Camarero"){
+            this.restaurantService.see_productosaentregar();
+            this.navCtrl.setRoot(CamareroPage);
+          }else{
+            this.restaurantService.see_productoscocinar();
+            this.navCtrl.setRoot(CocineroPage);
+          }
+          
         }
     });
   }

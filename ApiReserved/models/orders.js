@@ -56,10 +56,9 @@ Order.findOrderProducts = function(id, callback){
 }
 
 /*CAMBIA ESTADO DE UN PRODUCTO: PREPARAR-PREPARANDO  */
-/*:idpp Id de produco de pedido :idp  ID de producto*/
-Order.CambiaEstadoPP = function(id,idpp,idp, callback){
+Order.CambiaEstadoPP = function(id, callback){
   if(connection){
-    var sql = ("UPDATE productosdepedido SET tipoproducto='Preparando' where productop = "+ connection.escape(idp) +" and pedidop  ="+connection.escape(id)+"and tipoproducto='Preparar' and idProductoDePedido ="+connection.escape(idpp));
+    var sql = "UPDATE productosdepedido SET tipoproducto='Preparando' where tipoproducto='Preparar' and idProductoDePedido ="+connection.escape(id);
       console.log(sql);
       connection.query(sql,function(error,rows){
           if (error){
@@ -70,12 +69,12 @@ Order.CambiaEstadoPP = function(id,idpp,idp, callback){
       })
   }
 }
-/*CAMBIA ESTADO DE UN PRODUCTO: PREPARANDO-PREPARADO  */
-/*:idpp Id de produco de pedido :idp  ID de producto*/
 
-Order.CambiaEstadoPP2 = function(id,idpp,idp, callback){
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARANDO-PREPARADO  */
+
+Order.CambiaEstadoPP2 = function(id, callback){
   if(connection){
-    var sql = ("UPDATE productosdepedido SET tipoproducto='Preparado' where productop = "+ connection.escape(idp) +" and pedidop  ="+connection.escape(id)+"and tipoproducto='Preparando' and idProductoDePedido ="+connection.escape(idpp));
+    var sql ="UPDATE productosdepedido SET tipoproducto='Preparado' where idProductoDePedido ="+connection.escape(id);
       console.log(sql);
       connection.query(sql,function(error,rows){
           if (error){
@@ -89,12 +88,10 @@ Order.CambiaEstadoPP2 = function(id,idpp,idp, callback){
 }
 
 /*CAMBIA ESTADO DE UN PRODUCTO: PREPARADO-SERVIDO  */
-/*:idpp Id de produco de pedido :idp  ID de producto*/
 
-Order.CambiaEstadoPS = function(id,idpp,idp, callback){
+Order.CambiaEstadoPS = function(id,callback){
   if(connection){
-    var sql = ("UPDATE productosdepedido SET tipoproducto='Servido' where productop = "+ connection.escape(idp) +" and pedidop  ="+connection.escape(id)+"and tipoproducto='Preparado' and idProductoDePedido ="+connection.escape(idpp));
-      console.log(sql);
+    var sql ="UPDATE productosdepedido SET tipoproducto='Servido' where idProductoDePedido="+connection.escape(id);
       connection.query(sql,function(error,rows){
           if (error){
               throw error;
@@ -358,8 +355,8 @@ Order.removeOrderProduct = function(id, product, callback){
   }
 }
 
-/* Añadir precio de producto de pedido eliminado */
-Order.Addprecio = function(id, product, callback){
+/* Sumar precio de producto pedido  */
+Order.Quitarprecio = function(id, product, callback){
   if(connection){
     connection.query("UPDATE PEDIDOS,productos,productosdepedido set cuentaTotal=cuentaTotal+precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
         if (error){
@@ -370,6 +367,48 @@ Order.Addprecio = function(id, product, callback){
     })
   }
 }
+
+/* Restar precio de producto de pedido eliminado */
+Order.Addprecio = function(id, product, callback){
+  if(connection){
+    connection.query("UPDATE PEDIDOS,productos,productosdepedido set cuentaTotal=cuentaTotal-precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,"Precio reestablecido");
+        }
+    })
+  }
+}
+
+/* Mostrar productos que un camarero debe entregar */
+Order.camareroPendientes = function(id, callback){
+  if(connection){
+    connection.query("select idProductoDePedido,nombre,mesa,hora from productosdepedido pp, pedidos p, productos pr where pedidoP=idPedido and idProducto=productoP and asignarE="+connection.escape(id)+" and tipoProducto='Preparado' ORDER BY hora ASC",function(error,rows){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,rows);
+        }
+    })
+  }
+}
+
+/* Mostrar productos que un cocinero debe hacer */
+Order.cocineroPreparar = function(id, callback){
+  if(connection){
+    connection.query("select idProductoDePedido,nombre,mesa,hora from productosdepedido pp, pedidos p, productos pr,empleados e where idEmpleado=asignarE and empleadoR="+connection.escape(id)+" and pedidoP=idPedido and idProducto=productoP and (tipoProducto='Preparar' or tipoProducto='Preparando') ORDER BY hora ASC",function(error,rows){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,rows);
+        }
+    })
+  }
+}
+
+
+
 
 
 /* Modificar el estado de un producto de pedido */

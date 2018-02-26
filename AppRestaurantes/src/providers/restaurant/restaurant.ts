@@ -58,6 +58,14 @@ export class RestaurantProvider {
   //Info donde estan todas las categorias de un restaurante
   categoriasrestaurante:any
 
+  //Id del pedido actual
+  idpedidoactual:any
+
+  //Productos que un CAMARERO tiene que llevar a mesa
+  productospendientes:any;
+
+  //Productos que un COCINERO tiene que hacer
+  productosapreparar
 
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
@@ -350,6 +358,7 @@ export class RestaurantProvider {
     let url="api/restaurants/orders/";
     this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosdepedido=data;
+      this.idpedidoactual=id;
     });
   }
 
@@ -357,9 +366,7 @@ export class RestaurantProvider {
     let url="api/restaurants/currentorders/";
     this.http.get(url+idpedido+"/deleteproduct/"+idproducto,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       //Precio cambiado
-    });
-
-    
+    }); 
   }
 
   eliminar_productodepedido(id,idproducto){
@@ -370,5 +377,66 @@ export class RestaurantProvider {
       this.info_pedido(this.productosdepedido[0].PedidoP);
     });
   }
+
+  anyadir_producto_pedido(data){
+    let url="api/restaurants/orders/";
+    return this.http.post(url+this.idpedidoactual+"/orderproducts", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+        
+      })
+  }
+
+  sumar_precio(idproducto){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+this.idpedidoactual+"/addproduct/"+idproducto,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      //Precio cambiado
+    }); 
+  }
+
+  see_productosaentregar(){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+this.session.idEmpleado+"/pendientes",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.productospendientes=data;
+    });
+  }
+
+  producto_entregado(data){
+    let url="api/restaurants/orders/";
+
+    this.http.get(url+data+"/orderproducts/servido", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(resp=>{
+          console.log("Producto Servido");
+          this.see_productosaentregar();
+      })
+  }
+
+  see_productoscocinar(){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+this.session.idRestaurante+"/apreparar",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.productosapreparar=data;
+    });
+  }
+
+  producto_preparado(data){
+    let url="api/restaurants/orders/";
+
+    this.http.get(url+data+"/orderproducts/preparado", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(resp=>{
+          console.log("Producto Preparado");
+          this.see_productoscocinar();
+      })
+  }
+
+  producto_preparando(data){
+    let url="api/restaurants/orders/";
+
+    this.http.get(url+data+"/orderproducts/preparando", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(resp=>{
+          console.log("Producto Preparando");
+          this.see_productoscocinar();
+      })
+  }
+
+
 
 }

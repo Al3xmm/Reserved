@@ -679,6 +679,27 @@ router.get('/orders/:id/orderproducts', function(req, res, next) {
     })
 });
 
+/* POST Crear un producto de pedido */
+router.post('/orders/:id/orderproducts/', function(req,res,next){
+
+    var OrderProductData={
+        IdProductoDePedido:null,
+        pedidop:req.params.id,
+        productop:req.body.productop,
+        tipoproducto:req.body.tipoproducto,
+        hora:req.body.hora
+    };
+
+    Orders.insertOrderProduct(OrderProductData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+            aux=1;
+        }
+    })
+});
+
 /* DELETE Eliminar un producto de pedido */
 router.delete('/orders/:id/orderproducts/:product', function(req,res,next){
   Orders.removeOrderProduct(req.params.id, req.params.product,function(error,data){
@@ -688,6 +709,18 @@ router.delete('/orders/:id/orderproducts/:product', function(req,res,next){
           res.json(200,data);
       }
   })
+});
+
+/* CAMBIAR precio total al añadir un producto */
+router.get('/currentorders/:id/addproduct/:product',function(req,res,next){
+    Orders.Quitarprecio(req.params.id,req.params.product,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
 });
 
 /* CAMBIAR precio total al eliminar un producto */
@@ -705,7 +738,6 @@ router.get('/currentorders/:id/deleteproduct/:product',function(req,res,next){
 
 /* Terminar un pedido */
 router.get('/currentorders/finish/:id',function(req,res,next){
-    console.log("entro");
     Orders.closepedido(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
@@ -716,7 +748,65 @@ router.get('/currentorders/finish/:id',function(req,res,next){
 
 });
 
+/* Mostrar productos que un CAMARERO debe entregar */
+router.get('/currentorders/:id/pendientes',function(req,res,next){
+    Orders.camareroPendientes(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
 
+});
+
+/* Mostrar productos que un COCINERO debe hacer */
+router.get('/currentorders/:idrestaurante/apreparar',function(req,res,next){
+    Orders.cocineroPreparar(req.params.idrestaurante,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARADO-SERVIDO  */
+router.get('/orders/:id/orderproducts/servido', function(req, res, next){
+
+      Orders.CambiaEstadoPS(req.params.id,function(error,data){
+          if (error){
+              res.json(500,error);
+          }else{
+              res.json(200,data);
+          }
+      })
+});
+
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARANDO-PREPARADO  */
+router.get('/orders/:id/orderproducts/preparado', function(req, res, next){
+
+      Orders.CambiaEstadoPP2(req.params.id,function(error,data){
+        if (error){
+              res.json(500,error);
+          }else{
+              res.json(200,data);
+          }
+      })
+});
+
+/*CAMBIA ESTADO DE UN PRODUCTO: PREPARAR-PREPARANDO  */
+router.get('/orders/:id/orderproducts/preparando', function(req, res, next){
+
+    Orders.CambiaEstadoPP(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 
 

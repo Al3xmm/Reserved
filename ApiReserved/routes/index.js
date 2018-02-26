@@ -101,6 +101,7 @@ router.post('/loginempleado',function(req,res,next){
               idEmpleado:data[0].idEmpleado,
               nick:data[0].nick,
               tipoEmpleado:data[0].tipoEmpleado,
+              idRestaurante:data[0].empleadoR,
               token:token
             }
 
@@ -491,70 +492,6 @@ router.get('/orders/:id/orderproducts/:tipo', function(req, res, next) {
         }
     })
 });
-
-/* POST Crear un producto de pedido */
-router.post('/orders/:id/orderproducts/', function(req,res,next){
-
-    var OrderProductData={
-        IdProductoDePedido:null,
-        pedidop:req.params.id,
-        productop:req.body.productop,
-        tipoproducto:req.body.tipoproducto,
-        hora:req.body.hora
-    };
-
-    Orders.insertOrderProduct(OrderProductData,function(error,data){
-        if (error){
-            res.json(500,error);
-        }else{
-            res.json(200,data);
-            aux=1;
-        }
-    })
-});
-
-
-
-/*CAMBIA ESTADO DE UN PRODUCTO: PREPARAR-PREPARANDO  */
-/*:idpp Id de produco de pedido :idp  ID de producto*/
-router.put('/orders/:id/orderproducts/:idpp/preparando/:idp', function(req, res, next){
-
-        Orders.CambiaEstadoPP(req.params.id,req.params.idpp,req.params.idp,function(error,data){
-            if (error){
-                res.json(500,error);
-            }else{
-                res.json(200,data);
-                aux=1;
-            }
-        })
-    });
-
-/*CAMBIA ESTADO DE UN PRODUCTO: PREPARANDO-PREPARADO  */
-/*:idpp Id de produco de pedido :idp  ID de producto*/
-router.put('/orders/:id/orderproducts/:idpp/preparado/:idp', function(req, res, next){
-
-      Orders.CambiaEstadoPP2(req.params.id,req.params.idpp,req.params.idp,function(error,data){
-              if (error){
-                    res.json(500,error);
-                }else{
-                    res.json(200,data);
-                    aux=1;
-                }
-            })
-        });
-  /*CAMBIA ESTADO DE UN PRODUCTO: PREPARADO-SERVIDO  */
-  /*:idpp Id de produco de pedido :idp  ID de producto*/
-  router.put('/orders/:id/orderproducts/:idpp/servido/:idp', function(req, res, next){
-
-        Orders.CambiaEstadoPS(req.params.id,req.params.idpp,req.params.idp,function(error,data){
-                    if (error){
-                        res.json(500,error);
-                    }else{
-                        res.json(200,data);
-                        aux=1;
-                    }
-                })
-            });
 
 
 /* GET facturas */

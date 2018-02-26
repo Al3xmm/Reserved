@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Camarero</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <button ion-button (click)="ver_pedidos()">Pedidos</button>
+    <ion-grid>
+        <h2>Pedidos a entregar</h2>
+        <ion-item *ngFor="let item of restaurantService.productospendientes">
+          <ion-col>
+            <p>
+              <br>
+              Nombre: {{item.nombre}}
+              <br>
+              Mesa: {{item.mesa}}
+              <br>
+              Hora: {{item.hora}}
+              <br>
+              <button ion-button (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
+            </p>
+          </ion-col>
+        </ion-item>
+      </ion-grid>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+
+    
+
+</ion-content>

@@ -1,0 +1,23 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Agregar Producto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-item *ngFor="let item of restaurantService.cartarestaurante">
+      <ion-col>
+          <br>
+          <h2>{{item.nombre}}</h2>
+          <br>
+          <button ion-button (click)="anyadirproductopedido(item)">Añadir</button>
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+
+</ion-content>
