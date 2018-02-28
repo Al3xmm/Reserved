@@ -358,7 +358,7 @@ Order.removeOrderProduct = function(id, product, callback){
 /* Sumar precio de producto pedido  */
 Order.Quitarprecio = function(id, product, callback){
   if(connection){
-    connection.query("UPDATE PEDIDOS,productos,productosdepedido set cuentaTotal=cuentaTotal+precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
+    connection.query("UPDATE pedidos,productos,productosdepedido set cuentaTotal=cuentaTotal+precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
         if (error){
             throw error;
         }else{
@@ -371,7 +371,7 @@ Order.Quitarprecio = function(id, product, callback){
 /* Restar precio de producto de pedido eliminado */
 Order.Addprecio = function(id, product, callback){
   if(connection){
-    connection.query("UPDATE PEDIDOS,productos,productosdepedido set cuentaTotal=cuentaTotal-precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
+    connection.query("UPDATE pedidos,productos,productosdepedido set cuentaTotal=cuentaTotal-precio where idProducto="+connection.escape(product)+" and idPedido="+connection.escape(id),function(error,result){
         if (error){
             throw error;
         }else{
@@ -397,7 +397,7 @@ Order.camareroPendientes = function(id, callback){
 /* Mostrar productos que un cocinero debe hacer */
 Order.cocineroPreparar = function(id, callback){
   if(connection){
-    connection.query("select idProductoDePedido,nombre,mesa,hora from productosdepedido pp, pedidos p, productos pr,empleados e where idEmpleado=asignarE and empleadoR="+connection.escape(id)+" and pedidoP=idPedido and idProducto=productoP and (tipoProducto='Preparar' or tipoProducto='Preparando') ORDER BY hora ASC",function(error,rows){
+    connection.query("select idProductoDePedido,nombre,mesa,hora,tipoProducto from productosdepedido pp, pedidos p, productos pr,empleados e where idEmpleado=asignarE and empleadoR="+connection.escape(id)+" and pedidoP=idPedido and idProducto=productoP and (tipoProducto='Preparar' or tipoProducto='Preparando') ORDER BY hora ASC",function(error,rows){
         if (error){
             throw error;
         }else{

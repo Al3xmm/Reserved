@@ -15,7 +15,7 @@ export class CamareroPage {
   }
 
   ver_pedidos(){
-    this.navCtrl.push(EmpleadoPage)
+    this.navCtrl.setRoot(EmpleadoPage)
   }
 
   producto_entregado(idproducto){

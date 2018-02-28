@@ -16,7 +16,9 @@
               <br>
               Nombre: {{item.nombre}}
               <br>
-              Hora: {{item.hora}}
+              Hora: {{item.hora | date: 'H:mm'}}
+              <br>
+              Estado: {{item.tipoProducto}}
               <br>
               <button ion-button (click)="producto_preparando(item.idProductoDePedido)">Preparando</button>
               <button ion-button (click)="producto_preparado(item.idProductoDePedido)">Preparado</button>

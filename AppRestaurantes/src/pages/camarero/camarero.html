@@ -3,6 +3,12 @@
 
   <ion-navbar>
     <ion-title>Camarero</ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -20,7 +26,7 @@
               <br>
               Mesa: {{item.mesa}}
               <br>
-              Hora: {{item.hora}}
+              Hora: {{item.hora | date: 'H:mm'}}
               <br>
               <button ion-button (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
             </p>
