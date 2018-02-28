@@ -1,3 +1,4 @@
+import { EmpleadoPage } from './../empleado/empleado';
 import { AgregarproductopedidoPage } from './../agregarproductopedido/agregarproductopedido';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -21,6 +22,10 @@ export class ProductosdepedidoPage {
   eliminar_productodepedido(id,idproducto){
     this.restaurantService.eliminar_productodepedido(id,idproducto);
     this.navCtrl.push(ProductosdepedidoPage);
+  }
+
+  volver_pedidos(){
+    this.navCtrl.setRoot(EmpleadoPage);
   }
 
 }

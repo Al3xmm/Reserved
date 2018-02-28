@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
+import { EmpleadoPage } from '../empleado/empleado';
 
 
 @IonicPage()
@@ -45,6 +46,10 @@ export class AgregarproductopedidoPage {
       this.restaurantService.sumar_precio(this.producto.productop);
     });
 
+  }
+
+  volver_pedidos(){
+    this.navCtrl.setRoot(EmpleadoPage);
   }
 
 }
