@@ -131,14 +131,8 @@ router.get('/city/:city', function(req, res, next) {
     })
 });
 /* GET Restaurantes dada una ciudad, nombre y tipocomida */
-router.get('/find', function(req, res, next) {
-
-    var restaurantData={
-        nombre:req.body.nombre,
-        ciudad:req.body.ciudad,
-        tipoComida:req.body.tipoComida
-    };
-    Restaurant.findRestaurant(restaurantData,function(error,data){
+router.get('/name/:nombre/city/:ciudad/type/:tipoComida', function(req, res, next) {
+    Restaurant.findRestaurant(req.params.nombre,req.params.ciudad, req.params.tipoComida,function(error,data){
         if (error){
             res.json(500,error);
         }else{
@@ -807,6 +801,7 @@ router.get('/orders/:id/orderproducts/preparando', function(req, res, next){
         }
     })
 });
+
 
 
 

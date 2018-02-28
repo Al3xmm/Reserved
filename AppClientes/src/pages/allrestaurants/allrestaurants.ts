@@ -1,4 +1,5 @@
 import { RestaurantPage } from './../restaurant/restaurant';
+import { BusquedaPage } from './../busqueda/busqueda';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
@@ -10,7 +11,8 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
   templateUrl: 'allrestaurants.html',
 })
 export class AllrestaurantsPage {
-
+  busqueda = {nombre: '', ciudad:'', tipoComida:''}
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider) {
     //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
     //restaurantservice.mostrar_todos();
@@ -20,11 +22,16 @@ export class AllrestaurantsPage {
 
   }
 
+  ver_busqueda(){
+    this.navCtrl.push(BusquedaPage);;
+  }
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
     this.restaurantService.comentarios_restaurante(id);
     this.navCtrl.push(RestaurantPage);
   }
 
-
+  busquedaavanzada(){
+    this.restaurantService.busqueda_avanzada(this.busqueda.nombre,this.busqueda.ciudad,this.busqueda.tipoComida);
+  }
 }

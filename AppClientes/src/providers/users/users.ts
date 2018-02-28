@@ -17,7 +17,7 @@ export class UsersProvider {
   nuevareserva = false;
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
-
+  reservaactual:any;
   reservasusuario:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
@@ -135,6 +135,14 @@ export class UsersProvider {
       this.nuevopedido = true;
     })
 
+  }
+  reserva_actual(id){
+    let url = "api/restaurants/";
+    this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
+    .subscribe(data=>{
+      this.reservaactual =data;
+      console.log(this.reservaactual);
+    })
   }
  
 }

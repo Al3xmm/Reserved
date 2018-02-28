@@ -11,25 +11,20 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content>
-    <form (ngSubmit)="busquedaavanzada()">
-        <ion-item>
-          <ion-label>Nombre</ion-label>
-          <ion-input type="text" [(ngModel)]="busqueda.nombre" name="nombre" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ciudad</ion-label>
-          <ion-input type="text" [(ngModel)]="busqueda.ciudad" name="ciudad" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Tipo de comida</ion-label>
-          <ion-input type="text" [(ngModel)]="busqueda.tipoComida" name="tipo" required></ion-input>
-        </ion-item>
+  <ion-grid>
+<ion-item *ngFor="let item of restaurantService.avanzada">
+    <ion-col>
+      {{item.nombre}}
+      <p>
         <br>
-        <button ion-button  type="submit" block>Buscar</button>
-      </form>
-
-
+        Comida: {{item.tipoComida}}
+        <br>
+        Horario: {{item.horario}}
+        <br>
+        <button ion-button (click)="ver_restaurante(item.idRestaurante)">Ver Restaurante</button>
+      </p>
+    </ion-col>
+  </ion-item>
+</ion-grid>
 </ion-content>

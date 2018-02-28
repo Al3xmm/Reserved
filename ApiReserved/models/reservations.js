@@ -112,4 +112,17 @@ Reservation.updatereservation=function(ReservationData,idreserva,callback){
     }
 }
 
+/* Mostrar el idpedido dada su reserva*/
+Reservation.findorderbyreserve=function(id,idreserva, callback){
+    if (connection){
+        var sql=("select idPedido,cuentaTotal from pedidos,reservas WHERE usuarioR="+connection.escape(id)+"AND idReserva="+connection.escape(idreserva));
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
 module.exports=Reservation;

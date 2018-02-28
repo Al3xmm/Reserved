@@ -76,9 +76,9 @@ export class RestaurantsProvider {
     })
   }
 
-  busqueda_avanzada(data){
-    let url="api/restaurants/find/";
-      this.http.get(url+data,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+  busqueda_avanzada(nombre, ciudad, tipoComida){
+    let url="api/restaurants/name/";
+      this.http.get(url+nombre+"/city/"+ciudad+"/type/"+tipoComida,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.avanzada=data;
         console.log(this.avanzada);
     });
@@ -124,5 +124,13 @@ export class RestaurantsProvider {
         console.log(this.allcategorias);
       });
     });
+  }
+  reserva_actual(id){
+    let url = "api/restaurants/";
+    this.http.get(url+this.userService.session+"/reservations/orders/"+id,{headers:{'token-acceso':this.userService.session.token}})
+    .subscribe(data=>{
+      this.productoscategoria =data;
+      //console.log(this.productoscategoria);
+    })
   }
 }

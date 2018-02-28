@@ -109,21 +109,23 @@ Restaurants.findRestaurantCity=function(city, callback){
     }
 }
 /* Mostar restaurantes dada su ciudad, nombre o tipo comida */
-Restaurants.findRestaurant=function(restaurantData, callback){
+Restaurants.findRestaurant=function(nombre,ciudad,tipoComida, callback){
     var coma=false;
     if (connection){
-        var sql="SELECT nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE"
-        if(restaurantData.nombre != undefined)
+        var sql = "SELECT nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE"
+        //var sql=("SELECT nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE nombre ="+connection.escape(nombre)+"AND ciudad ="+connection.escape(ciudad)+"AND tipoComida ="+connection.escape(tipoComida));
+         if(ciudad != undefined || ciudad == "")
         {
-          sql += " nombre="+connection.escape(restaurantData.nombre);
+          sql += " ciudad="+connection.escape(ciudad);
           coma=true;
-        } if(restaurantData.ciudad != undefined)
+        } if(tipoComida != undefined || tipoComida == "")
         {
-          sql += " ciudad="+connection.escape(restaurantData.ciudad);
+          sql += "AND tipoComida="+connection.escape(tipoComida);
           coma=true;
-        } if(restaurantData.tipoComida != undefined)
+        }
+        if(nombre != undefined || nombre == "")
         {
-          sql += " tipo="+connection.escape(restaurantData.tipoComida);
+          sql += "AND nombre="+connection.escape(nombre);
           coma=true;
         }
         connection.query(sql,function(error,rows){

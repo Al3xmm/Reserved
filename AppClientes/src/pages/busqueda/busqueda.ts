@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
+import { RestaurantPage } from './../restaurant/restaurant';
 /**
  * Generated class for the BusquedaPage page.
  *
@@ -22,21 +23,9 @@ export class BusquedaPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad BusquedaPage');
   }
-  busquedaavanzada(){
-    this.restaurantService.busqueda_avanzada(this.busqueda)
+  ver_restaurante(id){
+    this.restaurantService.restaurante_id(id);
+    this.restaurantService.comentarios_restaurante(id);
+    this.navCtrl.push(RestaurantPage);
   }
-  /*
-  buscarpornombre(){
-    this.restaurantService.buscar_restaurante(this.busqueda.nombre);
-  }
-  buscarportipo(ev:any){
-    let tipo = "asdas";
-    this.restaurantService.buscar_ciudadrestaurante(tipo);
-    //this.navCtrl.setRoot(AllusersPage);
-  }
-  buscarporciudad(){
-    let ciudad = "asdas";
-    this.restaurantService.buscar_ciudadrestaurante(ciudad);
-    //this.navCtrl.setRoot(AllusersPage);
-  }*/
 }

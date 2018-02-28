@@ -27,10 +27,13 @@ export class MipedidoPage {
   }
 
   add_reserva(){
+    var date = new Date();
+    var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    this.pedido.hora=currentdate;
     //this.pedido.pedidop=this.restaurantService.restauranteactual; la dificultad es pasar el idpedido de appRestaurantes a appClientes
     //this.pedido.productop=this.pedidoService.plato; El problema es que tengo que sacar solo el id de plato ver video.
     //this.pedido.hora = hora de ahora mismo ver en ionic docs
-    //Como cojones se el tipo de producto
+    //this.pedido.tipoproducto = this.restaurantService.productoactual
     this.userService.add_reserva(this.pedido)
       .subscribe(()=>{
         if(this.userService.nuevopedido==true){

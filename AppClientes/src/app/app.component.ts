@@ -9,7 +9,6 @@ import { HomePage } from '../pages/home/home';
 import { RegistroPage } from '../pages/registro/registro';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { LoginPage } from '../pages/login/login';
-import { BusquedaPage } from '../pages/busqueda/busqueda';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
@@ -23,7 +22,6 @@ export class MyApp {
   restaurantes = AllrestaurantsPage;
   registro = RegistroPage;
   perfil=PerfilPage;
-  busqueda = BusquedaPage;
   rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl:MenuController,private alertCtrl:AlertController, public userservice:UsersProvider, public storage:Storage) {
