@@ -20,6 +20,7 @@ export class RestaurantsProvider {
   productoscategoria:any;
   allcategorias:any;
   avanzada:any;
+  productopedido:any;
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -76,12 +77,12 @@ export class RestaurantsProvider {
     })
   }
 
-  busqueda_avanzada(nombre, ciudad, tipoComida){
-    let url="api/restaurants/name/";
-      this.http.get(url+nombre+"/city/"+ciudad+"/type/"+tipoComida,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
-        this.avanzada=data;
-        console.log(this.avanzada);
-    });
+  busqueda_avanzada(data){
+    let url="api/restaurants/find";
+    this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      this.avanzada=data;
+      console.log(this.avanzada);
+  });
   }
 
   buscar_restaurante(termino){
@@ -125,12 +126,14 @@ export class RestaurantsProvider {
       });
     });
   }
-  reserva_actual(id){
-    let url = "api/restaurants/";
-    this.http.get(url+this.userService.session+"/reservations/orders/"+id,{headers:{'token-acceso':this.userService.session.token}})
-    .subscribe(data=>{
-      this.productoscategoria =data;
-      //console.log(this.productoscategoria);
-    })
+  productospedido(){
+    let url="api/restaurants/orders/";
+        this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+          this.productopedido=data;
+          console.log(this.productopedido);
+ 
+    });
+
   }
+
 }

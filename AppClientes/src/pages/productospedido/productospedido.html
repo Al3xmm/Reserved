@@ -7,12 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>productospedido</ion-title>
+    <ion-title>Ver pedido</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-item *ngFor="let item of restaurantService.productopedido">
+      <ion-col>
+        Nombre: {{item.productoP}}
+        <p>
+          Estado del producto: {{item.tipoProducto}}
+      </ion-col>
+    </ion-item>
+    <button ion-button (click)="anayadirplato()">Agregar platos</button>
+    <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
+  </ion-grid>
 </ion-content>

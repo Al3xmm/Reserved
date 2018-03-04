@@ -131,8 +131,13 @@ router.get('/city/:city', function(req, res, next) {
     })
 });
 /* GET Restaurantes dada una ciudad, nombre y tipocomida */
-router.get('/name/:nombre/city/:ciudad/type/:tipoComida', function(req, res, next) {
-    Restaurant.findRestaurant(req.params.nombre,req.params.ciudad, req.params.tipoComida,function(error,data){
+router.post('/find', function(req, res, next) {
+        var buscadorData={
+        ciudad:req.body.ciudad,
+        tipoComida:req.body.tipoComida,
+        nombre:req.body.nombre
+    };
+    Restaurant.findRestaurant(buscadorData,function(error,data){
         if (error){
             res.json(500,error);
         }else{

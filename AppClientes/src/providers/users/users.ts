@@ -19,6 +19,7 @@ export class UsersProvider {
   infouser:any;
   reservaactual:any;
   reservasusuario:any;
+  reservation:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
@@ -95,11 +96,11 @@ export class UsersProvider {
 
   mis_reservas(){
     let url="api/users/";
-
     this.storage.get('idUsuario').then((val) => {
       this.storage.get('token').then((val2) => {
         this.http.get(url+val+"/reservations",{headers: {'token-acceso':val2}}).subscribe(data=>{
           this.reservasusuario=data;
+          console.log(this.reservasusuario);
         });
       });
     });
@@ -124,25 +125,27 @@ export class UsersProvider {
       this.mis_reservas();
       this.nuevareserva = true;
     })
-
-
+  }
+  reserva_actual(id){
+    this.reservation = id;
+    let url = "api/users/";
+    this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
+    .subscribe(data=>{
+      this.reservaactual =data;
+      console.log(this.reservaactual);
+      console.log(this.reservation);
+    })
   }
   add_pedido(data){
-    let url = "api/orders";
-    return this.http.post(url+this.session.idUsuario+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
+    let url = "api/restaurants/orders/";
+    return this.http.post(url+this.reservation+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
+      console.log(this.reservation);
       console.log("Pedido enviado");
       this.nuevopedido = true;
     })
 
   }
-  reserva_actual(id){
-    let url = "api/restaurants/";
-    this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
-    .subscribe(data=>{
-      this.reservaactual =data;
-      console.log(this.reservaactual);
-    })
-  }
+
  
 }

@@ -49,7 +49,7 @@ Products.findProductsByType = function(id,tipo,callback){
 /* Mostrar los productos segun su categoria */
 Products.findProductsByCategory = function(id,categoria,callback){
     if (connection){
-      var sql = ("SELECT p.nombre,p.precio, p.informacion FROM productos p WHERE restaurantep="+connection.escape(id)+"AND categoria="+connection.escape(categoria));
+      var sql = ("SELECT  p.idProducto,p.nombre,p.precio, p.informacion, p.tipo FROM productos p WHERE restaurantep="+connection.escape(id)+"AND categoria="+connection.escape(categoria));
 
 
 

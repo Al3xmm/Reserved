@@ -32,6 +32,7 @@ export class AllrestaurantsPage {
   }
 
   busquedaavanzada(){
-    this.restaurantService.busqueda_avanzada(this.busqueda.nombre,this.busqueda.ciudad,this.busqueda.tipoComida);
+    this.restaurantService.busqueda_avanzada(this.busqueda);
+    console.log("hola");
   }
 }

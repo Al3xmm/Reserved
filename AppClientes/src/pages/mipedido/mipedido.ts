@@ -4,6 +4,7 @@ import { PedidoProvider } from './../../providers/pedido/pedido';
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { UsersProvider } from './../../providers/users/users';
 import { MisReservasPage } from './../mis-reservas/mis-reservas';
+import { ProductospedidoPage } from './../productospedido/productospedido';
 /**
  * Generated class for the MipedidoPage page.
  *
@@ -26,19 +27,23 @@ export class MipedidoPage {
     console.log('ionViewDidLoad MipedidoPage');
   }
 
-  add_reserva(){
-    var date = new Date();
-    var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-    this.pedido.hora=currentdate;
-    //this.pedido.pedidop=this.restaurantService.restauranteactual; la dificultad es pasar el idpedido de appRestaurantes a appClientes
-    //this.pedido.productop=this.pedidoService.plato; El problema es que tengo que sacar solo el id de plato ver video.
-    //this.pedido.hora = hora de ahora mismo ver en ionic docs
-    //this.pedido.tipoproducto = this.restaurantService.productoactual
-    this.userService.add_reserva(this.pedido)
+  add_pedido(){
+    var i =0;
+    for( i=0;i<this.pedidoService.plato.length;i++){
+      var date = new Date();
+      var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+      this.pedido.hora=currentdate;
+      this.pedido.pedidop = this.userService.reservation;
+      this.pedido.productop= this.pedidoService.plato[i].idProducto;// si pongo 0 si va -.-
+      this.pedido.tipoproducto = this.pedidoService.plato[i].tipo;
+      console.log(this.pedido.pedidop);
+      console.log(this.pedido.tipoproducto);
+      console.log(this.pedido.productop);
+      this.userService.add_pedido(this.pedido)
       .subscribe(()=>{
-        if(this.userService.nuevopedido==true){
-          this.navCtrl.setRoot(MisReservasPage);
-        }
     });
+    }
+    this.restaurantService.productospedido();
+    this.navCtrl.setRoot(ProductospedidoPage);
   }
 }

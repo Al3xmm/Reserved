@@ -18,6 +18,7 @@ export class BusquedaPage {
   busqueda = {nombre: '', ciudad:'', tipoComida:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider) {
+    restaurantService.inforestaurante();
   }
 
   ionViewDidLoad() {

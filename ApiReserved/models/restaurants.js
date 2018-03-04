@@ -109,24 +109,54 @@ Restaurants.findRestaurantCity=function(city, callback){
     }
 }
 /* Mostar restaurantes dada su ciudad, nombre o tipo comida */
-Restaurants.findRestaurant=function(nombre,ciudad,tipoComida, callback){
+Restaurants.findRestaurant=function(buscadorData, callback){
     var coma=false;
     if (connection){
         var sql = "SELECT nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE"
         //var sql=("SELECT nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE nombre ="+connection.escape(nombre)+"AND ciudad ="+connection.escape(ciudad)+"AND tipoComida ="+connection.escape(tipoComida));
-         if(ciudad != undefined || ciudad == "")
+        /*if(buscadorData.tipoComida != undefined)
         {
-          sql += " ciudad="+connection.escape(ciudad);
-          coma=true;
-        } if(tipoComida != undefined || tipoComida == "")
-        {
-          sql += "AND tipoComida="+connection.escape(tipoComida);
+          sql += " tipoComida like '%"+connection.escape(buscadorData.tipoComida)+"%'";
           coma=true;
         }
-        if(nombre != undefined || nombre == "")
+        if(buscadorData.nombre != undefined)
         {
-          sql += "AND nombre="+connection.escape(nombre);
+          sql += " AND nombre like '%"+connection.escape(buscadorData.nombre)+"%'";
           coma=true;
+        }
+        if(buscadorData.ciudad != undefined)
+        {
+        if(coma== true)
+        {
+          sql += ",";
+          coma=false;
+        }
+        sql +=  "contraseña="+connection.escape(buscadorData.ciudad);
+        coma=true;
+        }*/
+        if(buscadorData.ciudad != undefined)
+        {
+            sql +=  "ciudad="+connection.escape(buscadorData.ciudad);
+            coma=true;
+        } if(buscadorData.tipoComida != undefined)
+        {
+            if(coma== true)
+            {
+              sql += ",";
+              coma=false;
+            }
+            sql +=  "tipoComida="+connection.escape(buscadorData.tipoComida);
+            coma=true;
+        }
+        if(buscadorData.nombre != undefined )
+        {
+            if(coma== true)
+            {
+              sql += ",";
+              coma=false;
+            }
+            sql +=  "nombre="+connection.escape(buscadorData.nombre);
+            coma=true;
         }
         connection.query(sql,function(error,rows){
             if (error){
