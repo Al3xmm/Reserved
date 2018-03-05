@@ -16,15 +16,18 @@ export class EmpleadoPage {
   }
 
   crear_pedido(){
+    this.restaurantService.reservas_today();
     this.navCtrl.push(CrearpedidoPage);
   }
 
   cerrar_pedido(id){
+    this.restaurantService.delete_pin(id);
     this.restaurantService.cerrar_pedido(id);
     this.navCtrl.setRoot(EmpleadoPage);
   }
 
   info_pedido(id){
+    this.restaurantService.ver_pin(id);
     this.restaurantService.info_pedido(id);
     this.navCtrl.push(ProductosdepedidoPage);
   }

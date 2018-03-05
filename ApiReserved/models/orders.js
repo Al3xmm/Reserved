@@ -111,7 +111,7 @@ Order.insert = function(OrderData, callback){
         if (error){
             throw error;
         }else{
-            return callback(null,"Pedido creado");
+            return callback(null,result.insertId);
         }
     })
   }
@@ -406,7 +406,6 @@ Order.cocineroPreparar = function(id, callback){
     })
   }
 }
-
 
 
 

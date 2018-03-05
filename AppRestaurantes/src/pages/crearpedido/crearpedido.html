@@ -9,15 +9,22 @@
 
 
 <ion-content padding>
-    <form (ngSubmit)="add_pedido()">
+    <form (ngSubmit)="crear_pedido()">
         <ion-item>
           <ion-label>Mesa</ion-label>
           <ion-input type="number" [(ngModel)]="pedido.mesa" name="mesa" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>ID Reserva</ion-label>
-          <ion-input type="text" [(ngModel)]="pedido.reservap" name="reservap"></ion-input>
+          <ion-label>Reservas</ion-label>
+          <ion-select [(ngModel)]="pedido.reservap" [ngModelOptions]="{standalone: true}" (ngModelChange)="select_reserva($event)">
+            <ion-option *ngFor="let item of restaurantService.reservastoday" [value]="item.idReserva">{{item.nick}} - {{item.hora}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item *ngIf="buttonClicked">
+          <ion-label>Comensales</ion-label>
+          <ion-input type="number" [(ngModel)]="reserva.comensales" name="comensales" ></ion-input>
         </ion-item>
         <br>
         <button ion-button [disabled]="pedido.mesa.length<1" type="submit" block>Crear</button>

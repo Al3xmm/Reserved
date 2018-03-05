@@ -3,6 +3,13 @@
 
   <ion-navbar>
     <ion-title>Productos del pedido</ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -10,6 +17,8 @@
 
 <ion-content padding>
     <ion-grid>
+        PIN: {{restaurantService.pin}}
+        <br>
         <button ion-button (click)="agregar_productopedido()" >Añadir Producto</button>
         <ion-item *ngFor="let item of restaurantService.productosdepedido">
           <ion-col>

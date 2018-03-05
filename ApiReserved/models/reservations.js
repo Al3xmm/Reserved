@@ -54,6 +54,38 @@ Reservation.updateAforo=function(AforoData,callback){
     }
 }
 
+/* Crear una reserva (PARA UN PEDIDO SIN RESERVA) */
+
+//Este metodo lo que hace es crear la reserva
+Reservation.insertReservation2=function(ReservationData,callback){
+    if(connection){
+        connection.query("INSERT INTO reservas SET ?",ReservationData,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                var salida={
+                  idReserva:result.insertId,
+                }
+                return callback(null,salida);
+            }
+        })
+    }
+}
+
+//Este metodo lo que hace es crear una fila en aforo_libre o modificar una existente ajustando el aforo de un restaurante ese dia a ese turno
+Reservation.updateAforo2=function(AforoData,callback){
+    if(connection){
+        var sql=("INSERT INTO aforo_libre values (" + AforoData.IdAforo + ",'" + AforoData.dia + "','" + AforoData.turno + "',(SELECT aforo-"+AforoData.comensales+" FROM restaurantes where IdRestaurante="+AforoData.idrestaurante+")," + AforoData.idrestaurante + ") ON DUPLICATE KEY update aforo=aforo-" + AforoData.comensales);
+        connection.query(sql,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                //return callback(null,result.insertid);
+            }
+        })
+    }
+}
+
 /* Elimina una reserva */
 
 Reservation.remove=function(Id,callback){
@@ -125,4 +157,61 @@ Reservation.findorderbyreserve=function(id,idreserva, callback){
         })
     }
 }
+
+/*Mostrar reservas de hoy */
+Reservation.findreservation=function(restaurante, callback){
+  var date = new Date();
+  var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+  var current_hour = date.getHours();
+  var turno;
+
+  if(current_hour<17){
+    turno="Comida";
+  }else{
+    turno="Cena";
+  }
+
+  if (connection){
+      var sql=("select nick,reservas.* from reservas,usuarios where usuarioR=idUsuario and dia='"+currentdate+"' and restauranteR="+connection.escape(restaurante)+"and turno='"+turno+"'");
+      connection.query(sql,function(error,rows){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,rows);
+          }
+      })
+  }
+}
+
+/* Eliminar PIN de una reserva al terminar el pedido */
+Reservation.deletepin=function(id, callback){
+    if (connection){
+        var sql=("update reservas,pedidos set pin=null where idReserva=reservaP and idPedido="+connection.escape(id));
+        connection.query(sql,function(error,row){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,row);
+            }
+        })
+    }
+}
+
+/*Mostrar PIN de una reserva (pedido)*/
+Reservation.seepin = function(id, callback){
+  if(connection){
+    var sql=("select pin from reservas,pedidos where idReserva=reservaP and idPedido="+connection.escape(id));
+    connection.query(sql,function(error,row){
+        if (error){
+            throw error;
+        }else{
+            return callback(null,row);
+        }
+    })
+  }
+}
+
+
+
 module.exports=Reservation;

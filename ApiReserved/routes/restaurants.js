@@ -9,6 +9,7 @@ var Employee=require("../models/employees");
 var Images=require("../models/images");
 var Visit=require("../models/visitrestaurant");
 var Orders=require("../models/orders");
+var Reservations=require("../models/reservations");
 
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
@@ -643,12 +644,15 @@ router.post('/orders', function(req,res,next){
         dia:req.body.dia,
         finalizado:req.body.finalizado
     };
-    console.log(OrderData);
+
     Orders.insert(OrderData,function(error,data){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
+            var salida={
+              idPedido:data,
+            }
+            res.json(200,salida);
             aux=1;
         }
     })
@@ -799,6 +803,98 @@ router.get('/orders/:id/orderproducts/preparado', function(req, res, next){
 router.get('/orders/:id/orderproducts/preparando', function(req, res, next){
 
     Orders.CambiaEstadoPP(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* Mostrar reservas de un dia concreto */
+router.get('/:res/reservationstoday', function(req, res, next){
+
+    Reservations.findreservation(req.params.res,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* POST Crear una reserva (con un pedido) */
+router.post('/reservationorder',function(req,res,next){
+
+    var date = new Date();
+    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+    var current_hour = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    var auxhour=date.getHours();
+    var auxturno;
+
+    if(auxhour<17){
+      auxturno="Comida";
+    }else{
+      auxturno="Cena";
+    }
+
+    auxpin=req.body.restauranter+req.body.mesa;
+
+    var ReservationData={
+        IdReserva:null,
+        dia:currentdate,
+        turno:auxturno,
+        hora:current_hour,
+        comensales:req.body.comensales,
+        usuarior:0,
+        restauranter:req.body.restauranter,
+        pin:auxpin
+    };
+
+    var AforoData={
+        IdAforo:req.body.restauranter,
+        dia:currentdate,
+        turno:auxturno,
+        idrestaurante:req.body.restauranter,
+        comensales:req.body.comensales
+    };
+
+    Reservations.updateAforo2(AforoData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+    Reservations.insertReservation2(ReservationData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+            aux=1;
+        }
+    })
+
+});
+
+/*Mostrar PIN de una reserva (pedido)*/
+router.get('/:id/pin', function(req, res, next){
+
+    Reservations.seepin(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/*Borrar PIN al terminar un pedido*/
+router.get('/:id/deletepin', function(req, res, next){
+
+    Reservations.deletepin(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
         }else{

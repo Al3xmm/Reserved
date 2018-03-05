@@ -67,6 +67,9 @@ export class RestaurantProvider {
   //Productos que un COCINERO tiene que hacer
   productosapreparar
 
+  //Reservas del dia actual
+  reservastoday:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -330,14 +333,42 @@ export class RestaurantProvider {
       });
   }
 
+  //variable auxiliar para guardar el id del pedido
+  aux:any;
+
   add_pedido(data){
     let url="api/restaurants/orders";
 
     return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
+          this.aux=resp;
+          this.ver_pin(this.aux.idPedido);
+          this.info_pedido(this.aux.idPedido);
           console.log("Pedido Creado");
 
       })
+  }
+
+  //metodo para crear la reserva antes que el pedido si no se le asigna una reserva existente
+  idreservaaux:any;
+
+  add_reserva_pedido(data){
+    let url="api/restaurants/reservationorder";
+
+    return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          this.idreservaaux=resp;
+          console.log("Reserva Creada");
+
+      })
+
+  }
+
+  delete_pin(id){
+    let url="api/restaurants/";
+      this.http.get(url+id+"/deletepin",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        
+      });
   }
 
   pedidos_en_curso(){
@@ -359,6 +390,20 @@ export class RestaurantProvider {
     this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosdepedido=data;
       this.idpedidoactual=id;
+    });
+  }
+
+  //pin de la reserva del pedido que estamos viendo
+  pin:any;
+
+  ver_pin(id){
+    let url="api/restaurants/";
+    this.http.get(url+id+"/pin",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.pin=data;
+      if(this.pin!=null){
+        this.pin=this.pin[0].pin;
+      } 
+      console.log(this.pin);
     });
   }
 
@@ -434,6 +479,15 @@ export class RestaurantProvider {
       .subscribe(resp=>{
           console.log("Producto Preparando");
           this.see_productoscocinar();
+      })
+  }
+
+  reservas_today(){
+    let url="api/restaurants/";
+
+    this.http.get(url+this.session.idRestaurante+"/reservationstoday", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.reservastoday=data;
       })
   }
 
