@@ -46,7 +46,7 @@ router.use(function(req, res, next) {
 
 
 
-/*
+
 //ver foto
 router.get('/:name', function (req, res) {
     console.log(req.params.name);
@@ -55,7 +55,7 @@ router.get('/:name', function (req, res) {
 
 //subir foto
 router.post('/:id/upload',upload.single('imagensubir'), function(req, res) {
-  console.log(req.files.imagensubir);
+  //console.log(req.files.imagensubir);
   if (!req.files){
     return res.status(400).send('No files were uploaded.');
   }
@@ -72,7 +72,7 @@ router.post('/:id/upload',upload.single('imagensubir'), function(req, res) {
   })
 
 });
-*/
+
 
 /* GET  Restaurantes por nombre */
 router.get('/find/:nick', function(req, res, next) {

@@ -15,16 +15,18 @@ var Images={};
 
 
 Images.uploadimage=function(file,img_name,id,callback){
+  var aux=id+"_"+file.name;
+
   if(connection){
     if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"){
-      file.mv('../ApiReserved/images/'+file.name, function(err) {
+      file.mv('../ApiReserved/images/'+aux, function(err) {
          if (err){
           throw err;
          }
 
         var imgData={
             idImagenes:null,
-            url:img_name,
+            url:aux,
             imagenesR:id
         };
 
