@@ -2,7 +2,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-
+import { RestaurantsProvider } from '../restaurants/restaurants';
 import { Storage } from '@ionic/storage';
 
 
@@ -11,15 +11,20 @@ export class UsersProvider {
 
   login_correcto=false;
   modificar_perfil=false;
+  modificar_reserva= false;
   session:any;
   nuevopedido:any;
   logueado=false;
   nuevareserva = false;
+  nuevopin=false;
+
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
   reservaactual:any;
+  pedidoactual:any;
   reservasusuario:any;
   reservation:any;
+  reservashour:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
@@ -126,13 +131,14 @@ export class UsersProvider {
       this.nuevareserva = true;
     })
   }
-  reserva_actual(id){
+  //id del pedido dada una reserva
+  pedido_actual(id){
     this.reservation = id;
     let url = "api/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
-      this.reservaactual =data;
-      console.log(this.reservaactual);
+      this.pedidoactual =data;
+      console.log(this.pedidoactual);
       console.log(this.reservation);
     })
   }
@@ -143,6 +149,39 @@ export class UsersProvider {
       console.log(this.reservation);
       console.log("Pedido enviado");
       this.nuevopedido = true;
+    })
+
+  }
+  modify_reserva(data){
+    let url="api/users/";
+    return this.http.put(url+this.session.idUsuario+"/reservation/"+this.reservaactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Reserva actualizada");
+          this.modificar_reserva=true;
+
+      })
+
+  }
+  eliminar_reserva(id){
+    let url="api/users/";
+    this.http.delete(url+this.session.idUsuario+"/reservation/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.user_profile(this.session.idUsuario, this.session.token);
+    });
+
+  }
+  reservashora(){
+    let url="api/users/";
+    this.http.get(url+this.session.idUsuario+"/reservationshour", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.reservashour=data;
+      })
+  }
+  add_pin(data){
+    let url = "api/addpin";
+    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
+    .map(resp=>{
+      console.log("Pin enviado");
+      this.nuevopin = true;
     })
 
   }

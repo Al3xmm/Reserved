@@ -21,6 +21,8 @@ import { UsersProvider } from '../providers/users/users';
 import { RestaurantsProvider } from '../providers/restaurants/restaurants';
 import { LoginPage } from '../pages/login/login';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { ModificarReservaPage } from '../pages/modificar-reserva/modificar-reserva';
+
 import { RegistroPage } from '../pages/registro/registro';
 import { ModificarperfilPage } from '../pages/modificarperfil/modificarperfil';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,7 +50,8 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     ComentariosPage,
     MiscategoriasPage,
     CategoriaspedidoPage,
-    IniciarpedidoPage
+    IniciarpedidoPage,
+    ModificarReservaPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     ComentariosPage,
     MiscategoriasPage,
     CategoriaspedidoPage,
-    IniciarpedidoPage
+    IniciarpedidoPage,
+    ModificarReservaPage
   ],
   providers: [
     StatusBar,

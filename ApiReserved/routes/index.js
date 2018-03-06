@@ -8,7 +8,7 @@ var Orders=require("../models/orders");
 var Images=require("../models/images");
 var Restaurant=require("../models/restaurants");
 var Employee=require("../models/employees");
-
+var Reservations=require("../models/reservations");
 var bcrypt=require('bcrypt');
 var salt=bcrypt.genSaltSync(10);
 
@@ -580,6 +580,22 @@ router.get('/orders/:id/employee/:idempleado', function(req, res, next){
 });
 
 
+/* POST dado un pin comprobarlo y cambiar el idusuario al de session */
+router.post('/addpin', function(req,res,next){
+
+    var pinData={
+        pin:req.body.pin,
+        usuarior:req.body.usuarior,
+    };
+
+    Reservation.insertPin(pinData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 
 /* Prueba CONEXION */

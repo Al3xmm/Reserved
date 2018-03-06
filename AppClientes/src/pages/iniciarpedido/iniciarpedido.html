@@ -20,16 +20,18 @@
 
 <ion-content padding>
     <ion-grid>
-      <h3>¿Tienes codigo de reserva?</h3>
-        <ion-item>
-            <ion-label>Introduce el codigo</ion-label>
-            <ion-input type="text"  name="name" required></ion-input>
-            <button ion-button (click)="iniciarpedido()">Iniciar Pedido</button>
-          </ion-item>
+        <form (ngSubmit)= "comprobar_pin()">
+            <h3>¿Tienes codigo de reserva?</h3>
+            <ion-item>
+              <ion-label>Pin</ion-label>
+              <ion-input type="text" [(ngModel)]="pin.pin" name="pin" required></ion-input>
+            </ion-item>
+          <button ion-button type="submit" block>Comprobar</button>
+          </form>
           <br>
           <br>
       <h3>Reservas actuales</h3>
-       <ion-item *ngFor="let item of userService.reservasusuario">
+       <ion-item *ngFor="let item of userService.reservashour">
       <ion-col>
         Restaurante: {{item.nombre}}
         <p>

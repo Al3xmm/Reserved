@@ -1,0 +1,40 @@
+<!--
+  Generated template for the ModificarReservaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>modificar_reserva</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)= "modificar_reserva()">
+    <ion-item>
+      <ion-label>Día</ion-label>
+      <ion-input type="date" [(ngModel)]="reserva.dia" name="dia" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hora</ion-label>
+      <ion-input type="hour" [(ngModel)]="reserva.hora" name="hora" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Comensales</ion-label>
+      <ion-input type="number" [(ngModel)]="reserva.comensales" name="comensales" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Turno</ion-label>
+      <ion-select [(ngModel)]="reserva.turno" [ngModelOptions]="{standalone: true}">
+          <ion-option value="comida">Comida</ion-option>
+          <ion-option value="cena">Cena</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button type="submit" block>Modificar reserva</button>
+  </form>
+</ion-content>

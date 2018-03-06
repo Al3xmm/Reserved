@@ -21,6 +21,7 @@ export class RestaurantsProvider {
   allcategorias:any;
   avanzada:any;
   productopedido:any;
+ 
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -126,12 +127,19 @@ export class RestaurantsProvider {
       });
     });
   }
+
   productospedido(){
     let url="api/restaurants/orders/";
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
           console.log(this.productopedido);
- 
+    });
+  }
+  
+  eliminar_plato(id){
+    let url="api/restaurants/orders/";
+    this.http.delete(url+this.userService.reservation+"/orderproducts/"+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      this.productospedido();
     });
 
   }

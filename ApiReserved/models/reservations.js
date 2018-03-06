@@ -212,6 +212,18 @@ Reservation.seepin = function(id, callback){
   }
 }
 
-
-
+//Comprobar que el pin es correcto
+Reservation.insertPin = function(pinData, callback){
+    if(connection){
+      var sql=("select pin,idReserva from reservas where pin="+conection.escape(pinData.pin));
+      connection.query(sql,function(error,row){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,row);
+          }
+      })
+    }
+  }
+  
 module.exports=Reservation;
