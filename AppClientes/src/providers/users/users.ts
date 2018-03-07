@@ -24,7 +24,7 @@ export class UsersProvider {
   pedidoactual:any;
   reservasusuario:any;
   reservation:any;
-  reservashour:any;
+  reservaconfirmada:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
@@ -169,11 +169,11 @@ export class UsersProvider {
     });
 
   }
-  reservashora(){
+  reservasconfirmadas(){
     let url="api/users/";
-    this.http.get(url+this.session.idUsuario+"/reservationshour", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+    this.http.get(url+this.session.idUsuario+"/reservations/confirmadas", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
-          this.reservashour=data;
+          this.reservaconfirmada=data;
       })
   }
   add_pin(data){

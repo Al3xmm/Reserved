@@ -17,9 +17,9 @@
   <ion-grid>
     <ion-item *ngFor="let item of restaurantService.productopedido">
       <ion-col>
-        Nombre: {{item.productoP}}
+        Nombre: {{item.nombre}}
         <p>
-          Estado del producto: {{item.tipoProducto}}
+          Estado del producto: {{item.informacion}}
       </ion-col>
     </ion-item>
     <button ion-button (click)="anayadirplato()">Agregar platos</button>

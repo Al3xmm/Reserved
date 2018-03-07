@@ -212,7 +212,7 @@ Reservation.seepin = function(id, callback){
   }
 }
 
-//Comprobar que el pin es correcto
+// Mostrar el idpedido insertando el pin sin reserva
 Reservation.insertPin = function(pinData, callback){
     if(connection){
       var sql=("select pin,idReserva from reservas where pin="+conection.escape(pinData.pin));
@@ -225,5 +225,19 @@ Reservation.insertPin = function(pinData, callback){
       })
     }
   }
+  /* Mostar las reservas de un usuario que tienen los pedidos confirmadosconfirmadas*/
+Reservation.findReserve=function(id, callback){
+    if (connection){
+        var sql=("select idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=1 and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
   
 module.exports=Reservation;

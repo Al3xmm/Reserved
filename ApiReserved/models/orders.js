@@ -44,7 +44,7 @@ Order.findOneById=function(id, callback){
 /* Mostrar productos de un pedido*/
 Order.findOrderProducts = function(id, callback){
   if(connection){
-      var sql = ("select pp.idProductoDePedido, pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
+      var sql = ("select pp.idProductoDePedido,p.precio,p.informacion, pp.PedidoP, pp.TipoProducto, p.IdProducto, p.nombre from productosdepedido pp, productos p where pp.ProductoP = p.IdProducto and pp.PedidoP ="+connection.escape(id));
       connection.query(sql,function(error,rows){
           if (error){
               throw error;

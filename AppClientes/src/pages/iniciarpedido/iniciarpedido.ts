@@ -36,7 +36,7 @@ export class IniciarpedidoPage {
   }
   iniciarpedido(){
       //faltaria filtrar solamente habria una reserva, falta metodo de una reserva dada su id con la hora maybe
-        this.userService.pedido_actual(this.userService.reservashour[0].idReserva);
+        this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
         if(this.userService.reservation!=undefined){
           this.restaurantService.categorias_restaurante();
           this.navCtrl.push(CategoriaspedidoPage);
@@ -44,7 +44,7 @@ export class IniciarpedidoPage {
   }
   iniciarpedidopin(){
     //faltaria filtrar solamente habria una reserva, falta metodo de una reserva dada su id con la hora maybe
-      this.userService.pedido_actual(this.userService.reservashour[0].idReserva);
+      this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
       if(this.userService.reservation!=undefined){
         this.restaurantService.categorias_restaurante();
         this.navCtrl.push(CategoriaspedidoPage);

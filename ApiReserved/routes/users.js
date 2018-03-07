@@ -337,10 +337,11 @@ router.get('/:id/reservations/orders/:idreserva', function(req, res, next) {
         }
     })
 });
-/* Mostrar reservas de un dia concreto y hora concreto */
-router.get('/:id/reservationshour', function(req, res, next){
 
-    Reservations.findreservationhour(req.params.id,function(error,data){
+/* GET Reservas de un Usuario */
+router.get('/:id/reservations/confirmadas', function(req, res, next) {
+
+    Reservations.findReserve(req.params.id,function(error,data){
         if (error){
             res.json(500,error);
         }else{
@@ -348,5 +349,4 @@ router.get('/:id/reservationshour', function(req, res, next){
         }
     })
 });
-
 module.exports = router;
