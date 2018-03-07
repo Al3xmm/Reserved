@@ -16,6 +16,21 @@
 
 <ion-content padding>
     <ion-grid>
+      <!-- puesto temporalmente arriba hasta decidir como hacerlo-->
+        <ion-item  *ngFor="let item of userService.reservafutura">
+            <ion-col>
+                Restaurante: {{item.nombre}}
+                <p>
+                  <br>
+                  Dia: {{ item.dia | date : format : timezone}}
+                  <br>
+                  Hora: {{item.hora}}
+                  <br>
+                  Comensales: {{item.comensales}}
+                </p>
+              </ion-col>
+        </ion-item>
+          <br>
         <ion-item *ngFor="let item of userService.infouser">
           <ion-col>
             Nick: {{item.nombre}}

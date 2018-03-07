@@ -20,7 +20,7 @@ export class IniciarpedidoPage {
   pin={pin:'',usuarior:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService:RestaurantsProvider) {
-    userService.mis_reservas();
+    userService.reservasconfirmadas();
   }
 
   ionViewDidLoad() {

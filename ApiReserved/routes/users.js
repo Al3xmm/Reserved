@@ -349,4 +349,15 @@ router.get('/:id/reservations/confirmadas', function(req, res, next) {
         }
     })
 });
+/* GET Reservas de un Usuario posteriores a la fecha actual */
+router.get('/:id/reservations/future', function(req, res, next) {
+
+    Reservations.findUserReservefuture(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 module.exports = router;

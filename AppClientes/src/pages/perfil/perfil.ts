@@ -12,7 +12,7 @@ import { ModificarperfilPage } from './../modificarperfil/modificarperfil';
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
-
+  public buttonClicked: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, public userService:UsersProvider) {
     storage.get('idUsuario').then((val) => {
@@ -22,12 +22,19 @@ export class PerfilPage {
     });
   }
 
+  mostrar_formulario(){
+    this.buttonClicked = !this.buttonClicked;
+  }
+
   mis_reservas(){
     this.userService.mis_reservas();
     this.navCtrl.push(MisReservasPage);
   }
   modificarperfil(){
     this.navCtrl.push(ModificarperfilPage);
+  }
+  futuras_reservas(){
+    this.userService.reservasfuturas();
   }
 
 }

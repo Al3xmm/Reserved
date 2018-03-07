@@ -25,6 +25,7 @@ export class UsersProvider {
   reservasusuario:any;
   reservation:any;
   reservaconfirmada:any;
+  reservafutura:any;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
@@ -184,6 +185,13 @@ export class UsersProvider {
       this.nuevopin = true;
     })
 
+  }
+  reservasfuturas(){
+    let url="api/users/";
+    this.http.get(url+this.session.idUsuario+"/reservations/future", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.reservafutura=data;
+      })
   }
 
  

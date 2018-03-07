@@ -228,7 +228,7 @@ Reservation.insertPin = function(pinData, callback){
   /* Mostar las reservas de un usuario que tienen los pedidos confirmadosconfirmadas*/
 Reservation.findReserve=function(id, callback){
     if (connection){
-        var sql=("select idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=1 and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        var sql=("select idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=1 and IdRestaurante=restauranter and IdUsuario=usuarior and idReserva=reservap and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -253,6 +253,21 @@ Reservation.deletepinbutton=function(pin, callback){
 }
 
 
+/* Mostar las reservas de un usuario posterior a la fecha actual*/
+Reservation.findUserReservefuture=function(id, callback){
+    var date = new Date();
+    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    if (connection){
+        var sql=("select idReserva,dia,hora,re.nombre,comensales from reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and dia > '"+currentdate+"' and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
 
 
 module.exports=Reservation;
