@@ -3,6 +3,11 @@
 
   <ion-navbar>
     <ion-title>Denuncias</ion-title>
+    <ion-buttons left>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -20,7 +25,8 @@
             <br>
             Comentario: {{item.contenido}}
             <br>
-            <button ion-button (click)="borrar_comentario(item.idComentario)">Borrar Comentario</button>
+            <button ion-button (click)="borrar_comentario(item.idComentario)">Borrar</button>
+            <button ion-button (click)="permitir_comentario(item.idComentario)">Permitir</button>
           </p>
         </ion-col>
       </ion-item>

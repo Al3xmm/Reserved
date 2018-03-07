@@ -399,12 +399,15 @@ function isLoggedIn(req, res, next) {
 
 /* POST Crear un comentario */
 router.post('/comment',function(req,res,next){
+    var date = new Date();
+    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
     var commentData={
         IdComentario:null,
         contenido:req.body.contenido,
-        fecha:req.body.fecha,
+        fecha:currentdate,
         usuarioc:req.body.usuarioc,
         restaurantec:req.body.restaurantec,
+        denunciado:"no"
     };
 
     Comments.insert(commentData,function(error,data){

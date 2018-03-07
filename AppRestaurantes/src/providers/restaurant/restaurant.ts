@@ -307,6 +307,13 @@ export class RestaurantProvider {
       })
   }
 
+  cambiar_estado_denunciado(comentario){
+    let url="api/restaurants/";
+      this.http.get(url+this.session.idRestaurante+"/comment/"+comentario+"/denunciado",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        
+      });
+  }
+
   see_reservas(data){
     let url="api/restaurants/";
 

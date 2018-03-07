@@ -17,7 +17,13 @@
           {{item.contenido}}
         </p>
       </ion-col>
-      <button ion-button (click)="denunciar_comentario(item.idComentario,item.idUsuario)">Denunciar</button>
+      <button [disabled]="item.denunciado==='si' || item.denunciado==='validado' " ion-button (click)="denunciar_comentario(item.idComentario,item.idUsuario)">Denunciar</button>
+      <br>
+      <ion-col [hidden]="item.denunciado==='no' || item.denunciado==='si' ">
+        <h4>
+          AVISO: Comentario revisado y permitido.
+        </h4>
+      </ion-col>
     </ion-item>
 
 </ion-content>

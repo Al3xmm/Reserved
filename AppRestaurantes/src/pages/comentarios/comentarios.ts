@@ -23,6 +23,7 @@ export class ComentariosPage {
 
     this.restaurantService.denunciar_comentario(this.denunciarcomentario)
     .subscribe(()=>{
+      this.restaurantService.cambiar_estado_denunciado(comentario);
       if(this.restaurantService.denunciada==true){
         this.navCtrl.push(RestaurantePage);
         this.restaurantService.denunciada=false;

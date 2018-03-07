@@ -18,7 +18,12 @@ export class DenunciasPage {
 
   borrar_comentario(id){
     this.restaurantService.borrar_comentario(id);
-    this.navCtrl.setRoot(HomePage)
+    this.navCtrl.setRoot(HomePage);
+  }
+
+  permitir_comentario(id){
+    this.restaurantService.permitir_comentario(id);
+    this.navCtrl.setRoot(HomePage);
   }
 
 

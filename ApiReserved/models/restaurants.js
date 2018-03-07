@@ -451,6 +451,21 @@ Restaurants.removecomment=function(Id,callback){
     }
 }
 
+Restaurants.allowcomment=function(Id,callback){
+    if(connection){
+        var sql= "update comentarios set denunciado='validado' where idComentario=" + connection.escape(Id);
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Comentario permitido");
+            }
+        })
+    }
+}
+
+
+
 
 
 module.exports=Restaurants;

@@ -89,6 +89,14 @@ export class RestaurantsProvider {
 
   }
 
+  permitir_comentario(id){
+    let url="api/restaurants/denunciationallow/";
+
+    this.http.delete(url+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      this.mostrar_denuncias();
+    });
+  }
+
   find_restaurant(nombre){
     let url="api/restaurants/find/";
       this.http.get(url+nombre,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
