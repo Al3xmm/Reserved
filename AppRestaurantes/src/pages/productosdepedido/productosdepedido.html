@@ -18,6 +18,7 @@
 <ion-content padding>
     <ion-grid>
         PIN: {{restaurantService.pin}}
+        <button ion-button  [disabled]="restaurantService.pin==null" (click)="borrar_pin()">Borrar PIN</button>
         <br>
         <button ion-button (click)="agregar_productopedido()" >Añadir Producto</button>
         <ion-item *ngFor="let item of restaurantService.productosdepedido">

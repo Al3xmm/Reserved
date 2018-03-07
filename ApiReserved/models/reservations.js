@@ -239,5 +239,20 @@ Reservation.findReserve=function(id, callback){
     }
 }
 
-  
+Reservation.deletepinbutton=function(pin, callback){
+    if (connection){
+        var sql=("update reservas set pin=null where pin="+connection.escape(pin));
+        connection.query(sql,function(error,row){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,row);
+            }
+        })
+    }
+}
+
+
+
+
 module.exports=Reservation;

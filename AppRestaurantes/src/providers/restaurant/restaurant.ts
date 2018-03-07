@@ -70,6 +70,8 @@ export class RestaurantProvider {
   //Reservas del dia actual
   reservastoday:any;
 
+  todoscomentarios:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -288,6 +290,13 @@ export class RestaurantProvider {
         this.comentariosrestaurante=data;
       });
   }
+
+  find_comment(data){
+    let url="api/restaurants/";
+      this.http.get(url+this.session.idRestaurante+"/findcomment/"+data,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+        this.comentariosrestaurante=data;
+      });
+  }
   
   denunciar_comentario(data){
     let url="api/restaurants/denunciation";
@@ -409,8 +418,7 @@ export class RestaurantProvider {
       this.pin=data;
       if(this.pin!=null){
         this.pin=this.pin[0].pin;
-      } 
-      console.log(this.pin);
+      }
     });
   }
 
@@ -495,6 +503,15 @@ export class RestaurantProvider {
     this.http.get(url+this.session.idRestaurante+"/reservationstoday", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservastoday=data;
+      })
+  }
+
+  borrar_pin(){
+    let url="api/restaurants/deletepin/";
+
+    this.http.get(url+this.pin, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.pin=null;
       })
   }
 

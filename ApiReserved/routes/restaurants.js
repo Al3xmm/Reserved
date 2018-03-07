@@ -937,6 +937,32 @@ router.get('/:id/deletepin', function(req, res, next){
     })
 });
 
+/*Borrar PIN a gusto*/
+router.get('/deletepin/:pin', function(req, res, next){
+
+    Reservations.deletepinbutton(req.params.pin,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/*Buscar comentario*/
+router.get('/:id/findcomment/:contenido', function(req, res, next){
+
+    Comments.findcomment(req.params.id,req.params.contenido,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+
+
 
 
 

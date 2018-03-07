@@ -33,7 +33,7 @@
             <ion-input type="text" [(ngModel)]="busqueda.tipoComida" name="tipo" required></ion-input>
           </ion-item>
           <br>
-          <button ion-button  (click)="ver_busqueda()" type="submit" block>Buscar</button>
+          <button ion-button type="submit" block>Buscar</button>
         </form>
         <ion-item *ngFor="let item of restaurantService.restaurantes">
           <ion-col>

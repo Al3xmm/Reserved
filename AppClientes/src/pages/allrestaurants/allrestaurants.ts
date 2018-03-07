@@ -32,7 +32,10 @@ export class AllrestaurantsPage {
   }
 
   busquedaavanzada(){
-    this.restaurantService.busqueda_avanzada(this.busqueda);
-    console.log("hola");
+    this.restaurantService.busqueda_avanzada(this.busqueda)
+    .subscribe(()=>{
+      this.navCtrl.push(BusquedaPage);
+  });
+    
   }
 }

@@ -9,6 +9,15 @@
 
 
 <ion-content padding>
+    <form (ngSubmit)="find_comment()">
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="comentario.contenido" name="contenido" required></ion-input>
+      </ion-item>
+      <br>
+      <button ion-button [disabled]="comentario.contenido.length<1" type="submit" block>Buscar</button>
+    </form>
+    <h2>Todos los comentarios</h2>
     <ion-item *ngFor="let item of restaurantService.comentariosrestaurante">
       <ion-col>
         {{item.nombre}} - {{ item.fecha | date : format : timezone}}

@@ -13,6 +13,7 @@ export class ProductosdepedidoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider) {
     restaurantService.mi_carta();
+    console.log(restaurantService.pin);
   }
 
   agregar_productopedido(){
@@ -26,6 +27,11 @@ export class ProductosdepedidoPage {
 
   volver_pedidos(){
     this.navCtrl.setRoot(EmpleadoPage);
+  }
+
+  borrar_pin(){
+    this.restaurantService.borrar_pin();
+    this.navCtrl.setRoot(ProductosdepedidoPage);
   }
 
 }

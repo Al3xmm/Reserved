@@ -79,4 +79,20 @@ Comments.remove=function(Id,callback){
     }
 }
 
+/* Mostar los comentarios de un restaurante */
+Comments.findcomment=function(id,contenido, callback){
+
+    if (connection){
+        var sql="SELECT DISTINCT c.idComentario, u.idUsuario, c.contenido, c.fecha, u.nombre, c.denunciado FROM restaurantes r, comentarios c, usuarios u WHERE usuarioC=idUsuario and restauranteC=idRestaurante and c.RestauranteC="+connection.escape(id)+" AND contenido like '%"+contenido+"%'";
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
+
 module.exports=Comments;

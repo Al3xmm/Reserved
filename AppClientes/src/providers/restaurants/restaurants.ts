@@ -80,7 +80,8 @@ export class RestaurantsProvider {
 
   busqueda_avanzada(data){
     let url="api/restaurants/find";
-    this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+    return this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}})
+    .map(data=>{
       this.avanzada=data;
       console.log(this.avanzada);
   });
