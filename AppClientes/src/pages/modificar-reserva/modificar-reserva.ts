@@ -4,13 +4,6 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { UsersProvider } from './../../providers/users/users';
 import { PerfilPage } from './../perfil/perfil';
 
-/**
- * Generated class for the ModificarReservaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-modificar-reserva',

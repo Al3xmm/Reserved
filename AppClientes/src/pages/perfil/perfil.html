@@ -16,21 +16,6 @@
 
 <ion-content padding>
     <ion-grid>
-      <!-- puesto temporalmente arriba hasta decidir como hacerlo-->
-        <ion-item  *ngFor="let item of userService.reservafutura">
-            <ion-col>
-                Restaurante: {{item.nombre}}
-                <p>
-                  <br>
-                  Dia: {{ item.dia | date : format : timezone}}
-                  <br>
-                  Hora: {{item.hora}}
-                  <br>
-                  Comensales: {{item.comensales}}
-                </p>
-              </ion-col>
-        </ion-item>
-          <br>
         <ion-item *ngFor="let item of userService.infouser">
           <ion-col>
             Nick: {{item.nombre}}
@@ -44,6 +29,25 @@
             <button ion-button (click)="modificarperfil()">Modificar Perfil</button>
           </ion-col>
         </ion-item>
+        <br>
+        <br>
+              <!-- puesto temporalmente arriba hasta decidir como hacerlo-->
+              <h3>Reservas pendientes</h3>
+              <ion-item  *ngFor="let item of userService.reservafutura">
+                <ion-col>
+                    Restaurante: {{item.nombre}}
+                    <p>
+                      <br>
+                      Dia: {{ item.dia | date : format : timezone}}
+                      <br>
+                      Hora: {{item.hora}}
+                      <br>
+                      Comensales: {{item.comensales}}
+                    </p>
+                    <button ion-button (click)="eliminar_reserva(item.idReserva)">Eliminar</button>
+                    <button ion-button (click)="modificar_reserva(item.idReserva)">Modificar reserva</button>
+                  </ion-col>
+            </ion-item>
       </ion-grid>
 
 </ion-content>

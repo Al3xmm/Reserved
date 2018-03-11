@@ -157,6 +157,7 @@ export class UsersProvider {
     let url="api/users/";
     return this.http.put(url+this.session.idUsuario+"/reservation/"+this.reservaactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
+        this.user_profile(this.session.idUsuario, this.session.token);
           console.log("Reserva actualizada");
           this.modificar_reserva=true;
 
@@ -165,7 +166,7 @@ export class UsersProvider {
   }
   eliminar_reserva(id){
     let url="api/users/";
-    this.http.delete(url+this.session.idUsuario+"/reservation/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+    this.http.delete(url+this.session.idUsuario+"/reservations/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.user_profile(this.session.idUsuario, this.session.token);
     });
 
@@ -191,6 +192,7 @@ export class UsersProvider {
     this.http.get(url+this.session.idUsuario+"/reservations/future", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservafutura=data;
+          console.log(this.reservafutura);
       })
   }
 

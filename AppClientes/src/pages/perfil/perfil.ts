@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ModificarperfilPage } from './../modificarperfil/modificarperfil';
+import { ModificarReservaPage } from './../modificar-reserva/modificar-reserva';
 
 
 @IonicPage()
@@ -20,6 +21,7 @@ export class PerfilPage {
         userService.user_profile(val,val2);
       });
     });
+    userService.reservasfuturas();
   }
 
   mostrar_formulario(){
@@ -33,8 +35,12 @@ export class PerfilPage {
   modificarperfil(){
     this.navCtrl.push(ModificarperfilPage);
   }
-  futuras_reservas(){
-    this.userService.reservasfuturas();
+  modificar_reserva(id){
+    this.userService.reservaactual=id;
+    this.navCtrl.push(ModificarReservaPage);
   }
-
+  eliminar_reserva(id){
+    this.userService.eliminar_reserva(id);
+    this.navCtrl.push(PerfilPage);
+  }
 }

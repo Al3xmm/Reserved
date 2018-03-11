@@ -338,7 +338,7 @@ router.get('/:id/reservations/orders/:idreserva', function(req, res, next) {
     })
 });
 
-/* GET Reservas de un Usuario */
+/* GET Reservas de un Usuario confirmadas */
 router.get('/:id/reservations/confirmadas', function(req, res, next) {
 
     Reservations.findReserve(req.params.id,function(error,data){
