@@ -10,7 +10,7 @@ import { PerfilPage } from './../perfil/perfil';
   templateUrl: 'modificar-reserva.html',
 })
 export class ModificarReservaPage {
-  reserva={dia: '', hora: '', comensales: '', turno:'', restauranter:'',usuarior:''}
+  reserva={dia: '', hora: '', comensales: '', turno:'', restauranter:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
   }
@@ -19,13 +19,11 @@ export class ModificarReservaPage {
   }
 
   modificar_reserva(){
-    this.reserva.restauranter=this.restaurantService.restauranteactual;
-    this.reserva.usuarior=this.userService.session.idUsuario;
+    this.reserva.restauranter=this.userService.reservafutura[0].idRestaurante;
+    console.log(this.reserva.restauranter);
     this.userService.modify_reserva(this.reserva)
       .subscribe(()=>{
-        if(this.userService.nuevareserva==true){
           this.navCtrl.setRoot(PerfilPage);
-        }
     });
   }
 }

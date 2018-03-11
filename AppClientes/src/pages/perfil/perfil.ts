@@ -13,8 +13,7 @@ import { ModificarReservaPage } from './../modificar-reserva/modificar-reserva';
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
-  public buttonClicked: boolean = false;
-
+  eliminar={dia: '', turno:'', restaurante:''}
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, public userService:UsersProvider) {
     storage.get('idUsuario').then((val) => {
       storage.get('token').then((val2) => {
@@ -24,9 +23,7 @@ export class PerfilPage {
     userService.reservasfuturas();
   }
 
-  mostrar_formulario(){
-    this.buttonClicked = !this.buttonClicked;
-  }
+
 
   mis_reservas(){
     this.userService.mis_reservas();
@@ -40,7 +37,10 @@ export class PerfilPage {
     this.navCtrl.push(ModificarReservaPage);
   }
   eliminar_reserva(id){
-    this.userService.eliminar_reserva(id);
+    this.eliminar.restaurante=this.userService.reservafutura[0].idRestaurante;
+    this.eliminar.dia=this.userService.reservafutura[0].dia;
+    this.eliminar.turno=this.userService.reservafutura[0].turno;
+    this.userService.eliminar_reserva(this.eliminar,id);
     this.navCtrl.push(PerfilPage);
   }
 }

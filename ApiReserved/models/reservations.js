@@ -258,7 +258,7 @@ Reservation.findUserReservefuture=function(id, callback){
     var date = new Date();
     var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
     if (connection){
-        var sql=("select idReserva,dia,hora,re.nombre,comensales from reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and dia > '"+currentdate+"' and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        var sql=("select idRestaurante,idReserva,dia,hora,turno,re.nombre,comensales from reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and dia > '"+currentdate+"' and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
