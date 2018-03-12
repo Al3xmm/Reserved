@@ -16,16 +16,12 @@ export class AgregarempleadoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AgregarempleadoPage');
-  }
-
   add_empleado(){
     this.empleado.empleador=this.restaurantService.session.idRestaurante;
     this.restaurantService.add_empleado(this.empleado)
       .subscribe(()=>{
         if(this.restaurantService.agregar_correcto==true){
-          this.navCtrl.push(ListaempleadosPage);
+          this.navCtrl.setRoot(ListaempleadosPage);
         }
     });
   }

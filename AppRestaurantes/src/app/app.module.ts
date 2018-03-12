@@ -1,3 +1,4 @@
+import { InformacionPage } from './../pages/informacion/informacion';
 import { CamareroPage } from './../pages/camarero/camarero';
 import { CocineroPage } from './../pages/cocinero/cocinero';
 import { AgregarproductopedidoPage } from './../pages/agregarproductopedido/agregarproductopedido';
@@ -53,7 +54,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     ProductosdepedidoPage,
     AgregarproductopedidoPage,
     CocineroPage,
-    CamareroPage
+    CamareroPage,
+    InformacionPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     ProductosdepedidoPage,
     AgregarproductopedidoPage,
     CocineroPage,
-    CamareroPage
+    CamareroPage,
+    InformacionPage
   ],
   providers: [
     StatusBar,

@@ -1,6 +1,6 @@
 import { ModificarproductoPage } from './../modificarproducto/modificarproducto';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 import { AgregarproductoPage } from '../agregarproducto/agregarproducto';
 
@@ -16,7 +16,8 @@ export class CartarestaurantePage {
 
   categoria={nombre: ''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider, private menu:MenuController) {
+    this.menu.enable(true, 'menu2');
   }
 
 

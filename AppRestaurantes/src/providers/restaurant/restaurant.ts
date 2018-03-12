@@ -72,6 +72,12 @@ export class RestaurantProvider {
 
   todoscomentarios:any;
 
+  infocomida:any;
+
+  infocena:any;
+
+  allcategorias:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -513,6 +519,39 @@ export class RestaurantProvider {
       .subscribe(data=>{
           this.pin=null;
       })
+  }
+
+  see_info(dia){
+    this.see_info_comida(dia);
+    this.see_info_cena(dia);
+  }
+
+  see_info_comida(dia){
+    let url="api/restaurants/";
+
+    this.http.get(url+this.session.idRestaurante+"/informationlunch/"+dia, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.infocomida=data;
+      })
+  }
+
+  see_info_cena(dia){
+    let url="api/restaurants/";
+
+    this.http.get(url+this.session.idRestaurante+"/informationdinner/"+dia, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(data=>{
+          this.infocena=data;
+      })
+  }
+
+  categorias_restaurante(){
+    let url="api/restaurants/";
+    this.storage.get('token').then((val) => {
+      this.http.get(url+this.session.idRestaurante+"/category",{headers: {'token-acceso':val}}).subscribe(data=>{
+        this.allcategorias=data;
+        console.log(this.allcategorias);
+      });
+    });
   }
 
 

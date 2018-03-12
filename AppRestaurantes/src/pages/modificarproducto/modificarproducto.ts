@@ -22,7 +22,7 @@ export class ModificarproductoPage {
     this.restaurantService.modify_producto(this.producto)
       .subscribe(()=>{
         if(this.restaurantService.modificar_producto==true){
-          this.navCtrl.push(CartarestaurantePage);
+          this.navCtrl.setRoot(CartarestaurantePage);
         }
     });
   }

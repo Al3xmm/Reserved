@@ -398,7 +398,6 @@ Restaurants.seedenunciations= function(callback){
             if (error){
                 throw error;
             }else{
-              console.log(rows);
                 return callback(null,rows);
             }
         })
@@ -441,6 +440,34 @@ Restaurants.allowcomment=function(Id,callback){
             }else{
                 return callback(null,"Comentario permitido");
             }
+        })
+    }
+}
+
+/* Informacion turno comida */
+Restaurants.infocomida= function(infoData,callback){
+    if (connection){
+        var sql="SELECT count(idReserva) as reservas, sum(comensales) as comensales,sum(cuentaTotal) as cuentas FROM reservas r,pedidos p WHERE p.reservaP=r.idReserva and r.dia='"+infoData.dia+"' AND restauranteR="+infoData.restaurante+" and turno='Comida'";
+        connection.query(sql,function (error,rows){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,rows);
+          }
+        })
+    }
+}
+
+/* Informacion turno cena */
+Restaurants.infocena= function(infoData,callback){
+    if (connection){
+        var sql="SELECT count(idReserva) as reservas, sum(comensales) as comensales,sum(cuentaTotal) as cuentas FROM reservas r,pedidos p WHERE p.reservaP=r.idReserva and r.dia='"+infoData.dia+"' AND restauranteR="+infoData.restaurante+" and turno='Cena'";
+        connection.query(sql,function (error,rows){
+          if (error){
+              throw error;
+          }else{
+              return callback(null,rows);
+          }
         })
     }
 }

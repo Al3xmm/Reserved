@@ -1,6 +1,6 @@
 import { RestaurantePage } from './../restaurante/restaurante';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 
 
@@ -14,7 +14,10 @@ export class ComentariosPage {
   denunciarcomentario={usuarioU: '', restauranteR: '', comentarioC: ''}
   comentario={contenido: ''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider, private menu:MenuController) {
+
+    this.menu.enable(true, 'menu2');
+
     if(restaurantService.todoscomentarios==true){
       restaurantService.mis_comentarios();
     }

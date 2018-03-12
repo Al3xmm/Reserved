@@ -1,7 +1,7 @@
 import { MostrarreservasPage } from './../mostrarreservas/mostrarreservas';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -13,13 +13,14 @@ export class ReservasPage {
 
   reservas={dia: ''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider, private menu: MenuController) {
+    this.menu.enable(true, 'menu2');
   }
 
   see_reservas(){
     this.restaurantService.see_reservas(this.reservas)
       .subscribe(()=>{
-          this.navCtrl.push(ReservasPage);
+          this.navCtrl.setRoot(ReservasPage);
     });
   }
 

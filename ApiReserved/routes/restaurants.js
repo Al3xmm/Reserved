@@ -961,6 +961,40 @@ router.get('/:id/findcomment/:contenido', function(req, res, next){
     })
 });
 
+/* Info comida */
+router.get('/:id/informationlunch/:dia', function(req, res, next) {
+
+  var infoData={
+      dia:req.params.dia,
+      restaurante:req.params.id
+  };
+
+    Restaurant.infocomida(infoData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
+/* Info cena */
+router.get('/:id/informationdinner/:dia', function(req, res, next) {
+
+  var infoData={
+      dia:req.params.dia,
+      restaurante:req.params.id
+  };
+
+    Restaurant.infocena(infoData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 
 
 

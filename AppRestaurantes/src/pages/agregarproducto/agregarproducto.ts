@@ -22,7 +22,7 @@ export class AgregarproductoPage {
     this.restaurantService.add_producto(this.producto)
       .subscribe(()=>{
         if(this.restaurantService.anyadir_producto==true){
-          this.navCtrl.push(CartarestaurantePage);
+          this.navCtrl.setRoot(CartarestaurantePage);
         }
     });
   }

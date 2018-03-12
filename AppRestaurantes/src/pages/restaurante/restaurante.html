@@ -2,7 +2,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>restaurante</ion-title>
+    <ion-title>Restaurante</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -28,6 +33,8 @@
           <button ion-button (click)="mis_comentarios()">Mis comentarios</button>
           <br>
           <button ion-button (click)="mis_reservas()">Reservas</button>
+          <br>
+          <button ion-button (click)="mi_informacion()">Información</button>
         </ion-col>
       </ion-item>
     </ion-grid>
