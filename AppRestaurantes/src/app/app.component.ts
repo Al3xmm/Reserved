@@ -1,3 +1,4 @@
+import { ModidifcarrestaurantePage } from './../pages/modidifcarrestaurante/modidifcarrestaurante';
 import { RestaurantePage } from './../pages/restaurante/restaurante';
 import { CartarestaurantePage } from './../pages/cartarestaurante/cartarestaurante';
 import { ListaempleadosPage } from './../pages/listaempleados/listaempleados';
@@ -27,6 +28,7 @@ export class MyApp {
   pedidos=EmpleadoPage;
 
   inicio=RestaurantePage;
+  modificar=ModidifcarrestaurantePage;
   empleados=ListaempleadosPage;
   carta=CartarestaurantePage;
   comentarios=ComentariosPage;

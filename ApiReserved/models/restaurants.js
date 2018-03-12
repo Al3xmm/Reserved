@@ -57,7 +57,7 @@ Restaurants.all= function(callback){
 /* Mostar un restaurante buscado por su Id */
 Restaurants.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT  idRestaurante,nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
+        var sql=("SELECT  idRestaurante,nombre,email,horario,descripcion,direccion,telefono,ciudad,tipoComida,aforo FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;
@@ -210,24 +210,24 @@ Restaurants.update=function(id,restaurantData,callback) {
   if(connection){
       var sql= "UPDATE restaurantes SET "
 
-      if(restaurantData.nombre != undefined)
+      if(restaurantData.nombre != '')
       {
         sql += " nombre="+connection.escape(restaurantData.nombre);
         coma=true;
       }
 
-      if(restaurantData.password != undefined)
+      if(restaurantData.password != '')
       {
         if(coma== true)
         {
           sql += ",";
           coma=false;
         }
-        sql +=  "contraseña="+connection.escape(restaurantData.password);
+        sql +=  "password="+connection.escape(restaurantData.password);
         coma=true;
       }
 
-      if(restaurantData.email != undefined)
+      if(restaurantData.email != '')
       {
         if(coma== true)
         {
@@ -238,7 +238,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.horario != undefined)
+      if(restaurantData.horario != '')
       {
         if(coma== true)
         {
@@ -249,7 +249,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.descripcion != undefined)
+      if(restaurantData.descripcion != '')
       {
         if(coma== true)
         {
@@ -260,7 +260,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.direccion != undefined)
+      if(restaurantData.direccion != '')
       {
         if(coma== true)
         {
@@ -271,7 +271,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.telefono != undefined)
+      if(restaurantData.telefono != '')
       {
         if(coma== true)
         {
@@ -282,7 +282,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.ciudad != undefined)
+      if(restaurantData.ciudad != '')
       {
         if(coma== true)
         {
@@ -292,7 +292,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         sql += "ciudad="+connection.escape(restaurantData.ciudad);
         coma=true;
       }
-
+      /*
       if(restaurantData.imagenes != undefined)
       {
         if(coma== true)
@@ -303,8 +303,8 @@ Restaurants.update=function(id,restaurantData,callback) {
         sql += "imagenes="+connection.escape(restaurantData.imagenes);
         coma=true;
       }
-
-      if(restaurantData.aforo != undefined)
+      */
+      if(restaurantData.aforo != '')
       {
         if(coma== true)
         {
@@ -315,7 +315,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.tipoComida != undefined)
+      if(restaurantData.tipoComida != '')
       {
         if(coma== true)
         {
@@ -326,7 +326,7 @@ Restaurants.update=function(id,restaurantData,callback) {
         coma=true;
       }
 
-      if(restaurantData.coordenadas != undefined)
+      if(restaurantData.coordenadas != '')
       {
         if(coma== true)
         {

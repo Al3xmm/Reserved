@@ -173,7 +173,7 @@ Reservation.findreservation=function(restaurante, callback){
   }
 
   if (connection){
-      var sql=("select nick,reservas.* from reservas,usuarios where usuarioR=idUsuario and dia='"+currentdate+"' and restauranteR="+connection.escape(restaurante)+"and turno='"+turno+"'");
+      var sql=("select nick,reservas.* from reservas,usuarios where usuarioR=idUsuario and dia='"+currentdate+"' and restauranteR="+connection.escape(restaurante)+"and turno='"+turno+"' and usuarioR!=0");
       connection.query(sql,function(error,rows){
           if (error){
               throw error;

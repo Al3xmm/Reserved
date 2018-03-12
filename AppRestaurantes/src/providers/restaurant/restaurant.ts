@@ -179,6 +179,16 @@ export class RestaurantProvider {
     })
   }
 
+  modify_restaurant(data){
+    let url="api/restaurants/";
+    return this.http.put(url+this.session.idRestaurante, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Restaurante Actualizado");
+          this.restaurant_profile(this.session.idRestaurante,this.session.token)
+
+      })
+  }
+
 
   restaurant_profile(id,token){
     let url="api/restaurants/";

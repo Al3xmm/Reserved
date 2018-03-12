@@ -200,7 +200,7 @@ router.put('/:id',function(req,res,next){
         direccion:req.body.direccion,
         telefono:req.body.telefono,
         ciudad:req.body.ciudad,
-        imagenes:req.body.imagenes,
+        //imagenes:req.body.imagenes,
         aforo:req.body.aforo,
         tipoComida:req.body.tipoComida,
         coordenadas:req.body.coordenadas

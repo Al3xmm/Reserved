@@ -1,3 +1,4 @@
+import { ModidifcarrestaurantePage } from './../modidifcarrestaurante/modidifcarrestaurante';
 import { InformacionPage } from './../informacion/informacion';
 import { ReservasPage } from './../reservas/reservas';
 import { ComentariosPage } from './../comentarios/comentarios';
@@ -17,6 +18,10 @@ export class RestaurantePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private restaurantService: RestaurantProvider, private menu: MenuController) {
     this.menu.enable(true, 'menu2');
+  }
+
+  modificar_restaurante(){
+    this.navCtrl.setRoot(ModidifcarrestaurantePage);
   }
 
   mis_empleados(){
