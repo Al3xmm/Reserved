@@ -38,8 +38,16 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  login:      #76323F
 );
+
+//Colores de las navbar
+$toolbar-ios-background: #76323F;
+$toolbar-md-background: #76323F;
+$toolbar-wp-background: #76323F;
+
+
 
 
 // App iOS Variables
@@ -52,7 +60,6 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
 
 
 
