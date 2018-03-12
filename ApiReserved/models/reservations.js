@@ -215,7 +215,7 @@ Reservation.seepin = function(id, callback){
 // Mostrar el idpedido insertando el pin sin reserva
 Reservation.insertPin = function(pinData, callback){
     if(connection){
-      var sql=("select pin,idReserva from reservas where pin="+conection.escape(pinData.pin));
+      var sql=("select pin,idReserva,usuarioR from reservas where pin="+pinData.pin);
       connection.query(sql,function(error,row){
           if (error){
               throw error;

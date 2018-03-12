@@ -37,9 +37,12 @@ export class PerfilPage {
     this.navCtrl.push(ModificarReservaPage);
   }
   eliminar_reserva(id){
-    this.eliminar.restaurante=this.userService.reservafutura[0].idRestaurante;
-    this.eliminar.dia=this.userService.reservafutura[0].dia;
-    this.eliminar.turno=this.userService.reservafutura[0].turno;
+    var i=0;
+    for(i=0;i<this.userService.reservafutura.legth;i++){
+      this.eliminar.restaurante=this.userService.reservafutura[i].idRestaurante;
+      this.eliminar.dia=this.userService.reservafutura[i].dia;
+      this.eliminar.turno=this.userService.reservafutura[i].turno;
+    }
     this.userService.eliminar_reserva(this.eliminar,id);
     this.navCtrl.push(PerfilPage);
   }

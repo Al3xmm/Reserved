@@ -360,4 +360,21 @@ router.get('/:id/reservations/future', function(req, res, next) {
         }
     })
 });
+
+/* Introducir un pin y comprobar que sea correcto*/
+router.post('/addpin', function(req,res,next){
+
+    var pinData={
+        pin:req.body.pin
+    };
+
+    Reservations.insertPin(pinData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
+
 module.exports = router;

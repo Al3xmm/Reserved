@@ -17,7 +17,7 @@ import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
   templateUrl: 'iniciarpedido.html',
 })
 export class IniciarpedidoPage {
-  pin={pin:'',usuarior:''}
+  pin={pin:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService:RestaurantsProvider) {
     userService.reservasconfirmadas();
@@ -27,10 +27,9 @@ export class IniciarpedidoPage {
     console.log('ionViewDidLoad IniciarpedidoPage');
   }
   comprobar_pin(){
-      this.pin.usuarior = this.userService.session.idUsuario;
       this.userService.add_pin(this.pin).subscribe(()=>{
         if(this.userService.nuevopin==true){
-          this.navCtrl.setRoot(IniciarpedidoPage);
+          this.iniciarpedidopin();
         }
     });
   }
@@ -42,8 +41,9 @@ export class IniciarpedidoPage {
           this.navCtrl.push(CategoriaspedidoPage);
     }
   }
+
   iniciarpedidopin(){
-    //faltaria filtrar solamente habria una reserva, falta metodo de una reserva dada su id con la hora maybe
+    //cambiar esta linea cuando tenga la resp
       this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
       if(this.userService.reservation!=undefined){
         this.restaurantService.categorias_restaurante();

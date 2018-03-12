@@ -19,8 +19,10 @@ export class ModificarReservaPage {
   }
 
   modificar_reserva(){
-    this.reserva.restauranter=this.userService.reservafutura[0].idRestaurante;
-    console.log(this.reserva.restauranter);
+    var i=0;
+    for (i=0;i<this.userService.reservafutura.length;i++){
+      this.reserva.restauranter=this.userService.reservafutura[i].idRestaurante;
+    }
     this.userService.modify_reserva(this.reserva)
       .subscribe(()=>{
           this.navCtrl.setRoot(PerfilPage);

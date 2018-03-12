@@ -179,13 +179,20 @@ export class UsersProvider {
       })
   }
   add_pin(data){
-    let url = "api/addpin";
+    let url = "api/users/addpin";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
-      console.log("Pin enviado");
-      this.nuevopin = true;
+      if(resp==='Pin incorrecto'){
+        this.alertCtrl.create({
+          title:"Error",
+          subTitle:"Pin incorrecto",
+          buttons:["OK"]
+        }).present();
+      }else{
+        console.log("Pin correcto");
+        this.nuevopin = true;
+      }
     })
-
   }
   reservasfuturas(){
     let url="api/users/";
