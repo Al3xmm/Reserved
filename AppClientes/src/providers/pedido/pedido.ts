@@ -20,11 +20,6 @@ export class PedidoProvider {
 
   agregarpedido(item:any) {
     this.plato.push(item);
-    console.log(this.plato);
-    this.alertCtrl.create({
-      title:"Producto añadido al pedido",
-      buttons:["ok"]
-    }).present();
   }
 
   eliminarplato(num){

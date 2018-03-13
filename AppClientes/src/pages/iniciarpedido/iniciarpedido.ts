@@ -21,6 +21,7 @@ export class IniciarpedidoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService:RestaurantsProvider) {
     userService.reservasconfirmadas();
+
   }
 
   ionViewDidLoad() {
@@ -34,17 +35,19 @@ export class IniciarpedidoPage {
     });
   }
   iniciarpedido(){
-      //faltaria filtrar solamente habria una reserva, falta metodo de una reserva dada su id con la hora maybe
         this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
         if(this.userService.reservation!=undefined){
-          this.restaurantService.categorias_restaurante();
+          this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
           this.navCtrl.push(CategoriaspedidoPage);
+          this.restaurantService.categorias_restaurante();
     }
   }
 
   iniciarpedidopin(){
     //cambiar esta linea cuando tenga la resp
-      this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
+      this.userService.pininfo[0].usuarioR=this.userService.session.idUsuario;
+      this.userService.pedido_actual(this.userService.pininfo[0].idReserva);
+      this.restaurantService.restauranteactual=this.userService.pininfo[0].restauranteR;
       if(this.userService.reservation!=undefined){
         this.restaurantService.categorias_restaurante();
         this.navCtrl.push(CategoriaspedidoPage);

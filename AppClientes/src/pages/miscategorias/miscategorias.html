@@ -7,14 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>miscategorias</ion-title>
+    <ion-title>Mis categorias</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
-      <h3>Productos</h3>
       <ion-item *ngFor="let item of restaurantService.allcategorias">
         <ion-col>
         {{item.nombre}}

@@ -20,6 +20,7 @@ export class UsersProvider {
 
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
+  pininfo:any;
   reservaactual:any;
   pedidoactual:any;
   reservasusuario:any;
@@ -139,8 +140,6 @@ export class UsersProvider {
     this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.pedidoactual =data;
-      console.log(this.pedidoactual);
-      console.log(this.reservation);
     })
   }
   add_pedido(data){
@@ -180,9 +179,8 @@ export class UsersProvider {
   }
   add_pin(data){
     let url = "api/users/addpin";
-    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
+    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
-      console.log(resp);
       if(resp==='[]'){
         this.alertCtrl.create({
           title:"Error",
@@ -191,7 +189,9 @@ export class UsersProvider {
         }).present();
       }else{
         console.log("Pin correcto");
+        console.log(resp);
         this.nuevopin = true;
+        this.pininfo= resp;
       }
     })
   }
