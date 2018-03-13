@@ -182,7 +182,8 @@ export class UsersProvider {
     let url = "api/users/addpin";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
-      if(resp==='Pin incorrecto'){
+      console.log(resp);
+      if(resp==='[]'){
         this.alertCtrl.create({
           title:"Error",
           subTitle:"Pin incorrecto",
