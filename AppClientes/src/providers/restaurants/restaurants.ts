@@ -134,6 +134,8 @@ export class RestaurantsProvider {
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
           console.log(this.productopedido);
+          console.log(this.userService.reservation);
+          console.log(this.productopedido);
     });
   }
   

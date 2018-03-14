@@ -135,11 +135,11 @@ export class UsersProvider {
   }
   //id del pedido dada una reserva
   pedido_actual(id){
-    this.reservation = id;
     let url = "api/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.pedidoactual =data;
+      this.reservation=this.pedidoactual[0].idPedido;
     })
   }
   add_pedido(data){
@@ -181,7 +181,7 @@ export class UsersProvider {
     let url = "api/users/addpin";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
-      if(resp==='[]'){
+      if(resp==='Pin incorrecto'){
         this.alertCtrl.create({
           title:"Error",
           subTitle:"Pin incorrecto",

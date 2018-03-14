@@ -717,7 +717,7 @@ router.get('/orders/:id/orderproducts', function(req, res, next) {
 
 /* POST Crear un producto de pedido */
 router.post('/orders/:id/orderproducts/', function(req,res,next){
-
+    var date = new Date();
     var OrderProductData={
         IdProductoDePedido:null,
         pedidop:req.params.id,

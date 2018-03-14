@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
+import { PedidoProvider } from '../../providers/pedido/pedido';
 import { CategoriaspedidoPage } from './../categoriaspedido/categoriaspedido';
 import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 /**
@@ -17,7 +18,7 @@ import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 })
 export class ProductospedidoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public restaurantService:RestaurantsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public restaurantService:RestaurantsProvider,public pedidoService:PedidoProvider) {
   }
 
   ionViewDidLoad() {

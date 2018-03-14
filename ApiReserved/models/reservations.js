@@ -217,11 +217,13 @@ Reservation.insertPin = function(pinData, callback){
     if(connection){
       var sql=("select pin,idReserva,usuarioR,restauranteR from reservas where pin="+pinData.pin);
       connection.query(sql,function(error,row){
-          if (error){
-              throw error;
-          }else{
-              return callback(null,row);
-          }
+        if (error){
+            throw error;
+        }else if(row!=""){
+            return callback(null,row);
+        }else{
+            return callback(null,null);
+        }
       })
     }
   }

@@ -18,7 +18,6 @@ import { PedirPage} from './../pedir/pedir';
 export class CategoriaspedidoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public restaurantService: RestaurantsProvider) {
-    restaurantService.categorias_restaurante();
   }
 
   ionViewDidLoad() {

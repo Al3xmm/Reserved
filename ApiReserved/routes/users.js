@@ -372,8 +372,11 @@ router.post('/addpin', function(req,res,next){
         if (error){
             res.json(500,error);
         }else{
-            res.json(200,data);
+            if(data==null){            
+                res.json(200,"Pin incorrecto");
+            }
         }
+        
     })
 });
 

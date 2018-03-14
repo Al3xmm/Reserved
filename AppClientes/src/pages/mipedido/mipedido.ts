@@ -34,11 +34,9 @@ export class MipedidoPage {
       var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
       this.pedido.hora=currentdate;
       this.pedido.pedidop = this.userService.reservation;
-      this.pedido.productop= this.pedidoService.plato[i].idProducto;// si pongo 0 si va -.-
+      
+      this.pedido.productop= this.pedidoService.plato[i].idProducto;
       this.pedido.tipoproducto = this.pedidoService.plato[i].tipo;
-      console.log(this.pedido.pedidop);
-      console.log(this.pedido.tipoproducto);
-      console.log(this.pedido.productop);
       this.userService.add_pedido(this.pedido)
       .subscribe(()=>{
     });
