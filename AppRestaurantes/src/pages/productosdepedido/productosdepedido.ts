@@ -16,6 +16,7 @@ export class ProductosdepedidoPage {
   }
 
   agregar_productopedido(){
+    this.restaurantService.categorias_restaurante();
     this.navCtrl.push(AgregarproductopedidoPage);
   }
 

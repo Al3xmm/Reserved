@@ -230,7 +230,7 @@ Reservation.insertPin = function(pinData, callback){
   /* Mostar las reservas de un usuario que tienen los pedidos confirmadosconfirmadas*/
 Reservation.findReserve=function(id, callback){
     if (connection){
-        var sql=("select idRestaurante,idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=1 and IdRestaurante=restauranter and IdUsuario=usuarior and idReserva=reservap and UsuarioR="+connection.escape(id));
+        var sql=("select idRestaurante,idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=0 and IdRestaurante=restauranter and IdUsuario=usuarior and idReserva=reservap and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

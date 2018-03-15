@@ -78,6 +78,8 @@ export class RestaurantProvider {
 
   allcategorias:any;
 
+  productoscategoria:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
     
   }
@@ -562,6 +564,15 @@ export class RestaurantProvider {
         console.log(this.allcategorias);
       });
     });
+  }
+
+  productos_porcategoria(id){
+    let url = "api/restaurants/";
+    this.http.get(url+this.session.idRestaurante+"/products/"+"category/"+id,{headers:{'token-acceso':this.session.token}})
+    .subscribe(data=>{
+      this.productoscategoria =data;
+      //console.log(this.productoscategoria);
+    })
   }
 
 

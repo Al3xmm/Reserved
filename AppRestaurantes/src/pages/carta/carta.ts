@@ -1,21 +1,22 @@
-import { CartaPage } from './../carta/carta';
+import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RestaurantProvider } from '../../providers/restaurant/restaurant';
-import { EmpleadoPage } from '../empleado/empleado';
-
 
 @IonicPage()
 @Component({
-  selector: 'page-agregarproductopedido',
-  templateUrl: 'agregarproductopedido.html',
+  selector: 'page-carta',
+  templateUrl: 'carta.html',
 })
-export class AgregarproductopedidoPage {
+export class CartaPage {
 
   producto={productop:'',tipoproducto:'',hora:''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private restaurantService:RestaurantProvider) {
+  }
 
+  mis_productos(id){
+    this.restaurantService.productos_porcategoria(id);
+    this.navCtrl.push(CartaPage);
   }
 
   anyadirproductopedido(productoactual){
@@ -47,16 +48,6 @@ export class AgregarproductopedidoPage {
       this.restaurantService.sumar_precio(this.producto.productop);
     });
 
-  }
-
-  volver_pedidos(){
-    this.navCtrl.setRoot(EmpleadoPage);
-  }
-
-  mis_productos(id){
-    this.restaurantService.productos_porcategoria(id);
-    //console.log(id);
-    this.navCtrl.push(CartaPage);
   }
 
 }

@@ -22,13 +22,13 @@
           <ion-col>
             <p>
               <br>
-              Nombre: {{item.nombre}}
+              Nombre: <span>{{item.nombre}}</span>
               <br>
-              Mesa: {{item.mesa}}
+              Mesa: <span>{{item.mesa}}</span>
               <br>
-              Hora: {{item.hora | date: 'H:mm'}}
+              Hora: <span>{{item.hora | date: 'H:mm'}}</span>
               <br>
-              <button ion-button (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
+              <button ion-button color=danger (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
             </p>
           </ion-col>
         </ion-item>

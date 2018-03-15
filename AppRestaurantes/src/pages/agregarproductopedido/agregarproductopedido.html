@@ -11,13 +11,11 @@
 <ion-content padding>
   <ion-grid>
     <button ion-button (click)="volver_pedidos()">Volver</button>
-    <ion-item *ngFor="let item of restaurantService.cartarestaurante">
+    <ion-item *ngFor="let item of restaurantService.allcategorias">
       <ion-col>
-          <br>
-          <h2>{{item.nombre}}</h2>
-          <br>
-          <button ion-button (click)="anyadirproductopedido(item)">Añadir</button>
+      {{item.nombre}}
       </ion-col>
+      <button ion-button (click)="mis_productos(item.idCategoria)">Ver productos</button>
     </ion-item>
   </ion-grid>
 

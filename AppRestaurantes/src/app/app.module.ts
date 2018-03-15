@@ -1,3 +1,4 @@
+import { CartaPage } from './../pages/carta/carta';
 import { ModidifcarrestaurantePage } from './../pages/modidifcarrestaurante/modidifcarrestaurante';
 import { InformacionPage } from './../pages/informacion/informacion';
 import { CamareroPage } from './../pages/camarero/camarero';
@@ -57,7 +58,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     CocineroPage,
     CamareroPage,
     InformacionPage,
-    ModidifcarrestaurantePage
+    ModidifcarrestaurantePage,
+    CartaPage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     CocineroPage,
     CamareroPage,
     InformacionPage,
-    ModidifcarrestaurantePage
+    ModidifcarrestaurantePage,
+    CartaPage
   ],
   providers: [
     StatusBar,
