@@ -19,7 +19,10 @@
 
 <ion-content>
     <ion-grid>
-      <form (ngSubmit)="busquedaavanzada()">
+      <button ion-button (click)="mostrar_formulario()"> <ion-icon name="search"></ion-icon> Buscador</button>
+      <br>
+      <button *ngIf="buttonClicked2" ion-button (click)="todos_restaurantes()"> Ver todos los restaurantes</button>
+      <form *ngIf="buttonClicked" (ngSubmit)="busquedaavanzada()">
           <ion-item>
             <ion-label>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="busqueda.nombre" name="nombre" required></ion-input>
@@ -35,6 +38,8 @@
           <br>
           <button ion-button type="submit" block>Buscar</button>
         </form>
+        <h2>Restaurantes</h2>
+        <br>
         <ion-item *ngFor="let item of restaurantService.restaurantes">
           <ion-col>
             {{item.nombre}}

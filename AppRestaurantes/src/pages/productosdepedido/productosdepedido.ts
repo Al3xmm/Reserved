@@ -22,7 +22,7 @@ export class ProductosdepedidoPage {
 
   eliminar_productodepedido(id,idproducto){
     this.restaurantService.eliminar_productodepedido(id,idproducto);
-    this.navCtrl.push(ProductosdepedidoPage);
+    this.navCtrl.setRoot(ProductosdepedidoPage);
   }
 
   volver_pedidos(){

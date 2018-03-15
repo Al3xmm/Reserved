@@ -11,15 +11,18 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
   templateUrl: 'allrestaurants.html',
 })
 export class AllrestaurantsPage {
+
   busqueda = {nombre: '', ciudad:'', tipoComida:''}
+
+  public buttonClicked: boolean = false;
+  public buttonClicked2: boolean = false;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider) {
     //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
     //restaurantservice.mostrar_todos();
-  }
-
-  ionViewDidLoad() {
-
+    if(restaurantService.botontodosrestaurantes==true){
+      this.buttonClicked2 = !this.buttonClicked2;
+    }
   }
 
   ver_busqueda(){
@@ -34,8 +37,19 @@ export class AllrestaurantsPage {
   busquedaavanzada(){
     this.restaurantService.busqueda_avanzada(this.busqueda)
     .subscribe(()=>{
-      this.navCtrl.push(BusquedaPage);
-  });
-    
+      this.restaurantService.botontodosrestaurantes=true;
+      this.navCtrl.setRoot(AllrestaurantsPage);
+    });
   }
+
+  todos_restaurantes(){
+    this.restaurantService.mostrar_todos();
+    this.navCtrl.setRoot(AllrestaurantsPage);
+    this.restaurantService.botontodosrestaurantes=false;
+  }
+
+  mostrar_formulario(){
+    this.buttonClicked = !this.buttonClicked;
+  }
+
 }

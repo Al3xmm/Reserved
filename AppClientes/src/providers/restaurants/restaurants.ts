@@ -21,6 +21,7 @@ export class RestaurantsProvider {
   allcategorias:any;
   avanzada:any;
   productopedido:any;
+  botontodosrestaurantes:boolean=false;
  
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
@@ -82,8 +83,7 @@ export class RestaurantsProvider {
     let url="api/restaurants/find";
     return this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}})
     .map(data=>{
-      this.avanzada=data;
-      console.log(this.avanzada);
+      this.restaurantes=data;
   });
   }
 
