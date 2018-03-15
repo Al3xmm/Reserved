@@ -147,7 +147,7 @@ Reservation.updatereservation=function(ReservationData,idreserva,callback){
 /* Mostrar el idpedido dada su reserva*/
 Reservation.findorderbyreserve=function(id,idreserva, callback){
     if (connection){
-        var sql=("select idPedido,cuentaTotal from pedidos,reservas WHERE usuarioR="+connection.escape(id)+"AND idReserva="+connection.escape(idreserva));
+        var sql=("select idPedido,cuentaTotal from pedidos,reservas WHERE idReserva=reservaP AND idReserva="+connection.escape(idreserva));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -266,6 +266,20 @@ Reservation.findUserReservefuture=function(id, callback){
                 throw error;
             }else{
                 return callback(null,rows);
+            }
+        })
+    }
+}
+/*Modificar el usuario una vez que mete el pin y borrarlo*/
+Reservation.update=function(id,pinData,callback){
+    if(connection){
+        var sql=("update reservas set pin=null, usuarioR="+connection.escape(pinData.usuarioR)+" where idReserva="+connection.escape(id));
+        //usuarioR="+connection.escape(pinData.usuarioR)+
+        connection.query(sql,function(error,result){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,"Pin actualizado");
             }
         })
     }
