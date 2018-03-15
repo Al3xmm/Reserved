@@ -130,12 +130,10 @@ export class RestaurantsProvider {
   }
 
   productospedido(){
+    console.log(this.userService.reservation);
     let url="api/restaurants/orders/";
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
-          console.log(this.productopedido);
-          console.log(this.userService.reservation);
-          console.log(this.productopedido);
     });
   }
   

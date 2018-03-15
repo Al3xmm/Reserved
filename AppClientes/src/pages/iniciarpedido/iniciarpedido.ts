@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsersProvider } from '../../providers/users/users';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
+import { ProductospedidoPage } from '../productospedido/productospedido';
 
 /**
  * Generated class for the IniciarpedidoPage page.
@@ -21,7 +22,6 @@ export class IniciarpedidoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService:RestaurantsProvider) {
     userService.reservasconfirmadas();
-
   }
 
   ionViewDidLoad() {
@@ -36,11 +36,11 @@ export class IniciarpedidoPage {
   }
   iniciarpedido(){
         this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
-        if(this.userService.reservation!=undefined){
+        //if(this.userService.reservation!=undefined){
           this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
           this.navCtrl.push(CategoriaspedidoPage);
           this.restaurantService.categorias_restaurante();
-    }
+    //}
   }
 
   iniciarpedidopin(){
@@ -53,4 +53,11 @@ export class IniciarpedidoPage {
         this.navCtrl.push(CategoriaspedidoPage);
   }
 }
+  verpedido(id){
+    this.userService.pedido_actual(id);
+    if(this.userService.reservation!=undefined){
+      this.restaurantService.productospedido();
+      this.navCtrl.setRoot(ProductospedidoPage);
+    }
+  }
 }

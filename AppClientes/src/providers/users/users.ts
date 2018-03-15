@@ -140,6 +140,7 @@ export class UsersProvider {
     .subscribe(data=>{
       this.pedidoactual =data;
       this.reservation=this.pedidoactual[0].idPedido;
+      console.log(this.reservation);
     })
   }
   add_pedido(data){
@@ -175,6 +176,7 @@ export class UsersProvider {
     this.http.get(url+this.session.idUsuario+"/reservations/confirmadas", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservaconfirmada=data;
+          console.log(this.reservaconfirmada);
       })
   }
   add_pin(data){

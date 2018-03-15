@@ -4,6 +4,7 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { PedidoProvider } from '../../providers/pedido/pedido';
 import { CategoriaspedidoPage } from './../categoriaspedido/categoriaspedido';
 import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
+import { UsersProvider } from '../../providers/users/users';
 /**
  * Generated class for the ProductospedidoPage page.
  *
@@ -18,7 +19,7 @@ import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 })
 export class ProductospedidoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public restaurantService:RestaurantsProvider,public pedidoService:PedidoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public restaurantService:RestaurantsProvider,public pedidoService:PedidoProvider,public userService:UsersProvider) {
   }
 
   ionViewDidLoad() {
@@ -26,6 +27,9 @@ export class ProductospedidoPage {
   }
 
   anayadirplato(){
+    this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
+    console.log(this.userService.reservaconfirmada[0].idRestaurante);
+    this.restaurantService.categorias_restaurante();
     this.navCtrl.setRoot(CategoriaspedidoPage);
   }
   pedirCuenta(){
@@ -35,5 +39,9 @@ export class ProductospedidoPage {
     buttons:["OK"]
   }).present();
   this.navCtrl.setRoot(AllrestaurantsPage);
+  }
+  eliminarplato(id){
+    this.restaurantService.eliminar_plato(id);
+    this.navCtrl.push(ProductospedidoPage);
   }
 }

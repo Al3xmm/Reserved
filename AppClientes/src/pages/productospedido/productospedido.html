@@ -20,9 +20,19 @@
         Nombre: {{item.nombre}}
         <p>
           Descripcion: {{item.informacion}}
+          </p>
+          <p>
+            Precio: {{item.precio | currency:'€':true}}
+            </p>
+         <button ion-button *ngIf="item.TipoProducto=='Preparado'"
+         (click)="eliminarplato(item.idProductoDePedido)">Eliminar plato</button>
       </ion-col>
     </ion-item>
     <button ion-button (click)="anayadirplato()">Agregar platos</button>
     <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
+    <hr>
+    <ion-item>
+      <h3>Precio total:</h3>
+    </ion-item>
   </ion-grid>
 </ion-content>
