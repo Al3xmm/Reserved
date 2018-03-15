@@ -1,5 +1,4 @@
 import { RestaurantPage } from './../restaurant/restaurant';
-import { BusquedaPage } from './../busqueda/busqueda';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
@@ -25,9 +24,6 @@ export class AllrestaurantsPage {
     }
   }
 
-  ver_busqueda(){
-    this.navCtrl.push(BusquedaPage);;
-  }
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
     this.restaurantService.comentarios_restaurante(id);

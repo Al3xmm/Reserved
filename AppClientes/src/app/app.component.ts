@@ -14,6 +14,7 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 import { Storage } from '@ionic/storage';
+import { MisReservasPage } from '../pages/mis-reservas/mis-reservas';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,6 +24,7 @@ export class MyApp {
   restaurantes = AllrestaurantsPage;
   registro = RegistroPage;
   perfil=PerfilPage;
+  reserva=MisReservasPage;
   pedir = IniciarpedidoPage;
   rootPage:any = LoginPage;
 

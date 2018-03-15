@@ -18,6 +18,7 @@ import { ProductospedidoPage } from '../productospedido/productospedido';
   templateUrl: 'iniciarpedido.html',
 })
 export class IniciarpedidoPage {
+  usuario={usuarioR:''}
   pin={pin:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService:RestaurantsProvider) {
@@ -44,14 +45,19 @@ export class IniciarpedidoPage {
   }
 
   iniciarpedidopin(){
-    //cambiar esta linea cuando tenga la resp
-      this.userService.pininfo[0].usuarioR=this.userService.session.idUsuario;
-      this.userService.pedido_actual(this.userService.pininfo[0].idReserva);
-      this.restaurantService.restauranteactual=this.userService.pininfo[0].restauranteR;
-      if(this.userService.reservation!=undefined){
-        this.restaurantService.categorias_restaurante();
-        this.navCtrl.push(CategoriaspedidoPage);
-  }
+    this.restaurantService.restauranteactual=this.userService.pininfo[0].restauranteR;
+      this.userService.pedido_actual(this.userService.pininfo[0].idReserva).subscribe(()=>{
+        if(this.userService.pedidos==true){
+          this.usuario.usuarioR=this.userService.session.idUsuario;
+          this.userService.reservapinactual=this.userService.pininfo[0].idReserva;
+          this.userService.modificarpin(this.usuario.usuarioR, this.userService.reservapinactual).subscribe(()=>{
+            if(this.userService.pinmodi==true){
+              this.navCtrl.push(CategoriaspedidoPage);
+              this.restaurantService.categorias_restaurante();
+            }
+        });
+        }
+      });
 }
   verpedido(id){
     this.userService.pedido_actual(id);

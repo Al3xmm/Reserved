@@ -12,21 +12,26 @@ export class UsersProvider {
   login_correcto=false;
   modificar_perfil=false;
   modificar_reserva= false;
+  pinmodi=false;
   session:any;
   nuevopedido:any;
   logueado=false;
   nuevareserva = false;
   nuevopin=false;
+  pedidos=false;
 
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
   pininfo:any;
   reservaactual:any;
+  reservapinactual:any;
   pedidoactual:any;
   reservasusuario:any;
   reservation:any;
   reservaconfirmada:any;
   reservafutura:any;
+  botonhistorial:boolean=false;
+  botonpendientes:boolean=false;
 
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
@@ -133,16 +138,17 @@ export class UsersProvider {
       this.nuevareserva = true;
     })
   }
-  //id del pedido dada una reserva
-  pedido_actual(id){
-    let url = "api/users/";
-    this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
-    .subscribe(data=>{
-      this.pedidoactual =data;
-      this.reservation=this.pedidoactual[0].idPedido;
-      console.log(this.reservation);
-    })
-  }
+ //id del pedido dada una reserva
+ pedido_actual(id){
+  console.log(id);
+  let url = "api/users/";
+  return this.http.post(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
+  .map(data=>{
+    this.pedidoactual =data;
+    this.reservation=this.pedidoactual[0].idPedido;
+    this.pedidos=true;
+  })
+}
   add_pedido(data){
     let url = "api/restaurants/orders/";
     return this.http.post(url+this.reservation+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
@@ -205,6 +211,16 @@ export class UsersProvider {
           console.log(this.reservafutura);
       })
   }
+  modificarpin(data,id){
+      let url="api/users/pin/";
+      return this.http.put(url+this.reservapinactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+        .map(resp=>{
+            console.log("Usuario actualizada");
+            this.pinmodi=true;
+  
+        })
+  
+    }
+  }
 
  
-}

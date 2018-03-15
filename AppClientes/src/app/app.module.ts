@@ -1,6 +1,5 @@
 import { ReservarPage } from './../pages/reservar/reservar';
 import { CartaPage } from './../pages/carta/carta';
-import { BusquedaPage } from './../pages/busqueda/busqueda';
 import { MipedidoPage } from './../pages/mipedido/mipedido';
 import { IniciarpedidoPage } from './../pages/iniciarpedido/iniciarpedido';
 import { MiscategoriasPage } from './../pages/miscategorias/miscategorias';
@@ -45,7 +44,6 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     ProductospedidoPage,
     PedirPage,
     MipedidoPage,
-    BusquedaPage,
     ModificarperfilPage,
     ComentariosPage,
     MiscategoriasPage,
@@ -73,7 +71,6 @@ import { PedidoProvider } from '../providers/pedido/pedido';
     ProductospedidoPage,
     PedirPage,
     MipedidoPage,
-    BusquedaPage,
     ModificarperfilPage,
     ComentariosPage,
     MiscategoriasPage,
