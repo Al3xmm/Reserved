@@ -191,6 +191,15 @@ export class RestaurantProvider {
       })
   }
 
+  modify_employee(data){
+    let url="api/restaurants/employee/";
+    return this.http.put(url+this.session.idEmpleado, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .map(resp=>{
+          console.log("Pass Actualizada");
+          //this.restaurant_profile(this.session.idRestaurante,this.session.token)
+      })
+  }
+
 
   restaurant_profile(id,token){
     let url="api/restaurants/";

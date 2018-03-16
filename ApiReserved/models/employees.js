@@ -26,6 +26,27 @@ Employee.loginEmployee = function(nick,callback){
     }
 }
 
+/* Modifica un empleado logueado */
+Employee.updatepass=function(employeeData,callback) {
+    if(connection){
+        var sql="UPDATE empleados SET "
+
+        if(employeeData.password!=""){
+          sql+="password="+connection.escape(employeeData.password);
+        }
+
+        sql+="WHERE idEmpleado="+employeeData.id;
+
+        connection.query(sql,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Empleado actualizado");
+            }
+        })
+    }
+}
+
 
 Employee.findEmployee = function(id,callback){
     if (connection){

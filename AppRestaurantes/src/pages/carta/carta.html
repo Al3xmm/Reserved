@@ -14,6 +14,8 @@
 
 <ion-content padding>
     <ion-grid>
+      <button ion-button (click)="volver_pedidos()">Volver</button>
+      <br>
       <h3>Productos</h3>
       <ion-item *ngFor="let item of restaurantService.productoscategoria">
         <ion-col>

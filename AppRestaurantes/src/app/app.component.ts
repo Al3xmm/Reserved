@@ -1,3 +1,4 @@
+import { ModificarempleadoPage } from './../pages/modificarempleado/modificarempleado';
 import { ModidifcarrestaurantePage } from './../pages/modidifcarrestaurante/modidifcarrestaurante';
 import { RestaurantePage } from './../pages/restaurante/restaurante';
 import { CartarestaurantePage } from './../pages/cartarestaurante/cartarestaurante';
@@ -17,6 +18,7 @@ import { Storage } from '@ionic/storage';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { ReservasPage } from '../pages/reservas/reservas';
 import { InformacionPage } from '../pages/informacion/informacion';
+import { CocineroPage } from '../pages/cocinero/cocinero';
 
 @Component({
   templateUrl: 'app.html'
@@ -34,6 +36,8 @@ export class MyApp {
   comentarios=ComentariosPage;
   reservas=ReservasPage;
   informacion=InformacionPage;
+  modificarempleado=ModificarempleadoPage;
+  cocinero=CocineroPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl:MenuController,public storage:Storage, private restaurantService:RestaurantProvider) {
     platform.ready().then(() => {

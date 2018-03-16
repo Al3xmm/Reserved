@@ -45,8 +45,6 @@ router.use(function(req, res, next) {
 });
 
 
-
-
 //ver foto
 router.get('/images/:name', function (req, res) {
     console.log(req.params.name);
@@ -225,6 +223,25 @@ router.delete("/:id",function(req,res,next){
             res.json(200,data);
         }
     })
+});
+
+/* PUT Modificar un empleado */
+router.put('/employee/:id',function(req,res,next){
+
+    var hash=bcrypt.hashSync(req.body.password,salt);
+    var employeeData={
+        id:req.params.id,
+        password:hash,
+    };
+
+    Employee.updatepass(employeeData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
 });
 
 /* GET Comentarios de un Restaurante */

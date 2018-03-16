@@ -1,3 +1,4 @@
+import { EmpleadoPage } from './../empleado/empleado';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -48,6 +49,10 @@ export class CartaPage {
       this.restaurantService.sumar_precio(this.producto.productop);
     });
 
+  }
+
+  volver_pedidos(){
+    this.navCtrl.setRoot(EmpleadoPage);
   }
 
 }

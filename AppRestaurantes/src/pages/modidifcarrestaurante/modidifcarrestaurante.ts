@@ -20,7 +20,7 @@ export class ModidifcarrestaurantePage {
     this.restaurantService.modify_restaurant(this.restaurant)
     .subscribe(()=>{
         this.navCtrl.setRoot(RestaurantePage);
-  });
+    });
   }
 
 }
