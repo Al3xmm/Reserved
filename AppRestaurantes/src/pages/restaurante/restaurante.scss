@@ -1,3 +1,29 @@
 page-restaurante {
+    .item-md{
+        background-color: #fff0;
+    }
+
+    .item-md h2{
+        font-size: 2.6rem;
+        text-decoration: underline;
+    }
+
+    .item-md p{
+        font-size: 1.8rem;
+        padding: 1em 0em;
+    }
+
+    .label-md{
+        white-space: normal;
+    }
+
+    .button-md{
+        padding: 1em 3em;
+        margin: 1em 0em;
+    }
+
+    .ion-col {
+        text-align: center;
+    }
 
 }

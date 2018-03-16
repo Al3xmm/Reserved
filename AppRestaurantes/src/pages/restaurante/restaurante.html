@@ -17,15 +17,16 @@
   <ion-grid>
       <ion-item *ngFor="let item of restaurantService.inforestaurant">
         <ion-col>
-          Nombre: {{item.nombre}}
+          <h2>{{item.nombre}}</h2>
           <p>
-            <br>
             Descripcion: {{item.descripcion}}
-            <br>
-            Direccion: {{item.direccion}}
-            <br>
-            Telefono: {{item.telefono}}
           </p>
+          <p>
+            Direccion: {{item.direccion}}
+          </p>
+          <p>
+            Telefono: {{item.telefono}}
+          </p> 
           <button ion-button (click)="modificar_restaurante()">Modificar</button>
           <br>
           <button ion-button (click)="mis_empleados()">Empleados</button>
