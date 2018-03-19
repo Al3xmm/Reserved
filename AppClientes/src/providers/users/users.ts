@@ -142,12 +142,13 @@ export class UsersProvider {
  pedido_actual(id){
   console.log(id);
   let url = "api/users/";
-  return this.http.post(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
+  return this.http.post(url+this.session.idUsuario+"/reservations/orders/"+id,{headers: {'token-acceso':this.session.token}})
   .map(data=>{
     this.pedidoactual =data;
     this.reservation=this.pedidoactual[0].idPedido;
     this.pedidos=true;
   })
+  
 }
   add_pedido(data){
     let url = "api/restaurants/orders/";
@@ -211,9 +212,9 @@ export class UsersProvider {
           console.log(this.reservafutura);
       })
   }
-  modificarpin(data,id){
+  modificarpin(id,data){
       let url="api/users/pin/";
-      return this.http.put(url+this.reservapinactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      return this.http.put(url+id, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
         .map(resp=>{
             console.log("Usuario actualizada");
             this.pinmodi=true;

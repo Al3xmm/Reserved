@@ -47,5 +47,8 @@ export class AllrestaurantsPage {
   mostrar_formulario(){
     this.buttonClicked = !this.buttonClicked;
   }
+  mostrar_formulario1(){
+    this.buttonClicked2 = !this.buttonClicked2;
+  }
 
 }

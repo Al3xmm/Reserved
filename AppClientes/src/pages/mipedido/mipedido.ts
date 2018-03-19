@@ -33,15 +33,22 @@ export class MipedidoPage {
       var date = new Date();
       var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
       this.pedido.hora=currentdate;
-      this.pedido.pedidop = this.userService.reservation;
-      
+      console.log(this.userService.reservaconfirmada[0].idReserva);
       this.pedido.productop= this.pedidoService.plato[i].idProducto;
       this.pedido.tipoproducto = this.pedidoService.plato[i].tipo;
+      this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
+      if(this.userService.pedidos=true){
+      this.userService.reservation=9;
+      this.pedido.pedidop = this.userService.reservation;
+      console.log(this.pedido.pedidop);
       this.userService.add_pedido(this.pedido)
       .subscribe(()=>{
+        this.restaurantService.productospedido();
+        this.navCtrl.setRoot(ProductospedidoPage);
+        
     });
+  }
+
     }
-    this.restaurantService.productospedido();
-    this.navCtrl.setRoot(ProductospedidoPage);
   }
 }

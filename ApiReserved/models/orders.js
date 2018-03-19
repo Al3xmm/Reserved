@@ -407,9 +407,6 @@ Order.cocineroPreparar = function(id, callback){
   }
 }
 
-
-
-
 /* Modificar el estado de un producto de pedido */
 /*Order.updateOrderProduct = function(id, callback){
   if(connection){

@@ -16,10 +16,9 @@
 <ion-content padding>
     <ion-grid>
         <br>
-        <button ion-button (click)="historial()">Historial de reservas</button>
-        <button ion-button (click)="pendientes()">Reservas pendientes</button>
-        <ion-item *ngFor="let item of userService.reservasusuario">
-          <ion-col>
+        <button  ion-button (click)="historial()">Historial de reservas</button>
+        <ion-item *ngIf="!buttonClicked2" >
+          <ion-col *ngFor="let item of userService.reservasusuario">
             Restaurante: {{item.nombre}}
             <p>
               <br>
@@ -29,6 +28,26 @@
               <br>
               Comensales: {{item.comensales}}
             </p>
+            <button ion-button (click)="verpedido(item.idPedido)" >Ver pedido</button>
+            <hr>
+          </ion-col>
+        </ion-item>
+        <br>
+        <button ion-button (click)="pendientes()">Reservas pendientes</button>
+        <ion-item *ngIf="!buttonClicked" >
+          <ion-col *ngFor="let item of userService.reservafutura">
+            Restaurante: {{item.nombre}}
+            <p>
+              <br>
+              Dia: {{ item.dia | date : format : timezone}}
+              <br>
+              Hora: {{item.hora}}
+              <br>
+              Comensales: {{item.comensales}}
+            </p>
+            <button ion-button (click)="eliminar_reserva(item.idReserva)">Eliminar</button>
+            <button ion-button (click)="modificar_reserva(item.idReserva)">Modificar reserva</button>
+            <hr>
           </ion-col>
         </ion-item>
       </ion-grid>

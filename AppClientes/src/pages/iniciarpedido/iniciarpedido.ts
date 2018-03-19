@@ -46,24 +46,20 @@ export class IniciarpedidoPage {
 
   iniciarpedidopin(){
     this.restaurantService.restauranteactual=this.userService.pininfo[0].restauranteR;
-      this.userService.pedido_actual(this.userService.pininfo[0].idReserva).subscribe(()=>{
-        if(this.userService.pedidos==true){
           this.usuario.usuarioR=this.userService.session.idUsuario;
           this.userService.reservapinactual=this.userService.pininfo[0].idReserva;
-          this.userService.modificarpin(this.usuario.usuarioR, this.userService.reservapinactual).subscribe(()=>{
-            if(this.userService.pinmodi==true){
+          console.log(this.usuario.usuarioR);
+          console.log(this.userService.reservapinactual);
+          this.userService.modificarpin(this.userService.reservapinactual,this.usuario.usuarioR).subscribe(()=>{
               this.navCtrl.push(CategoriaspedidoPage);
               this.restaurantService.categorias_restaurante();
-            }
-        });
-        }
-      });
+  });
+       
 }
   verpedido(id){
-    this.userService.pedido_actual(id);
-    if(this.userService.reservation!=undefined){
+    this.userService.pedido_actual(id).subscribe(()=>{
       this.restaurantService.productospedido();
       this.navCtrl.setRoot(ProductospedidoPage);
-    }
+    });
   }
 }

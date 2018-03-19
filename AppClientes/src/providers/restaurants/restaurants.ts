@@ -20,9 +20,10 @@ export class RestaurantsProvider {
   productoscategoria:any;
   allcategorias:any;
   avanzada:any;
+  cantidad:any;
   productopedido:any;
   botontodosrestaurantes:boolean=false;
- 
+  suma:number=0;
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -134,6 +135,8 @@ export class RestaurantsProvider {
     let url="api/restaurants/orders/";
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
+          this.cantidad=this.productopedido.length;
+          this.sumatotal();
     });
   }
   
@@ -143,6 +146,13 @@ export class RestaurantsProvider {
       this.productospedido();
     });
 
+  }
+  sumatotal(){
+    this.suma=0;
+    for(let i=0;i<this.cantidad;i++){
+      this.suma=this.suma+this.productopedido[i].precio;
+    }
+    console.log(this.suma);
   }
 
 }
