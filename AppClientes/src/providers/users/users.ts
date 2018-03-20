@@ -19,6 +19,7 @@ export class UsersProvider {
   nuevareserva = false;
   nuevopin=false;
   pedidos=false;
+  idpedido=false;
 
   //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
@@ -138,18 +139,20 @@ export class UsersProvider {
       this.nuevareserva = true;
     })
   }
- //id del pedido dada una reserva
- pedido_actual(id){
-  console.log(id);
-  let url = "api/users/";
-  return this.http.post(url+this.session.idUsuario+"/reservations/orders/"+id,{headers: {'token-acceso':this.session.token}})
-  .map(data=>{
-    this.pedidoactual =data;
-    this.reservation=this.pedidoactual[0].idPedido;
-    this.pedidos=true;
-  })
-  
-}
+
+  //id del pedido dada una reserva
+  pedido_actual(id){
+    let url = "api/users/";
+    this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
+    .subscribe(data=>{
+      this.pedidoactual =data;
+      this.reservation=this.pedidoactual[0].idPedido;
+      this.idpedido=true;
+      console.log(this.idpedido);
+    })
+  }
+
+
   add_pedido(data){
     let url = "api/restaurants/orders/";
     return this.http.post(url+this.reservation+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})

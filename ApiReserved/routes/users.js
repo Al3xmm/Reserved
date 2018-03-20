@@ -327,7 +327,7 @@ router.delete("/:id/visit/:idvisita",function(req,res,next){
 });
 
 /* Conseguir el idPedido dado una reserva de un Usuario */
-router.post('/:id/reservations/orders/:idreserva', function(req, res, next) {
+router.get('/:id/reservations/orders/:idreserva', function(req, res, next) {
 
     Reservations.findorderbyreserve(req.params.id, req.params.idreserva, function(error,data){
         if (error){
