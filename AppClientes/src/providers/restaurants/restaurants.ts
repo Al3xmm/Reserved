@@ -36,7 +36,7 @@ export class RestaurantsProvider {
 
     this.http.get(url)
       .subscribe(data=>{
-        //guardamos en la variable restaurantes el data que nos devuelve la petición a la API
+        //guardamos en la variable restaurantes el data que nos devuelve la petición a la api
         this.restaurantes=data;
     });
 
