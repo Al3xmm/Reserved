@@ -41,8 +41,11 @@ export class MipedidoPage {
     //  console.log(this.pedido.pedidop);
       this.userService.add_pedido(this.pedido)
       .subscribe(()=>{
+        this.pedidoService.plato.splice(0,i);
+        this.pedidoService.suma=0;
         this.restaurantService.productospedido();
-        this.navCtrl.setRoot(ProductospedidoPage);      
+        this.navCtrl.setRoot(ProductospedidoPage);  
+
     });
     }
   }

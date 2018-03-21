@@ -42,6 +42,6 @@ export class ProductospedidoPage {
   }
   eliminarplato(id){
     this.restaurantService.eliminar_plato(id);
-    this.navCtrl.push(ProductospedidoPage);
+    this.navCtrl.setRoot(ProductospedidoPage);
   }
 }

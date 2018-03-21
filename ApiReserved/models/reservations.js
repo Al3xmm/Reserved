@@ -14,7 +14,7 @@ var Reservation={};
 /* Mostar las reservas de un usuario*/
 Reservation.findUserReserve=function(id, callback){
     if (connection){
-        var sql=("select idReserva,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1 and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        var sql=("select idReserva,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1  and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -121,6 +121,7 @@ Reservation.removeAforo=function(Id,ReservationData,callback){
 Reservation.update=function(ReservationData,idreserva,callback){
     if(connection){
         var sql="UPDATE aforo_libre set aforo=aforo+(SELECT comensales from reservas where idreserva="+connection.escape(idreserva)+")-"+ReservationData.comensales+" where idaforo="+ReservationData.IdAforo+" AND dia='"+ReservationData.dia+"' AND turno='"+ReservationData.turno+"'";
+        console.log("sql");
         connection.query(sql,function(error,result){
             if (error){
                 throw error;
@@ -134,6 +135,7 @@ Reservation.update=function(ReservationData,idreserva,callback){
 Reservation.updatereservation=function(ReservationData,idreserva,callback){
     if(connection){
         var sql="UPDATE reservas SET comensales="+ReservationData.comensales+", hora='"+ReservationData.hora+"' WHERE idreserva="+connection.escape(idreserva);
+        console.log("2");
         connection.query(sql,function(error,result){
             if (error){
                 throw error;
@@ -230,7 +232,7 @@ Reservation.insertPin = function(pinData, callback){
   /* Mostar las reservas de un usuario que tienen los pedidos confirmadosconfirmadas*/
 Reservation.findReserve=function(id, callback){
     if (connection){
-        var sql=("select idRestaurante,idReserva,hora,re.nombre,comensales, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=0 and IdRestaurante=restauranter and IdUsuario=usuarior and idReserva=reservap and UsuarioR="+connection.escape(id));
+        var sql=("select idRestaurante,idReserva,hora,re.nombre,comensales,mesa, pe.finalizado from reservas r,usuarios u,restaurantes re,pedidos pe  where finalizado=0 and IdRestaurante=restauranter and IdUsuario=usuarior and idReserva=reservap and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

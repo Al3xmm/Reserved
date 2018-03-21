@@ -24,7 +24,7 @@ comentario={ contenido:'', usuarioc:'', restaurantec:''}
     this.restaurantService.add_comentario(this.comentario)
       .subscribe(()=>{
         if(this.restaurantService.nuevacomentario==true){
-          this.navCtrl.push(RestaurantPage);
+          this.navCtrl.setRoot(RestaurantPage);
         }
     });
   }

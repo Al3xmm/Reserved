@@ -174,7 +174,7 @@ export class UsersProvider {
       })
 
   }
-  eliminar_reserva(data,id){
+  eliminar_reserva(id,data){
     let url="api/users/";
     this.http.delete(url+this.session.idUsuario+"/reservations/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.user_profile(this.session.idUsuario, this.session.token);

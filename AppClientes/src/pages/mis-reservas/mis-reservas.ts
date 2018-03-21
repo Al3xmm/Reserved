@@ -45,13 +45,14 @@ export class MisReservasPage {
     this.navCtrl.push(ModificarReservaPage);
   }
   eliminar_reserva(id){
+    console.log(id);
     var i=0;
-    for(i=0;i<this.userService.reservafutura.legth;i++){
+    for(i=0;i<this.userService.reservafutura.length;i++){
       this.eliminar.restaurante=this.userService.reservafutura[i].idRestaurante;
       this.eliminar.dia=this.userService.reservafutura[i].dia;
       this.eliminar.turno=this.userService.reservafutura[i].turno;
     }
-    this.userService.eliminar_reserva(this.eliminar,id);
+    this.userService.eliminar_reserva(id,this.eliminar);
     this.navCtrl.push(MisReservasPage);
   }
   verpedido(id){
