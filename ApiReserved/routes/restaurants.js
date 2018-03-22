@@ -734,13 +734,20 @@ router.get('/orders/:id/orderproducts', function(req, res, next) {
 
 /* POST Crear un producto de pedido */
 router.post('/orders/:id/orderproducts/', function(req,res,next){
+
     var date = new Date();
+    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+    var current_hour = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    var auxhour=date.getHours();
+    var auxturno;
+
     var OrderProductData={
         IdProductoDePedido:null,
         pedidop:req.params.id,
         productop:req.body.productop,
         tipoproducto:req.body.tipoproducto,
-        hora:req.body.hora
+        hora:date
     };
 
     Orders.insertOrderProduct(OrderProductData,function(error,data){
