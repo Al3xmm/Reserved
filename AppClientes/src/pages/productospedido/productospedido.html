@@ -24,8 +24,8 @@
           <p>
             Precio: {{item.precio | currency:'€':true}}
             </p>
-         <button ion-button *ngIf="item.TipoProducto=='Preparado'"
-         (click)="eliminarplato(item.idProductoDePedido)">Eliminar plato</button>
+         <button ion-button *ngIf="item.TipoProducto=='Preparar'"
+         (click)="eliminarplato(item.idProductoDePedido,item.IdProducto)">Eliminar plato</button>
       </ion-col>
     </ion-item>
     <button ion-button (click)="anayadirplato()">Agregar platos</button>
@@ -36,4 +36,8 @@
       {{restaurantService.suma}}€
     </ion-item>
   </ion-grid>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
 </ion-content>

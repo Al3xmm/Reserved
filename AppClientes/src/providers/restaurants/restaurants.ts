@@ -137,13 +137,18 @@ export class RestaurantsProvider {
           this.productopedido=data;
           this.cantidad=this.productopedido.length;
           this.sumatotal();
+          console.log(this.productopedido);
     });
   }
   
-  eliminar_plato(id){
+  eliminar_plato(id,idproducto){
+    console.log(idproducto);
+    console.log(this.userService.reservation);
     let url="api/restaurants/orders/";
     this.http.delete(url+this.userService.reservation+"/orderproducts/"+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
       this.productospedido();
+      this.anyadir_precio_productodepedido(this.userService.reservation, idproducto);
+      
     });
 
   }
@@ -153,6 +158,18 @@ export class RestaurantsProvider {
       this.suma=this.suma+this.productopedido[i].precio;
     }
     console.log(this.suma);
+  }
+  anyadir_precio_productodepedido(idpedido,idproducto){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+idpedido+"/deleteproduct/"+idproducto,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      console.log("probando");
+    }); 
+  }
+  sumar_precio(idproducto){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+this.userService.reservation+"/addproduct/"+idproducto,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+      //Precio cambiado
+    }); 
   }
 
 }

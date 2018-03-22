@@ -40,8 +40,14 @@ export class ProductospedidoPage {
   }).present();
   this.navCtrl.setRoot(AllrestaurantsPage);
   }
-  eliminarplato(id){
-    this.restaurantService.eliminar_plato(id);
+  eliminarplato(id,idproducto){
+    this.restaurantService.eliminar_plato(id,idproducto);
     this.navCtrl.setRoot(ProductospedidoPage);
+  }
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.restaurantService.productospedido();
+      refresher.complete();
+    }, 1000);
   }
 }
