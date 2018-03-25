@@ -51,8 +51,7 @@ export class IniciarpedidoPage {
           console.log(this.usuario.usuarioR);
           console.log(this.userService.reservapinactual);
           this.userService.modificarpin(this.userService.reservapinactual,this.usuario).subscribe(()=>{
-              this.navCtrl.push(CategoriaspedidoPage);
-              this.restaurantService.categorias_restaurante();
+              this.navCtrl.push(IniciarpedidoPage);
   });
        
 }

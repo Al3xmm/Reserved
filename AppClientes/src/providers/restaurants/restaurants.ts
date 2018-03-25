@@ -147,8 +147,6 @@ export class RestaurantsProvider {
     let url="api/restaurants/orders/";
     this.http.delete(url+this.userService.reservation+"/orderproducts/"+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
       this.productospedido();
-      this.anyadir_precio_productodepedido(this.userService.reservation, idproducto);
-      
     });
 
   }
@@ -168,7 +166,7 @@ export class RestaurantsProvider {
   sumar_precio(idproducto){
     let url="api/restaurants/currentorders/";
     this.http.get(url+this.userService.reservation+"/addproduct/"+idproducto,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
-      //Precio cambiado
+      console.log("porque");
     }); 
   }
 

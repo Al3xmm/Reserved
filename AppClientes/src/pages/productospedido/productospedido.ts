@@ -42,6 +42,7 @@ export class ProductospedidoPage {
   }
   eliminarplato(id,idproducto){
     this.restaurantService.eliminar_plato(id,idproducto);
+    this.restaurantService.anyadir_precio_productodepedido(this.userService.reservation, idproducto);
     this.navCtrl.setRoot(ProductospedidoPage);
   }
   doRefresh(refresher) {

@@ -39,9 +39,9 @@ export class MipedidoPage {
      // console.log(this.userService.reservation);
       this.pedido.pedidop = this.userService.reservation;
     //  console.log(this.pedido.pedidop);
+    this.restaurantService.sumar_precio(this.pedido.productop);
       this.userService.add_pedido(this.pedido)
       .subscribe(()=>{
-          this.restaurantService.sumar_precio(this.pedido.productop);
           this.pedidoService.plato.splice(0,i);
           this.pedidoService.suma=0;
           this.restaurantService.productospedido();
