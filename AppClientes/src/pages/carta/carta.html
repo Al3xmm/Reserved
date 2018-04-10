@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>Carta Restaurante</ion-title>
+      <ion-title>Productos</ion-title>
   
       <ion-buttons left>
         <button ion-button icon-only menuToggle>
@@ -14,7 +14,6 @@
   
   <ion-content padding>
       <ion-grid>
-          <h3>Productos</h3>
           <ion-item *ngFor="let item of restaurantService.productoscategoria">
             <ion-col>
               Nombre: {{item.nombre}}

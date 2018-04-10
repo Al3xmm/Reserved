@@ -18,7 +18,9 @@
         <ion-col>
         {{item.nombre}}
         </ion-col>
-        <button ion-button (click)="mis_productos(item.idCategoria)">Ver productos</button>
+         <ion-buttons right>
+        <button (click)="mis_productos(item.idCategoria)"><ion-icon name="search"></ion-icon></button>
+      </ion-buttons>
       </ion-item>
     </ion-grid>
 
