@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 
 import { Storage } from '@ionic/storage';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
 
 @Injectable()
 export class RestaurantProvider {
@@ -80,12 +82,12 @@ export class RestaurantProvider {
 
   productoscategoria:any;
 
-  constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage) {
+  constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage, private transfer: FileTransfer) {
     
   }
 
   add_restaurant(data){
-    let url="api/addrestaurant";
+    let url="https://reserved.ovh/apireserved/addrestaurant";
 
     return this.http.post(url, data, {responseType: 'json'} )
       .map(resp=>{
@@ -112,7 +114,7 @@ export class RestaurantProvider {
   }
 
   login_restaurant(data){
-    let url="api/loginrestaurant";
+    let url="https://reserved.ovh/apireserved/loginrestaurant";
 
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
@@ -147,7 +149,7 @@ export class RestaurantProvider {
   }
 
   login_empleado(data){
-    let url="api/loginempleado";
+    let url="https://reserved.ovh/apireserved/loginempleado";
 
     return this.http.post(url,data,{responseType:'json'})
     .map(resp=>{
@@ -182,7 +184,7 @@ export class RestaurantProvider {
   }
 
   modify_restaurant(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     return this.http.put(url+this.session.idRestaurante, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
           console.log("Restaurante Actualizado");
@@ -192,7 +194,7 @@ export class RestaurantProvider {
   }
 
   modify_employee(data){
-    let url="api/restaurants/employee/";
+    let url="https://reserved.ovh/apireserved/restaurants/employee/";
     return this.http.put(url+this.session.idEmpleado, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
           console.log("Pass Actualizada");
@@ -202,7 +204,7 @@ export class RestaurantProvider {
 
 
   restaurant_profile(id,token){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{
       this.inforestaurant=data;
     });
@@ -210,7 +212,7 @@ export class RestaurantProvider {
   }
 
   mis_empleados(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.storage.get('idRestaurante').then((val) => {
       this.storage.get('token').then((val2) => {
@@ -223,7 +225,7 @@ export class RestaurantProvider {
   }
 
   eliminar_empleado(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.delete(url+this.session.idRestaurante+"/employee/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.mis_empleados();
@@ -232,7 +234,7 @@ export class RestaurantProvider {
   }
 
   add_empleado(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     return this.http.post(url+this.session.idRestaurante+"/employee", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -244,7 +246,7 @@ export class RestaurantProvider {
   }
 
   mi_carta(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.get(url+this.session.idRestaurante+"/products",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.cartarestaurante=data;
@@ -252,7 +254,7 @@ export class RestaurantProvider {
   }
 
   eliminar_producto(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.delete(url+this.session.idRestaurante+"/products/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.mi_carta();
@@ -260,7 +262,7 @@ export class RestaurantProvider {
   }
 
   add_category(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     return this.http.post(url+this.session.idRestaurante+"/products/category", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
           console.log("Categoria creada");
@@ -270,7 +272,7 @@ export class RestaurantProvider {
   }
 
   see_category(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.get(url+this.session.idRestaurante+"/category",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.categoriasrestaurante=data;
@@ -278,7 +280,7 @@ export class RestaurantProvider {
   }
 
   add_producto(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     return this.http.post(url+this.session.idRestaurante+"/products", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -290,7 +292,7 @@ export class RestaurantProvider {
   }
 
   modify_producto(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     return this.http.put(url+this.session.idRestaurante+"/products/"+ this.productoactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -303,7 +305,7 @@ export class RestaurantProvider {
   }
 
   producto_id(id){
-    let url="api/restaurants/allproducts/";
+    let url="https://reserved.ovh/apireserved/restaurants/allproducts/";
 
     this.http.get(url+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.infoproductoactual=data;
@@ -312,21 +314,21 @@ export class RestaurantProvider {
   }
 
   mis_comentarios(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
       this.http.get(url+this.session.idRestaurante+"/comments",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         this.comentariosrestaurante=data;
       });
   }
 
   find_comment(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
       this.http.get(url+this.session.idRestaurante+"/findcomment/"+data,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         this.comentariosrestaurante=data;
       });
   }
   
   denunciar_comentario(data){
-    let url="api/restaurants/denunciation";
+    let url="https://reserved.ovh/apireserved/restaurants/denunciation";
     return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
         if(resp==='Denuncia ya realizada'){
@@ -344,14 +346,14 @@ export class RestaurantProvider {
   }
 
   cambiar_estado_denunciado(comentario){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
       this.http.get(url+this.session.idRestaurante+"/comment/"+comentario+"/denunciado",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         
       });
   }
 
   see_reservas(data){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     return this.http.post(url+this.session.idRestaurante+"/capacity", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -370,7 +372,7 @@ export class RestaurantProvider {
     let day=aux+1;
     let finishdate=anyo+"-"+mes+"-"+day;
 
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
       this.http.get(url+this.session.idRestaurante+"/"+finishdate+"/"+turno+"/reservations",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         this.reservas=data;
       });
@@ -380,7 +382,7 @@ export class RestaurantProvider {
   aux:any;
 
   add_pedido(data){
-    let url="api/restaurants/orders";
+    let url="https://reserved.ovh/apireserved/restaurants/orders";
 
     return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -396,7 +398,7 @@ export class RestaurantProvider {
   idreservaaux:any;
 
   add_reserva_pedido(data){
-    let url="api/restaurants/reservationorder";
+    let url="https://reserved.ovh/apireserved/restaurants/reservationorder";
 
     return this.http.post(url, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
@@ -408,28 +410,28 @@ export class RestaurantProvider {
   }
 
   delete_pin(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
       this.http.get(url+id+"/deletepin",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         
       });
   }
 
   pedidos_en_curso(){
-    let url="api/restaurants/currentorders/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
       this.http.get(url+this.session.idEmpleado,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         this.pedidosencurso=data;
       });
   }
 
   cerrar_pedido(id){
-    let url="api/restaurants/currentorders/finish/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/finish/";
     this.http.get(url+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       console.log("Pedido cerrado");
     });
   }
 
   info_pedido(id){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
     this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosdepedido=data;
       this.idpedidoactual=id;
@@ -440,7 +442,7 @@ export class RestaurantProvider {
   pin:any;
 
   ver_pin(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     this.http.get(url+id+"/pin",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.pin=data;
       if(this.pin!=null){
@@ -450,14 +452,14 @@ export class RestaurantProvider {
   }
 
   anyadir_precio_productodepedido(idpedido,idproducto){
-    let url="api/restaurants/currentorders/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
     this.http.get(url+idpedido+"/deleteproduct/"+idproducto,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       //Precio cambiado
     }); 
   }
 
   eliminar_productodepedido(id,idproducto){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
 
     this.http.delete(url+this.productosdepedido[0].PedidoP+"/orderproducts/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.anyadir_precio_productodepedido(this.productosdepedido[0].PedidoP, idproducto);
@@ -466,7 +468,7 @@ export class RestaurantProvider {
   }
 
   anyadir_producto_pedido(data){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
     return this.http.post(url+this.idpedidoactual+"/orderproducts", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
         
@@ -474,21 +476,21 @@ export class RestaurantProvider {
   }
 
   sumar_precio(idproducto){
-    let url="api/restaurants/currentorders/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
     this.http.get(url+this.idpedidoactual+"/addproduct/"+idproducto,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       //Precio cambiado
     }); 
   }
 
   see_productosaentregar(){
-    let url="api/restaurants/currentorders/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
     this.http.get(url+this.session.idEmpleado+"/pendientes",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productospendientes=data;
     });
   }
 
   producto_entregado(data){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
 
     this.http.get(url+data+"/orderproducts/servido", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(resp=>{
@@ -498,14 +500,14 @@ export class RestaurantProvider {
   }
 
   see_productoscocinar(){
-    let url="api/restaurants/currentorders/";
+    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
     this.http.get(url+this.session.idRestaurante+"/apreparar",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosapreparar=data;
     });
   }
 
   producto_preparado(data){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
 
     this.http.get(url+data+"/orderproducts/preparado", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(resp=>{
@@ -515,7 +517,7 @@ export class RestaurantProvider {
   }
 
   producto_preparando(data){
-    let url="api/restaurants/orders/";
+    let url="https://reserved.ovh/apireserved/restaurants/orders/";
 
     this.http.get(url+data+"/orderproducts/preparando", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(resp=>{
@@ -525,7 +527,7 @@ export class RestaurantProvider {
   }
 
   reservas_today(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.get(url+this.session.idRestaurante+"/reservationstoday", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
@@ -534,7 +536,7 @@ export class RestaurantProvider {
   }
 
   borrar_pin(){
-    let url="api/restaurants/deletepin/";
+    let url="https://reserved.ovh/apireserved/restaurants/deletepin/";
 
     this.http.get(url+this.pin, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
@@ -548,7 +550,7 @@ export class RestaurantProvider {
   }
 
   see_info_comida(dia){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.get(url+this.session.idRestaurante+"/informationlunch/"+dia, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
@@ -557,7 +559,7 @@ export class RestaurantProvider {
   }
 
   see_info_cena(dia){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.http.get(url+this.session.idRestaurante+"/informationdinner/"+dia, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
@@ -566,17 +568,16 @@ export class RestaurantProvider {
   }
 
   categorias_restaurante(){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+this.session.idRestaurante+"/category",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.allcategorias=data;
-        console.log(this.allcategorias);
       });
     });
   }
 
   productos_porcategoria(id){
-    let url = "api/restaurants/";
+    let url = "https://reserved.ovh/apireserved/restaurants/";
     this.http.get(url+this.session.idRestaurante+"/products/"+"category/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.productoscategoria =data;
@@ -584,6 +585,35 @@ export class RestaurantProvider {
     })
   }
 
+  upload_image(data){
+    let url = "https://reserved.ovh/apireserved/17/uploadprincipal";
+ 
+    // File for Upload
+    var targetPath = data;
+ 
+    var options: FileUploadOptions = {
+      fileKey: 'imagensubir',
+      chunkedMode: false,
+      mimeType: 'image/jpeg',
+    };
+ 
+    const fileTransfer: FileTransferObject = this.transfer.create();
+ 
+    // Use the FileTransfer to upload the image
+    return fileTransfer.upload(targetPath, url, options);
+  }
+
+  /*
+  images:any;
+
+  get_imagenprincipal() {
+    let url = "https://reserved.ovh/apireserved/restaurants/";
+    this.http.get(url+this.session.idRestaurante+"/imageprincipal",{headers:{'token-acceso':this.session.token},responseType: 'blob'})
+    .subscribe(data=>{
+      this.images=data;
+    })
+  }
+*/
 
 
 }

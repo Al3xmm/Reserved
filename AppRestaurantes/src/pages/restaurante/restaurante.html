@@ -16,6 +16,15 @@
 <ion-content padding>
   <ion-grid>
       <ion-item *ngFor="let item of restaurantService.inforestaurant">
+
+        
+
+        <ion-item tappable (click)="openImage()">
+          <img width="120" height="120" [src]="urlfotoprincipal">
+        </ion-item>
+
+        <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
+
         <ion-col>
           <h2>{{item.nombre}}</h2>
           <p>

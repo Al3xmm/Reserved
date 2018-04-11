@@ -20,6 +20,8 @@ var upload = multer({ dest: 'images/' })
 var jwt = require('jsonwebtoken');
 var configJWT = require('../config/auth');
 
+var fs = require('fs');
+
 //Comprobar token
 router.use(function(req, res, next) {
   // check header or url parameters or post parameters for token
@@ -45,10 +47,41 @@ router.use(function(req, res, next) {
 });
 
 
+
+
+//ver foto PRINCIPAL
+router.get('/:id/imageprincipal', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    fs.createReadStream(path.join('./images/'+req.params.id, 'principal.jpg')).pipe(res);
+});
+
+
+//subir foto PRINCIPAL
+router.post('/:id/uploadprincipal',upload.single('imagensubir'), function(req, res) {
+  //console.log(req.files.imagensubir);
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimageprincipal(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
+
 //ver foto
-router.get('/images/:name', function (req, res) {
+router.get('/:id/images/:name', function (req, res) {
     console.log(req.params.name);
-    res.sendfile(path.resolve('./images/'+req.params.name));
+    res.sendfile(path.resolve('./images/'+req.params.id+'/'+req.params.name));
 });
 
 
@@ -450,17 +483,6 @@ router.put('/:id/employee/:idempleado',function(req,res,next){
         }
     })
 
-});
-
-//Mostrar imagenes por id
-router.get('/:id/images/:idimagen',function(req,res,next){
-  Images.findImageId(req.params.id,req.params.idimagen,function(error,data){
-      if (error){
-          res.json(500,error);
-      }else{
-          res.json(200,data);
-      }
-  })
 });
 
 

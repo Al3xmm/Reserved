@@ -15,6 +15,39 @@ var salt=bcrypt.genSaltSync(10);
 var jwt = require('jsonwebtoken');
 var configJWT = require('../config/auth');
 
+var fs = require('fs');
+var path = require("path");
+var multer  = require('multer');
+var upload = multer({ dest: 'images/' })
+
+//subir foto PRINCIPAL
+router.post('/:id/uploadprincipal',upload.single('imagensubir'), function(req, res) {
+  //console.log(req.files.imagensubir);
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimageprincipal(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
+//ver foto PRINCIPAL
+router.get('/:id/imageprincipal', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    fs.createReadStream(path.join('./images/'+req.params.id, 'principal.jpg')).pipe(res);
+});
+
+
 /* POST Crear un Restaurante */
 router.post('/addrestaurant',function(req,res,next){
 

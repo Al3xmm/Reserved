@@ -1,3 +1,4 @@
+import { PreviewImagePage } from './../pages/preview-image/preview-image';
 import { ModificarempleadoPage } from './../pages/modificarempleado/modificarempleado';
 import { CartaPage } from './../pages/carta/carta';
 import { ModidifcarrestaurantePage } from './../pages/modidifcarrestaurante/modidifcarrestaurante';
@@ -34,6 +35,10 @@ import { LoginempleadosPage } from '../pages/loginempleados/loginempleados';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { LoginrestaurantePage } from '../pages/loginrestaurante/loginrestaurante';
 import { EmpleadoPage } from '../pages/empleado/empleado';
+
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprincipal';
 
 @NgModule({
   declarations: [
@@ -101,7 +106,9 @@ import { EmpleadoPage } from '../pages/empleado/empleado';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestaurantProvider
+    RestaurantProvider,
+    Camera,
+    FileTransfer
   ]
 })
 export class AppModule {}
