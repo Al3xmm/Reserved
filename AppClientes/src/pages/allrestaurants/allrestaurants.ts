@@ -1,6 +1,6 @@
 import { RestaurantPage } from './../restaurant/restaurant';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 
 
@@ -16,12 +16,18 @@ export class AllrestaurantsPage {
   public buttonClicked: boolean = false;
   public buttonClicked2: boolean = false;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider, private modalCtrl: ModalController) {
     //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
     //restaurantservice.mostrar_todos();
     if(restaurantService.botontodosrestaurantes==true){
       this.buttonClicked2 = !this.buttonClicked2;
     }
+  }
+
+  openImage(id) {
+    //this.navCtrl.push(PreviewImagePage);
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "http://localhost:3000/"+id+"/imageprincipal" });
+    modal.present();
   }
 
   ver_restaurante(id){

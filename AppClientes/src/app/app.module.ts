@@ -1,3 +1,4 @@
+import { PreviewImagePage } from './../pages/preview-image/preview-image';
 import { ReservarPage } from './../pages/reservar/reservar';
 import { CartaPage } from './../pages/carta/carta';
 import { MipedidoPage } from './../pages/mipedido/mipedido';

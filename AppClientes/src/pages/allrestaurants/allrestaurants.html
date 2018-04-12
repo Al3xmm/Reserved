@@ -41,6 +41,10 @@
         <br>
         <ion-item *ngFor="let item of restaurantService.restaurantes">
           <ion-col>
+            <ion-item tappable (click)="openImage(item.idRestaurante)">
+                <ion-img width="120" height="120" src="http://localhost:3000/{{item.idRestaurante}}/imageprincipal"></ion-img>
+            </ion-item>
+            
             {{item.nombre}}
             <p>
               <br>
