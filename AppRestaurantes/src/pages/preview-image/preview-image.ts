@@ -21,7 +21,7 @@ export class PreviewImagePage {
   }
 
   url_foto(){
-    this.urlfotoprincipal="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    this.urlfotoprincipal=this.restaurantService.urlfotopreview;
   }
 
 }

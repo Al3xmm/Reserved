@@ -58,8 +58,99 @@ Images.uploadimageprincipal=function(file,img_name,id,callback){
 }
 
 
-Images.uploadimage=function(file,img_name,id,callback){
-  var aux=id+"_"+file.name;
+Images.uploadimagesecundaria1=function(file,img_name,id,callback){
+
+  if(file.mimetype == "image/jpeg"){
+    var aux="sec_1.jpg";
+  }else if(file.mimetype == "image/png"){
+    var aux="sec_1.png";
+  }
+
+
+
+  var dir = './images/'+id;
+  if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+  }
+
+  if(connection){
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"){
+      file.mv('../ApiReserved/images/'+id+'/'+aux, function(err) {
+         if (err){
+          throw err;
+         }
+
+        var imgData={
+            idImagenes:null,
+            url:aux,
+            imagenesR:id
+        };
+
+          connection.query("INSERT INTO imagenes SET ?",imgData,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Imagen Subida");
+            }
+        })
+      });
+    } else {
+      res.json(200,"This format is not allowed , please upload file with '.png','.jpg'");
+    }
+  }
+}
+
+Images.uploadimagesecundaria2=function(file,img_name,id,callback){
+
+  if(file.mimetype == "image/jpeg"){
+    var aux="sec_2.jpg";
+  }else if(file.mimetype == "image/png"){
+    var aux="sec_2.png";
+  }
+
+
+
+  var dir = './images/'+id;
+  if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+  }
+
+  if(connection){
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"){
+      file.mv('../ApiReserved/images/'+id+'/'+aux, function(err) {
+         if (err){
+          throw err;
+         }
+
+        var imgData={
+            idImagenes:null,
+            url:aux,
+            imagenesR:id
+        };
+
+          connection.query("INSERT INTO imagenes SET ?",imgData,function(error,result){
+            if(error){
+                throw error;
+            }else{
+                return callback(null,"Imagen Subida");
+            }
+        })
+      });
+    } else {
+      res.json(200,"This format is not allowed , please upload file with '.png','.jpg'");
+    }
+  }
+}
+
+Images.uploadimagesecundaria3=function(file,img_name,id,callback){
+
+  if(file.mimetype == "image/jpeg"){
+    var aux="sec_3.jpg";
+  }else if(file.mimetype == "image/png"){
+    var aux="sec_3.png";
+  }
+
+
 
   var dir = './images/'+id;
   if (!fs.existsSync(dir)){

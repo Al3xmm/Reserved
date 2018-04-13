@@ -40,11 +40,89 @@ router.post('/:id/uploadprincipal',upload.single('imagensubir'), function(req, r
 
 });
 
+//subir foto SECUNDARIA 1
+router.post('/:id/uploadsecundaria1',upload.single('imagensubir'), function(req, res) {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimagesecundaria1(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
+//subir foto SECUNDARIA 2
+router.post('/:id/uploadsecundaria2',upload.single('imagensubir'), function(req, res) {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimagesecundaria2(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
+//subir foto SECUNDARIA 3
+router.post('/:id/uploadsecundaria3',upload.single('imagensubir'), function(req, res) {
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimagesecundaria3(file,img_name,req.params.id,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
 //ver foto PRINCIPAL
 router.get('/:id/imageprincipal', function (req, res) {
     res.setHeader('Content-Type', 'image/jpeg');
     //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
     fs.createReadStream(path.join('./images/'+req.params.id, 'principal.jpg')).pipe(res);
+});
+
+//ver foto SECUNDARIA 1
+router.get('/:id/imagesec1', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_1.jpg')).pipe(res);
+});
+
+//ver foto SECUNDARIA 2
+router.get('/:id/imagesec2', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_2.jpg')).pipe(res);
+});
+
+//ver foto SECUNDARIA 3
+router.get('/:id/imagesec3', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_3.jpg')).pipe(res);
 });
 
 

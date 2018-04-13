@@ -1,3 +1,4 @@
+import { MasfotosPage } from './../pages/masfotos/masfotos';
 import { PreviewImagePage } from './../pages/preview-image/preview-image';
 import { ModificarempleadoPage } from './../pages/modificarempleado/modificarempleado';
 import { CartaPage } from './../pages/carta/carta';
@@ -66,7 +67,8 @@ import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprinci
     InformacionPage,
     ModidifcarrestaurantePage,
     CartaPage,
-    ModificarempleadoPage
+    ModificarempleadoPage,
+    MasfotosPage
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,8 @@ import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprinci
     InformacionPage,
     ModidifcarrestaurantePage,
     CartaPage,
-    ModificarempleadoPage
+    ModificarempleadoPage,
+    MasfotosPage
   ],
   providers: [
     StatusBar,
