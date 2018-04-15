@@ -1,20 +1,41 @@
 page-allrestaurants {
      ion-icon.ion-md-search{
          font-size: 2em!important;
-         color: red!important;
+         color: white!important;
      }
      ion-col.col{
          font-size:1.4em;
      }
      .item-md p{
-        font-size: 15px;
+        font-size: 14px;
     }
-    .item-md button{
-        
-    }
-
+   
     img{
-        width: auto;
-        height: 100%;
+        width: auto!important;
+        height: 100%!important;
     }
+    .label-md{
+        margin-top: -1em;   
+    }
+    /*buscador cada vez tiene un id diferente
+    #lbl{
+        margin-top: 4em!important; 
+    }
+    #lbl-13{
+        margin-top: 1em!important; 
+    }
+    #lbl-14{
+        margin-top: 1em!important; 
+    }*/
+    h2{
+        font-size: 3.0rem;
+        color:#76323F;
+    }
+    .item-md{
+        background-color: #fff0;
+    }
+    .button-default-md{
+        background-color:#76323F;
+    }
+  
 }

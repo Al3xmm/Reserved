@@ -22,7 +22,7 @@
           Descripcion: {{item.informacion}}
           </p>
           <p>
-            Precio: {{item.precio | currency:'€':true}}
+            Precio: {{item.precio}}€
             </p>
          <button ion-button *ngIf="item.TipoProducto=='Preparar'"
          (click)="eliminarplato(item.idProductoDePedido,item.IdProducto)">Eliminar plato</button>

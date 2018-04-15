@@ -27,7 +27,7 @@
       Nombre:{{item.nombre}}
       <p>
         <br>
-        Precio:{{item.precio | currency:'€':true}}
+        Precio:{{item.precio}}€
       </p>
     </ion-col>
     <button ion-button
@@ -42,7 +42,7 @@
   <hr>
   <ion-item>
     <h3>Precio total:</h3>
-    {{pedidoService.suma | currency:'€':true}}
+    {{pedidoService.suma}}€
   </ion-item>
   <button ion-button
   (click)="add_pedido()">
