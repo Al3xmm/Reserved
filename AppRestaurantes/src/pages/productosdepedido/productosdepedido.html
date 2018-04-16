@@ -17,21 +17,15 @@
 
 <ion-content padding>
     <ion-grid>
-        PIN: {{restaurantService.pin}}
-        <button ion-button  [disabled]="restaurantService.pin==null" (click)="borrar_pin()">Borrar PIN</button>
+        <div>PIN: {{restaurantService.pin}}</div>
+        <button ion-button  color="danger" [disabled]="restaurantService.pin==null" (click)="borrar_pin()">Borrar PIN</button>
         <br>
-        <button ion-button (click)="agregar_productopedido()" >Añadir Producto</button>
+        <button ion-button color="secondary" (click)="agregar_productopedido()" ><ion-icon md="md-restaurant"></ion-icon> Añadir Producto</button>
         <ion-item *ngFor="let item of restaurantService.productosdepedido">
-          <ion-col>
-            <p>
-              <br>
-              Nombre: {{item.nombre}}
-              <br>
-              Tipo: {{item.TipoProducto}}
-              <br>
-              <button ion-button (click)="eliminar_productodepedido(item.idProductoDePedido,item.IdProducto)">Eliminar</button>
-            </p>
-          </ion-col>
+          <ion-row>
+              <span class="producto">{{item.nombre}}</span>
+              <button ion-button color="danger" (click)="eliminar_productodepedido(item.idProductoDePedido,item.IdProducto)">Eliminar</button>
+          </ion-row>
         </ion-item>
         <button ion-button (click)="volver_pedidos()">Volver</button>
       </ion-grid>

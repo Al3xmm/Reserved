@@ -49,22 +49,22 @@ export class MasfotosPage {
     this.restaurantService.numfoto=null;
     this.restaurantService.numfoto=1;
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: 'Selecciona una opción',
       buttons: [
         {
-          text: 'Load from Library',
+          text: 'Cargar desde galería',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Use Camera',
+          text: 'Usar cámara',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel'
         }
       ]
@@ -76,22 +76,22 @@ export class MasfotosPage {
     this.restaurantService.numfoto=null;
     this.restaurantService.numfoto=2;
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: 'Selecciona una opción',
       buttons: [
         {
-          text: 'Load from Library',
+          text: 'Cargar desde galería',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Use Camera',
+          text: 'Usar Cámara',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel'
         }
       ]
@@ -103,22 +103,22 @@ export class MasfotosPage {
     this.restaurantService.numfoto=null;
     this.restaurantService.numfoto=3;
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: 'Selecciona una opción',
       buttons: [
         {
-          text: 'Load from Library',
+          text: 'Cargar desde galería',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Use Camera',
+          text: 'Usar Cámara',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel'
         }
       ]

@@ -11,10 +11,14 @@ page-empleado {
         text-decoration: underline;
     }
 
-    .button-md:first-child{
+    .scroll-content>.button-md:first-child{
         font-size: 1.5em;
         padding: 1em 2em;
         background-color: #00ce52;
+    }
+
+    .row{
+        
     }
 
     p>span{
@@ -42,7 +46,7 @@ page-empleado {
     }
 
     .item-md button{
-        margin: 3em 0em;
+        margin: 1em 0em;
     }
 
     .label-md {

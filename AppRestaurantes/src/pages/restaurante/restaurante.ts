@@ -33,22 +33,22 @@ export class RestaurantePage {
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: 'Selecciona una opción',
       buttons: [
         {
-          text: 'Load from Library',
+          text: 'Cargar desde galería',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Use Camera',
+          text: 'Usar Cámara',
           handler: () => {
             this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel'
         }
       ]
@@ -57,7 +57,7 @@ export class RestaurantePage {
   }
 
   public takePicture(sourceType) {
-    // Create options for the Camera Dialog
+    
     var options = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -66,7 +66,7 @@ export class RestaurantePage {
       correctOrientation: true
     };
  
-    // Get the data of an image
+    
     this.camera.getPicture(options).then((imagePath) => {
       let modal = this.modalCtrl.create('SubirimgprincipalPage', { data: imagePath });
       modal.present();

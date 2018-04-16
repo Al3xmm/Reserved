@@ -21,12 +21,9 @@
         <ion-item *ngFor="let item of restaurantService.productospendientes">
           <ion-col>
             <p>
-              <br>
               Nombre: <span>{{item.nombre}}</span>
               <br>
               Mesa: <span>{{item.mesa}}</span>
-              <br>
-              Hora: <span>{{item.hora | date: 'H:mm'}}</span>
               <br>
               <button ion-button color=danger (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
             </p>

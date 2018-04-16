@@ -31,7 +31,8 @@
           Cuenta Total: {{item.cuentaTotal}}
         </p>
         <button ion-button (click)="info_pedido(item.idPedido)">Ver</button>
-        <button ion-button (click)="cerrar_pedido(item.idPedido)">Terminar Pedido</button>
+        <br>
+        <button ion-button color="danger" (click)="cerrar_pedido(item.idPedido)">Terminar Pedido</button>
         <br>
       </ion-col>
     </ion-item>
