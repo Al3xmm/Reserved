@@ -17,14 +17,14 @@
     <ion-grid>
         <ion-item *ngFor="let item of restaurantService.inforestaurante">
           <ion-col>
-            Nombre: {{item.nombre}}
+            <h4>Nombre: {{item.nombre}}</h4>
             <p>
               <br>
-              Descripción: {{item.descripcion}}
+              <b>Descripción:</b> {{item.descripcion}}.
               <br>
-              Horario: {{item.horario}}
+              <b>Horario:</b> {{item.horario}}.
               <br>
-              Dirección: {{item.direccion}}
+              <b>Dirección:</b> {{item.direccion}}.
             </p>
           </ion-col>
           <ion-row>
@@ -41,18 +41,19 @@
               <ion-img src="http://localhost:3000/{{item.idRestaurante}}/imagesec3"></ion-img>
             </ion-thumbnail>
           </ion-row>
+          <button ion-button outline (click)="ver_carta()">Ver Carta</button>
+          <button ion-button (click)="reservar()">Reservar</button>
         </ion-item>
-        <button ion-button outline (click)="ver_carta()">Ver Carta</button>
-        <button ion-button (click)="reservar()">Reservar</button>
+
         <h3>Comentarios</h3>
         <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">
-            <ion-col>
-              {{item2.nombre}} - {{ item2.fecha | date : format : timezone}}
-              <p>
-                <br>
-                {{item2.contenido}}
-              </p>
+            <ion-row>
+              <span>{{item2.nombre}} - {{ item2.fecha | date : format : timezone}}</span>
+              </ion-row>
+              <ion-col>
+                <p>{{item2.contenido}}</p>
             </ion-col>
+            
           </ion-item>
           <button ion-button (click)="comentar()">Comentar</button>
       </ion-grid>

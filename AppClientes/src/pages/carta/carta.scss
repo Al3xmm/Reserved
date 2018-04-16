@@ -2,4 +2,15 @@ page-carta {
     .item-md{
         background-color: #fff0;
     }
+    h4{
+        color:#76323F;
+        //text-align:center;
+        font-size: 1.1em!important;
+    }
+    .scroll-content{
+        margin-top: 35px!important;
+    }
+    ion-item{
+        display: none;
+    }
 }

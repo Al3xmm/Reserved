@@ -10,7 +10,6 @@
     <ion-buttons>
       <button ion-button
               (click)="viewCtrl.dismiss()">
-              Cerrar
       </button>
     </ion-buttons>
 
@@ -23,23 +22,17 @@
 
 <ion-content padding>
   <ion-item *ngFor="let item of pedidoService.plato; let i = index;">
-    <ion-col>
-      Nombre:{{item.nombre}}
+    <ion-col item-left>
+      <b>{{item.nombre}}</b>
       <p>
         <br>
         Precio:{{item.precio}}€
       </p>
     </ion-col>
-    <button ion-button
-            color="danger"
-            outline
-            block
-            small
-            (click)="pedidoService.eliminarplato(i)">
-      Eliminar
-    </button>
+    <button ion-button item-right
+            (click)="pedidoService.eliminarplato(i)"><ion-icon name="trash"></ion-icon></button>
   </ion-item>
-  <hr>
+  
   <ion-item>
     <h3>Precio total:</h3>
     {{pedidoService.suma}}€

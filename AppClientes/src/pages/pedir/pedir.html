@@ -22,13 +22,12 @@
 
 <ion-content padding>
 <ion-grid>
-<h3>Iniciar Pedido</h3>
 <ion-item *ngFor="let item of restaurantService.productoscategoria">
   <ion-col>
-    Nombre:{{item.nombre}}
+    <b>{{item.nombre}}</b>
     <p>
       <br>
-      Precio:{{item.precio}}€
+      Precio: {{item.precio}}€
     </p>
   </ion-col>
   <button ion-button block icon-left

@@ -16,14 +16,14 @@
       <ion-grid>
           <ion-item *ngFor="let item of restaurantService.productoscategoria">
             <ion-col>
-              Nombre: {{item.nombre}}
+              <h4>Nombre: {{item.nombre}}</h4>
               <p>
                 <br>
-                Precio: {{item.precio}}€
+                <b>Informacion:</b> {{item.informacion}}
               </p>
               <p>
                 <br>
-                Informacion: {{item.informacion}}
+                <b>Precio:</b> {{item.precio}}€
               </p>
             </ion-col>
           </ion-item>

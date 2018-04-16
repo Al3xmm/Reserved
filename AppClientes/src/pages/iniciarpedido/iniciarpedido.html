@@ -33,12 +33,12 @@
       <h3>Reserva actual</h3>
        <ion-item *ngFor="let item of userService.reservaconfirmada">
       <ion-col>
-        Restaurante: {{item.nombre}}
+        <b>{{item.nombre}}</b>
         <p>
           <br>
-          Hora: {{item.hora}}
+          <b>Hora:</b> {{item.hora}}
           <br>
-          Comensales: {{item.comensales}}
+          <b>Comensales:</b> {{item.comensales}}
         </p>
       </ion-col>
       <button ion-button (click)="iniciarpedido()">Iniciar Pedido</button>

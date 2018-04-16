@@ -16,18 +16,18 @@
 <ion-grid>
   <ion-item *ngFor="let item of restaurantService.productopedido">
     <ion-col>
-      Nombre: {{item.nombre}}
+      <h4>{{item.nombre}}</h4>
       <p>
-        Descripcion: {{item.informacion}}
+        <b>Descripcion:</b> {{item.informacion}}
         </p>
         <p>
-          Precio: {{item.precio}}€
+          <b>Precio:</b> {{item.precio}}€
           </p>
     </ion-col>
   </ion-item>
   <hr>
   <ion-item>
-    <h3>Precio total:</h3>
+    <h4>Precio total:</h4>
     {{restaurantService.suma}}€
   </ion-item>
 </ion-grid>

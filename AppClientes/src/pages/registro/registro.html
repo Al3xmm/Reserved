@@ -21,16 +21,16 @@
   
   <form (ngSubmit)="add_user()">
     <ion-item>
-      <ion-label>Nick</ion-label>
+      <ion-label stacked>Nick</ion-label>
       <ion-input type="text" [(ngModel)]="user.nick" name="name" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Password</ion-label>
+      <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
+      
+      <ion-input placeholder="Email" type="email" [(ngModel)]="user.email" name="email" required></ion-input>
     </ion-item>
     <button ion-button [disabled]="user.nick.length<4 || user.password.length<5 || user.email.length<10" type="submit" block>Regístrate</button>
   </form>
