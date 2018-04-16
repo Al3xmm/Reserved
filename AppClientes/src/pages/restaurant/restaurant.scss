@@ -1,4 +1,8 @@
 page-restaurant {
+    ion-thumbnail{
+        width: 20%;
+        min-width: 0!important;
+    }
     .item-md{
         background-color: #fff0;
     }
@@ -12,4 +16,6 @@ page-restaurant {
     h3{
         color:#76323F;
     }
+
+    
 }

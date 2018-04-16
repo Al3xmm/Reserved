@@ -1,6 +1,6 @@
 import { RestaurantPage } from './../restaurant/restaurant';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 
 
@@ -16,7 +16,7 @@ export class AllrestaurantsPage {
   public buttonClicked: boolean = false;
   public buttonClicked2: boolean = false;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider, private modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider, private modalCtrl: ModalController, private loadingCtrl:LoadingController) {
     //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
     //restaurantservice.mostrar_todos();
     if(restaurantService.botontodosrestaurantes==true){
@@ -30,9 +30,27 @@ export class AllrestaurantsPage {
     modal.present();
   }
 
+  presentLoadingCustom(id) {
+    this.ver_restaurante(id);
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando información',
+      duration: 1500,
+    });
+
+    loading.onDidDismiss(() => {
+      this.ir_restaurante();
+    });
+
+    loading.present();
+  }
+
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
     this.restaurantService.comentarios_restaurante(id);
+    //this.navCtrl.push(RestaurantPage);
+  }
+
+  ir_restaurante(){
     this.navCtrl.push(RestaurantPage);
   }
 

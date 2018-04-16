@@ -107,22 +107,22 @@ router.get('/:id/imageprincipal', function (req, res) {
 //ver foto SECUNDARIA 1
 router.get('/:id/imagesec1', function (req, res) {
     res.setHeader('Content-Type', 'image/jpeg');
-    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
-    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_1.jpg')).pipe(res);
+    res.sendfile(path.resolve('./images/'+req.params.id+'/sec_1.jpg'));
+    //fs.createReadStream(path.join('./images/'+req.params.id, 'sec_1.jpg')).pipe(res);
 });
 
 //ver foto SECUNDARIA 2
 router.get('/:id/imagesec2', function (req, res) {
     res.setHeader('Content-Type', 'image/jpeg');
-    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
-    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_2.jpg')).pipe(res);
+    res.sendfile(path.resolve('./images/'+req.params.id+'/sec_2.jpg'));
+    //fs.createReadStream(path.join('./images/'+req.params.id, 'sec_2.jpg')).pipe(res);
 });
 
 //ver foto SECUNDARIA 3
 router.get('/:id/imagesec3', function (req, res) {
     res.setHeader('Content-Type', 'image/jpeg');
-    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
-    fs.createReadStream(path.join('./images/'+req.params.id, 'sec_3.jpg')).pipe(res);
+    res.sendfile(path.resolve('./images/'+req.params.id+'/sec_3.jpg'));
+    //fs.createReadStream(path.join('./images/'+req.params.id, 'sec_3.jpg')).pipe(res);
 });
 
 

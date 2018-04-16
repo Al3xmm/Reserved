@@ -27,6 +27,20 @@
               Dirección: {{item.direccion}}
             </p>
           </ion-col>
+          <ion-row>
+            <ion-thumbnail item-left tappable (click)="openImageprincipal(item.idRestaurante)">
+              <ion-img src="http://localhost:3000/{{item.idRestaurante}}/imageprincipal"></ion-img>
+            </ion-thumbnail>
+            <ion-thumbnail item-left tappable (click)="openImagesec1(item.idRestaurante)">
+              <ion-img src="http://localhost:3000/{{item.idRestaurante}}/imagesec1"></ion-img>
+            </ion-thumbnail>
+            <ion-thumbnail item-left tappable (click)="openImagesec2(item.idRestaurante)">
+              <ion-img src="http://localhost:3000/{{item.idRestaurante}}/imagesec2"></ion-img>
+            </ion-thumbnail>
+            <ion-thumbnail item-left tappable (click)="openImagesec3(item.idRestaurante)">
+              <ion-img src="http://localhost:3000/{{item.idRestaurante}}/imagesec3"></ion-img>
+            </ion-thumbnail>
+          </ion-row>
         </ion-item>
         <button ion-button outline (click)="ver_carta()">Ver Carta</button>
         <button ion-button (click)="reservar()">Reservar</button>
