@@ -37,22 +37,22 @@ export class RestaurantPage {
   }
   openImageprincipal(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "http://localhost:3000/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
     modal.present();
   }
   openImagesec1(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "http://localhost:3000/"+id+"/imagesec1" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec1" });
     modal.present();
   }
   openImagesec2(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "http://localhost:3000/"+id+"/imagesec2" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec2" });
     modal.present();
   }
   openImagesec3(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "http://localhost:3000/"+id+"/imagesec3" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec3" });
     modal.present();
   }
 
