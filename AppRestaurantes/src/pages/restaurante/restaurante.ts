@@ -83,13 +83,13 @@ export class RestaurantePage {
   openImage() {
     //this.navCtrl.push(PreviewImagePage);
     this.restaurantService.urlfotopreview=null;
-    this.restaurantService.urlfotopreview="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
+    this.restaurantService.urlfotopreview="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
     modal.present();
   }
 
   url_foto(){
-    this.urlfotoprincipal="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    this.urlfotoprincipal="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
   }
 
   mas_fotos(){
