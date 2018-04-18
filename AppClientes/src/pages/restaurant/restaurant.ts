@@ -2,22 +2,68 @@ import { ReservarPage } from './../reservar/reservar';
 import { CartaPage } from './../carta/carta';
 import { PedirPage } from './../pedir/pedir';
 import { ComentariosPage } from './../comentarios/comentarios';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component , ViewChild ,ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { MiscategoriasPage } from './../miscategorias/miscategorias';
 import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
 
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+
+declare var google;
 
 @IonicPage()
+
 @Component({
   selector: 'page-restaurant',
   templateUrl: 'restaurant.html',
 })
 export class RestaurantPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController) { 
+  map: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController,private toastCtrl:ToastController, private geolocation:Geolocation) { 
+
+  }
+
+  ionViewDidLoad(){
+    this.getPosition();
+  }
+
+  getPosition():any{
+    this.geolocation.getCurrentPosition().then(response => {
+      this.loadMap(response);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
+
+  loadMap(position: Geoposition){
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    //console.log(latitude, longitude);
+    
+    
+    let mapEle: HTMLElement = document.getElementById('map');
+  
+    
+    let myLatLng = {lat: latitude, lng: longitude};
+  
+    // crear mapa
+    this.map = new google.maps.Map(mapEle, {
+      center: myLatLng,
+      zoom: 12
+    });
+  
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        title: 'Mapa'
+      });
+      mapEle.classList.add('show-map');
+    });
   }
 
   ver_carta(){
@@ -37,22 +83,22 @@ export class RestaurantPage {
   }
   openImageprincipal(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imageprincipal" });
     modal.present();
   }
   openImagesec1(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec1" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec1" });
     modal.present();
   }
   openImagesec2(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec2" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec2" });
     modal.present();
   }
   openImagesec3(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec3" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec3" });
     modal.present();
   }
 

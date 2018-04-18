@@ -26,7 +26,7 @@ export class AllrestaurantsPage {
 
   openImage(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imageprincipal" });
     modal.present();
   }
 

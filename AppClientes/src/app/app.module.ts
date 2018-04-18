@@ -31,6 +31,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MisReservasPage } from '../pages/mis-reservas/mis-reservas';
 import { PedidoProvider } from '../providers/pedido/pedido';
 
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -84,10 +88,13 @@ import { PedidoProvider } from '../providers/pedido/pedido';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsersProvider,
     RestaurantsProvider,
-    PedidoProvider
+    PedidoProvider,
+    GoogleMaps
+    
   ]
 })
 export class AppModule {}

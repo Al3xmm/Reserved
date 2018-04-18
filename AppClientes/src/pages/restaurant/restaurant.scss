@@ -1,5 +1,16 @@
 page-restaurant {
 
+    #map {
+        width: 100%;
+        height: 225px;
+        opacity: 0;
+        transition: opacity 150ms ease-in;
+        display: block;
+        &.show-map{
+            opacity: 1;
+        }
+    }
+
     ion-thumbnail{
         width: 20%;
         min-width: 0!important;
