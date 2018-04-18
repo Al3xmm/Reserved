@@ -1,6 +1,6 @@
 page-carta {
     .item-md{
-        background-color: #fff0;
+        background-color:transparent;
     }
     h4{
         color:#76323F;
@@ -10,7 +10,7 @@ page-carta {
     .scroll-content{
         margin-top: 35px!important;
     }
-    ion-item{
-        display: none;
+    ion-label{
+        white-space: normal;
     }
 }

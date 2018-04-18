@@ -19,7 +19,7 @@
         <button  ion-button (click)="historial()">Historial de reservas</button>
         <ion-item *ngIf="!buttonClicked2" >
           <ion-col *ngFor="let item of userService.reservasusuario">
-            <h4>Restaurante: {{item.nombre}}</h4>
+            <h4>{{item.nombre}}</h4>
             <p>
               <br>
               <b>Dia:</b> {{ item.dia | date : format : timezone}}

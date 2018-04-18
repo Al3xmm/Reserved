@@ -25,9 +25,13 @@
 <ion-item *ngFor="let item of restaurantService.productoscategoria">
   <ion-col>
     <b>{{item.nombre}}</b>
+    <br>
+    <br>
     <p>
-      <br>
-      Precio: {{item.precio}}€
+      <b>Descripcion:</b> {{item.informacion}}
+      </p>
+    <p>
+      <b>Precio:</b> {{item.precio}}€
     </p>
   </ion-col>
   <button ion-button block icon-left

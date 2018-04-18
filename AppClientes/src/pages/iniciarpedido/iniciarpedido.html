@@ -33,7 +33,7 @@
       <h3>Reserva actual</h3>
        <ion-item *ngFor="let item of userService.reservaconfirmada">
       <ion-col>
-        <b>{{item.nombre}}</b>
+        <h4><b>{{item.nombre}}</b></h4>
         <p>
           <br>
           <b>Hora:</b> {{item.hora}}
@@ -41,8 +41,9 @@
           <b>Comensales:</b> {{item.comensales}}
         </p>
       </ion-col>
-      <button ion-button (click)="iniciarpedido()">Iniciar Pedido</button>
-      <button ion-button (click)="verpedido(item.idReserva)">Ver pedido</button>
+      <br>
+      <button ion-button  id="actual" (click)="iniciarpedido()">Iniciar Pedido</button>
+      <button ion-button  id="actual" (click)="verpedido(item.idReserva)">Ver pedido</button>
     </ion-item>
   </ion-grid>
 </ion-content>

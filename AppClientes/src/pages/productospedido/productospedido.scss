@@ -1,9 +1,11 @@
 page-productospedido {
     .item-md{
-        background-color: #fff0;
+        background-color:transparent;
     }
     .button-default-md{
         background-color:#76323F;
+        width: 45%;
+        height: 2em!important;
     }
     .scroll-content{
         margin-top: 35px!important;
@@ -12,5 +14,18 @@ page-productospedido {
         color:#76323F;
         //text-align:center;
         font-size: 1.1em!important;
+    }
+
+    .icon-md{
+        font-size: 2em;
+    }
+    ion-label{
+        white-space: normal
+    }
+    #basura{
+        height: 30px!important;
+        width: 40px!important;
+        color: #76323F;
+        background-color:transparent; 
     }
 }

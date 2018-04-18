@@ -17,7 +17,7 @@
     <ion-grid>
         <ion-item *ngFor="let item of restaurantService.inforestaurante">
           <ion-col>
-            <h4>Nombre: {{item.nombre}}</h4>
+            <h4> {{item.nombre}}</h4>
             <p>
               <br>
               <b>Descripción:</b> {{item.descripcion}}.
@@ -41,9 +41,9 @@
               <ion-img src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imagesec3"></ion-img>
             </ion-thumbnail>
           </ion-row>
-          <button ion-button outline (click)="ver_carta()">Ver Carta</button>
-          <button ion-button (click)="reservar()">Reservar</button>
         </ion-item>
+        <p><button ion-button outline (click)="ver_carta()">Ver Carta</button>
+        <button ion-button (click)="reservar()">Reservar</button></p>
 
         <h3>Comentarios</h3>
         <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">

@@ -1,8 +1,19 @@
 page-pedir {
     .item-md{
-        background-color: #fff0;
+        background-color:transparent;
     }
     .button-default-md{
         background-color:#76323F;
+    }
+    .badge-md{
+     top:-8px;
+      left:20px;
+      position: absolute;
+    }
+    .icon-md{
+        margin-right: 15px;
+    }
+    ion-label{
+        white-space: normal;
     }
 }

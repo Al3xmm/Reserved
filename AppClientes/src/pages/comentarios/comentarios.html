@@ -16,8 +16,8 @@
 
   <form (ngSubmit)= "add_comentario()">
     <ion-item>
-      <ion-label>Contenido</ion-label>
-      <ion-input type="text" [(ngModel)]="comentario.contenido" name="contenido" required></ion-input>
+      <ion-label floating>Contenido</ion-label>
+      <ion-textarea type="text" [(ngModel)]="comentario.contenido" name="contenido" required></ion-textarea>
     </ion-item>
 
     <button ion-button type="submit" block>Comentar</button>

@@ -24,15 +24,15 @@
       <button *ngIf="buttonClicked2" ion-button (click)="todos_restaurantes()"> Ver todos los restaurantes</button>
       <form *ngIf="buttonClicked" (ngSubmit)="busquedaavanzada()">
           <ion-item>
-            <ion-label>Nombre</ion-label>
+            <ion-label floating>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="busqueda.nombre" name="nombre" required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Ciudad</ion-label>
+            <ion-label floating>Ciudad</ion-label>
             <ion-input type="text" [(ngModel)]="busqueda.ciudad" name="ciudad" required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Tipo de comida</ion-label>
+            <ion-label floating>Tipo de comida</ion-label>
             <ion-input type="text" [(ngModel)]="busqueda.tipoComida" name="tipo" required></ion-input>
           </ion-item>
             <button ion-button type="submit" block>Buscar</button>
@@ -46,12 +46,12 @@
            <h2>{{item.nombre}}</h2>
            <br>
             <p>
-              Comida: {{item.tipoComida}}
+              {{item.tipoComida}}
             </p>
             <p>
-              Horario: {{item.horario}}
+              Dirección: {{item.direccion}}
             </p>
-              <button ion-button clear  item-right (click)="presentLoadingCustom(item.idRestaurante)">Ver</button>
+              <button ion-button clear  (click)="presentLoadingCustom(item.idRestaurante)">Ver</button>
         </ion-item>
       </ion-list>
       </ion-grid>

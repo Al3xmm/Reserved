@@ -1,12 +1,11 @@
 page-restaurant {
 
     ion-thumbnail{
-        margin-left: 10px!important;
         width: 20%;
         min-width: 0!important;
     }
     .item-md{
-        background-color: #fff0;
+        background-color:transparent;
         
     }
     .button-outline-md{
@@ -21,7 +20,7 @@ page-restaurant {
     }
     h4{
         color:#76323F;
-        font-size: 1.1em!important;
+        font-size: 1em!important;
     }
     .scroll-content{
         margin-top: 30px!important;
@@ -29,6 +28,12 @@ page-restaurant {
     ion-row>span{
         font-size: 0.55em!important;
         margin-right:-20em!important;
+    }
+    .button-md{
+        width: 45%!important;
+    }
+    ion-label{
+        white-space: normal
     }
 
       

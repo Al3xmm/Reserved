@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons>
-      <button ion-button
-              (click)="viewCtrl.dismiss()">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -22,11 +22,15 @@
 
 <ion-content padding>
   <ion-item *ngFor="let item of pedidoService.plato; let i = index;">
-    <ion-col item-left>
+    <ion-col>
       <b>{{item.nombre}}</b>
+      <br>
+      <br>
       <p>
-        <br>
-        Precio:{{item.precio}}€
+        <b>Descripcion:</b> {{item.informacion}}
+        </p>
+      <p>
+        <b>Precio:</b>{{item.precio}}€
       </p>
     </ion-col>
     <button ion-button item-right

@@ -1,9 +1,10 @@
 page-iniciarpedido {
     .item-md{
-        background-color: #fff0;
+        background-color:transparent;
     }
     .button-default-md{
         background-color:#76323F;
+        
     }
     h3{
         margin-top:1.2em;
@@ -12,8 +13,16 @@ page-iniciarpedido {
         font-size: 1.6em!important;
     }
     h4{
-        color:#76323F;
+        color:black;
         //text-align:center;
-        font-size: 1.1em!important;
+        font-size: 1.2em!important;
+    }
+    #actual{
+        width: 45%;
+        height: 2em!important;
+    }
+  
+    p{
+        font-size: 1em!important;
     }
 }

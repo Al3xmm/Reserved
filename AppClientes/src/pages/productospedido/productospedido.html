@@ -16,16 +16,18 @@
 <ion-content padding>
   <ion-grid>
     <ion-item *ngFor="let item of restaurantService.productopedido">
-      <ion-col item-left>
+      <ion-col>
         <b>{{item.nombre}}</b>
+        <br>
+        <br>
         <p>
-          Descripcion: {{item.informacion}}
+          <b>Descripcion:</b> {{item.informacion}}
           </p>
           <p>
-              Precio: {{item.precio}}€
+              <b>Precio:</b> {{item.precio}}€
             </p>
           </ion-col>
-         <button ion-button item-right *ngIf="item.TipoProducto=='Preparar'"
+         <button id="basura" ion-button item-right *ngIf="item.TipoProducto=='Preparar'"
          (click)="eliminarplato(item.idProductoDePedido,item.IdProducto)">
          <ion-icon name="trash"></ion-icon></button>
       
