@@ -15,17 +15,17 @@
 
 <ion-content padding>
   <ion-grid>
+    <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
     <ion-item *ngFor="let item of restaurantService.productopedido">
       <ion-col>
-        <b>{{item.nombre}}</b>
+        <h2>{{item.nombre}}</h2>
         <br>
-        <br>
-        <p>
-          <b>Descripcion:</b> {{item.informacion}}
-          </p>
           <p>
               <b>Precio:</b> {{item.precio}}€
             </p>
+            <p>
+                <b>Estado:</b> {{item.TipoProducto}}
+              </p>
           </ion-col>
          <button id="basura" ion-button item-right *ngIf="item.TipoProducto=='Preparar'"
          (click)="eliminarplato(item.idProductoDePedido,item.IdProducto)">
@@ -37,8 +37,7 @@
       <b>{{restaurantService.suma}}€</b>
       <br>
       <br>
-      <button ion-button (click)="anayadirplato()">Agregar platos</button>
-      <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
+      <button ion-button (click)="anayadirplato()">Agregar platos</button> 
     </ion-item>
   </ion-grid>
   <ion-refresher (ionRefresh)="doRefresh($event)">

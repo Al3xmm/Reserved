@@ -21,4 +21,16 @@ page-mipedido {
     .col{
         white-space: normal;
     }
+    h2{
+        font-size: 3.0rem;
+        color:#76323F;
+    }
+    img{
+        width: auto!important;
+        height: 100%!important;
+    }
+    .item-md ion-thumbnail ion-img{
+        width: 80px!important;
+        height: 80px!important;
+      }
 }

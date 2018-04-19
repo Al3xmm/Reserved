@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>Productos</ion-title>
+      <ion-title>Carta</ion-title>
   
       <ion-buttons left>
         <button ion-button icon-only menuToggle>
@@ -14,20 +14,17 @@
   
   <ion-content padding>
       <ion-grid>
-          <ion-item *ngFor="let item of restaurantService.productoscategoria">
-            <ion-col>
-              <img width="120" height="120" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
-              <h4>Nombre: {{item.nombre}}</h4>
+            <ion-item *ngFor="let item of restaurantService.productoscategoria"> 
+              <ion-thumbnail item-left>
+              <ion-img width="120" height="120" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto"></ion-img>
+            </ion-thumbnail>
+              <h2>{{item.nombre}}</h2>
               <p>
-                <br>
                 <b>Informacion:</b> {{item.informacion}}
               </p>
               <p>
-                <br>
                 <b>Precio:</b> {{item.precio}}€
               </p>
-            </ion-col>
           </ion-item>
-        </ion-grid>
-  
+      </ion-grid>
   </ion-content>

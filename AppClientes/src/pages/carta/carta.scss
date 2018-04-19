@@ -2,15 +2,21 @@ page-carta {
     .item-md{
         background-color:transparent;
     }
-    h4{
-        color:#76323F;
-        //text-align:center;
-        font-size: 1.1em!important;
-    }
-    .scroll-content{
-        margin-top: 35px!important;
-    }
     ion-label{
         white-space: normal;
+        margin-top: -15px!important;
+    }
+       
+    img{
+        width: auto!important;
+        height: 100%!important;
+    }
+    h2{
+        font-size: 3.0rem;
+        color:#76323F;
+    }
+    .item-md ion-thumbnail ion-img{
+      width: 120px!important;
+      height: 120px!important;
     }
 }
