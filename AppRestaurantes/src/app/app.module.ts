@@ -41,6 +41,8 @@ import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprincipal';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -108,6 +110,7 @@ import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprinci
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestaurantProvider,
     Camera,

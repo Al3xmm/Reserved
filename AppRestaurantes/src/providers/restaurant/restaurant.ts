@@ -84,6 +84,8 @@ export class RestaurantProvider {
 
   urlfotopreview:any;
 
+  latlng:any;
+
   constructor(public http: HttpClient, private alertCtrl: AlertController, public storage:Storage, private transfer: FileTransfer) {
     
   }

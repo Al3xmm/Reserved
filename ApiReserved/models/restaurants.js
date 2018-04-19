@@ -57,7 +57,7 @@ Restaurants.all= function(callback){
 /* Mostar un restaurante buscado por su Id */
 Restaurants.findOneById=function(id, callback){
     if (connection){
-        var sql=("SELECT  idRestaurante,nombre,email,horario,descripcion,direccion,telefono,ciudad,tipoComida,aforo FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
+        var sql=("SELECT  idRestaurante,nombre,email,horario,descripcion,direccion,telefono,ciudad,tipoComida,aforo,coordenadas FROM restaurantes WHERE IdRestaurante="+connection.escape(id));
         connection.query(sql,function(error,row){
             if (error){
                 throw error;

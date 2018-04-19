@@ -1,0 +1,24 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <ion-item class="close-fake" no-lines (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-item>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div id="floating-panel">
+    <input id="address" type="textbox" [(ngModel)]="address">
+    <input id="submit" type="button" value="Geocode" (click)="add_marker()">
+    <input id="lat" type="textbox" value="">
+    <input id="lng" type="textbox" value="">
+  </div>
+  <br>
+  <div id="map"></div>
+
+</ion-content>

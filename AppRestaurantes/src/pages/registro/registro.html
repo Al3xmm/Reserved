@@ -64,10 +64,10 @@
     <ion-input type="text" [(ngModel)]="restaurant.tipoComida" name="horario" required></ion-input>
     </ion-item>
     <br>
-    <ion-item>
-    <ion-label>Coordenadas</ion-label>
-    <ion-input type="number" [(ngModel)]="restaurant.coordenadas" name="coordenadas" required></ion-input>
-    </ion-item>
+    <ion-row>
+      <ion-label>Coordenadas</ion-label> <button type="button" name="coordenadas"  (click)="openMap()">Ver Mapa</button>
+    </ion-row>
+    <br>
     <button ion-button [disabled]="restaurant.password.length<5 || restaurant.email.length<10" type="submit" block>Regístrate</button>
   </form>
   <br>

@@ -23,13 +23,14 @@ export class RestaurantPage {
   map: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController,private toastCtrl:ToastController, private geolocation:Geolocation) { 
-
+    
   }
 
   ionViewDidLoad(){
-    this.getPosition();
+    //this.getPosition();
+    this.loadMap();
   }
-
+/*
   getPosition():any{
     this.geolocation.getCurrentPosition().then(response => {
       this.loadMap(response);
@@ -38,12 +39,12 @@ export class RestaurantPage {
       console.log(error);
     })
   }
+*/
 
-  loadMap(position: Geoposition){
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-    //console.log(latitude, longitude);
-    
+  loadMap(/*position: Geoposition*/){
+    var aux= this.restaurantService.inforestaurante[0].coordenadas.split("_");
+    let latitude =parseFloat(aux[0]) ;
+    let longitude = parseFloat(aux[1]);
     
     let mapEle: HTMLElement = document.getElementById('map');
   
@@ -53,7 +54,7 @@ export class RestaurantPage {
     // crear mapa
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
-      zoom: 12
+      zoom: 15
     });
   
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
