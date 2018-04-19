@@ -84,22 +84,22 @@ export class RestaurantPage {
   }
   openImageprincipal(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
     modal.present();
   }
   openImagesec1(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec1" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec1" });
     modal.present();
   }
   openImagesec2(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec2" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec2" });
     modal.present();
   }
   openImagesec3(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imagesec3" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec3" });
     modal.present();
   }
 

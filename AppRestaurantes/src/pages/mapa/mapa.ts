@@ -21,7 +21,7 @@ export class MapaPage {
 
   markers:any[];
 
-  markercreado:boolean=false;
+  markerboolean:boolean=false;
 
   lat:any;
   long:any;
@@ -42,7 +42,7 @@ export class MapaPage {
     map.addListener('click', function(event) {
       (document.getElementById("lat") as HTMLInputElement).value = event.latLng.lat();
       (document.getElementById("lng") as HTMLInputElement).value = event.latLng.lng();
-      if(this.markercreado==true){
+      if(this.markerboolean==true){
           this.markers.setMap(null);
       }
 
@@ -51,16 +51,17 @@ export class MapaPage {
         position: event.latLng
       });
 
-      this.markercreado=true;
+      this.markerboolean=true
       this.markers=marker;
     });
+    
     this.map=map;
   }
 
   geocodeAddress(geocoder, resultsMap) {
     geocoder.geocode({'address': this.address}, function(results, status) {
       if (status === 'OK') {
-        if(this.markercreado==true){
+        if(this.markerboolean==true){
           this.markers.setMap(null);
         }
         (document.getElementById("lat") as HTMLInputElement).value = results[0].geometry.location.lat();
@@ -70,7 +71,7 @@ export class MapaPage {
           map: resultsMap,
           position: results[0].geometry.location
         });
-        this.markercreado=true;
+        this.markerboolean=true
         this.markers=marker;
       } else {
         alert('Geocode was not successful for the following reason: ' + status);

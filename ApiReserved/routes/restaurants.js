@@ -321,7 +321,24 @@ router.post('/:id/products', function(req, res, next){
       Tipo: req.body.tipo,
       Informacion: req.body.informacion,
       RestauranteP: req.params.id,
-      Categoria:req.body.categoria
+      Categoria:req.body.categoria,
+      Url:req.body.url,
+      Gluten:req.body.gluten,
+      Crustaceos:req.body.crustaceos,
+      Huevos:req.body.huevos,
+      Pescado:req.body.pescado,
+      Cacahuetes:req.body.cacahuetes,
+      Soja:req.body.soja,
+      Lacteos:req.body.lacteos,
+      Frutos_cascara:req.body.frutos_cascara,
+      Apio:req.body.apio,
+      Mostaza:req.body.mostaza,
+      Sesamo:req.body.sesamo,
+      Dioxido_azufre:req.body.dioxido_azufre,
+      Moluscos:req.body.moluscos,
+      Altramuces:req.body.altramuces,
+      Url:req.params.id+"_"+req.body.nombre
+
   };
 
     Product.insert(productData, function(error,data){
@@ -340,7 +357,22 @@ router.put('/:id/products/:idproducto', function(req, res, next){
         Precio: req.body.precio,
         Tipo: req.body.tipo,
         Informacion: req.body.informacion,
-        Categoria:req.body.categoria
+        Categoria:req.body.categoria,
+        Url:req.body.url,
+        Gluten:req.body.gluten,
+        Crustaceos:req.body.crustaceos,
+        Huevos:req.body.huevos,
+        Pescado:req.body.pescado,
+        Cacahuetes:req.body.cacahuetes,
+        Soja:req.body.soja,
+        Lacteos:req.body.lacteos,
+        Frutos_cascara:req.body.frutos_cascara,
+        Apio:req.body.apio,
+        Mostaza:req.body.mostaza,
+        Sesamo:req.body.sesamo,
+        Dioxido_azufre:req.body.dioxido_azufre,
+        Moluscos:req.body.moluscos,
+        Altramuces:req.body.altramuces
     };
 
     Product.update(req.params.id,req.params.idproducto,productData, function(error, data){

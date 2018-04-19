@@ -59,7 +59,9 @@ export class RestaurantePage {
   public takePicture(sourceType) {
     
     var options = {
-      quality: 100,
+      quality: 50,
+      targetWidth: 1024,
+      targetHeight: 1024,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
@@ -83,13 +85,13 @@ export class RestaurantePage {
   openImage() {
     //this.navCtrl.push(PreviewImagePage);
     this.restaurantService.urlfotopreview=null;
-    this.restaurantService.urlfotopreview="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
+    this.restaurantService.urlfotopreview="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
     modal.present();
   }
 
   url_foto(){
-    this.urlfotoprincipal="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    this.urlfotoprincipal="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
   }
 
   mas_fotos(){

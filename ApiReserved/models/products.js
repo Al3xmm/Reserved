@@ -84,7 +84,7 @@ Products.findProductsByCategory = function(id,categoria,callback){
 /* Mostar un producto en concreto */
 Products.findProduct = function(id,callback){
     if (connection){
-      connection.query("SELECT idProducto,nombre,precio,tipo,informacion FROM productos WHERE idProducto ="+connection.escape(id) ,function(error,row){
+      connection.query("SELECT * FROM productos WHERE idProducto ="+connection.escape(id) ,function(error,row){
           if (error){
               throw error;
           }else{

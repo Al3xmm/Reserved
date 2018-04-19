@@ -15,6 +15,36 @@ connection=mysql.createConnection({
 
 var Images={};
 
+Images.uploadimageproducto=function(file,img_name,id,nombreproducto,callback){
+
+  if(file.mimetype == "image/jpeg"){
+    var aux=id+"_"+nombreproducto+".jpg";
+  }else if(file.mimetype == "image/png"){
+    var aux=id+"_"+nombreproducto+".png";
+  }
+
+
+
+  var dir = './images/'+id+"/productos";
+  if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+  }
+
+  if(connection){
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"){
+      file.mv('../ApiReserved/images/'+id+'/productos/'+aux, function(err) {
+         if (err){
+          throw err;
+         }
+      });
+    } else {
+      res.json(200,"This format is not allowed , please upload file with '.png','.jpg'");
+    }
+  }
+}
+
+
+
 Images.uploadimageprincipal=function(file,img_name,id,callback){
 
   if(file.mimetype == "image/jpeg"){

@@ -20,6 +20,29 @@ var path = require("path");
 var multer  = require('multer');
 var upload = multer({ dest: 'images/' })
 
+
+
+//subir foto Producto
+router.post('/:id/:name/uploadproducto',upload.single('imagensubir'), function(req, res) {
+  //console.log(req.files.imagensubir);
+  if (!req.files){
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  var file = req.files.imagensubir;
+  var img_name=file.name;
+
+  Images.uploadimageproducto(file,img_name,req.params.id,req.params.name,function(error,data){
+    if (error){
+        res.json(500,error);
+    }else{
+        res.json(200,data);
+    }
+  })
+
+});
+
+
 //subir foto PRINCIPAL
 router.post('/:id/uploadprincipal',upload.single('imagensubir'), function(req, res) {
   //console.log(req.files.imagensubir);
@@ -95,6 +118,14 @@ router.post('/:id/uploadsecundaria3',upload.single('imagensubir'), function(req,
     }
   })
 
+});
+
+//ver foto PRODUCTO
+router.get('/:id/:name/imageproducto', function (req, res) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    //res.sendfile(path.resolve('./images/'+req.params.id+'/principal.jpg'));
+    //fs.createReadStream(path.join('./images/'+req.params.id+'/productos', req.params.id+'_'+req.params.name+'.jpg')).pipe(res);
+    res.sendfile(path.resolve('./images/'+req.params.id+'/productos/'+req.params.id+'_'+req.params.name+'.jpg'));
 });
 
 //ver foto PRINCIPAL

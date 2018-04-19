@@ -31,7 +31,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MisReservasPage } from '../pages/mis-reservas/mis-reservas';
 import { PedidoProvider } from '../providers/pedido/pedido';
 
-import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
@@ -92,8 +91,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsersProvider,
     RestaurantsProvider,
-    PedidoProvider,
-    GoogleMaps
+    PedidoProvider
     
   ]
 })

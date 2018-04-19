@@ -17,7 +17,7 @@ export class LoginPage {
   //objeto creado con nick y password que estará disponible en el login.html
   user= { nick: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private userservice:UsersProvider, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private userservice:UsersProvider, private loadingCtrl: LoadingController,private restaurantService:RestaurantsProvider) {
 
   }
 
@@ -42,6 +42,7 @@ export class LoginPage {
     this.userservice.login_user(this.user)
       .subscribe(()=>{
         if(this.userservice.login_correcto==true){
+          this.restaurantService.mostrar_todos();
           this.presentLoadingCustom();
         }
         

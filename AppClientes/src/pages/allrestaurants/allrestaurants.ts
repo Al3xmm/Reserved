@@ -26,7 +26,7 @@ export class AllrestaurantsPage {
 
   openImage(id) {
     //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
     modal.present();
   }
 
@@ -34,7 +34,7 @@ export class AllrestaurantsPage {
     this.ver_restaurante(id);
     let loading = this.loadingCtrl.create({
       content: 'Cargando información',
-      duration: 1500,
+      duration: 3000,
     });
 
     loading.onDidDismiss(() => {

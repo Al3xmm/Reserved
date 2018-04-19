@@ -27,7 +27,7 @@ export class RestaurantsProvider {
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
-    this.mostrar_todos();
+    //this.mostrar_todos();
   }
 
   mostrar_todos(){

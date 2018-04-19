@@ -16,6 +16,7 @@
       <ion-grid>
           <ion-item *ngFor="let item of restaurantService.productoscategoria">
             <ion-col>
+              <img width="120" height="120" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
               <h4>Nombre: {{item.nombre}}</h4>
               <p>
                 <br>

@@ -13,6 +13,7 @@ export class SubirimgprincipalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private viewCtrl: ViewController, private restaurantService: RestaurantProvider) {
     this.imageData = this.navParams.get('data');
+    
   }
 
   saveImage() {
