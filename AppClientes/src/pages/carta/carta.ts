@@ -1,6 +1,6 @@
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -10,10 +10,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CartaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider, private modalCtrl:ModalController, private loadingCtrl:LoadingController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CartaPage');
+  mas_info(){
+    let modal = this.modalCtrl.create('InfoproductoPage');
+    modal.present();
+  }
+
+  presentLoadingCustom(idproducto) {
+    this.restaurantService.masinfoproducto(idproducto);
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando...',
+      duration: 1000,
+    });
+
+    loading.onDidDismiss(() => {
+      this.mas_info();
+    });
+
+    loading.present();
   }
 }

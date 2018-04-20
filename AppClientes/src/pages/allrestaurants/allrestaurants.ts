@@ -34,7 +34,7 @@ export class AllrestaurantsPage {
     this.ver_restaurante(id);
     let loading = this.loadingCtrl.create({
       content: 'Cargando información',
-      duration: 3000,
+      duration: 1500,
     });
 
     loading.onDidDismiss(() => {

@@ -1,0 +1,28 @@
+page-infoproducto {
+
+    .content-ios {
+        background: rgba(44, 39, 45, 0.95) !important;
+    }
+    
+    .content-md {
+        background: rgba(44, 39, 45, 0.95) !important;
+    }
+
+    .close-fake {
+        background: transparent;
+        color: color($colors, light);
+        font-size: 3rem;
+    }
+  
+    .image-modal{
+      text-align: center;
+    }
+
+    h2{
+        color: aliceblue;
+    }
+    h3{
+        color: aliceblue;
+    }
+
+}

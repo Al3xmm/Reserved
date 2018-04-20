@@ -24,6 +24,7 @@ export class RestaurantsProvider {
   productopedido:any;
   botontodosrestaurantes:boolean=false;
   suma:number=0;
+  masinfoproductoactual:any;
 
   constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
@@ -76,8 +77,16 @@ export class RestaurantsProvider {
     this.http.get(url+this.restauranteactual+"/products/"+"category/"+id,{headers:{'token-acceso':this.userService.session.token}})
     .subscribe(data=>{
       this.productoscategoria =data;
-      //console.log(this.productoscategoria);
     })
+  }
+
+  masinfoproducto(id){
+    let url = "api/restaurants/allproducts/";
+    this.http.get(url+id,{headers:{'token-acceso':this.userService.session.token}})
+    .subscribe(data=>{
+      this.masinfoproductoactual=data;
+    })
+
   }
 
   busqueda_avanzada(data){
@@ -92,7 +101,7 @@ export class RestaurantsProvider {
     let url="api/restaurants/name/";
       this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.busqueda=data;
-        console.log(this.busqueda);
+        //console.log(this.busqueda);
     });
   }
 
