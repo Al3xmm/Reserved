@@ -4,20 +4,23 @@ page-carta {
     }
     ion-label{
         white-space: normal;
-        margin-top: -15px!important;
     }
        
-    /*img{
+    img{
         width: auto!important;
         height: 100%!important;
-    }*/
+    }
+    
 
     h2{
         font-size: 3.0rem;
         color:#76323F;
     }
-    .item-md ion-thumbnail img{
-      width: 120px!important;
-      height: 120px!important;
+    .icon-md{
+        font-size: 25px;
+    }
+    h4{
+        font-size: 3.0rem;
+        color:#76323F;
     }
 }

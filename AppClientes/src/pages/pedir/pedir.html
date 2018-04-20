@@ -28,11 +28,9 @@
     </ion-thumbnail>
     <h2>{{item.nombre}}</h2>
     <p>
-      <b>Descripcion:</b> {{item.informacion}}
-      </p>
-    <p>
       <b>Precio:</b> {{item.precio}}€
     </p>
+  <button ion-button clear right (click)="presentLoadingCustom(item.idProducto)">Ver información</button>
   <button ion-button block icon-left
           (click)="pedidoService.agregarpedido(item)">
     <ion-icon name ="restaurant"></ion-icon>

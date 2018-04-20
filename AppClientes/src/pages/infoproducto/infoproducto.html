@@ -4,27 +4,27 @@
       <ion-icon name="close"></ion-icon>
     </ion-item>
     <br>
-    <h2>Nombre: {{restaurantService.masinfoproductoactual[0].nombre}}</h2>
+    <h2>{{restaurantService.masinfoproductoactual[0].nombre}}</h2>
     <br>
     <h3>Descripción: {{restaurantService.masinfoproductoactual[0].informacion}}</h3>
     <h3>Precio: {{restaurantService.masinfoproductoactual[0].precio}} €</h3>
     <br>
-    <h3>Alergenos:</h3>
-    <h4><ion-icon [name]="icongluten"></ion-icon> Gluten</h4>
-    <h4><ion-icon [name]="iconcrustaceos"></ion-icon> Crustaceos</h4>
-    <h4><ion-icon [name]="iconhuevos"></ion-icon> Huevo</h4>
-    <h4><ion-icon [name]="iconpescado"></ion-icon> Pescado</h4>
-    <h4><ion-icon [name]="iconcacahuetes"></ion-icon> Cacahuetes</h4>
-    <h4><ion-icon [name]="iconsoja"></ion-icon> Soja</h4>
-    <h4><ion-icon [name]="iconlacteos"></ion-icon> Lacteos</h4>
-    <h4><ion-icon [name]="iconcascara"></ion-icon> Cascaras de frutos</h4>
-    <h4><ion-icon [name]="iconapio"></ion-icon> Apio</h4>
-    <h4><ion-icon [name]="iconmostaza"></ion-icon> Mostaza</h4>
-    <h4><ion-icon [name]="iconsesamo"></ion-icon> Sesamo</h4>
-    <h4><ion-icon [name]="icondioxido"></ion-icon> Dioxido de azufre</h4>
-    <h4><ion-icon [name]="iconmoluscos"></ion-icon> Moluscos</h4>
-    <h4><ion-icon [name]="iconaltramuces"></ion-icon> Altramuces</h4>
-    
-    
+    <h4>Alergenos:</h4>
+    <ion-list>
+    <p><ion-icon [name]="icongluten"></ion-icon> Gluten &nbsp; &nbsp;
+    <ion-icon  [name]="iconcrustaceos"></ion-icon> Crustaceos</p>
+    <p><ion-icon [name]="iconhuevos"></ion-icon> Huevo &nbsp; &nbsp;
+    <ion-icon [name]="iconpescado"></ion-icon> Pescado</p>
+    <p><ion-icon [name]="iconcacahuetes"></ion-icon> Cacahuetes &nbsp;&nbsp; 
+    <ion-icon [name]="iconsoja"></ion-icon> Soja</p>
+    <p><ion-icon [name]="iconlacteos"></ion-icon> Lacteos  &nbsp;&nbsp;
+    <ion-icon [name]="iconcascara"></ion-icon> Cascaras de frutos</p>
+    <p><ion-icon [name]="iconapio"></ion-icon> Apio  &nbsp;&nbsp;
+    <ion-icon [name]="iconmostaza"></ion-icon> Mostaza</p>
+    <p><ion-icon [name]="iconsesamo"></ion-icon> Sesamo  &nbsp;&nbsp;
+    <ion-icon [name]="icondioxido"></ion-icon> Dioxido de azufre</p>
+    <p><ion-icon [name]="iconmoluscos"></ion-icon> Moluscos  &nbsp;&nbsp;
+    <ion-icon [name]="iconaltramuces"></ion-icon> Altramuces</p>
+  </ion-list> 
   </div>
 </ion-content>

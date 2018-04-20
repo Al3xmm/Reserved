@@ -15,14 +15,28 @@ page-infoproducto {
     }
   
     .image-modal{
-      text-align: center;
+        white-space: normal;
     }
 
     h2{
         color: aliceblue;
+        text-align: center;
+        font-size: 1.5em;
     }
     h3{
         color: aliceblue;
+        font-size: 1em;
+        margin-left: 4em;
+    }
+    h4{
+        color: aliceblue;
+        font-size: 1.1em;
+        text-align:center;
+    }
+    p{
+        color:aliceblue;
+        font-size: 1em;
+        text-align: center;
     }
 
 }

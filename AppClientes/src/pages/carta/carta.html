@@ -10,21 +10,18 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
-  
-  
   <ion-content padding>
       <ion-grid>
             <ion-item *ngFor="let item of restaurantService.productoscategoria"> 
               <ion-thumbnail item-left>
-              <img width="120" height="120" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+              <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
             </ion-thumbnail>
+              <h4>{{item.nombre}}</h4>
               <br>
-              <h2>{{item.nombre}}</h2>
               <p>
                 <b>Precio:</b> {{item.precio}}€
               </p>
-              <br>
-              <button ion-button  (click)="presentLoadingCustom(item.idProducto)">Mas Información</button>
+              <button ion-button clear (click)="presentLoadingCustom(item.idProducto)">Ver información</button>
           </ion-item>
       </ion-grid>
   </ion-content>
