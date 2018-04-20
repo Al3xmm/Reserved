@@ -19,9 +19,9 @@ export class MasfotosPage {
   }
 
   url_foto(){
-    this.urlfotosec1="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec1";
-    this.urlfotosec2="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec2";
-    this.urlfotosec3="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec3";
+    this.urlfotosec1="api/"+this.restaurantService.session.idRestaurante+"/imagesec1";
+    this.urlfotosec2="api/"+this.restaurantService.session.idRestaurante+"/imagesec2";
+    this.urlfotosec3="api/"+this.restaurantService.session.idRestaurante+"/imagesec3";
   }
 
   openImage1() {
