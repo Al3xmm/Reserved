@@ -197,6 +197,231 @@ Products.update = function(id,idproducto, productData,callback){
           coma=true;
         }
 
+        if(productData.Gluten != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Gluten==1){
+            sql +=  "gluten=1";
+            coma=true;
+          }else{
+            sql +=  "gluten=0";
+            coma=true;
+          }
+
+        }
+
+        if(productData.Crustaceos != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Crustaceos==1){
+            sql +=  "crustaceos=1";
+            coma=true;
+          }else{
+            sql +=  "crustaceos=0";
+            coma=true;
+          };
+        }
+
+        if(productData.Huevos != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Huevos==1){
+            sql +=  "huevos=1";
+            coma=true;
+          }else{
+            sql +=  "huevos=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Pescado != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Pescado==1){
+            sql +=  "pescado=1";
+            coma=true;
+          }else{
+            sql +=  "pescado=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Cacahuetes != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Cacahuetes==1){
+            sql +=  "cacahuetes=1";
+            coma=true;
+          }else{
+            sql +=  "cacahuetes=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Soja != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Soja==1){
+            sql +=  "soja=1";
+            coma=true;
+          }else{
+            sql +=  "soja=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Lacteos != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Lacteos==1){
+            sql +=  "lacteos=1";
+            coma=true;
+          }else{
+            sql +=  "lacteos=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Frutos_cascara != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Frutos_cascara==1){
+            sql +=  "frutos_cascara=1";
+            coma=true;
+          }else{
+            sql +=  "frutos_cascara=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Apio != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Apio==1){
+            sql +=  "apio=1";
+            coma=true;
+          }else{
+            sql +=  "apio=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Mostaza != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Mostaza==1){
+            sql +=  "mostaza=1";
+            coma=true;
+          }else{
+            sql +=  "mostaza=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Sesamo != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Sesamo==1){
+            sql +=  "sesamo=1";
+            coma=true;
+          }else{
+            sql +=  "sesamo=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Dioxido_azufre != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Dioxido_azufre==1){
+            sql +=  "dioxido_azufre=1";
+            coma=true;
+          }else{
+            sql +=  "dioxido_azufre=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Moluscos != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Moluscos==1){
+            sql +=  "moluscos=1";
+            coma=true;
+          }else{
+            sql +=  "moluscos=0";
+            coma=true;
+          }
+        }
+
+        if(productData.Altramuces != 0)
+        {
+          if(coma== true)
+          {
+            sql += ",";
+            coma=false;
+          }
+          if(productData.Altramuces==1){
+            sql +=  "altramuces=1";
+            coma=true;
+          }else{
+            sql +=  "altramuces=0";
+            coma=true;
+          }
+        }
+
     sql +=  " WHERE idproducto="+connection.escape(idproducto)+"AND restaurantep = "+connection.escape(id);
 
     console.log(sql);

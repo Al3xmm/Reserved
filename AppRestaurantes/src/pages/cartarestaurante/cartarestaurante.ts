@@ -1,6 +1,6 @@
 import { ModificarproductoPage } from './../modificarproducto/modificarproducto';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 import { AgregarproductoPage } from '../agregarproducto/agregarproducto';
 
@@ -16,7 +16,7 @@ export class CartarestaurantePage {
 
   categoria={nombre: ''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider, private menu:MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public restaurantService:RestaurantProvider, private menu:MenuController,private loadingCtrl:LoadingController) {
     this.menu.enable(true, 'menu2');
   }
 
@@ -30,10 +30,19 @@ export class CartarestaurantePage {
     this.navCtrl.push(AgregarproductoPage);
   }
   
-  modificar_producto(id){
+  modificar_producto(id) {
     this.restaurantService.producto_id(id);
     this.restaurantService.productoactual=id;
-    this.navCtrl.push(ModificarproductoPage);
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando...',
+      duration: 500,
+    });
+
+    loading.onDidDismiss(() => {
+      this.navCtrl.push(ModificarproductoPage);
+    });
+
+    loading.present();
   }
 
   mostrar_formulario(){

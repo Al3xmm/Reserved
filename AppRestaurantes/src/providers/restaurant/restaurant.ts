@@ -39,6 +39,8 @@ export class RestaurantProvider {
   //informacion producto a modificar
   infoproductoactual:any;
 
+  alergenosproductoactual={gluten:false,crustaceos:false,huevos:false,pescado:false,cacahuetes:false,soja:false,lacteos:false,frutos_cascara:false,apio:false,mostaza:false,sesamo:false,dioxido_azufre:false,moluscos:false,altramuces:false};
+
   //comentarios hechos hacia mi restaurante
   comentariosrestaurante:any;
 
@@ -313,6 +315,7 @@ export class RestaurantProvider {
 
     this.http.get(url+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.infoproductoactual=data;
+      this.comprobar_alergenos();
     });
 
   }
@@ -643,6 +646,92 @@ export class RestaurantProvider {
  
     // Use the FileTransfer to upload the image
     return fileTransfer.upload(targetPath, url, options);
+  }
+
+  comprobar_alergenos(){
+    if(this.infoproductoactual[0].gluten==0){
+      this.alergenosproductoactual.gluten=false;
+    }else{
+      this.alergenosproductoactual.gluten=true;
+    }
+
+    if(this.infoproductoactual[0].crustaceos==0){
+      this.alergenosproductoactual.crustaceos=false;
+    }else{
+      this.alergenosproductoactual.crustaceos=true;
+    }
+
+    if(this.infoproductoactual[0].huevos==0){
+      this.alergenosproductoactual.huevos=false;
+    }else{
+      this.alergenosproductoactual.huevos=true;
+    }
+
+    if(this.infoproductoactual[0].pescado==0){
+      this.alergenosproductoactual.pescado=false;
+    }else{
+      this.alergenosproductoactual.pescado=true;
+    }
+
+    if(this.infoproductoactual[0].cacahuetes==0){
+      this.alergenosproductoactual.cacahuetes=false;
+    }else{
+      this.alergenosproductoactual.cacahuetes=true;
+    }
+
+    if(this.infoproductoactual[0].soja==0){
+      this.alergenosproductoactual.soja=false;
+    }else{
+      this.alergenosproductoactual.soja=true;
+    }
+
+    if(this.infoproductoactual[0].lacteos==0){
+      this.alergenosproductoactual.lacteos=false;
+    }else{
+      this.alergenosproductoactual.lacteos=true;
+    }
+
+    if(this.infoproductoactual[0].frutos_cascara==0){
+      this.alergenosproductoactual.frutos_cascara=false;
+    }else{
+      this.alergenosproductoactual.frutos_cascara=true;
+    }
+
+    if(this.infoproductoactual[0].apio==0){
+      this.alergenosproductoactual.apio=false;
+    }else{
+      this.alergenosproductoactual.apio=true;
+    }
+
+    if(this.infoproductoactual[0].mostaza==0){
+      this.alergenosproductoactual.mostaza=false;
+    }else{
+      this.alergenosproductoactual.mostaza=true;
+    }
+
+    if(this.infoproductoactual[0].sesamo==0){
+      this.alergenosproductoactual.sesamo=false;
+    }else{
+      this.alergenosproductoactual.sesamo=true;
+    }
+
+    if(this.infoproductoactual[0].dioxido_azufre==0){
+      this.alergenosproductoactual.dioxido_azufre=false;
+    }else{
+      this.alergenosproductoactual.dioxido_azufre=true;
+    }
+
+    if(this.infoproductoactual[0].altramuces==0){
+      this.alergenosproductoactual.altramuces=false;
+    }else{
+      this.alergenosproductoactual.altramuces=true;
+    }
+
+    if(this.infoproductoactual[0].moluscos==0){
+      this.alergenosproductoactual.moluscos=false;
+    }else{
+      this.alergenosproductoactual.moluscos=true;
+    }
   }
 
 
