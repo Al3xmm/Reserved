@@ -1,0 +1,29 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Historial de reservas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <br>
+    <ion-item *ngFor="let item of userService.reservasusuario">
+      <ion-col>
+        <h4>{{item.nombre}}</h4>
+        <p>
+          <br>
+          <b>Dia:</b> {{ item.dia | date : format : timezone}}
+          <br>
+          <b>Hora:</b> {{item.hora}}
+          <br>
+          <b>Comensales:</b> {{item.comensales}}
+        </p>
+        <button ion-button (click)="verpedido(item.idPedido)" >Ver pedido</button>
+      </ion-col>
+    </ion-item>
+    </ion-grid>
+</ion-content>

@@ -18,28 +18,14 @@ import { PedidosAntiguosPage } from './../pedidos-antiguos/pedidos-antiguos';
 })
 export class MisReservasPage {
   eliminar={dia: '', turno:'', restaurante:''}
-  public buttonClicked: boolean = false;
-  public buttonClicked2: boolean = false;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService: RestaurantsProvider) {
-    
+   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider,public restaurantService: RestaurantsProvider) {
+    this.userService.reservasfuturas();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MisReservasPage');
   }
-  historial(){
-    this.userService.mis_reservas();
-    this.navCtrl.setRoot(MisReservasPage);
-    this.userService.botonhistorial=false;
-    this.buttonClicked2 = !this.buttonClicked2;
-  }
-  pendientes(){
-    this.userService.reservasfuturas()
-    this.navCtrl.setRoot(MisReservasPage);
-    this.userService.botonpendientes=false;
-    this.buttonClicked = !this.buttonClicked;
-  }
+
   modificar_reserva(id){
     this.userService.reservaactual=id;
     this.navCtrl.push(ModificarReservaPage);
@@ -54,11 +40,5 @@ export class MisReservasPage {
     }
     this.userService.eliminar_reserva(id,this.eliminar);
     this.navCtrl.push(MisReservasPage);
-  }
-  verpedido(id){
-    this.userService.reservation=id;
-    this.restaurantService.productospedido();
-    this.navCtrl.push(PedidosAntiguosPage);
- 
   }
 }

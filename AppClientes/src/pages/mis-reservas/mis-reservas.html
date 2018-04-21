@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mis Reservas</ion-title>
+    <ion-title>Reservas pendientes</ion-title>
 
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
@@ -11,14 +11,10 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
     <ion-grid>
-        <br>
-        <button  ion-button (click)="historial()">Historial de reservas</button>
-        <ion-item *ngIf="!buttonClicked2" >
-          <ion-col *ngFor="let item of userService.reservasusuario">
+        <ion-item *ngFor="let item of userService.reservafutura">
+          <ion-col>
             <h4>{{item.nombre}}</h4>
             <p>
               <br>
@@ -27,23 +23,6 @@
               <b>Hora:</b> {{item.hora}}
               <br>
               <b>Comensales:</b> {{item.comensales}}
-            </p>
-            <button ion-button (click)="verpedido(item.idPedido)" >Ver pedido</button>
-            <hr>
-          </ion-col>
-        </ion-item>
-        <br>
-        <button ion-button (click)="pendientes()">Reservas pendientes</button>
-        <ion-item *ngIf="!buttonClicked" >
-          <ion-col *ngFor="let item of userService.reservafutura">
-            Restaurante: {{item.nombre}}
-            <p>
-              <br>
-              Dia: {{ item.dia | date : format : timezone}}
-              <br>
-              Hora: {{item.hora}}
-              <br>
-              Comensales: {{item.comensales}}
             </p>
             <button ion-button (click)="eliminar_reserva(item.idReserva)">Eliminar</button>
             <button ion-button (click)="modificar_reserva(item.idReserva)">Modificar reserva</button>

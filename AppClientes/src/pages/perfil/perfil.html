@@ -18,14 +18,16 @@
     <ion-grid>
         <ion-item *ngFor="let item of userService.infouser">
           <ion-col>
-            <h4>Nick: {{item.nombre}}</h4>
+            <h4>{{item.nombre}}</h4>
             <p>
               <br>
-              Nombre: {{item.nombre}}
+              <b>Nombre:</b> {{item.nombre}}
               <br>
-              email: {{item.email}}
+              <b>email:</b> {{item.email}}
             </p>
+            <br>
             <button ion-button (click)="modificarperfil()">Modificar Perfil</button>
+            <button ion-button (click)="verhistorial()">Historial de reservas</button>
           </ion-col>
         </ion-item>
       </ion-grid>

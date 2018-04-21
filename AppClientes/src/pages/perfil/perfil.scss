@@ -3,14 +3,21 @@ page-perfil {
         background-color:transparent;
     }
     .button-default-md{
+        margin-left: -1px;
         background-color:#76323F;
     }
     h4{
         color:#76323F;
-        //text-align:center;
-        font-size: 1.1em!important;
+        text-align:center;
+        font-size: 1.2em!important;
     }
     .scroll-content{
         margin-top: 30px!important;
+    }
+    .button-inner{
+        margin-left: -2px;
+    }
+    p{
+        font-size: 1em!important;
     }
 }

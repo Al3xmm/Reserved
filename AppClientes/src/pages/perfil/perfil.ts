@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ModificarperfilPage } from './../modificarperfil/modificarperfil';
 import { ModificarReservaPage } from './../modificar-reserva/modificar-reserva';
+import { HistorialPage } from './../historial/historial';
 
 
 @IonicPage()
@@ -24,5 +25,7 @@ export class PerfilPage {
   modificarperfil(){
     this.navCtrl.push(ModificarperfilPage);
   }
-
+  verhistorial(){
+    this.navCtrl.push(HistorialPage);
+  }
 }

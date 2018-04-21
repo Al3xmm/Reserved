@@ -4,6 +4,7 @@ import { CartaPage } from './../pages/carta/carta';
 import { MipedidoPage } from './../pages/mipedido/mipedido';
 import { IniciarpedidoPage } from './../pages/iniciarpedido/iniciarpedido';
 import { MiscategoriasPage } from './../pages/miscategorias/miscategorias';
+import { HistorialPage } from './../pages/historial/historial';
 import { CategoriaspedidoPage } from './../pages/categoriaspedido/categoriaspedido';
 import { PedirPage } from './../pages/pedir/pedir';
 import { ProductospedidoPage } from './../pages/productospedido/productospedido';
@@ -54,7 +55,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CategoriaspedidoPage,
     IniciarpedidoPage,
     ModificarReservaPage,
-    PedidosAntiguosPage
+    PedidosAntiguosPage,
+    HistorialPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CategoriaspedidoPage,
     IniciarpedidoPage,
     ModificarReservaPage,
-    PedidosAntiguosPage
+    PedidosAntiguosPage,
+    HistorialPage
   ],
   providers: [
     StatusBar,
