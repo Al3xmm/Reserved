@@ -14,7 +14,7 @@ var Comments={};
 /* Mostar los comentarios de un usuario */
 Comments.findCommentsUser=function(id, callback){
     if (connection){
-        var sql=("SELECT c.contenido, c.fecha, r.nombre FROM restaurantes r, comentarios c, usuarios u WHERE c.UsuarioC="+connection.escape(id)+" AND r.IdRestaurante=c.RestauranteC");
+        var sql=("SELECT c.contenido, c.fecha, c.valoracion, r.nombre FROM restaurantes r, comentarios c, usuarios u WHERE c.UsuarioC="+connection.escape(id)+" AND r.IdRestaurante=c.RestauranteC");
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -28,7 +28,7 @@ Comments.findCommentsUser=function(id, callback){
 /* Mostar los comentarios de un restaurante */
 Comments.findCommentsRestaurant=function(id, callback){
     if (connection){
-        var sql=("SELECT DISTINCT c.idComentario, u.idUsuario, c.contenido, c.fecha, u.nombre, c.denunciado FROM restaurantes r, comentarios c, usuarios u WHERE c.RestauranteC="+connection.escape(id)+" AND u.IdUsuario=c.UsuarioC");
+        var sql=("SELECT DISTINCT c.idComentario, u.idUsuario, c.contenido, c.valoracion, c.fecha, u.nombre, c.denunciado FROM restaurantes r, comentarios c, usuarios u WHERE c.RestauranteC="+connection.escape(id)+" AND u.IdUsuario=c.UsuarioC");
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

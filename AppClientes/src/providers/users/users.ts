@@ -44,7 +44,7 @@ export class UsersProvider {
     return this.http.post(url, data, {responseType: 'json'} )
       .map(resp=>{
         //si entra, significa que el nick ya esta siendo utilizado por otro usuario.
-        if(resp==='"Nick no disponible"'){
+        if(resp==='Nick no disponible'){
           this.alertCtrl.create({
             title:"Error",
             subTitle:"Nick ya en uso",

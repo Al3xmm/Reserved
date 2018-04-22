@@ -51,7 +51,13 @@
         <ion-item *ngFor="let item2 of restaurantService.comentariosrestaurante">
             <ion-row>
               <span>{{item2.nombre}} - {{ item2.fecha | date : format : timezone}}</span>
-              </ion-row>
+              <ng-template ngFor let-item [ngForOf]="createRange(item2.valoracion)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                  <ion-icon  md="md-star"></ion-icon>
+              </ng-template>
+              <ng-template ngFor let-item [ngForOf]="createRange2(item2.valoracion)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                  <ion-icon  md="md-star-outline"></ion-icon>
+              </ng-template>
+            </ion-row>
               <ion-col>
                 <p>{{item2.contenido}}</p>
             </ion-col>

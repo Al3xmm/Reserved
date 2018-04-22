@@ -19,6 +19,16 @@
       <ion-label floating>Contenido</ion-label>
       <ion-textarea type="text" [(ngModel)]="comentario.contenido" name="contenido" required></ion-textarea>
     </ion-item>
+    <ion-item>
+      <ion-label>Valoración</ion-label>
+      <ion-select [(ngModel)]="comentario.valoracion" [ngModelOptions]="{standalone: true}">
+          <ion-option value="1">1 - Muy Malo</ion-option>
+          <ion-option value="2">2 - Malo</ion-option>
+          <ion-option value="3">3 - Normal</ion-option>
+          <ion-option value="4">4 - Bueno</ion-option>
+          <ion-option value="5">5 - Muy Bueno</ion-option>
+      </ion-select>
+    </ion-item>
 
     <button ion-button type="submit" block>Comentar</button>
   </form>

@@ -546,6 +546,7 @@ router.post('/comment',function(req,res,next){
     var commentData={
         IdComentario:null,
         contenido:req.body.contenido,
+        valoracion:req.body.valoracion,
         fecha:currentdate,
         usuarioc:req.body.usuarioc,
         restaurantec:req.body.restaurantec,

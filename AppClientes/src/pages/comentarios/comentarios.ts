@@ -11,7 +11,7 @@ import { RestaurantPage } from './../restaurant/restaurant';
 })
 export class ComentariosPage {
 
-comentario={ contenido:'', usuarioc:'', restaurantec:''}
+comentario={ contenido:'',valoracion:0, usuarioc:'', restaurantec:''}
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
   }
 
