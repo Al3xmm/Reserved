@@ -14,35 +14,22 @@
 
 
 <ion-content padding>
-
     <ion-grid>
-        <button ion-button (click)="mostrar_formulario()">Crear Categoria</button>
-        <form *ngIf="buttonClicked" (ngSubmit)="crear_categoria()">
-            <ion-item>
-              <ion-label>Nombre</ion-label>
-              <ion-input type="text" [(ngModel)]="categoria.nombre" name="name" required></ion-input>
-            </ion-item>
-            <br>
-            <button ion-button [disabled]="categoria.nombre.length<2" type="submit" block>Crear</button>
-          </form>
-        <br>
-        <button ion-button (click)="agregar_producto()" >Agregar Producto</button>
-        <ion-item *ngFor="let item of restaurantService.cartarestaurante">
+        <ion-item *ngFor="let item of restaurantService.productoscategoria">
+            <ion-thumbnail item-left>
+                <img width="80" height="80" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
+              </ion-thumbnail>
           <ion-col>
-            <p>
+              <h4>{{item.nombre}}</h4>
               <br>
-              Nombre: {{item.nombre}}
+              <b>Precio:</b> {{item.precio}}
               <br>
-              Precio: {{item.precio}}
+              <b>Tipo:</b> {{item.tipo}}
               <br>
-              Tipo: {{item.tipo}}
+              <b>Información:</b> {{item.informacion}}
               <br>
-              Información: {{item.informacion}}
-              <br>
-              Categoría: {{item.categoria}}
-              <br>
+              <p>
               <button ion-button (click)="modificar_producto(item.idProducto)">Modificar</button>
-              <br>
               <button ion-button (click)="eliminar_producto(item.idProducto)">Eliminar</button>
             </p>
           </ion-col>

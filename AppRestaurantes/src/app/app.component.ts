@@ -6,6 +6,7 @@ import { ListaempleadosPage } from './../pages/listaempleados/listaempleados';
 import { RestaurantProvider } from './../providers/restaurant/restaurant';
 import { EmpleadoPage } from './../pages/empleado/empleado';
 import { CamareroPage } from './../pages/camarero/camarero';
+import { CategoriasPage } from './../pages/categorias/categorias';
 import { Component } from '@angular/core';
 import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,6 +34,7 @@ export class MyApp {
   modificar=ModidifcarrestaurantePage;
   empleados=ListaempleadosPage;
   carta=CartarestaurantePage;
+  categorias= CategoriasPage;
   comentarios=ComentariosPage;
   reservas=ReservasPage;
   informacion=InformacionPage;

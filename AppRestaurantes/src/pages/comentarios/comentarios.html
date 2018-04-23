@@ -24,10 +24,11 @@
     </form>
     <h2>Todos los comentarios</h2>
     <ion-item *ngFor="let item of restaurantService.comentariosrestaurante">
-      <ion-col>
-        {{item.nombre}} - {{ item.fecha | date : format : timezone}}
+      <ion-row>
+        <span>{{item.nombre}} - {{ item.fecha | date : format : timezone}}</span>
+      </ion-row>
+        <ion-col>
         <p>
-          <br>
           {{item.contenido}}
         </p>
       </ion-col>

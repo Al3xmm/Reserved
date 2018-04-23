@@ -14,6 +14,7 @@ import { ReservasPage } from './../pages/reservas/reservas';
 import { ModificarproductoPage } from './../pages/modificarproducto/modificarproducto';
 import { AgregarproductoPage } from './../pages/agregarproducto/agregarproducto';
 import { CartarestaurantePage } from './../pages/cartarestaurante/cartarestaurante';
+import { CategoriasPage } from './../pages/categorias/categorias';
 import { AgregarempleadoPage } from './../pages/agregarempleado/agregarempleado';
 import { ListaempleadosPage } from './../pages/listaempleados/listaempleados';
 import { BrowserModule } from '@angular/platform-browser';
@@ -70,7 +71,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     ModidifcarrestaurantePage,
     CartaPage,
     ModificarempleadoPage,
-    MasfotosPage
+    MasfotosPage,
+    CategoriasPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     ModidifcarrestaurantePage,
     CartaPage,
     ModificarempleadoPage,
-    MasfotosPage
+    MasfotosPage,
+    CategoriasPage
   ],
   providers: [
     StatusBar,

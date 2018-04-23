@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ActionSheetController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ListaempleadosPage } from '../listaempleados/listaempleados';
-
+import { CategoriasPage } from '../categorias/categorias';
 import { ModalController } from 'ionic-angular';
 
 @IonicPage()
@@ -108,8 +108,8 @@ export class RestaurantePage {
   }
 
   mi_carta(){
-    this.restaurantService.mi_carta();
-    this.navCtrl.setRoot(CartarestaurantePage);
+    this.restaurantService.categorias_restaurante();
+    this.navCtrl.setRoot(CategoriasPage);
   }
 
   mis_comentarios(){

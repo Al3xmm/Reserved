@@ -579,16 +579,18 @@ export class RestaurantProvider {
     this.storage.get('token').then((val) => {
       this.http.get(url+this.session.idRestaurante+"/category",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.allcategorias=data;
+        console.log(this.allcategorias);
       });
     });
   }
+  
 
   productos_porcategoria(id){
     let url = "api/restaurants/";
     this.http.get(url+this.session.idRestaurante+"/products/"+"category/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.productoscategoria =data;
-      //console.log(this.productoscategoria);
+      console.log(this.productoscategoria);
     })
   }
 
@@ -733,6 +735,4 @@ export class RestaurantProvider {
       this.alergenosproductoactual.moluscos=true;
     }
   }
-
-
 }

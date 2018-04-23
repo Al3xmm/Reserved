@@ -2,6 +2,7 @@ import { CartarestaurantePage } from './../cartarestaurante/cartarestaurante';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
+import { CategoriasPage } from './../categorias/categorias';
 
 import { Camera } from '@ionic-native/camera';
 
@@ -28,7 +29,7 @@ export class AgregarproductoPage {
     this.restaurantService.add_producto(this.producto)
       .subscribe(()=>{
         if(this.restaurantService.anyadir_producto==true){
-          this.navCtrl.setRoot(CartarestaurantePage);
+          this.navCtrl.setRoot(CategoriasPage);
         }
     });
     
