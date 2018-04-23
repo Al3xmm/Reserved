@@ -77,16 +77,16 @@ router.get('/:id', function(req, res, next) {
 
 /* PUT Modificar un usuario */
 router.put('/:id',function(req,res,next){
+    if(req.body.password!=''){
+      var hash=bcrypt.hashSync(req.body.password,salt);
+    }else{
+      var hash='';
+    }
 
-    var hash=bcrypt.hashSync(req.body.password,salt);
     var userData={
         id:req.params.id,
         password:hash,
-        nombre:req.body.nombre,
-        apellidos:req.body.apellidos,
         email:req.body.email,
-        telefono:req.body.telefono,
-        direccion:req.body.direccion
     };
 
     User.update(userData,function(error,data){
@@ -372,14 +372,14 @@ router.post('/addpin', function(req,res,next){
         if (error){
             res.json(500,error);
         }else{
-            if(data==null){            
+            if(data==null){
                 res.json(200,"Pin incorrecto");
             }
             else{
                 res.json(200,data);
             }
         }
-        
+
     })
 });
 /*Modificar usuario y borrar pin*/

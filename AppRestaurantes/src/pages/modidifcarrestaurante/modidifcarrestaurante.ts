@@ -1,7 +1,7 @@
 import { RestaurantePage } from './../restaurante/restaurante';
 import { RestaurantProvider } from './../../providers/restaurant/restaurant';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,8 +11,9 @@ import { IonicPage, NavController, NavParams, MenuController, ModalController } 
 export class ModidifcarrestaurantePage {
 
   restaurant= { nombre: '', password: '', email: '',horario: '',descripcion: '',direccion: '',telefono: '',ciudad: '',aforo: '',tipoComida: '',coordenadas: ''};
+  pass={confirmarpassword:''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantProvider, private menu:MenuController, private modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantProvider,private alertCtrl:AlertController, private menu:MenuController, private modalCtrl:ModalController) {
     this.menu.enable(true, 'menu2');
   }
 
@@ -21,11 +22,30 @@ export class ModidifcarrestaurantePage {
     if(this.restaurantService.latlng!=undefined){
       this.restaurant.coordenadas=this.restaurantService.latlng;
     }
+
+    if(this.restaurant.password!=''){
+      if(this.restaurant.password==this.pass.confirmarpassword){
+        this.restaurantService.modify_restaurant(this.restaurant)
+        .subscribe(()=>{
+            this.navCtrl.setRoot(RestaurantePage);
+        });
+      }else{
+        this.alertCtrl.create({
+          title:"Error",
+          subTitle:"Las contraseñas no coinciden",
+          buttons:["OK"]
+        }).present();
+      }
+    }
+
+    if(this.restaurant.password==''){
+      this.restaurantService.modify_restaurant(this.restaurant)
+      .subscribe(()=>{
+          this.navCtrl.setRoot(RestaurantePage);
+      });
+    } 
     
-    this.restaurantService.modify_restaurant(this.restaurant)
-    .subscribe(()=>{
-        this.navCtrl.setRoot(RestaurantePage);
-    });
+    
   }
 
   openMap() {

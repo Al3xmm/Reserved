@@ -20,6 +20,10 @@
         <ion-input type="password" [(ngModel)]="employee.password" name="password" ></ion-input>
       </ion-item>
       <br>
+        <ion-item>
+          <ion-label floating>Confirmar Password</ion-label>
+          <ion-input type="password" [(ngModel)]="pass.confirmarpassword" name="password2" required></ion-input>
+        </ion-item>
       <button ion-button type="submit" block>Cambiar</button>
     </form>
 

@@ -189,10 +189,16 @@ router.get('/:id/:dia/:turno/reservations', function(req, res, next) {
 
 /* PUT Modificar un Restaurante */
 router.put('/:id',function(req,res,next){
+    if(req.body.password!=''){
+      var hash=bcrypt.hashSync(req.body.password,salt);
+    }else{
+      var hash='';
+    }
+
     var restaurantData={
         id:req.params.id,
         nombre:req.body.nombre,
-        password:req.body.password,
+        password:hash,
         email:req.body.email,
         horario:req.body.horario,
         descripcion:req.body.descripcion,
