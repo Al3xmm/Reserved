@@ -11,12 +11,12 @@
 <ion-content padding>
     <form (ngSubmit)="add_empleado()">
         <ion-item>
-          <ion-label>Nombre</ion-label>
+          <ion-label floating>Nombre</ion-label>
           <ion-input type="text" [(ngModel)]="empleado.nick" name="name" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>Password</ion-label>
+          <ion-label floating>Password</ion-label>
           <ion-input type="password" [(ngModel)]="empleado.password" name="password" required></ion-input>
         </ion-item>
         <br>

@@ -13,46 +13,42 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-grid>
+      <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
       <ion-item *ngFor="let item of restaurantService.inforestaurant">
-
-        
-
-        <ion-item tappable (click)="openImage()">
+        <ion-thumbnail item-left  tappable (click)="openImage()">
           <img width="120" height="120" [src]="urlfotoprincipal">
-        </ion-item>
-
-        <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
-
+        </ion-thumbnail>
         <ion-col>
-          <h2>{{item.nombre}}</h2>
+            <h2>{{item.nombre}}</h2>
           <p>
-            Descripcion: {{item.descripcion}}
+            <b>Descripcion:</b> {{item.descripcion}}
           </p>
           <p>
-            Direccion: {{item.direccion}}
+            <b>Direccion:</b> {{item.direccion}}
           </p>
           <p>
-            Telefono: {{item.telefono}}
+            <b>Telefono:</b> {{item.telefono}}
           </p>
-          <div class="botonesrestaurante">
-            <button ion-button (click)="mas_fotos()">Mas fotos</button>
-            <br>
-            <button ion-button (click)="modificar_restaurante()">Modificar</button>
-            <br>
-            <button ion-button (click)="mis_empleados()">Empleados</button>
-            <br>
-            <button ion-button (click)="mi_carta()">Carta</button>
-            <br>
-            <button ion-button (click)="mis_comentarios()">Mis comentarios</button>
-            <br>
-            <button ion-button (click)="mis_reservas()">Reservas</button>
-            <br>
-            <button ion-button (click)="mi_informacion()">Información</button>
-          </div>
         </ion-col>
       </ion-item>
+          <div class="botonesrestaurante">
+            <p>
+                <button ion-button (click)="mis_reservas()">Reservas</button>
+                <button ion-button (click)="mi_carta()">Carta</button>
+            </p>
+            <p>
+                <button ion-button (click)="mi_informacion()">Información</button>
+                <button ion-button (click)="mis_comentarios()">Mis comentarios</button>
+            </p>
+            <p>
+                <button ion-button (click)="modificar_restaurante()">Modificar</button>           
+                <button ion-button (click)="mis_empleados()">Empleados</button>
+            </p>
+            <button ion-button (click)="mas_fotos()">Mas fotos</button>
+          </div>
+    
     </ion-grid>
 
 </ion-content>

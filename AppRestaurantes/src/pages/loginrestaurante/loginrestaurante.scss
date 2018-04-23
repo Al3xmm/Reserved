@@ -1,13 +1,18 @@
 page-loginrestaurante {
 
     .item-md{
-        font-size: 1.3em;
-        margin-bottom: 2em;
-        background-color: #fff0;
+        background-color:transparent;
     }
 
     .grid{
-        font-size: 1.3em;
+        font-size: 1.1em;
+    }
+    .button-md{
+        margin-top: 3em;
+        background-color:#76323F;
+    }
+    .ng-dirty{
+        font-size: 1.1em;
     }
 
 }

@@ -16,12 +16,12 @@
 <ion-content padding>
     <form (ngSubmit)="modify_restaurant()">
       <ion-item>
-        <ion-label>Nombre</ion-label>
+        <ion-label >Nombre</ion-label>
         <ion-input type="text" [(ngModel)]="restaurant.nombre" name="name" placeholder={{restaurantService.inforestaurant[0].nombre}} ></ion-input>
       </ion-item>
       <br>
       <ion-item>
-        <ion-label>Password</ion-label>
+        <ion-label floating>Password</ion-label>
         <ion-input type="password" [(ngModel)]="restaurant.password" name="password" ></ion-input>
       </ion-item>
         <ion-item>
@@ -30,7 +30,7 @@
         </ion-item>
       <br>
       <ion-item>
-        <ion-label>Email</ion-label>
+        <ion-label >Email</ion-label>
         <ion-input type="email" [(ngModel)]="restaurant.email" name="email" placeholder={{restaurantService.inforestaurant[0].email}} ></ion-input>
       </ion-item>
       <br>

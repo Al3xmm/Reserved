@@ -11,17 +11,17 @@
 <ion-content padding>
     <form (ngSubmit)="add_producto()">
         <ion-item>
-          <ion-label>Nombre</ion-label>
+          <ion-label floating>Nombre</ion-label>
           <ion-input type="text" [(ngModel)]="producto.nombre" name="name" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>Precio</ion-label>
+          <ion-label floating>Precio</ion-label>
           <ion-input type="number" [(ngModel)]="producto.precio" name="precio" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>Descripción del producto</ion-label>
+          <ion-label floating>Descripción del producto</ion-label>
           <ion-textarea [(ngModel)]="producto.informacion" name="informacion" required></ion-textarea>
         </ion-item>
         <br>
