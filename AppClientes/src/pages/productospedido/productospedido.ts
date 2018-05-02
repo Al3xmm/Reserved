@@ -30,7 +30,7 @@ export class ProductospedidoPage {
     this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
     console.log(this.userService.reservaconfirmada[0].idRestaurante);
     this.restaurantService.categorias_restaurante();
-    this.navCtrl.setRoot(CategoriaspedidoPage);
+    this.navCtrl.push(CategoriaspedidoPage);
   }
   pedirCuenta(){
     this.alertCtrl.create({

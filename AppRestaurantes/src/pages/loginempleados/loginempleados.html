@@ -11,11 +11,11 @@
 
   <form (ngSubmit)="login_empleado()">
       <ion-item>
-        <ion-label>Nick</ion-label>
+        <ion-label floating>Nick</ion-label>
         <ion-input type="text" [(ngModel)]="empleado.nick" name="nick" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Password</ion-label>
+        <ion-label floating>Password</ion-label>
         <ion-input type="password" [(ngModel)]="empleado.password" name="password" required></ion-input>
       </ion-item>
       

@@ -1,5 +1,5 @@
 <!--
-  Generated template for the MipedidoPage page.
+  Generated template for the CarritoPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -14,20 +14,16 @@
     </ion-buttons>
 
 
-    <ion-title>Mi pedido</ion-title>
+    <ion-title>Pedido</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-item>
-        <h3>Precio total:</h3>
-        {{pedidoService.suma}}€
-      </ion-item>
   <ion-item *ngFor="let item of pedidoService.plato; let i = index;">
       <ion-thumbnail item-left>
-          <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+          <img width="80" height="80" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
       </ion-thumbnail>
       <h2>{{item.nombre}}</h2>
       <br>
@@ -37,8 +33,10 @@
     <button ion-button item-right
             (click)="pedidoService.eliminarplato(i)"><ion-icon name="trash"></ion-icon></button>
   </ion-item>
-  <button ion-button
-  (click)="add_pedido()">
-  Enviar Pedido
-</button>
+  
+  <ion-item>
+    <h3>Precio total:</h3>
+    {{pedidoService.suma}}€
+  </ion-item>
+  <button ion-button (click)="anyadirproductopedido()">Añadir</button>
 </ion-content>

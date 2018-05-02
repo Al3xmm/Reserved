@@ -3,10 +3,12 @@
   <ion-navbar>
     <ion-title>Carta Restaurante</ion-title>
 
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+    <ion-buttons end>
+      <button right ion-button icon-only
+      (click)="verpedido()">
+      <ion-icon name="restaurant"></ion-icon>
+      <ion-badge color="danger">{{pedidoService.plato.length}}</ion-badge>
+</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -26,7 +28,11 @@
           </p>
           <p>
             <br>
-            <button ion-button (click)="anyadirproductopedido(item)">Añadir</button>
+            <button ion-button block icon-left
+            (click)="pedidoService.agregarpedido(item)">
+      <ion-icon name ="restaurant"></ion-icon>
+      Agregar al pedido
+    </button>
           </p>
         </ion-col>
       </ion-item>

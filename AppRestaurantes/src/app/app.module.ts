@@ -43,6 +43,8 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { SubirimgprincipalPage } from '../pages/subirimgprincipal/subirimgprincipal';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { PedidoProvider } from '../providers/pedido/pedido';
+import { CarritoPage } from '../pages/carrito/carrito';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CartaPage,
     ModificarempleadoPage,
     MasfotosPage,
-    CategoriasPage
+    CategoriasPage,
+    CarritoPage
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CartaPage,
     ModificarempleadoPage,
     MasfotosPage,
-    CategoriasPage
+    CategoriasPage,
+    CarritoPage
   ],
   providers: [
     StatusBar,
@@ -117,7 +121,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestaurantProvider,
     Camera,
-    FileTransfer
+    FileTransfer,
+    PedidoProvider
   ]
 })
 export class AppModule {}

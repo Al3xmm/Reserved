@@ -22,8 +22,20 @@ page-pedir {
         font-size: 3.0rem;
         color:#76323F;
     }
-    .item-md ion-thumbnail ion-img{
-        width: 120px!important;
-        height: 120px!important;
+    ion-thumbnail img{
+        width: 100px!important;
+        height: 100px!important;
       }
+    .icon-md{
+        font-size: 2.2rem;
+        
+    }
+    p>button{
+        margin-top: -6px!important;
+        
+    }
+    .ion-md-information-circle{
+        color: #76323F;
+    }
+
 }

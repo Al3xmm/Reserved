@@ -17,7 +17,6 @@ export class MiscategoriasPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MiscategoriasPage');
   }
-
   mis_productos(id){
     this.restaurantService.productos_porcategoria(id);
     //console.log(id);

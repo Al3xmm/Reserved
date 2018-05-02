@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { CartaPage} from './../carta/carta';
 import { PedirPage} from './../pedir/pedir';
-/**
- * Generated class for the CategoriaspedidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,7 +11,7 @@ import { PedirPage} from './../pedir/pedir';
 })
 export class CategoriaspedidoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public restaurantService: RestaurantsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider) {
   }
 
   ionViewDidLoad() {
@@ -28,5 +22,4 @@ export class CategoriaspedidoPage {
     //console.log(id);
     this.navCtrl.push(PedirPage);
   }
-
 }

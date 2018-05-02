@@ -16,12 +16,13 @@
               <ion-thumbnail item-left>
               <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
             </ion-thumbnail>
-              <h4>{{item.nombre}}</h4>
+            <p>{{item.nombre}}
+              <button ion-button clear right (click)="presentLoadingCustom(item.idProducto)"><ion-icon name="information-circle"></ion-icon></button>
+            </p>
               <br>
               <p>
                 <b>Precio:</b> {{item.precio}}€
               </p>
-              <button ion-button clear (click)="presentLoadingCustom(item.idProducto)">Ver información</button>
           </ion-item>
       </ion-grid>
   </ion-content>

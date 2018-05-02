@@ -1,4 +1,4 @@
-page-mipedido {
+page-carrito {
     .item-md{
         background-color:transparent;
     }
@@ -25,9 +25,9 @@ page-mipedido {
         font-size: 3.0rem;
         color:#76323F;
     }
-    h3{
-        color:#76323F;
-        //text-align:center;
-        font-size: 1.1em!important;
-    }
+ 
+    .item-md ion-thumbnail ion-img{
+        width: 80px!important;
+        height: 80px!important;
+      }
 }
