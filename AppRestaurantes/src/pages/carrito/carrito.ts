@@ -41,13 +41,12 @@ export class CarritoPage {
     let finishHour=hour+":"+min+":"+seg[0];
     
     this.producto.hora=finishdate+" "+finishHour;
-
+    this.restaurantService.sumar_precio(this.producto.productop);
     this.restaurantService.anyadir_producto_pedido(this.producto)
     .subscribe(()=>{
       console.log("Producto pedido");
       this.pedidoService.plato.splice(0,i);
       this.pedidoService.suma=0;
-      this.restaurantService.sumar_precio(this.producto.productop);
       this.navCtrl.setRoot(CamareroPage); 
     });
   }
