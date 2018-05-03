@@ -441,8 +441,44 @@ export class RestaurantProvider {
     let url="api/restaurants/orders/";
     this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosdepedido=data;
+      //this.productosdepedido[1].cantidad=9;
+      var i=0;
+      for(i=0;i<this.productosdepedido.length;i++){
+        this.productosdepedido[i].cantidad=1;
+      }
+      this.agrupar_productos();
       this.idpedidoactual=id;
+
     });
+  }
+
+  //productosagrupados=[{idProducto:'',pedidoP:'',tipoProducto:'',idProductoDePedido:'',informacion:'',nombre:'',precio:'',cantidad:1}]
+  productosagrupados=[];
+
+  agrupar_productos(){
+    this.productosagrupados=[];
+    var i=0;
+    var j=0;
+    var para=false;
+    for(i=0;i<this.productosdepedido.length;i++){
+      if(this.productosagrupados.length!=0){
+        for(j=0;j<this.productosagrupados.length;j++){
+          if(para==false){
+            if(this.productosdepedido[i].IdProducto==this.productosagrupados[j].IdProducto){
+              this.productosagrupados[j].cantidad=this.productosagrupados[j].cantidad+1;
+              para=true;
+            }
+          }
+        }
+        if(para==false){
+          this.productosagrupados.push(this.productosdepedido[i]);
+          para=true;
+        }
+      }else{
+        this.productosagrupados.push(this.productosdepedido[i]);
+      }
+      para=false;
+    }
   }
 
   //pin de la reserva del pedido que estamos viendo
