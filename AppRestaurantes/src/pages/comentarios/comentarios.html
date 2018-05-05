@@ -24,9 +24,15 @@
     </form>
     <h2>Todos los comentarios</h2>
     <ion-item *ngFor="let item of restaurantService.comentariosrestaurante">
-      <ion-row>
-        <span>{{item.nombre}} - {{ item.fecha | date : format : timezone}}</span>
-      </ion-row>
+        <ion-row>
+            <span>{{item.nombre}} - {{ item.fecha | date : format : timezone}}</span>
+            <ng-template ngFor let-item [ngForOf]="createRange(item.valoracion)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                <ion-icon  md="md-star"></ion-icon>
+            </ng-template>
+            <ng-template ngFor let-item [ngForOf]="createRange2(item.valoracion)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                <ion-icon  md="md-star-outline"></ion-icon>
+            </ng-template>
+          </ion-row>
         <ion-col>
         <p>
           {{item.contenido}}

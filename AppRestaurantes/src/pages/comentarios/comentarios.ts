@@ -46,5 +46,20 @@ export class ComentariosPage {
     this.navCtrl.setRoot(ComentariosPage);
     this.restaurantService.todoscomentarios=false;
   }
+  createRange(number){
+    var items: number[] = [];
+    for(var i = 1; i <= number; i++){
+       items.push(i);
+    }
+    return items;
+  }
+  createRange2(number1){
+    var number=5-number1;
+    var items: number[] = [];
+    for(var i = 1; i <= number; i++){
+       items.push(i);
+    }
+    return items;
+  }
 
 }

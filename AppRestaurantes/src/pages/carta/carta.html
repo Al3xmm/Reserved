@@ -20,11 +20,13 @@
       <br>
       <h3>Productos</h3>
       <ion-item *ngFor="let item of restaurantService.productoscategoria">
-        <ion-col>
-          Nombre: {{item.nombre}}
+          <ion-thumbnail item-left>
+              <img width="80" height="80" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
+            </ion-thumbnail>
+          <h4>{{item.nombre}}</h4>
           <p>
             <br>
-            Precio: {{item.precio}} €
+            <b>Precio:</b> {{item.precio}} €
           </p>
           <p>
             <br>
@@ -34,7 +36,6 @@
       Agregar al pedido
     </button>
           </p>
-        </ion-col>
       </ion-item>
     </ion-grid>
 
