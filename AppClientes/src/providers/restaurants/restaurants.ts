@@ -219,4 +219,13 @@ export class RestaurantsProvider {
     }); 
   }
 
+  valoracionmedia:any;
+
+  valoracion_media(id){
+    let url="api/restaurants/";
+      this.http.get(url+id+"/valorationcomments",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
+        this.valoracionmedia=data[0].valoracion/data[0].comentarios;
+    });
+  }
+
 }

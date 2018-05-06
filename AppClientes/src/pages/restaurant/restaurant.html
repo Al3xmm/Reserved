@@ -26,6 +26,8 @@
               <b>Horario:</b> {{item.horario}}.
               <br>
               <b>Dirección:</b> {{item.direccion}}.
+              <br>
+              <b>Valoración:</b> {{this.restaurantService.valoracionmedia | number : '1.2-2'}} / 5
             </p>
           </ion-col>
           <ion-row>

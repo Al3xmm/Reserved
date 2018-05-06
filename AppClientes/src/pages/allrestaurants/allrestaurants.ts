@@ -32,6 +32,8 @@ export class AllrestaurantsPage {
 
   presentLoadingCustom(id) {
     this.ver_restaurante(id);
+    this.restaurantService.valoracion_media(id);
+    
     let loading = this.loadingCtrl.create({
       content: 'Cargando información',
       duration: 1500,

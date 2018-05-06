@@ -1047,9 +1047,17 @@ router.get('/:id/informationdinner/:dia', function(req, res, next) {
     })
 });
 
+/* Info cena */
+router.get('/:id/valorationcomments', function(req, res, next) {
 
-
-
+    Comments.valorationcomments(req.params.id,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+});
 
 
 module.exports = router;

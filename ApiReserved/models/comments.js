@@ -11,6 +11,20 @@ connection=mysql.createConnection({
 });
 var Comments={};
 
+/* Mostar la media de los comentarios de un restaurante */
+Comments.valorationcomments=function(id, callback){
+    if (connection){
+        var sql=("SELECT SUM(valoracion) as valoracion,count(*) as comentarios FROM comentarios WHERE RestauranteC="+connection.escape(id));
+        connection.query(sql,function(error,rows){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,rows);
+            }
+        })
+    }
+}
+
 /* Mostar los comentarios de un usuario */
 Comments.findCommentsUser=function(id, callback){
     if (connection){
