@@ -1,9 +1,16 @@
 page-comentarios {
     .button-default-md{
         background-color:#76323F;
+
     }
     .ng-dirty{
         font-size: 1.1em;
     }
-
+    #buscar{
+        width: 50%;
+        margin: 0 auto;
+    }
+    ion-label{
+        white-space: normal
+    }
 }

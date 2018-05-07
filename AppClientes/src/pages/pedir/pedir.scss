@@ -4,7 +4,7 @@ page-pedir {
     }
     .button-default-md{
         background-color:#76323F;
-        width: 85%!important;
+        width: 85%;
         
     }
     .badge-md{
@@ -17,10 +17,6 @@ page-pedir {
     }
     ion-label{
         white-space: normal;
-    }
-    h2{
-        font-size: 3.0rem;
-        color:#76323F;
     }
     ion-thumbnail img{
         width: 100px!important;
@@ -37,5 +33,18 @@ page-pedir {
     .ion-md-information-circle{
         color: #76323F;
     }
-
+    b{
+        float: right;
+        padding-bottom: 1.5em;
+      }
+      .item-md p{
+        font-size: 1.7rem;
+        color:#76323F;
+    }
+    p{
+        margin-left: 1.2em!important; 
+    }
+    .button-inner{
+        font-size: 0.9em;
+    }
 }

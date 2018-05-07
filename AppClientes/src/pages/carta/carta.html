@@ -19,10 +19,7 @@
             <p>{{item.nombre}}
               <button ion-button clear right (click)="presentLoadingCustom(item.idProducto)"><ion-icon name="information-circle"></ion-icon></button>
             </p>
-              <br>
-              <p>
-                <b>Precio:</b> {{item.precio}}€
-              </p>
+                <b>{{item.precio}}€</b> 
           </ion-item>
       </ion-grid>
   </ion-content>

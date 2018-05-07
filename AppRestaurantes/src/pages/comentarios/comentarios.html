@@ -20,7 +20,7 @@
         <ion-input type="text" [(ngModel)]="comentario.contenido" name="contenido" required></ion-input>
       </ion-item>
       <br>
-      <button ion-button [disabled]="comentario.contenido.length<1" type="submit" block>Buscar</button>
+      <button ion-button id="buscar" [disabled]="comentario.contenido.length<1" type="submit" block>Buscar</button>
     </form>
     <h2>Todos los comentarios</h2>
     <ion-item *ngFor="let item of restaurantService.comentariosrestaurante">

@@ -21,7 +21,7 @@
       <ion-input type="date" [(ngModel)]="reservas.dia" name="dia" required></ion-input>
     </ion-item>
     <br>
-    <button ion-button [disabled]="reservas.dia.length<1" type="submit" block>Buscar</button>
+    <button ion-button id="buscar" [disabled]="reservas.dia.length<1" type="submit" block>Buscar</button>
   </form>
 
   <ion-item *ngFor="let item of restaurantService.aforo">

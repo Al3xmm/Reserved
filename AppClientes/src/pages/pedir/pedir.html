@@ -24,19 +24,18 @@
 <ion-grid>
 <ion-item *ngFor="let item of restaurantService.productoscategoria">
     <ion-thumbnail item-left>
-        <img width="120" height="120" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+        <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
     </ion-thumbnail>
     <p>{{item.nombre}}
       <button ion-button clear right (click)="presentLoadingCustom(item.idProducto)"><ion-icon name="information-circle"></ion-icon></button>
     </p>
-    <p>
-      <b>Precio:</b> {{item.precio}}€
-    </p>
+      <b>{{item.precio}}€</b> 
   <button ion-button block icon-left
           (click)="pedidoService.agregarpedido(item)">
     <ion-icon name ="restaurant"></ion-icon>
     Agregar al pedido
   </button>
+
 </ion-item>
 </ion-grid>
 

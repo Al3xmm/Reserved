@@ -20,7 +20,7 @@
         <ion-input type="date" [(ngModel)]="info.dia" name="dia" required></ion-input>
       </ion-item>
       <br>
-      <button ion-button [disabled]="info.dia.length<1" type="submit" block>Buscar</button>
+      <button ion-button id="buscar" [disabled]="info.dia.length<1" type="submit" block>Buscar</button>
     </form>
 
     <ion-item *ngFor="let item of restaurantService.infocomida">
