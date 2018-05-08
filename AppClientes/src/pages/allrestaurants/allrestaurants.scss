@@ -7,26 +7,17 @@ page-allrestaurants {
          font-size:1.4em;
      }
      .item-md p{
-        font-size: 14px;
+        font-size: 1em;
     }
    
     img{
-        width: auto!important;
-        height: 100%!important;
+        border: solid 1px;
+        width: 150px!important;
+        height: 150px!important;
     }
 
-    /*buscador cada vez tiene un id diferente
-    #lbl{
-        margin-top: 4em!important; 
-    }
-    #lbl-13{
-        margin-top: 1em!important; 
-    }
-    #lbl-14{
-        margin-top: 1em!important; 
-    }*/
     h2{
-        font-size: 3.0rem;
+        font-size: 1.15em!important;
         color:#76323F;
     }
     .item-md{
@@ -37,6 +28,13 @@ page-allrestaurants {
         width: 50%;
         margin: 0 auto;
         margin-top:2em;
+    }
+    .label-md{
+        margin-top: 0;
+
+    }
+    ion-label{
+        white-space: normal
     }
   
 }

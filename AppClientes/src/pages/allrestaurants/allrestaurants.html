@@ -39,9 +39,9 @@
         </form>
         <br>
         <ion-list>
-        <ion-item *ngFor="let item of restaurantService.restaurantes">
-            <ion-thumbnail item-left tappable (click)="openImage(item.idRestaurante)">
-                <ion-img width="120" height="120" src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
+        <ion-item *ngFor="let item of restaurantService.restaurantes" (click)="presentLoadingCustom(item.idRestaurante)">
+            <ion-thumbnail item-left>
+                <ion-img width="150" height="150" src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
             </ion-thumbnail>
            <h2>{{item.nombre}}</h2>
            <br>
@@ -49,9 +49,8 @@
               {{item.tipoComida}}
             </p>
             <p>
-              Dirección: {{item.direccion}}
+             {{item.direccion}}
             </p>
-              <button ion-button clear  (click)="presentLoadingCustom(item.idRestaurante)">Ver</button>
         </ion-item>
       </ion-list>
       </ion-grid>

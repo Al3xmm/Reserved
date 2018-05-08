@@ -19,7 +19,7 @@ page-infoproducto {
     }
 
     h2{
-        color: aliceblue;
+        color:aliceblue;
         text-align: center;
         font-size: 1.5em;
     }
@@ -37,6 +37,10 @@ page-infoproducto {
         color:aliceblue;
         font-size: 1em;
         text-align: center;
+    }
+    ion-thumbnail>img{
+        width: 100%;
+        height: 250px;
     }
 
 }

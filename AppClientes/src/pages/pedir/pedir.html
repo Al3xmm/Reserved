@@ -22,14 +22,12 @@
 
 <ion-content padding>
 <ion-grid>
-<ion-item *ngFor="let item of restaurantService.productoscategoria">
-    <ion-thumbnail item-left>
+<ion-item *ngFor="let item of restaurantService.productoscategoria" >
+    <ion-thumbnail item-left (click)="presentLoadingCustom(item.idProducto)">
         <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
     </ion-thumbnail>
-    <p>{{item.nombre}}
-      <button ion-button clear right (click)="presentLoadingCustom(item.idProducto)"><ion-icon name="information-circle"></ion-icon></button>
-    </p>
-      <b>{{item.precio}}€</b> 
+    <p (click)="presentLoadingCustom(item.idProducto)">{{item.nombre}}
+      <b>{{item.precio}}€</b>  </p>
   <button ion-button block icon-left
           (click)="pedidoService.agregarpedido(item)">
     <ion-icon name ="restaurant"></ion-icon>

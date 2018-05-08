@@ -90,6 +90,7 @@ export class RestaurantsProvider {
     this.http.get(url+id,{headers:{'token-acceso':this.userService.session.token}})
     .subscribe(data=>{
       this.masinfoproductoactual=data;
+      console.log(this.masinfoproductoactual);
     })
 
   }

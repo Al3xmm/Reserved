@@ -10,4 +10,12 @@ page-pedidos-antiguos {
     ion-label{
         white-space: normal
     }
+    #precio{
+        float: right!important;
+    }
+    h5{
+        float: right!important;
+        margin-left:100%!important;
+        font-size: 1em!important;
+    }
 }

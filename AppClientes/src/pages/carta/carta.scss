@@ -20,7 +20,7 @@ page-carta {
     }
     b{
       float: right;
-      padding-bottom: 1.5em;
+     // padding-bottom: 1.5em;
     }
     .item-md p{
         font-size: 1.8rem;
@@ -29,5 +29,11 @@ page-carta {
     }
     p>button{
         margin-top: -4.5px!important;
+    }
+    img{
+        border:solid 1px;
+    }
+    p>b{
+        color:black;
     }
 }

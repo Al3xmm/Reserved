@@ -3,12 +3,13 @@
     <ion-item class="close-fake" no-lines (click)="close()">
       <ion-icon name="close"></ion-icon>
     </ion-item>
-    <br>
-    <h2>{{restaurantService.masinfoproductoactual[0].nombre}}</h2>
-    <br>
-    <h3>Descripción: {{restaurantService.masinfoproductoactual[0].informacion}}</h3>
+    <ion-thumbnail>
+        <img  src="api/{{restaurantService.masinfoproductoactual[0].restauranteP}}/{{restaurantService.masinfoproductoactual[0].nombre}}/imageproducto">
+      </ion-thumbnail>
+    <h2><b>{{restaurantService.masinfoproductoactual[0].nombre}}</b></h2>
+    
+    <h3>{{restaurantService.masinfoproductoactual[0].informacion}}</h3>
     <h3>Precio: {{restaurantService.masinfoproductoactual[0].precio}} €</h3>
-    <br>
     <h4>Alergenos:</h4>
     <ion-list>
     <p><ion-icon [name]="icongluten"></ion-icon> Gluten &nbsp; &nbsp;

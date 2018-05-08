@@ -4,10 +4,8 @@ page-restaurante {
     }
 
     .item-md h2{
-        margin-top:0px!important;
-        padding-top: 0px!important;
-        font-size: 2.5rem;
-        text-decoration: underline;
+        margin-left: 2em;
+        font-size: 2.2rem;
         color:#76323F;
     }
 
@@ -18,9 +16,12 @@ page-restaurante {
     .button-default-md{
         background-color:#76323F;
     }
-    img{
-        margin: 1em 0em;
+    ion-thumbnail>img{
+        width: 100%!important;
+        height: 200px!important;
+        border:solid 1px;
     }
+
     .botonesrestaurante{
         text-align: center;
     }
@@ -29,6 +30,6 @@ page-restaurante {
         margin-top:2em;
     }
     p{   
-            font-size: 1em!important;
+        font-size: 0.95em!important;
     }
 }

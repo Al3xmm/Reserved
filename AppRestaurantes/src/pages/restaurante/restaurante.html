@@ -13,23 +13,23 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding >
   <ion-grid>
-      <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
       <ion-item *ngFor="let item of restaurantService.inforestaurant">
-        <ion-thumbnail item-left  tappable (click)="openImage()">
-          <img width="120" height="120" [src]="urlfotoprincipal">
+        <ion-thumbnail tappable (click)="openImage()">
+          <img  [src]="urlfotoprincipal">
         </ion-thumbnail>
         <ion-col>
             <h2>{{item.nombre}}</h2>
+            <br>
           <p>
-            <b>Descripcion:</b> {{item.descripcion}}
+            <b>Descripcion:</b> {{item.descripcion}}.
           </p>
           <p>
-            <b>Direccion:</b> {{item.direccion}}
+            <b>Direccion:</b> {{item.direccion}}.
           </p>
           <p>
-            <b>Telefono:</b> {{item.telefono}}
+            <b>Telefono:</b> {{item.telefono}}.
           </p>
         </ion-col>
       </ion-item>
@@ -47,6 +47,7 @@
                 <button ion-button (click)="mis_empleados()">Empleados</button>
             </p>
             <button ion-button (click)="mas_fotos()">Mas fotos</button>
+            <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
           </div>
     
     </ion-grid>

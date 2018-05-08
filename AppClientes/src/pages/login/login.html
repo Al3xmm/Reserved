@@ -12,11 +12,11 @@
 </ion-header>
 -->
 
-<ion-content padding class="content">
+<ion-content padding>
     <br>
     <br>
-    <br>
-<img src="../../assets/imgs/LogoFinal.jpg" width="200" height="70">
+    <br>   
+<img  id ="logo" src="../../assets/imgs/LogoFinal.jpg" width="250" height="90">
   <form (ngSubmit)="login_user()">
     <ion-item>
       <ion-label floating>Usuario</ion-label>
@@ -26,7 +26,6 @@
       <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
     </ion-item>
-    
     <button ion-button [disabled]="user.nick.length<3 || user.password.length<3" type="submit" block>Login</button>
   </form>
 
