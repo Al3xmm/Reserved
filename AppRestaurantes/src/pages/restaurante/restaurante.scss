@@ -32,4 +32,25 @@ page-restaurante {
     p{   
         font-size: 0.95em!important;
     }
+    #container1{
+        background-color:#76323F;
+        width: 40%;
+        font-size: 1.3em;
+        margin-bottom: 2em;
+        padding: 1.2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+  .botonesrestaurante{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      color:white;
+  }
+  .icon-md{
+      font-size: 2em;
+      color:white;
+  }
 }

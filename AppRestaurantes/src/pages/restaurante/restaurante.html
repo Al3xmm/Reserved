@@ -34,20 +34,46 @@
         </ion-col>
       </ion-item>
           <div class="botonesrestaurante">
-            <p>
-                <button ion-button (click)="mis_reservas()">Reservas</button>
-                <button ion-button (click)="mi_carta()">Carta</button>
-            </p>
-            <p>
-                <button ion-button (click)="mi_informacion()">Información</button>
-                <button ion-button (click)="mis_comentarios()">Mis comentarios</button>
-            </p>
-            <p>
-                <button ion-button (click)="modificar_restaurante()">Modificar</button>           
-                <button ion-button (click)="mis_empleados()">Empleados</button>
-            </p>
-            <button ion-button (click)="mas_fotos()">Mas fotos</button>
-            <button ion-fab (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon></button>
+            <div id="container1"(click)="mis_reservas()">
+                <ion-icon name="paper"></ion-icon>
+                <br>
+                Reservas
+            </div>
+            <div id="container1" (click)="mis_comentarios()">
+                <ion-icon name="ios-chatbubbles"></ion-icon>
+                <br>
+              comentarios
+            </div>
+            <div id="container1" (click)="mi_informacion()">
+                <ion-icon name="information-circle"></ion-icon>
+                <br>
+              Informacion
+            </div>
+            <div id="container1" (click)="mi_carta()">
+                <ion-icon name="list-box"></ion-icon>
+                <br>
+              Carta
+            </div>
+            <div id="container1" (click)="mis_empleados()">
+                <ion-icon name="contacts"></ion-icon>
+                <br>
+              Empleados
+            </div>
+            <div id="container1" (click)="modificar_restaurante()">
+                <ion-icon name="build"></ion-icon>
+                <br>
+              Modificar
+            </div>
+            <div id="container1" (click)="presentActionSheet()">
+                <ion-icon name="image"></ion-icon>
+                <br>
+              Foto
+            </div>        
+             <div id="container1" (click)="mas_fotos()">
+                <ion-icon name="images"></ion-icon>
+                <br>
+                Mas fotos
+            </div>
           </div>
     
     </ion-grid>
