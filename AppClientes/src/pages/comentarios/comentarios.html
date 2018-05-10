@@ -13,7 +13,9 @@
 </ion-header>
 
 <ion-content padding>
-
+    <div *ngFor="let item of restaurantService.inforestaurante">
+        <h4> {{item.nombre}}</h4>
+    </div>
   <form (ngSubmit)= "add_comentario()">
     <ion-item>
       <ion-label floating>Contenido</ion-label>

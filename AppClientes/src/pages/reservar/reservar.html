@@ -15,7 +15,9 @@
 
 
 <ion-content padding>
-
+    <div *ngFor="let item of restaurantService.inforestaurante">
+        <h4> {{item.nombre}}</h4>
+    </div>
   <form (ngSubmit)= "add_reserva()">
     <ion-item>
       <ion-label>Día</ion-label>

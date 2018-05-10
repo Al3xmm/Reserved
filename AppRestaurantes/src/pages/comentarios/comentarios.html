@@ -33,11 +33,11 @@
                 <ion-icon  md="md-star-outline"></ion-icon>
             </ng-template>
           </ion-row>
+          <br>
         <ion-col>
-        <p>
-          {{item.contenido}}
-        </p>
+          {{item.contenido}} 
       </ion-col>
+      <br>
       <button [disabled]="item.denunciado==='si' || item.denunciado==='validado' " ion-button (click)="denunciar_comentario(item.idComentario,item.idUsuario)">Denunciar</button>
       <br>
       <ion-col [hidden]="item.denunciado==='no' || item.denunciado==='si' ">

@@ -81,8 +81,8 @@
                 <ng-template ngFor let-item [ngForOf]="createRange2(item.media)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
                     <ion-icon  md="md-star-outline"></ion-icon>
                 </ng-template>
-              </ion-row>
-              {{item.media| number : '1.2-2'}}/5 de {{item.comentarios}} Valoraciones
+                &nbsp;de {{item.comentarios}} opiniones </ion-row>
+              <!--{{item.media| number : '1.2-2'}}/5 de {{item.comentarios}} Valoraciones-->
             </p>
             <p>
               A <span class="distancia">{{item.distancia}}KM</span> de tí.
