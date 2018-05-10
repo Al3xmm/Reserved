@@ -21,6 +21,7 @@ declare var google;
 export class RestaurantPage {
 
   map: any;
+  mediaestrella:boolean=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController,private toastCtrl:ToastController, private geolocation:Geolocation) { 
     
@@ -46,16 +47,43 @@ export class RestaurantPage {
     }
     return items;
   }
-/*
-  getPosition():any{
-    this.geolocation.getCurrentPosition().then(response => {
-      this.loadMap(response);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
+
+  createRange4(number){
+    var items: number[] = [];
+    var aux=Math.floor(number);
+    if(number-Math.round(number)<-0.01){
+      this.mediaestrella=true;
+    }
+    if(number-Math.round(number)>0.01){
+      aux=aux+1;
+    }
+    for(var i = 1; i <= aux; i++){
+       items.push(i);
+    }
+
+    
+    return items;
   }
-*/
+  createRange5(number1){
+    var number=5-number1;
+    var items: number[] = [];
+    for(var i = 1; i <= number; i++){
+       items.push(i);
+    }
+    this.mediaestrella=false;
+    return items;
+  }
+
+  createRange6(){
+    var items: number[] = [];
+    if(this.mediaestrella==true){
+      for(var i = 1; i <= 1; i++){
+        items.push(i);
+      }
+    }
+    return items;
+
+  }
 
   loadMap(/*position: Geoposition*/){
     var aux= this.restaurantService.inforestaurante[0].coordenadas.split("_");

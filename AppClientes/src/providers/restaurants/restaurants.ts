@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
 import { UsersProvider } from '../users/users';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 @Injectable()
@@ -30,20 +31,87 @@ export class RestaurantsProvider {
   cantitat:any[]=[];
   reducido:any[]=[];
   idproducto:any[]=[];
+  filtro:string='proximidad';
 
-  constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider) {
+  constructor(public http: HttpClient,public storage:Storage, public userService: UsersProvider,private geolocation:Geolocation) {
     //descomentar la siguiente linea si queremos que solo carge los restaurantes una vez
     //this.mostrar_todos();
   }
 
-  mostrar_todos(){
+  comprobar_valoracion(){
+    let i=0;
+    for(i=0;i<this.restaurantes.length;i++){
+      if(this.restaurantes[i].media==null){
+        this.restaurantes[i].media=0;
+        this.restaurantes[i].comentarios=0;
+      }
+    }
+  }
 
+  comprobar_valoracionfiltro(){
+    let i=0;
+    for(i=0;i<this.restaurantes.length;i++){
+      if(this.restaurantes[i].media==null){
+        this.restaurantes[i].media=0;
+        this.restaurantes[i].comentarios=0;
+      }
+    }
+    this.restaurantes.sort(function(a, b) {
+      return parseFloat(b.media) - parseFloat(a.media);
+    });
+  }
+
+  mostrar_todos_novedades(){
+    this.restaurantes=null;
     let url="api/allrestaurants";
-
     this.http.get(url)
       .subscribe(data=>{
         //guardamos en la variable restaurantes el data que nos devuelve la petición a la api
         this.restaurantes=data;
+        this.restaurantes.sort(function(a, b) {
+          return parseFloat(b.idRestaurante) - parseFloat(a.idRestaurante);
+        });
+        this.comprobar_valoracion();
+    });
+
+  }
+
+  mostrar_todos_valoracion(){
+    this.restaurantes=null;
+    let url="api/allrestaurants";
+    this.http.get(url)
+      .subscribe(data=>{
+        //guardamos en la variable restaurantes el data que nos devuelve la petición a la api
+        this.restaurantes=data;
+        this.comprobar_valoracionfiltro();
+    });
+
+  }
+
+  mostrar_todos(){
+    this.restaurantes=null;
+    let url="api/allrestaurants";
+    this.http.get(url)
+      .subscribe(data=>{
+        //guardamos en la variable restaurantes el data que nos devuelve la petición a la api
+        this.restaurantes=data;
+        this.comprobar_valoracion();
+        this.mostrar_por_distancia();
+    });
+
+  }
+
+  mostrar_por_distancia(){
+    let i=0;
+    for(i=0;i<this.restaurantes.length;i++){
+      var aux= this.restaurantes[i].coordenadas.split("_");
+      let latitude =parseFloat(aux[0]) ;
+      let longitude = parseFloat(aux[1]);
+      this.restaurantes[i].distancia=this.applyHaversine(latitude,longitude);
+    }
+
+    this.restaurantes.sort(function(a, b) {
+      return parseFloat(a.distancia) - parseFloat(b.distancia);
     });
 
   }
@@ -227,6 +295,72 @@ export class RestaurantsProvider {
       this.http.get(url+id+"/valorationcomments",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.valoracionmedia=data[0].valoracion/data[0].comentarios;
     });
+  }
+
+  distancia:any;
+  posicionactual:any;
+
+  getPosition():any{
+    this.geolocation.getCurrentPosition().then(response => {
+      this.posicionactual=response;
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
+ 
+  applyHaversine(lat,lng){
+
+      let usersLocation = {
+          lat: this.posicionactual.coords.latitude,
+          lng: this.posicionactual.coords.longitude
+      };
+
+      let placeLocation = {
+          lat:lat,
+          lng:lng
+      };
+
+      this.distancia = this.getDistanceBetweenPoints(
+          usersLocation,
+          placeLocation,
+          'miles'
+      ).toFixed(2);
+
+      return this.distancia;
+
+  }
+
+  getDistanceBetweenPoints(start, end, units){
+
+      let earthRadius = {
+          miles: 3958.8,
+          km: 6371
+      };
+
+      let R = earthRadius[units || 'miles'];
+      let lat1 = start.lat;
+      let lon1 = start.lng;
+      let lat2 = end.lat;
+      let lon2 = end.lng;
+
+      let dLat = this.toRad((lat2 - lat1));
+      let dLon = this.toRad((lon2 - lon1));
+      let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      let d = R * c;
+
+      let kilometros=d*1.60934;
+
+      return kilometros;
+
+  }
+
+  toRad(x){
+      return x * Math.PI / 180;
   }
 
 }

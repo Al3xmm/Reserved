@@ -39,6 +39,7 @@ export class LoginPage {
   }
 
   login_user(){
+    this.restaurantService.getPosition();
     this.userservice.login_user(this.user)
       .subscribe(()=>{
         if(this.userservice.login_correcto==true){

@@ -27,7 +27,19 @@
               <br>
               <b>Dirección:</b> {{item.direccion}}.
               <br>
-              <b>Valoración:</b> {{this.restaurantService.valoracionmedia | number : '1.2-2'}} / 5
+              <ion-row>
+                <b>Valoración: </b>
+                <ng-template ngFor let-item [ngForOf]="createRange4(this.restaurantService.valoracionmedia)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                    <ion-icon  md="md-star"></ion-icon>
+                </ng-template>
+                <ng-template ngFor let-item [ngForOf]="createRange6()" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                    <ion-icon md="md-star-half"></ion-icon>
+                </ng-template>
+
+                <ng-template ngFor let-item [ngForOf]="createRange5(this.restaurantService.valoracionmedia)" let-currentElementIndex="(index + 1)" [ngForTrackBy]="trackByFn" item-right>
+                    <ion-icon  md="md-star-outline"></ion-icon>
+                </ng-template>
+              </ion-row>
             </p>
           </ion-col>
           <ion-row>
