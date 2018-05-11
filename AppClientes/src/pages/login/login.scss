@@ -6,10 +6,11 @@ page-login {
         background-color:#76323F;
         width: 80%;
         margin: 0 auto;
+       
     }
  
     .button-md{
-        margin-top: 2em;
+        margin-top: 3em;
     }
     .toolbar-md{
         color:#D7CEC7!important;
@@ -17,9 +18,14 @@ page-login {
     .scroll-content{
         display:flex;
         flex-direction: column;
+        justify-content: space-evenly;
+        padding-bottom: 0px!important;
     }
     #logo{
         align-self: center;
         margin-bottom: 2em;
+    }
+    img{
+        margin-bottom: 10em!important;
     }
 }

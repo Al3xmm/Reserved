@@ -5,13 +5,20 @@ page-comentarios {
     .button-default-md{
         background-color:#76323F;
         margin-top: 3em;
+        width: 80%;
+        margin: 0 auto;
     }
     h4{
         color:#76323F;
-        font-size: 1.5em!important;
+        font-size: 1.8em!important;
         margin-bottom: 2em!important;
+        text-align: center;
     }
     .scroll-content{
         margin-top: 20%!important;
+        padding-bottom: 0px!important;
+    }
+    .button-md{
+        margin-top: 95%;
     }
 }
