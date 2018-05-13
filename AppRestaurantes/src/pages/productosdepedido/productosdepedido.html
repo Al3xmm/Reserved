@@ -24,7 +24,7 @@
         <ion-item *ngFor="let item of restaurantService.productosagrupados">
           <ion-row>
               <span class="producto">{{item.cantidad}} X {{item.nombre}}</span>
-              <button ion-button color="danger" (click)="eliminar_productodepedido(item.idProductoDePedido,item.IdProducto)">Eliminar</button>
+              <button ion-button color="danger" [disabled]="item.TipoProducto=='Servido' || item.TipoProducto=='Preparando' || item.TipoProducto=='Preparado'" (click)="eliminar_productodepedido(item.idProductoDePedido,item.IdProducto)">Eliminar</button>
           </ion-row>
         </ion-item>
         <button ion-button (click)="volver_pedidos()">Volver</button>

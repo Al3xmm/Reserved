@@ -18,8 +18,22 @@ export class CamareroPage {
     this.navCtrl.setRoot(EmpleadoPage)
   }
 
+  //utilizar este para borrar producto a producto
   producto_entregado(idproducto){
     this.restaurantService.producto_entregado(idproducto);
+    this.navCtrl.setRoot(CamareroPage);
+  }
+
+  producto_entregado_todo(idproducto){
+    if(typeof(idproducto)=="string"){
+      let aux=idproducto.split("_");
+      let i=0;
+      for(i=0;i<aux.length;i++){
+        this.restaurantService.producto_entregado(aux[i]);
+      }
+    }else{
+      this.restaurantService.producto_entregado(idproducto);
+    }
     this.navCtrl.setRoot(CamareroPage);
   }
 

@@ -441,6 +441,9 @@ export class RestaurantProvider {
     let url="api/restaurants/orders/";
     this.http.get(url+id+"/orderproducts",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.productosdepedido=data;
+      this.productosdepedido.sort(function(a, b) {
+        return parseFloat(b.idProductoDePedido) - parseFloat(a.idProductoDePedido);
+      });
       //this.productosdepedido[1].cantidad=9;
       var i=0;
       for(i=0;i<this.productosdepedido.length;i++){
@@ -476,6 +479,48 @@ export class RestaurantProvider {
         }
       }else{
         this.productosagrupados.push(this.productosdepedido[i]);
+      }
+      para=false;
+    }
+    console.log(this.productosdepedido);
+  }
+
+  see_productosaentregar(){
+    let url="api/restaurants/currentorders/";
+    this.http.get(url+this.session.idEmpleado+"/pendientes",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+      this.productospendientes=data;
+      var i=0;
+      for(i=0;i<this.productospendientes.length;i++){
+        this.productospendientes[i].cantidad=1;
+      }
+      this.agrupar_productos_pendientes();
+    });
+  }
+
+  productospendientesagrupados=[];
+
+  agrupar_productos_pendientes(){
+    this.productospendientesagrupados=[];
+    var i=0;
+    var j=0;
+    var para=false;
+    for(i=0;i<this.productospendientes.length;i++){
+      if(this.productospendientesagrupados.length!=0){
+        for(j=0;j<this.productospendientesagrupados.length;j++){
+          if(para==false && this.productospendientes[i].mesa==this.productospendientesagrupados[j].mesa && this.productospendientes[i].productoP==this.productospendientesagrupados[j].productoP){
+            if(this.productospendientes[i].IdProducto==this.productospendientesagrupados[j].IdProducto){
+              this.productospendientesagrupados[j].cantidad=this.productospendientesagrupados[j].cantidad+1;
+              this.productospendientesagrupados[j].idProductoDePedido=this.productospendientesagrupados[j].idProductoDePedido+"_"+this.productospendientes[i].idProductoDePedido;
+              para=true;
+            }
+          }
+        }
+        if(para==false){
+          this.productospendientesagrupados.push(this.productospendientes[i]);
+          para=true;
+        }
+      }else{
+        this.productospendientesagrupados.push(this.productospendientes[i]);
       }
       para=false;
     }
@@ -525,19 +570,21 @@ export class RestaurantProvider {
     }); 
   }
 
-  see_productosaentregar(){
-    let url="api/restaurants/currentorders/";
-    this.http.get(url+this.session.idEmpleado+"/pendientes",{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
-      this.productospendientes=data;
-    });
-  }
-
+  //utilizar esta para borrar producto a producto
   producto_entregado(data){
     let url="api/restaurants/orders/";
 
     this.http.get(url+data+"/orderproducts/servido", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(resp=>{
-          console.log("Producto Servido");
+          this.see_productosaentregar();
+      })
+  }
+
+  producto_entregado_todo(data){
+    let url="api/restaurants/orders/";
+
+    this.http.get(url+data+"/orderproducts/servido", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
+      .subscribe(resp=>{
           this.see_productosaentregar();
       })
   }

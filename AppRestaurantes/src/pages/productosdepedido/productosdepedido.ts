@@ -13,6 +13,7 @@ export class ProductosdepedidoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider) {
     restaurantService.mi_carta();
+    console.log(this.restaurantService.productosagrupados);
   }
 
   agregar_productopedido(){

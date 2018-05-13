@@ -18,14 +18,14 @@
     <button ion-button (click)="ver_pedidos()">Pedidos</button>
     <ion-grid>
         <h2>Pedidos a entregar</h2>
-        <ion-item *ngFor="let item of restaurantService.productospendientes">
+        <ion-item *ngFor="let item of restaurantService.productospendientesagrupados">
           <ion-col>
             <p>
-              Nombre: <span>{{item.nombre}}</span>
+              Nombre: <span>{{item.nombre}} X{{item.cantidad}}</span>
               <br>
               Mesa: <span>{{item.mesa}}</span>
               <br>
-              <button ion-button color=danger (click)="producto_entregado(item.idProductoDePedido)">Entregado</button>
+              <button ion-button color=danger (click)="producto_entregado_todo(item.idProductoDePedido)">Entregado</button>
             </p>
           </ion-col>
         </ion-item>
