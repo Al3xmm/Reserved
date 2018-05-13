@@ -4,8 +4,8 @@ page-restaurante {
     }
 
     .item-md h2{
-        margin-left: 2em;
-        font-size: 2.2rem;
+        
+        font-size: 1.8em;
         color:#76323F;
     }
 
@@ -52,5 +52,11 @@ page-restaurante {
   .icon-md{
       font-size: 2em;
       color:white;
+  }
+  .scroll-content{
+      margin-top: 40px!important;
+  }
+  .col{
+      font-size: 1.1em;
   }
 }

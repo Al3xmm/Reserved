@@ -32,12 +32,12 @@
         <br>
     <button ion-button (click)="agregar_producto()" >Agregar Producto</button>
     <br>
-    <ion-item *ngFor="let item of restaurantService.allcategorias">
+    <ion-item *ngFor="let item of restaurantService.allcategorias" (click)="mis_productos(item.idCategoria)">
       <ion-col>
       {{item.nombre}}
       </ion-col>
       <ion-buttons right>
-        <button  (click)="mis_productos(item.idCategoria)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+        <button id="button">></button>
       </ion-buttons>
     </ion-item>
   </ion-grid>
