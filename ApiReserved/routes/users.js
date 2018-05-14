@@ -176,7 +176,7 @@ router.post('/:id/reservations',function(req,res,next){
 
 /* DELETE Borrar una Reserva */
 
-router.delete("/:iduser/reservations/:id",function(req,res,next){
+router.put("/:iduser/reservations/:id",function(req,res,next){
     var ReservationData={
         dia:req.body.dia,
         turno:req.body.turno,
@@ -397,6 +397,25 @@ router.put('/pin/:id',function(req,res,next){
     })
 
 });
+
+/*Comprobar aforo*/
+
+router.post('/comprobaraforo',function(req,res,next){
+    var aforoData={
+        dia:req.body.dia,
+        turno:req.body.turno
+    };
+
+    Reservations.comprobaraforo(aforoData,function(error,data){
+        if (error){
+            res.json(500,error);
+        }else{
+            res.json(200,data);
+        }
+    })
+
+});
+
 
 
 module.exports = router;

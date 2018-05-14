@@ -12,11 +12,21 @@ import { PerfilPage } from './../perfil/perfil';
 })
 export class ReservarPage {
   reserva={dia: '', hora: '', comensales: '', turno:'', restauranter:'',usuarior:''}
+  startDate = new Date().toISOString();
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
   }
 
   add_reserva(){
+    var dateData = this.startDate.split('-');
+    var year = dateData [0];
+    var month = dateData [1];
+    var aux1 = dateData [2];
+    var day = aux1.split('T');
+    var dia=year+"-"+month+"-"+day[0];
+    this.reserva.dia=dia;
+
     var aux=this.reserva.hora.split(':');
     var aux2=parseInt(aux[0]);
 
@@ -29,10 +39,13 @@ export class ReservarPage {
     if(this.reserva.restauranter !=null){
       this.reserva.restauranter=this.restaurantService.restauranteactual;
       this.reserva.usuarior=this.userService.session.idUsuario;
-      this.userService.add_reserva(this.reserva)
+      this.userService.comprobar_aforo(this.reserva)
         .subscribe(()=>{
           if(this.userService.nuevareserva==true){
-            this.navCtrl.setRoot(PerfilPage);
+            this.userService.add_reserva(this.reserva).subscribe(()=>{
+              this.navCtrl.setRoot(PerfilPage);
+            })
+            this.userService.nuevareserva = false;
           }
       });
     }

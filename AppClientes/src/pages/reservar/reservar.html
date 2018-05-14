@@ -21,7 +21,7 @@
   <form (ngSubmit)= "add_reserva()">
     <ion-item>
       <ion-label>Día</ion-label>
-      <ion-input type="date" [(ngModel)]="reserva.dia" name="dia" required></ion-input>
+      <ion-datetime [ngModelOptions]="{standalone: true}" displayFormat="DD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Hora</ion-label>

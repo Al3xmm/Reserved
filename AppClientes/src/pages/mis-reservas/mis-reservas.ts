@@ -31,14 +31,27 @@ export class MisReservasPage {
     this.navCtrl.push(ModificarReservaPage);
   }
   eliminar_reserva(id){
-    console.log(id);
     var i=0;
     for(i=0;i<this.userService.reservafutura.length;i++){
-      this.eliminar.restaurante=this.userService.reservafutura[i].idRestaurante;
-      this.eliminar.dia=this.userService.reservafutura[i].dia;
-      this.eliminar.turno=this.userService.reservafutura[i].turno;
+      if(id==this.userService.reservafutura[i].idReserva){
+        this.eliminar.restaurante=this.userService.reservafutura[i].idRestaurante;
+        this.eliminar.dia=this.userService.reservafutura[i].dia;
+        this.eliminar.turno=this.userService.reservafutura[i].turno;
+      }
     }
+
+    var dateData = this.eliminar.dia.split('-');
+    var year = dateData [0];
+    var month = dateData [1];
+    var aux1 = dateData [2];
+    var day = aux1.split('T');
+    var aux2=parseInt(day[0]);
+    var diadef=aux2+1;
+    var dia=year+"-"+month+"-"+diadef;
+    this.eliminar.dia=dia;
+
     this.userService.eliminar_reserva(id,this.eliminar);
-    this.navCtrl.push(MisReservasPage);
+    this.navCtrl.setRoot(MisReservasPage);
+    
   }
 }

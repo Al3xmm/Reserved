@@ -44,7 +44,7 @@ Restaurants.findEmail=function(email,callback){
 /* Mostar todos los restaurantes */
 Restaurants.all= function(callback){
     if (connection){
-        connection.query("SELECT SUM(valoracion) as valoracion,count(*) as comentarios,idRestaurante,nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida,coordenadas FROM comentarios,restaurantes WHERE RestauranteC=idrestaurante group by idrestaurante",function (error,rows){
+        connection.query("SELECT SUM(valoracion)/count(*) as media,count(*) as comentarios,idRestaurante,nombre,horario,descripcion,direccion,telefono,ciudad,tipoComida,coordenadas FROM restaurantes left join comentarios on RestauranteC=idrestaurante group by idrestaurante",function (error,rows){
             if (error){
                 throw error;
             }else{

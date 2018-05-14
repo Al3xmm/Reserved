@@ -130,13 +130,39 @@ export class UsersProvider {
       })
 
   }
+
+  aforoaux:any;
+
+  comprobar_aforo(data){
+    let url = "api/users/comprobaraforo";
+    return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
+    .map(resp=>{
+      this.aforoaux=resp;
+      if(this.aforoaux[0]==undefined){
+        this.nuevareserva = true;
+      }else{
+        if(this.aforoaux[0].aforo-data.comensales<0){
+          this.alertCtrl.create({
+            title:"Error",
+            subTitle:"Aforo completo, escoja otro dia",
+            buttons:["OK"]
+          }).present();
+        }else{
+          this.nuevareserva = true;
+        }
+      }
+
+    })
+
+  }
+
   add_reserva(data){
     let url = "api/users/";
     return this.http.post(url+this.session.idUsuario+"/reservations",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
       console.log("Reserva nueva");
       this.mis_reservas();
-      this.nuevareserva = true;
+      
     })
   }
 
@@ -176,7 +202,7 @@ export class UsersProvider {
   }
   eliminar_reserva(id,data){
     let url="api/users/";
-    this.http.delete(url+this.session.idUsuario+"/reservations/"+id,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
+    this.http.put(url+this.session.idUsuario+"/reservations/"+id,data, {headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.user_profile(this.session.idUsuario, this.session.token);
     });
 

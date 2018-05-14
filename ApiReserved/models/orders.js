@@ -384,7 +384,7 @@ Order.Addprecio = function(id, product, callback){
 /* Mostrar productos que un camarero debe entregar */
 Order.camareroPendientes = function(id, callback){
   if(connection){
-    connection.query("select idProductoDePedido,nombre,mesa,hora from productosdepedido pp, pedidos p, productos pr where pedidoP=idPedido and idProducto=productoP and asignarE="+connection.escape(id)+" and tipoProducto='Preparado' ORDER BY hora ASC",function(error,rows){
+    connection.query("select idProductoDePedido,nombre,mesa,hora,productoP from productosdepedido pp, pedidos p, productos pr where pedidoP=idPedido and idProducto=productoP and asignarE="+connection.escape(id)+" and tipoProducto='Preparado' ORDER BY hora ASC",function(error,rows){
         if (error){
             throw error;
         }else{

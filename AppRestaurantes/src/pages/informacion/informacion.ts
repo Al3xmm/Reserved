@@ -8,17 +8,24 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
   templateUrl: 'informacion.html',
 })
 export class InformacionPage {
-
-  info={dia: ''}
+  startDate = new Date().toISOString();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantProvider, private menu:MenuController) {
     this.menu.enable(true, 'menu2');
   }
 
   see_informacion(){
-    this.restaurantService.see_info(this.info.dia);
+    var dateData = this.startDate.split('-');
+    var year = dateData [0];
+    var month = dateData [1];
+    var aux = dateData [2];
+    var day = aux.split('T');
+    var dia=year+"-"+month+"-"+day[0];
+
+    this.restaurantService.see_info(dia);
     
     this.navCtrl.setRoot(InformacionPage);
+    
   }
 
 }

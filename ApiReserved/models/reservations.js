@@ -11,10 +11,14 @@ connection=mysql.createConnection({
 });
 var Reservation={};
 
+
+
+
+
 /* Mostar las reservas de un usuario*/
 Reservation.findUserReserve=function(id, callback){
     if (connection){
-        var sql=("select idRestaurante,idReserva,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1  and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        var sql=("select idReserva,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1  and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;
@@ -286,6 +290,22 @@ Reservation.update=function(id,pinData,callback){
         })
     }
 }
+
+/*comprobar aforo*/
+Reservation.comprobaraforo=function(aforoData,callback){
+    if(connection){
+        var sql=("SELECT * FROM aforo_libre WHERE dia="+connection.escape(aforoData.dia)+" AND turno="+connection.escape(aforoData.turno));
+        connection.query(sql,function(error,row){
+            if (error){
+                throw error;
+            }else{
+                return callback(null,row);
+            }
+        })
+    }
+}
+
+
 
 
 module.exports=Reservation;

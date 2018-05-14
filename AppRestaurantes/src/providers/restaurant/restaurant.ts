@@ -364,7 +364,6 @@ export class RestaurantProvider {
 
     return this.http.post(url+this.session.idRestaurante+"/capacity", data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
-          console.log("Mostrando reservas");
           this.aforo=resp;
       })
   }
