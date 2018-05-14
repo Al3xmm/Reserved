@@ -388,7 +388,7 @@ router.put('/pin/:id',function(req,res,next){
         usuarioR:req.body.usuarioR
     };
 
-    Reservations.update(req.params.id,pinData,function(error,data){
+    Reservations.updatepin(req.params.id,pinData,function(error,data){
         if (error){
             res.json(500,error);
         }else{

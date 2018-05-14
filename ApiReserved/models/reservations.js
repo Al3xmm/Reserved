@@ -139,7 +139,6 @@ Reservation.update=function(ReservationData,idreserva,callback){
 Reservation.updatereservation=function(ReservationData,idreserva,callback){
     if(connection){
         var sql="UPDATE reservas SET comensales="+ReservationData.comensales+", hora='"+ReservationData.hora+"' WHERE idreserva="+connection.escape(idreserva);
-        console.log("2");
         connection.query(sql,function(error,result){
             if (error){
                 throw error;
@@ -264,7 +263,11 @@ Reservation.deletepinbutton=function(pin, callback){
 /* Mostar las reservas de un usuario posterior a la fecha actual*/
 Reservation.findUserReservefuture=function(id, callback){
     var date = new Date();
-    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    var currentdate= date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-';
+    var dia=date.getDate();
+    dia=dia-1;
+    currentdate=currentdate+dia;
+    console.log(currentdate)
     if (connection){
         var sql=("select idRestaurante,idReserva,dia,hora,turno,re.nombre,comensales from reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and dia > '"+currentdate+"' and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
@@ -277,7 +280,7 @@ Reservation.findUserReservefuture=function(id, callback){
     }
 }
 /*Modificar el usuario una vez que mete el pin y borrarlo*/
-Reservation.update=function(id,pinData,callback){
+Reservation.updatepin=function(id,pinData,callback){
     if(connection){
         var sql=("update reservas set pin=null, usuarioR="+connection.escape(pinData.usuarioR)+" where idReserva="+connection.escape(id));
         //usuarioR="+connection.escape(pinData.usuarioR)+

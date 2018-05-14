@@ -34,6 +34,8 @@ export class UsersProvider {
   botonhistorial:boolean=false;
   botonpendientes:boolean=false;
 
+  modificarreserva={dia: '', hora: '', comensales: ''};
+
   constructor(public http: HttpClient, private alertCtrl:AlertController, public storage:Storage) {
 
   }

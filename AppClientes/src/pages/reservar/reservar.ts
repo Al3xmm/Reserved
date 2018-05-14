@@ -1,3 +1,5 @@
+import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
+import { MisReservasPage } from './../mis-reservas/mis-reservas';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
@@ -43,7 +45,7 @@ export class ReservarPage {
         .subscribe(()=>{
           if(this.userService.nuevareserva==true){
             this.userService.add_reserva(this.reserva).subscribe(()=>{
-              this.navCtrl.setRoot(PerfilPage);
+              this.navCtrl.setRoot(AllrestaurantsPage);
             })
             this.userService.nuevareserva = false;
           }
