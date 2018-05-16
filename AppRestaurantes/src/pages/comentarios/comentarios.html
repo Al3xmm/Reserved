@@ -34,9 +34,10 @@
             </ng-template>
           </ion-row>
           <br>
-        <ion-col>
+        <ion-col id="contenido">
           {{item.contenido}} 
       </ion-col>
+      <br>
       <br>
       <button [disabled]="item.denunciado==='si' || item.denunciado==='validado' " ion-button (click)="denunciar_comentario(item.idComentario,item.idUsuario)">Denunciar</button>
       <br>

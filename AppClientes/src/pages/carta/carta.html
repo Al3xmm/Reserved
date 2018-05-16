@@ -10,7 +10,7 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
-  <ion-content padding>
+  <ion-content>
       <ion-grid>
             <ion-item *ngFor="let item of restaurantService.productoscategoria" (click)="presentLoadingCustom(item.idProducto)"> 
               <ion-thumbnail item-left>

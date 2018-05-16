@@ -220,47 +220,50 @@ export class RestaurantsProvider {
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
           this.cantidad=this.productopedido.length;
-          this.sumatotal();
-          for(let i=0;i<this.productopedido.length;i++){
-              this.idproducto[i]=this.productopedido[i].IdProducto;
-              console.log(this.idproducto);//10,10,12,12,20 vector de idproductos. Falta reducir el vector quitar repetidos ¿Nueva funcion?
-            }
-            for(let i=0;i<this.productopedido.length;i++){
-              for(let x=0; x<this.idproducto.length;x++){
-                if(this.productopedido[i].IdProducto==this.idproducto[x]){//Vamos comparando si el numero del vector nuevo sale en el antiguo, si es asi ++
-                  this.total++;
-                  console.log(this.total);
-              }
-            }
-            this.cantitat[i]=this.total;//guardamos en un nuevo array los totales de esos id que sales para el vector (10,10,12,12,20) sale (2,2,2,2,1)
-            this.total=0;//Lo ponemos 0 cuando vamos a la posicion i++
+          this.sumatotal();  
+          this.productopedido.sort(function(a, b) {
+            return parseFloat(b.idProductoDePedido) - parseFloat(a.idProductoDePedido);
+          }); 
+          var i=0;
+          for(i=0;i<this.productopedido.length;i++){
+            this.productopedido[i].cantidad=1;
           }
-            console.log(this.cantitat);
-         /*eliminar repetidos
-         for(let i=0;i<this.productopedido.length;i++){
-			for(let j=0;j<this.productopedido.length-1;j++){
-				if(i!=j){
-					if(this.productopedido[i]==this.productopedido[j]){
-						// eliminamos su valor
-						this.productopedido[i]="";
-					}
-				}
-			}
-		}
- 
-		// mostramos unicamente los que tienen valor
-		let n=this.productopedido.length;
-		for (let k=0;k<=n-1;k++){
-			if(this.productopedido[k]!=""){
-			reducido[k]=this.productopedido[k];
-			}
-		}*/
-          
+          this.agrupar_productos();  
+          console.log("prueba");
     });
+  }
+
+  productospedidoagrupados=[];
+  agrupar_productos(){
+    this.productospedidoagrupados=[];
+    var i=0;
+    var j=0;
+    var para=false;
+    for(i=0;i<this.productopedido.length;i++){
+      if(this.productospedidoagrupados.length!=0){
+        for(j=0;j<this.productospedidoagrupados.length;j++){
+          if(para==false){
+            if(this.productopedido[i].IdProducto==this.productospedidoagrupados[j].IdProducto){
+              this.productospedidoagrupados[j].cantidad=this.productospedidoagrupados[j].cantidad+1;
+              para=true;
+            }
+          }
+        }
+        if(para==false){
+          this.productospedidoagrupados.push(this.productopedido[i]);
+          para=true;
+        }
+      }else{
+        this.productospedidoagrupados.push(this.productopedido[i]);
+      }
+      para=false;
+    }
+    console.log(this.productopedido);
   }
   
   eliminar_plato(id,idproducto){
     console.log(idproducto);
+    console.log(id);
     console.log(this.userService.reservation);
     let url="api/restaurants/orders/";
     this.http.delete(url+this.userService.reservation+"/orderproducts/"+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{

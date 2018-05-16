@@ -11,9 +11,9 @@
 <ion-content>
   <ion-grid>
     <br>
-    <ion-item *ngFor="let item of userService.reservasusuario">
+    <ion-item *ngFor="let item of userService.reservasusuario" (click)="verpedido(item.idPedido)">
       <ion-thumbnail item-left>
-        <ion-img width="100" height="100" src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
+        <img width="120" height="120" src="api/{{item.idRestaurante}}/imageprincipal">
     </ion-thumbnail>
         <h4>{{item.nombre}}</h4>
         <p>
@@ -24,7 +24,6 @@
           <br>
           <b>Comensales:</b> {{item.comensales}}
         </p>
-        <button ion-button (click)="verpedido(item.idPedido)" >Ver pedido</button>
     </ion-item>
     </ion-grid>
 </ion-content>

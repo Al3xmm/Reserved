@@ -20,22 +20,24 @@
 
 <ion-content padding>
   <ion-grid>
+    <ion-item>
+      <h4 id="precio">Precio total:</h4>
       <br>
-    <h4>Precio total:</h4>
-    <b>{{restaurantService.suma}}€</b>
+     <h5 id="precio">{{restaurantService.suma}}€</h5> 
+    </ion-item>
     <br>
     <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
     <br>
     
-    <ion-item *ngFor="let item of restaurantService.productopedido">
+    <ion-item *ngFor="let item of restaurantService.productospedidoagrupados">
         <ion-thumbnail item-left>
             <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
           </ion-thumbnail>
       <ion-col>
-        <h2>{{item.nombre}}</h2>
+        <h2>{{item.nombre}} &nbsp;X{{item.cantidad}}</h2>
         <br>
           <p>
-              <b>Precio:</b> {{item.precio}}€
+              <b>Precio:</b> {{item.precio}}€/ud
             </p>
             <p>
                 <b>Estado:</b> {{item.TipoProducto}}

@@ -19,7 +19,7 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 export class HistorialPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public userService:UsersProvider, public restaurantService: RestaurantsProvider) {
-    this.userService.mis_reservas();
+    //this.userService.mis_reservas();
   }
 
   ionViewDidLoad() {

@@ -20,13 +20,13 @@
        <h5 id="precio">{{restaurantService.suma}}€</h5> 
       </ion-item>
       <hr>
-  <ion-item *ngFor="let item of restaurantService.productopedido">
+  <ion-item *ngFor="let item of restaurantService.productospedidoagrupados">
       <ion-thumbnail item-left>
           <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
       </ion-thumbnail>
-      <h4>{{item.nombre}}</h4>
+      <h2>{{item.nombre}} &nbsp;X{{item.cantidad}}</h2>
         <p>
-          <b>Precio:</b> {{item.precio}}€
+          <b>Precio:</b> {{item.precio}}€/ud
           </p>
   </ion-item>
 </ion-grid>

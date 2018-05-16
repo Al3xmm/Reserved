@@ -17,10 +17,11 @@
     <ion-grid>
         <ion-item *ngFor="let item of restaurantService.productoscategoria">
             <ion-thumbnail item-left>
-                <img width="80" height="80" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
+                <img width="100" height="100" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
               </ion-thumbnail>
           <ion-col>
               <h4>{{item.nombre}}</h4>
+              <br>
               <b>Precio:</b> {{item.precio}}
               <br>
               <b>Tipo:</b> {{item.tipo}}
@@ -28,8 +29,8 @@
               <b>Información:</b> {{item.informacion}}
               <br>
               <p>
-              <button ion-button (click)="modificar_producto(item.idProducto)">Modificar</button>
-              <button ion-button (click)="eliminar_producto(item.idProducto)">Eliminar</button>
+              <button id="modificar" ion-button (click)="modificar_producto(item.idProducto)">Modificar</button>
+              <button id="eliminar" ion-button (click)="eliminar_producto(item.idProducto)">Eliminar</button>
             </p>
           </ion-col>
         </ion-item>

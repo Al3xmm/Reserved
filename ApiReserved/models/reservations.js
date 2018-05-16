@@ -18,7 +18,7 @@ var Reservation={};
 /* Mostar las reservas de un usuario*/
 Reservation.findUserReserve=function(id, callback){
     if (connection){
-        var sql=("select idReserva,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1  and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
+        var sql=("select idReserva,idRestaurante,idPedido,r.dia,hora,re.nombre,comensales from pedidos p, reservas r,usuarios u,restaurantes re  where IdRestaurante=restauranter and finalizado=1  and IdReserva=reservaP and IdUsuario=usuarior and UsuarioR="+connection.escape(id));
         connection.query(sql,function(error,rows){
             if (error){
                 throw error;

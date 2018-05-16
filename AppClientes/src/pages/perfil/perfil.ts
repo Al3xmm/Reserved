@@ -27,5 +27,6 @@ export class PerfilPage {
   }
   verhistorial(){
     this.navCtrl.push(HistorialPage);
+    this.userService.mis_reservas();
   }
 }

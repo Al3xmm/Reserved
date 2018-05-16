@@ -1,7 +1,7 @@
 import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 import { MisReservasPage } from './../mis-reservas/mis-reservas';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { UsersProvider } from './../../providers/users/users';
 import { PerfilPage } from './../perfil/perfil';
@@ -17,7 +17,7 @@ export class ReservarPage {
   startDate = new Date().toISOString();
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,   public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
   }
 
   add_reserva(){
@@ -45,11 +45,18 @@ export class ReservarPage {
         .subscribe(()=>{
           if(this.userService.nuevareserva==true){
             this.userService.add_reserva(this.reserva).subscribe(()=>{
+              let alert = this.alertCtrl.create({
+                title: 'Reserva Creada',
+                subTitle: 'La reserva ha sido creada',
+                buttons: ['Ok']
+              });
               this.navCtrl.setRoot(AllrestaurantsPage);
+              alert.present(); 
             })
             this.userService.nuevareserva = false;
           }
       });
+
     }
     
   }
