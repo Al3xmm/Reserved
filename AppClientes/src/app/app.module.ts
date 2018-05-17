@@ -34,6 +34,8 @@ import { PedidoProvider } from '../providers/pedido/pedido';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 @NgModule({
   declarations: [
@@ -88,6 +90,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     HistorialPage
   ],
   providers: [
+    InAppBrowser,
     StatusBar,
     SplashScreen,
     Geolocation,

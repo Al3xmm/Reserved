@@ -9,6 +9,7 @@ import { MiscategoriasPage } from './../miscategorias/miscategorias';
 import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 declare var google;
 
@@ -23,13 +24,24 @@ export class RestaurantPage {
   map: any;
   mediaestrella:boolean=false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController,private toastCtrl:ToastController, private geolocation:Geolocation) { 
+  constructor(public navCtrl: NavController, public navParams: NavParams,private iab:InAppBrowser, public restaurantService:RestaurantsProvider, private modalCtrl:ModalController,private toastCtrl:ToastController, private geolocation:Geolocation) { 
     
   }
 
   ionViewDidLoad(){
     //this.getPosition();
     this.loadMap();
+  }
+
+  openLink(){
+    var options:InAppBrowserOptions= {
+      location: 'yes',
+      clearcache: 'yes',
+      toolbar: 'no',
+      hardwareback: 'yes'
+   };
+
+    const browser = this.iab.create('https:reserved.ovh/motorgrafico','_self',options);
   }
 
   createRange(number){
