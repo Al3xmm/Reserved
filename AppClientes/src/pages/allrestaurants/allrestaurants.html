@@ -36,7 +36,7 @@
             <ion-label floating>Tipo de comida</ion-label>
             <ion-input type="text" [(ngModel)]="busqueda.tipoComida" name="tipo" required></ion-input>
           </ion-item>
-            <button ion-button type="submit" block>Buscar</button>
+            <button [disabled]="busqueda.nombre.length<1 && busqueda.ciudad.length<1 && busqueda.tipoComida.length<1" ion-button type="submit" block>Buscar</button>
         </form>
         <br>
         <ion-grid *ngIf="buttonClicked3" radio-group [(ngModel)]="this.restaurantService.filtro">

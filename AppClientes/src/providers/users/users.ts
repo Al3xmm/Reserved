@@ -240,9 +240,10 @@ export class UsersProvider {
     this.http.get(url+this.session.idUsuario+"/reservations/future", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservafutura=data;
-          console.log(this.reservafutura);
+          console.log(this.reservafutura.length);
       })
   }
+  
   modificarpin(id,data){
       let url="api/users/pin/";
       return this.http.put(url+id, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )

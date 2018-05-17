@@ -26,7 +26,7 @@
      <h5 id="precio">{{restaurantService.suma}}€</h5> 
     </ion-item>
     <br>
-    <button ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
+    <button id="azul" ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
     <br>
     
     <ion-item *ngFor="let item of restaurantService.productospedidoagrupados">
@@ -51,7 +51,7 @@
     <ion-item>
       <br>
       <br>
-      <button ion-button (click)="anayadirplato()">Agregar platos</button> 
+      <button id="azul" ion-button (click)="anayadirplato()">Agregar platos</button> 
     </ion-item>
   </ion-grid>
   <ion-refresher (ionRefresh)="doRefresh($event)">

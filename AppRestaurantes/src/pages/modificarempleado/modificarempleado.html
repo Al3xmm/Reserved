@@ -24,7 +24,7 @@
           <ion-label floating>Confirmar Password</ion-label>
           <ion-input type="password" [(ngModel)]="pass.confirmarpassword" name="password2" required></ion-input>
         </ion-item>
-      <button ion-button type="submit" block>Cambiar</button>
+      <button ion-button [disabled]="employee.password.length<3 || pass.confirmarpassword.length<3" type="submit" block>Cambiar</button>
     </form>
 
 

@@ -4,7 +4,7 @@ import { UsersProvider } from '../../providers/users/users';
 import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { ModificarReservaPage } from './../modificar-reserva/modificar-reserva';
 import { PedidosAntiguosPage } from './../pedidos-antiguos/pedidos-antiguos';
-
+import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 
 @IonicPage()
 @Component({
@@ -59,7 +59,10 @@ export class MisReservasPage {
     
 
     this.userService.eliminar_reserva(id,this.eliminar);
-    this.navCtrl.setRoot(MisReservasPage);
+    this.navCtrl.setRoot(AllrestaurantsPage);
     
+  }
+  restaurante(){
+    this.navCtrl.setRoot(AllrestaurantsPage);
   }
 }

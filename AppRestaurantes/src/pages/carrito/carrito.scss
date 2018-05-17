@@ -30,4 +30,17 @@ page-carrito {
         width: 80px!important;
         height: 80px!important;
       }
+      h3{
+        color:#76323F;
+        //text-align:center;
+        font-size: 1.1em!important;
+    }
+    #precio{
+        float: right;
+    }
+    h5{
+        float: right!important;
+        margin-left:100%!important;
+        font-size: 1em!important;
+    }
 }

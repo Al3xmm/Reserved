@@ -34,7 +34,7 @@
 
         <br>
 
-        <button ion-button type="submit" block>Modificar Perfil</button>
+        <button ion-button [disabled]="usuario.password.length<3 || pass.confirmarpassword.length<3" type="submit" block>Modificar Perfil</button>
       </form>
       <br>
 
