@@ -10,12 +10,14 @@
 
 <ion-content padding>
   <ion-grid>
-    <button ion-button (click)="volver_pedidos()">Volver</button>
-    <ion-item *ngFor="let item of restaurantService.allcategorias">
+    <button ion-button (click)="volver_pedidos()">Ver pedidos</button>
+    <ion-item *ngFor="let item of restaurantService.allcategorias" (click)="mis_productos(item.idCategoria)">
       <ion-col>
-      {{item.nombre}}
-      </ion-col>
-      <button ion-button (click)="mis_productos(item.idCategoria)">Ver productos</button>
+        {{item.nombre}}
+        </ion-col>
+         <ion-buttons right>
+        <button>></button>
+      </ion-buttons>
     </ion-item>
   </ion-grid>
 

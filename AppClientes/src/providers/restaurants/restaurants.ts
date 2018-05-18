@@ -28,6 +28,7 @@ export class RestaurantsProvider {
   suma:number=0;
   masinfoproductoactual:any;
   total:number=1;
+  alergenosproductoactual={gluten:false,crustaceos:false,huevos:false,pescado:false,cacahuetes:false,soja:false,lacteos:false,frutos_cascara:false,apio:false,mostaza:false,sesamo:false,dioxido_azufre:false,moluscos:false,altramuces:false};
   cantitat:any[]=[];
   reducido:any[]=[];
   idproducto:any[]=[];
@@ -72,6 +73,7 @@ export class RestaurantsProvider {
           return parseFloat(b.idRestaurante) - parseFloat(a.idRestaurante);
         });
         this.comprobar_valoracion();
+        this.mostrar_distancias();
     });
 
   }
@@ -84,6 +86,7 @@ export class RestaurantsProvider {
         //guardamos en la variable restaurantes el data que nos devuelve la petición a la api
         this.restaurantes=data;
         this.comprobar_valoracionfiltro();
+        this.mostrar_distancias();
     });
 
   }
@@ -114,6 +117,15 @@ export class RestaurantsProvider {
       return parseFloat(a.distancia) - parseFloat(b.distancia);
     });
 
+  }
+  mostrar_distancias(){
+    let i=0;
+    for(i=0;i<this.restaurantes.length;i++){
+      var aux= this.restaurantes[i].coordenadas.split("_");
+      let latitude =parseFloat(aux[0]) ;
+      let longitude = parseFloat(aux[1]);
+      this.restaurantes[i].distancia=this.applyHaversine(latitude,longitude);
+    }
   }
 
   restaurante_id(id){
@@ -168,6 +180,8 @@ export class RestaurantsProvider {
     return this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}})
     .map(data=>{
       this.restaurantes=data;
+      console.log(this.restaurantes);
+      this.mostrar_distancias();
   });
   }
 
@@ -364,6 +378,91 @@ export class RestaurantsProvider {
 
   toRad(x){
       return x * Math.PI / 180;
+  }
+  comprobar_alergenos(){
+    if(this.masinfoproductoactual[0].gluten==0){
+      this.alergenosproductoactual.gluten=false;
+    }else{
+      this.alergenosproductoactual.gluten=true;
+    }
+
+    if(this.masinfoproductoactual[0].crustaceos==0){
+      this.alergenosproductoactual.crustaceos=false;
+    }else{
+      this.alergenosproductoactual.crustaceos=true;
+    }
+
+    if(this.masinfoproductoactual[0].huevos==0){
+      this.alergenosproductoactual.huevos=false;
+    }else{
+      this.alergenosproductoactual.huevos=true;
+    }
+
+    if(this.masinfoproductoactual[0].pescado==0){
+      this.alergenosproductoactual.pescado=false;
+    }else{
+      this.alergenosproductoactual.pescado=true;
+    }
+
+    if(this.masinfoproductoactual[0].cacahuetes==0){
+      this.alergenosproductoactual.cacahuetes=false;
+    }else{
+      this.alergenosproductoactual.cacahuetes=true;
+    }
+
+    if(this.masinfoproductoactual[0].soja==0){
+      this.alergenosproductoactual.soja=false;
+    }else{
+      this.alergenosproductoactual.soja=true;
+    }
+
+    if(this.masinfoproductoactual[0].lacteos==0){
+      this.alergenosproductoactual.lacteos=false;
+    }else{
+      this.alergenosproductoactual.lacteos=true;
+    }
+
+    if(this.masinfoproductoactual[0].frutos_cascara==0){
+      this.alergenosproductoactual.frutos_cascara=false;
+    }else{
+      this.alergenosproductoactual.frutos_cascara=true;
+    }
+
+    if(this.masinfoproductoactual[0].apio==0){
+      this.alergenosproductoactual.apio=false;
+    }else{
+      this.alergenosproductoactual.apio=true;
+    }
+
+    if(this.masinfoproductoactual[0].mostaza==0){
+      this.alergenosproductoactual.mostaza=false;
+    }else{
+      this.alergenosproductoactual.mostaza=true;
+    }
+
+    if(this.masinfoproductoactual[0].sesamo==0){
+      this.alergenosproductoactual.sesamo=false;
+    }else{
+      this.alergenosproductoactual.sesamo=true;
+    }
+
+    if(this.masinfoproductoactual[0].dioxido_azufre==0){
+      this.alergenosproductoactual.dioxido_azufre=false;
+    }else{
+      this.alergenosproductoactual.dioxido_azufre=true;
+    }
+
+    if(this.masinfoproductoactual[0].altramuces==0){
+      this.alergenosproductoactual.altramuces=false;
+    }else{
+      this.alergenosproductoactual.altramuces=true;
+    }
+
+    if(this.masinfoproductoactual[0].moluscos==0){
+      this.alergenosproductoactual.moluscos=false;
+    }else{
+      this.alergenosproductoactual.moluscos=true;
+    }
   }
 
 }

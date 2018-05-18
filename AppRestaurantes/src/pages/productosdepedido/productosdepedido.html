@@ -23,7 +23,7 @@
         <button ion-button color="secondary" (click)="agregar_productopedido()" ><ion-icon md="md-restaurant"></ion-icon> Añadir Producto</button>
         <ion-item *ngFor="let item of restaurantService.productosagrupados">
           <ion-row>
-              <span class="producto">{{item.cantidad}} X {{item.nombre}}</span>
+              <span class="producto">{{item.cantidad}} x {{item.nombre}}</span>
               <button ion-button color="danger" [disabled]="item.TipoProducto=='Servido' || item.TipoProducto=='Preparando' || item.TipoProducto=='Preparado'" (click)="eliminar_productodepedido(item.idProductoDePedido,item.IdProducto)">Eliminar</button>
           </ion-row>
         </ion-item>

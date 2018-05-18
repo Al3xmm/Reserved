@@ -1,7 +1,7 @@
 import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
-
+import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 
 @IonicPage()
 @Component({
@@ -30,5 +30,8 @@ export class CartaPage {
     });
 
     loading.present();
+  }
+  restaurante(){
+    this.navCtrl.setRoot(AllrestaurantsPage);
   }
 }
