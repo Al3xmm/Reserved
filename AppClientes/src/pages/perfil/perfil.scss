@@ -3,8 +3,9 @@ page-perfil {
         background-color:transparent;
     }
     .button-default-md{
-        margin-left: -1px;
+        width: 49%;
         background-color:#76323F;
+       
     }
     h4{
         color:#76323F;
@@ -20,4 +21,8 @@ page-perfil {
     p{
         font-size: 1em!important;
     }
+    .button-inner{
+        font-size: 0.86em!important;
+    }
+  
 }

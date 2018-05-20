@@ -8,12 +8,12 @@
 
 <ion-content padding>
   <ion-grid>
-      <ion-item *ngFor="let item of restaurantService.allcategorias">
+      <ion-item *ngFor="let item of restaurantService.allcategorias" (click)="mis_productos(item.idCategoria)">
         <ion-col>
         {{item.nombre}}
         </ion-col>
         <ion-buttons right>      
-        <button  (click)="mis_productos(item.idCategoria)">></button>
+        <button>></button>
       </ion-buttons>
       </ion-item>
     </ion-grid>
