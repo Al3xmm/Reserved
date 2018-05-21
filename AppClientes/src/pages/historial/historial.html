@@ -13,7 +13,7 @@
     <br>
     <ion-item *ngFor="let item of userService.reservasusuario" (click)="verpedido(item.idPedido)">
       <ion-thumbnail item-left>
-        <img width="120" height="120" src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imageprincipal">
+        <img width="120" height="120" src="api/{{item.idRestaurante}}/imageprincipal">
     </ion-thumbnail>
         <h4>{{item.nombre}}</h4>
         <p>

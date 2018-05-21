@@ -19,7 +19,7 @@
 <ion-grid>
 <ion-item *ngFor="let item of restaurantService.productoscategoria" >
     <ion-thumbnail item-left (click)="presentLoadingCustom(item.idProducto)">
-        <img width="80" height="80" src="https://reserved.ovh/apireserved/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+        <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
     </ion-thumbnail>
     <p (click)="presentLoadingCustom(item.idProducto)">{{item.nombre}}
       <b>{{item.precio}}€</b>  </p>

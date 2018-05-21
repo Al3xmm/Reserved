@@ -21,7 +21,7 @@ export class ModificarproductoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider,private camera:Camera,private actionSheetCtrl:ActionSheetController) {
     restaurantService.see_category();
     if(this.subirimagen==false){
-      this.imageData="https://reserved.ovh/apireserved/"+restaurantService.session.idRestaurante+"/"+this.restaurantService.infoproductoactual[0].nombre+"/imageproducto"
+      this.imageData="api/"+restaurantService.session.idRestaurante+"/"+this.restaurantService.infoproductoactual[0].nombre+"/imageproducto"
     }
     
   }

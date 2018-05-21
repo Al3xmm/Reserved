@@ -138,7 +138,7 @@ export class AllrestaurantsPage {
   }
 
   openImage(id) {
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
     modal.present();
   }
 

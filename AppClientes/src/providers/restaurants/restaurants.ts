@@ -62,7 +62,7 @@ export class RestaurantsProvider {
 
   mostrar_todos_novedades(){
     this.restaurantes=null;
-    let url="https://reserved.ovh/apireserved/allrestaurants";
+    let url="api/allrestaurants";
     this.http.get(url)
       .subscribe(data=>{
         this.restaurantes=data;
@@ -77,7 +77,7 @@ export class RestaurantsProvider {
 
   mostrar_todos_valoracion(){
     this.restaurantes=null;
-    let url="https://reserved.ovh/apireserved/allrestaurants";
+    let url="api/allrestaurants";
     this.http.get(url)
       .subscribe(data=>{
         this.restaurantes=data;
@@ -89,7 +89,7 @@ export class RestaurantsProvider {
 
   mostrar_todos(){
     this.restaurantes=null;
-    let url="https://reserved.ovh/apireserved/allrestaurants";
+    let url="api/allrestaurants";
     this.http.get(url)
       .subscribe(data=>{
         this.restaurantes=data;
@@ -125,7 +125,7 @@ export class RestaurantsProvider {
 
   restaurante_id(id){
     this.restauranteactual=id;
-    let url="https://reserved.ovh/apireserved/restaurants/";
+    let url="api/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
         this.inforestaurante=data;
@@ -135,7 +135,7 @@ export class RestaurantsProvider {
   }
 
   comentarios_restaurante(id){
-    let url="https://reserved.ovh/apireserved/restaurants/";
+    let url="api/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+id+"/comments",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.comentariosrestaurante=data;
@@ -144,7 +144,7 @@ export class RestaurantsProvider {
   }
 
   carta_restaurante(){
-    let url="https://reserved.ovh/apireserved/restaurants/";
+    let url="api/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+this.restauranteactual+"/products",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.productosrestaurante=data;
@@ -152,7 +152,7 @@ export class RestaurantsProvider {
     });
   }
   productos_porcategoria(id){
-    let url = "https://reserved.ovh/apireserved/restaurants/";
+    let url = "api/restaurants/";
     this.http.get(url+this.restauranteactual+"/products/"+"category/"+id,{headers:{'token-acceso':this.userService.session.token}})
     .subscribe(data=>{
       this.productoscategoria =data;
@@ -160,7 +160,7 @@ export class RestaurantsProvider {
   }
 
   masinfoproducto(id){
-    let url = "https://reserved.ovh/apireserved/restaurants/allproducts/";
+    let url = "api/restaurants/allproducts/";
     this.http.get(url+id,{headers:{'token-acceso':this.userService.session.token}})
     .subscribe(data=>{
       this.masinfoproductoactual=data;
@@ -169,7 +169,7 @@ export class RestaurantsProvider {
   }
 
   busqueda_avanzada(data){
-    let url="https://reserved.ovh/apireserved/restaurants/find";
+    let url="api/restaurants/find";
     return this.http.post(url,data,{headers: {'token-acceso':this.userService.session.token}})
     .map(data=>{
       this.restaurantes=data;
@@ -178,26 +178,26 @@ export class RestaurantsProvider {
   }
 
   buscar_restaurante(termino){
-    let url="https://reserved.ovh/apireserved/restaurants/name/";
+    let url="api/restaurants/name/";
       this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.busqueda=data;
     });
   }
 
   buscar_tiporestaurante(termino){
-    let url="https://reserved.ovh/apireserved/restaurants/type/";
+    let url="api/restaurants/type/";
       this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.busqueda=data;
     });
   }
   buscar_ciudadrestaurante(termino){
-    let url="https://reserved.ovh/apireserved/restaurants/city/";
+    let url="api/restaurants/city/";
       this.http.get(url+termino,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.busqueda=data;
     });
   }
   add_comentario(data){
-    let url = "https://reserved.ovh/apireserved/comment/";
+    let url = "api/comment/";
     return this.http.post(url,data, {headers: {'token-acceso':this.userService.session.token} , responseType:'text'})
     .map(resp=>{
       this.nuevacomentario = true;
@@ -206,7 +206,7 @@ export class RestaurantsProvider {
   }
 
   categorias_restaurante(){
-    let url="https://reserved.ovh/apireserved/restaurants/";
+    let url="api/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+this.restauranteactual+"/category",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.allcategorias=data;
@@ -216,7 +216,7 @@ export class RestaurantsProvider {
 
   productospedido(){
     this.total=0;
-    let url="https://reserved.ovh/apireserved/restaurants/orders/";
+    let url="api/restaurants/orders/";
         this.http.get(url+this.userService.reservation+"/orderproducts",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
           this.productopedido=data;
           this.cantidad=this.productopedido.length;
@@ -260,7 +260,7 @@ export class RestaurantsProvider {
   }
   
   eliminar_plato(id,idproducto){
-    let url="https://reserved.ovh/apireserved/restaurants/orders/";
+    let url="api/restaurants/orders/";
     this.http.delete(url+this.userService.reservation+"/orderproducts/"+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
       this.productospedido();
     });
@@ -273,12 +273,12 @@ export class RestaurantsProvider {
     }
   }
   anyadir_precio_productodepedido(idpedido,idproducto){
-    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
+    let url="api/restaurants/currentorders/";
     this.http.get(url+idpedido+"/deleteproduct/"+idproducto,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
     }); 
   }
   sumar_precio(idproducto){
-    let url="https://reserved.ovh/apireserved/restaurants/currentorders/";
+    let url="api/restaurants/currentorders/";
     this.http.get(url+this.userService.reservation+"/addproduct/"+idproducto,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
     }); 
   }
@@ -286,7 +286,7 @@ export class RestaurantsProvider {
   valoracionmedia:any;
 
   valoracion_media(id){
-    let url="https://reserved.ovh/apireserved/restaurants/";
+    let url="api/restaurants/";
       this.http.get(url+id+"/valorationcomments",{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.valoracionmedia=data[0].valoracion/data[0].comentarios;
     });

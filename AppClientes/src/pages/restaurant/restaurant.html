@@ -16,7 +16,7 @@
 <ion-content padding>
     <ion-grid>
         <div id="foto" *ngFor="let item of restaurantService.inforestaurante">
-         <img id="general"  src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imageprincipal">
+         <img id="general"  src="api/{{item.idRestaurante}}/imageprincipal">
         </div>
        <ion-item *ngFor="let item of restaurantService.inforestaurante">
                       <ion-col>
@@ -46,16 +46,16 @@
           </ion-col>
             <div id="fotos">
             <ion-thumbnail item-left tappable (click)="openImageprincipal(item.idRestaurante)">
-              <ion-img src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imageprincipal"></ion-img>
+              <ion-img src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
             </ion-thumbnail>
             <ion-thumbnail item-left tappable (click)="openImagesec1(item.idRestaurante)">
-              <ion-img src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imagesec1"></ion-img>
+              <ion-img src="api/{{item.idRestaurante}}/imagesec1"></ion-img>
             </ion-thumbnail>
             <ion-thumbnail item-left tappable (click)="openImagesec2(item.idRestaurante)">
-              <ion-img src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imagesec2"></ion-img>
+              <ion-img src="api/{{item.idRestaurante}}/imagesec2"></ion-img>
             </ion-thumbnail>
             <ion-thumbnail item-left tappable (click)="openImagesec3(item.idRestaurante)">
-              <ion-img src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imagesec3"></ion-img>
+              <ion-img src="api/{{item.idRestaurante}}/imagesec3"></ion-img>
             </ion-thumbnail>
           </div>
         </ion-item>

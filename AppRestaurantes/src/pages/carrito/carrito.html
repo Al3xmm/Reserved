@@ -22,7 +22,7 @@
       </ion-item>
   <ion-item *ngFor="let item of pedidoService.plato; let i = index;">
       <ion-thumbnail item-left>
-          <img width="80" height="80" src="https://reserved.ovh/apireserved/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
+          <img width="80" height="80" src="api/{{restaurantService.session.idRestaurante}}/{{item.nombre}}/imageproducto">
       </ion-thumbnail>
       <h2>{{item.nombre}}</h2>
       <br>
