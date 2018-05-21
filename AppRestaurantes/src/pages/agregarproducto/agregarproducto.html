@@ -40,9 +40,11 @@
           </ion-select>
         </ion-item>
         <br>
+        <ion-row>
           <ion-label>Imagen</ion-label>
-          <button type="button" (click)="presentActionSheet()">Cargar imagen</button>
-          <img [src]="imageData" style="width:100px; height: auto;">
+          <button id="cargar" type="button" (click)="presentActionSheet()">Cargar imagen</button>
+        </ion-row>
+          <img id="imagen" [src]="imageData" style="width:100px; height: auto;">
         <br>
         <ion-row>
           <ion-item>
