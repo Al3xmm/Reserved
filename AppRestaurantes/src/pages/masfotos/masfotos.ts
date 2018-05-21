@@ -19,9 +19,9 @@ export class MasfotosPage {
   }
 
   url_foto(){
-    this.urlfotosec1="api/"+this.restaurantService.session.idRestaurante+"/imagesec1";
-    this.urlfotosec2="api/"+this.restaurantService.session.idRestaurante+"/imagesec2";
-    this.urlfotosec3="api/"+this.restaurantService.session.idRestaurante+"/imagesec3";
+    this.urlfotosec1="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec1";
+    this.urlfotosec2="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec2";
+    this.urlfotosec3="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imagesec3";
   }
 
   openImage1() {
@@ -127,7 +127,6 @@ export class MasfotosPage {
   }
 
   public takePicture(sourceType) {
-    // Create options for the Camera Dialog
     var options = {
       quality: 50,
       targetWidth: 1024,
@@ -138,7 +137,6 @@ export class MasfotosPage {
       correctOrientation: true
     };
  
-    // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
       let modal = this.modalCtrl.create('SubirimgsecundariaPage', { data: imagePath });
       modal.present();

@@ -59,7 +59,7 @@
         <ion-list>
         <ion-item *ngFor="let item of restaurantService.restaurantes" (click)="presentLoadingCustom(item.idRestaurante)">
             <ion-thumbnail item-left>
-                <ion-img width="150" height="150" src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
+                <ion-img width="150" height="150" src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imageprincipal"></ion-img>
             </ion-thumbnail>
            <h2>{{item.nombre}}</h2>
            <br>
@@ -82,7 +82,6 @@
                     <ion-icon  md="md-star-outline"></ion-icon>
                 </ng-template>
                 &nbsp;de {{item.comentarios}} opiniones </ion-row>
-              <!--{{item.media| number : '1.2-2'}}/5 de {{item.comentarios}} Valoraciones-->
             </p>
             <p>
               A <span class="distancia">{{item.distancia}}KM</span> de tí.

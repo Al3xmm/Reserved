@@ -5,13 +5,6 @@ import { RestaurantsProvider } from '../../providers/restaurants/restaurants';
 import { CategoriaspedidoPage } from '../categoriaspedido/categoriaspedido';
 import { ProductospedidoPage } from '../productospedido/productospedido';
 
-/**
- * Generated class for the IniciarpedidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-iniciarpedido',
@@ -25,9 +18,6 @@ export class IniciarpedidoPage {
     userService.reservasconfirmadas();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad IniciarpedidoPage');
-  }
   comprobar_pin(){
       this.userService.add_pin(this.pin).subscribe(()=>{
         if(this.userService.nuevopin==true){
@@ -37,19 +27,15 @@ export class IniciarpedidoPage {
   }
   iniciarpedido(){
         this.userService.pedido_actual(this.userService.reservaconfirmada[0].idReserva);
-        //if(this.userService.reservation!=undefined){
           this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
           this.navCtrl.push(CategoriaspedidoPage);
           this.restaurantService.categorias_restaurante();
-    //}
   }
 
   iniciarpedidopin(){
     this.restaurantService.restauranteactual=this.userService.pininfo[0].restauranteR;
           this.usuario.usuarioR=this.userService.session.idUsuario;
           this.userService.reservapinactual=this.userService.pininfo[0].idReserva;
-          console.log(this.usuario.usuarioR);
-          console.log(this.userService.reservapinactual);
           this.userService.modificarpin(this.userService.reservapinactual,this.usuario).subscribe(()=>{
               this.navCtrl.push(IniciarpedidoPage);
   });

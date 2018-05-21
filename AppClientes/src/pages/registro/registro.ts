@@ -67,15 +67,5 @@ export class RegistroPage {
     }
     
   }
-  /*
-  add_user() {
-    this.userService.add_user(this.user)
-      .subscribe(()=>{
-        if(this.userService.login_correcto==true){
-          this.navCtrl.setRoot(AllrestaurantsPage);
-        }
-    });
-   
-  }*/
 
 }

@@ -4,13 +4,6 @@ import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { PedidoProvider } from './../../providers/pedido/pedido';
 import { MipedidoPage } from './../mipedido/mipedido';
 
-/**
- * Generated class for the PedirPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-pedir',
@@ -19,10 +12,6 @@ import { MipedidoPage } from './../mipedido/mipedido';
 export class PedirPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider, public pedidoService: PedidoProvider,private modalCtrl:ModalController, private loadingCtrl:LoadingController ) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PedirPage');
   }
 
   verpedido(){

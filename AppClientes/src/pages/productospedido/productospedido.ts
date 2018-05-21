@@ -5,12 +5,6 @@ import { PedidoProvider } from '../../providers/pedido/pedido';
 import { CategoriaspedidoPage } from './../categoriaspedido/categoriaspedido';
 import { AllrestaurantsPage } from './../allrestaurants/allrestaurants';
 import { UsersProvider } from '../../providers/users/users';
-/**
- * Generated class for the ProductospedidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -22,13 +16,8 @@ export class ProductospedidoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public restaurantService:RestaurantsProvider,public pedidoService:PedidoProvider,public userService:UsersProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductospedidoPage');
-  }
-
   anayadirplato(){
     this.restaurantService.restauranteactual=this.userService.reservaconfirmada[0].idRestaurante;
-    console.log(this.userService.reservaconfirmada[0].idRestaurante);
     this.restaurantService.categorias_restaurante();
     this.navCtrl.push(CategoriaspedidoPage);
   }
@@ -42,7 +31,6 @@ export class ProductospedidoPage {
   }
   eliminarplato(id,idproducto){
     this.restaurantService.eliminar_plato(id,idproducto);
-    console.log(id);
     this.restaurantService.anyadir_precio_productodepedido(this.userService.reservation, idproducto);
     this.navCtrl.setRoot(ProductospedidoPage);
   }

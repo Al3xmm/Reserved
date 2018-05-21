@@ -14,9 +14,6 @@ export class CarritoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public pedidoService: PedidoProvider,private restaurantService:RestaurantProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CarritoPage');
-  }
   anyadirproductopedido(){
     var i=0;
     for( i=0;i<this.pedidoService.plato.length;i++){
@@ -44,7 +41,6 @@ export class CarritoPage {
     this.restaurantService.sumar_precio(this.producto.productop);
     this.restaurantService.anyadir_producto_pedido(this.producto)
     .subscribe(()=>{
-      console.log("Producto pedido");
       this.pedidoService.plato.splice(0,i);
       this.pedidoService.suma=0;
       this.navCtrl.setRoot(CamareroPage); 

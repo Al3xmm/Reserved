@@ -29,7 +29,6 @@ export class RestaurantPage {
   }
 
   ionViewDidLoad(){
-    //this.getPosition();
     this.loadMap();
   }
 
@@ -41,7 +40,7 @@ export class RestaurantPage {
       hardwareback: 'yes'
    };
 
-    const browser = this.iab.create('https:reserved.ovh/motorgrafico','_self',options);
+    let browser = this.iab.create('https:reserved.ovh/motorgrafico','_system','location=true');
   }
 
   createRange(number){
@@ -97,17 +96,14 @@ export class RestaurantPage {
 
   }
 
-  loadMap(/*position: Geoposition*/){
+  loadMap(){
     var aux= this.restaurantService.inforestaurante[0].coordenadas.split("_");
     let latitude =parseFloat(aux[0]) ;
     let longitude = parseFloat(aux[1]);
     
     let mapEle: HTMLElement = document.getElementById('map');
-  
-    
     let myLatLng = {lat: latitude, lng: longitude};
   
-    // crear mapa
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 15
@@ -139,23 +135,19 @@ export class RestaurantPage {
     this.navCtrl.push(CategoriaspedidoPage);
   }
   openImageprincipal(id) {
-    //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
     modal.present();
   }
   openImagesec1(id) {
-    //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec1" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec1" });
     modal.present();
   }
   openImagesec2(id) {
-    //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec2" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec2" });
     modal.present();
   }
   openImagesec3(id) {
-    //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec3" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec3" });
     modal.present();
   }
 

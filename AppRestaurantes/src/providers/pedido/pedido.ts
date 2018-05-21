@@ -4,18 +4,13 @@ import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-/*
-  Generated class for the PedidoProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class PedidoProvider {
   plato:any[]=[];
   suma:number=0;
   constructor(public http: HttpClient, public storage:Storage, private alertCtrl:AlertController) {
-    console.log('Hello PedidoProvider Provider');
+    
   }
 
   agregarpedido(item:any) {

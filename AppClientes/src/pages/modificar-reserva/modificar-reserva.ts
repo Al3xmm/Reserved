@@ -16,7 +16,6 @@ export class ModificarReservaPage {
   startDate:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
-    console.log(this.userService.modificarreserva.dia);
     this.startDate=this.userService.modificarreserva.dia;
     this.eliminar.dia=this.userService.modificarreserva.dia;
     this.reserva.comensales=this.userService.modificarreserva.comensales;
@@ -67,12 +66,5 @@ export class ModificarReservaPage {
             this.userService.reservasfuturas();
           }
       });
-    /*
-    this.userService.modify_reserva(this.reserva)
-      .subscribe(()=>{
-          this.navCtrl.setRoot(PerfilPage);
-    });
-    */
-    
   }
 }

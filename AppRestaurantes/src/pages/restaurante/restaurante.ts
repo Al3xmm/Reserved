@@ -26,7 +26,6 @@ export class RestaurantePage {
 
   constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams, public storage: Storage, private restaurantService: RestaurantProvider, private menu: MenuController, private modalCtrl: ModalController,private actionSheetCtrl: ActionSheetController) {
     this.menu.enable(true, 'menu2');
-    //this.restaurantService.get_imagenprincipal();
     this.url_foto();
 
   }
@@ -83,15 +82,14 @@ export class RestaurantePage {
   }
 
   openImage() {
-    //this.navCtrl.push(PreviewImagePage);
     this.restaurantService.urlfotopreview=null;
-    this.restaurantService.urlfotopreview="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
+    this.restaurantService.urlfotopreview="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal" });
     modal.present();
   }
 
   url_foto(){
-    this.urlfotoprincipal="api/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
+    this.urlfotoprincipal="https://reserved.ovh/apireserved/"+this.restaurantService.session.idRestaurante+"/imageprincipal";
   }
 
   mas_fotos(){

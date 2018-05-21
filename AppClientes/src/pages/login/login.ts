@@ -14,7 +14,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 })
 export class LoginPage {
 
-  //objeto creado con nick y password que estará disponible en el login.html
   user= { nick: '', password: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private userservice:UsersProvider, private loadingCtrl: LoadingController,private restaurantService:RestaurantsProvider) {

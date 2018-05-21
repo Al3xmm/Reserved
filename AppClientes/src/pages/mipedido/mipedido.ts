@@ -5,12 +5,6 @@ import { RestaurantsProvider } from './../../providers/restaurants/restaurants';
 import { UsersProvider } from './../../providers/users/users';
 import { MisReservasPage } from './../mis-reservas/mis-reservas';
 import { ProductospedidoPage } from './../productospedido/productospedido';
-/**
- * Generated class for the MipedidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,22 +17,15 @@ export class MipedidoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public pedidoService: PedidoProvider,public userService: UsersProvider,public restaurantService: RestaurantsProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MipedidoPage');
-  }
-
   add_pedido(){
     var i =0;
     for( i=0;i<this.pedidoService.plato.length;i++){
       var date = new Date();
       var currentdate=date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
       this.pedido.hora=currentdate;
-      //console.log(this.userService.reservaconfirmada[0].idReserva);
       this.pedido.productop= this.pedidoService.plato[i].idProducto;
       this.pedido.tipoproducto = this.pedidoService.plato[i].tipo;
-     // console.log(this.userService.reservation);
       this.pedido.pedidop = this.userService.reservation;
-    //  console.log(this.pedido.pedidop);
     this.restaurantService.sumar_precio(this.pedido.productop);
       this.userService.add_pedido(this.pedido)
       .subscribe(()=>{

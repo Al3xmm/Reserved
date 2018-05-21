@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PerfilPage } from './../perfil/perfil';
 import { UsersProvider } from './../../providers/users/users';
-/**
- * Generated class for the ModificarperfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -21,9 +16,6 @@ export class ModificarperfilPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public userService: UsersProvider,private alertCtrl:AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModificarperfilPage');
-  }
   modify_user(){
     if(this.usuario.password!=''){
       if(this.usuario.password==this.pass.confirmarpassword){

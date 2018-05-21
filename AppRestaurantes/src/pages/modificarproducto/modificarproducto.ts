@@ -21,7 +21,7 @@ export class ModificarproductoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService:RestaurantProvider,private camera:Camera,private actionSheetCtrl:ActionSheetController) {
     restaurantService.see_category();
     if(this.subirimagen==false){
-      this.imageData="api/"+restaurantService.session.idRestaurante+"/"+this.restaurantService.infoproductoactual[0].nombre+"/imageproducto"
+      this.imageData="https://reserved.ovh/apireserved/"+restaurantService.session.idRestaurante+"/"+this.restaurantService.infoproductoactual[0].nombre+"/imageproducto"
     }
     
   }
@@ -55,7 +55,6 @@ export class ModificarproductoPage {
 
   public takePicture(sourceType) {
     
-    // Create options for the Camera Dialog
     var options = {
       quality: 50,
       targetWidth: 400,
@@ -66,9 +65,7 @@ export class ModificarproductoPage {
       correctOrientation: true
     };
  
-    // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
-      //this.add_producto();
       this.imageData=imagePath;
       this.subirimagen=true;
       
@@ -81,10 +78,8 @@ export class ModificarproductoPage {
     if(this.subirimagen==true){
       if(this.producto.nombre!=""){
         this.restaurantService.upload_imageproducto(this.imageData,this.producto.nombre);
-        console.log("entro con nombre");
       }else{
         this.restaurantService.upload_imageproducto(this.imageData,this.restaurantService.infoproductoactual[0].nombre);
-        console.log("entro sin nombre");
       }
       
     }

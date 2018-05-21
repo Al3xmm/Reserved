@@ -21,7 +21,6 @@ export class UsersProvider {
   pedidos=false;
   idpedido=false;
 
-  //Guardamos la info del usuario que se acaba de loguear.
   infouser:any;
   pininfo:any;
   reservaactual:any;
@@ -41,11 +40,10 @@ export class UsersProvider {
   }
 
   add_user(data){
-    let url="api/adduser";
+    let url="https://reserved.ovh/apireserved/adduser";
 
     return this.http.post(url, data, {responseType: 'json'} )
       .map(resp=>{
-        //si entra, significa que el nick ya esta siendo utilizado por otro usuario.
         if(resp==='Nick no disponible'){
           this.alertCtrl.create({
             title:"Error",
@@ -56,9 +54,7 @@ export class UsersProvider {
           console.log("Usuario creado");
           this.logueado=true;
           this.login_correcto=true;
-          //guardamos la informacion del usuario
           this.session=resp;
-          //Guardar en el storage
           this.storage.set('idUsuario', this.session.idUsuario);
           this.storage.set('token', this.session.token);
         };
@@ -69,11 +65,10 @@ export class UsersProvider {
 
 
   login_user(data){
-    let url="api/login";
+    let url="https://reserved.ovh/apireserved/login";
 
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
-        //si entra, significa que el nick no existe.
         if(resp==='Login incorrecto'){
           this.alertCtrl.create({
             title:"Error",
@@ -90,9 +85,7 @@ export class UsersProvider {
           console.log("Login correcto");
           this.logueado=true;
           this.login_correcto=true;
-          //guardamos la informacion del usuario
           this.session=resp;
-          //Guardar en el storage
           this.storage.set('idUsuario', this.session.idUsuario);
           this.storage.set('token', this.session.token);
 
@@ -102,7 +95,7 @@ export class UsersProvider {
   }
 
   user_profile(id,token){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{
       this.infouser=data;
     });
@@ -110,12 +103,11 @@ export class UsersProvider {
   }
 
   mis_reservas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.storage.get('idUsuario').then((val) => {
       this.storage.get('token').then((val2) => {
         this.http.get(url+val+"/reservations",{headers: {'token-acceso':val2}}).subscribe(data=>{
           this.reservasusuario=data;
-          console.log(this.reservasusuario);
         });
       });
     });
@@ -123,10 +115,9 @@ export class UsersProvider {
   }
 
   modify_user(data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     return this.http.put(url+this.session.idUsuario, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
-          console.log("Perfil Actualizado");
           this.modificar_perfil=true;
 
       })
@@ -136,7 +127,7 @@ export class UsersProvider {
   aforoaux:any;
 
   comprobar_aforo(data){
-    let url = "api/users/comprobaraforo";
+    let url = "https://reserved.ovh/apireserved/users/comprobaraforo";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
       this.aforoaux=resp;
@@ -159,66 +150,59 @@ export class UsersProvider {
   }
 
   add_reserva(data){
-    let url = "api/users/";
+    let url = "https://reserved.ovh/apireserved/users/";
     return this.http.post(url+this.session.idUsuario+"/reservations",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
-      console.log("Reserva nueva");
       this.mis_reservas();
       
     })
   }
 
-  //id del pedido dada una reserva
   pedido_actual(id){
-    let url = "api/users/";
+    let url = "https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.pedidoactual =data;
       this.reservation=this.pedidoactual[0].idPedido;
       this.idpedido=true;
-      console.log(this.idpedido);
     })
   }
 
 
   add_pedido(data){
-    let url = "api/restaurants/orders/";
+    let url = "https://reserved.ovh/apireserved/restaurants/orders/";
     return this.http.post(url+this.reservation+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
-      console.log(this.reservation);
-      console.log("Pedido enviado");
       this.nuevopedido = true;
     })
 
   }
   modify_reserva(data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     return this.http.put(url+this.session.idUsuario+"/reservation/"+this.reservaactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
         this.user_profile(this.session.idUsuario, this.session.token);
-          console.log("Reserva actualizada");
           this.modificar_reserva=true;
 
       })
 
   }
   eliminar_reserva(id,data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.put(url+this.session.idUsuario+"/reservations/"+id,data, {headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.user_profile(this.session.idUsuario, this.session.token);
     });
 
   }
   reservasconfirmadas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/confirmadas", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservaconfirmada=data;
-          console.log(this.reservaconfirmada);
       })
   }
   add_pin(data){
-    let url = "api/users/addpin";
+    let url = "https://reserved.ovh/apireserved/users/addpin";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
       if(resp==='Pin incorrecto'){
@@ -228,27 +212,23 @@ export class UsersProvider {
           buttons:["OK"]
         }).present();
       }else{
-        console.log("Pin correcto");
-        console.log(resp);
         this.nuevopin = true;
         this.pininfo= resp;
       }
     })
   }
   reservasfuturas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/future", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservafutura=data;
-          console.log(this.reservafutura.length);
       })
   }
   
   modificarpin(id,data){
-      let url="api/users/pin/";
+      let url="https://reserved.ovh/apireserved/users/pin/";
       return this.http.put(url+id, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
         .map(resp=>{
-            console.log("Usuario actualizada");
             this.pinmodi=true;
   
         })

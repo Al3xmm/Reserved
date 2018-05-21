@@ -14,12 +14,8 @@ export class CategoriaspedidoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public restaurantService: RestaurantsProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriaspedidoPage');
-  }
   mis_productos(id){
     this.restaurantService.productos_porcategoria(id);
-    //console.log(id);
     this.navCtrl.push(PedirPage);
   }
 }

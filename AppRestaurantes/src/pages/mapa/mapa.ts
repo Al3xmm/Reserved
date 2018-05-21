@@ -104,7 +104,7 @@ export class MapaPage {
         this.markers=marker;
         
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        alert('Geocode no funciona: ' + status);
       }
     });
   }

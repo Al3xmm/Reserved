@@ -23,7 +23,6 @@ export class AgregarproductoPage {
   }
 
   add_producto(){
-    //console.log(this.producto);
     this.restaurantService.upload_imageproducto(this.imageData,this.producto.nombre);
     this.producto.restauranteP=this.restaurantService.session.idRestaurante;
     this.restaurantService.add_producto(this.producto)
@@ -63,7 +62,6 @@ export class AgregarproductoPage {
   }
 
   public takePicture(sourceType) {
-    // Create options for the Camera Dialog
     var options = {
       quality: 50,
       targetWidth: 400,
@@ -74,9 +72,7 @@ export class AgregarproductoPage {
       correctOrientation: true
     };
  
-    // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
-      //this.add_producto();
       this.imageData=imagePath;
       
     }, (err) => {

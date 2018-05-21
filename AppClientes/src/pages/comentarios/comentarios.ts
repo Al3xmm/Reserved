@@ -15,9 +15,6 @@ comentario={ contenido:'',valoracion:0, usuarioc:'', restaurantec:''}
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService:UsersProvider, public restaurantService:RestaurantsProvider) {
   }
 
-  ionViewDidLoad() {
-    
-  }
   add_comentario(){
     this.comentario.restaurantec=this.restaurantService.restauranteactual;
     this.comentario.usuarioc=this.userService.session.idUsuario;

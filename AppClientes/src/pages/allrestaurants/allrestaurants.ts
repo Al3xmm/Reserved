@@ -20,8 +20,6 @@ export class AllrestaurantsPage {
   mediaestrella:boolean=false;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,private restaurantService:RestaurantsProvider, private modalCtrl: ModalController, private loadingCtrl:LoadingController) {
-    //Si dejo esta linea aqui, cada vez que entremos a esta paguina, hara un get de restaurantes. Si la ponemos en restaurants.ts, solo lo hará una vez  (poner arriba el restaurants provider)
-    //restaurantservice.mostrar_todos();
     if(restaurantService.botontodosrestaurantes==true){
       this.buttonClicked2 = !this.buttonClicked2;
     }
@@ -140,8 +138,7 @@ export class AllrestaurantsPage {
   }
 
   openImage(id) {
-    //this.navCtrl.push(PreviewImagePage);
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
     modal.present();
   }
 
@@ -164,7 +161,6 @@ export class AllrestaurantsPage {
   ver_restaurante(id){
     this.restaurantService.restaurante_id(id);
     this.restaurantService.comentarios_restaurante(id);
-    //this.navCtrl.push(RestaurantPage);
   }
 
   ir_restaurante(){
