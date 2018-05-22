@@ -41,9 +41,17 @@
           </ion-select>
         </ion-item>
         <br>
-          <ion-label>Imagen</ion-label>
-          <button type="button" (click)="presentActionSheet()">Cargar imagen</button>
-          <img [src]="imageData" style="width:80px; height: 80px;">
+        <ion-row>
+          <ion-col>
+            <ion-label>Imagen: </ion-label>
+            <div>
+              <button id="cargar" type="button" (click)="presentActionSheet()">Cargar imagen</button>
+            </div>
+          </ion-col>
+          <ion-col class="colimagen">
+            <img id="imagen" [src]="imageData" style="width:100px; height: 100px;">
+          </ion-col>
+        </ion-row>
         <br>
         <ion-row>
           <ion-item>

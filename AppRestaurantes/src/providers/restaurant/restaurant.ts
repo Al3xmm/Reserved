@@ -98,7 +98,6 @@ export class RestaurantProvider {
     return this.http.post(url, data, {responseType: 'json'} )
       .map(resp=>{
         //si entra, significa que el email ya esta siendo utilizado por otro usuario.
-        console.log(resp);
         if(resp==='Email no disponible'){
           this.alertCtrl.create({
             title:"Error",
@@ -106,7 +105,6 @@ export class RestaurantProvider {
             buttons:["OK"]
           }).present();
         }else{
-          console.log("Restaurante creado");
           this.logueado=true;
           this.login_correcto=true;
           //guardamos la informacion del usuario
@@ -138,7 +136,6 @@ export class RestaurantProvider {
             buttons:["OK"]
           }).present();
         }else{
-          console.log("Login correcto");
           this.logueado=true;
           this.login_correcto=true;
           //guardamos la informacion del usuario
@@ -173,7 +170,6 @@ export class RestaurantProvider {
           buttons:["OK"]
         }).present();
       }else{
-        console.log("Login correcto");
         this.logueado=true;
         this.login_correcto=true;
         //guardamos la informacion del usuario

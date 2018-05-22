@@ -41,10 +41,16 @@
         </ion-item>
         <br>
         <ion-row>
-          <ion-label>Imagen</ion-label>
-          <button id="cargar" type="button" (click)="presentActionSheet()">Cargar imagen</button>
+          <ion-col>
+            <ion-label>Imagen: </ion-label>
+            <div>
+              <button id="cargar" type="button" (click)="presentActionSheet()">Cargar imagen</button>
+            </div>
+          </ion-col>
+          <ion-col class="colimagen">
+            <img id="imagen" [src]="imageData" style="width:100px; height: 100px;">
+          </ion-col>
         </ion-row>
-          <img id="imagen" [src]="imageData" style="width:100px; height: auto;">
         <br>
         <ion-row>
           <ion-item>
