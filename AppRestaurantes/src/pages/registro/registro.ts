@@ -27,7 +27,13 @@ export class RegistroPage {
       this.restaurantService.add_restaurant(this.restaurant)
       .subscribe(()=>{
         if(this.restaurantService.login_correcto==true){
+          let alert = this.alertCtrl.create({
+            title: 'Restaurante creado',
+            subTitle: 'El restaurante ha sido registrado correctamente',
+            buttons: ['Ok']
+          });
           this.navCtrl.setRoot(LoginPage);
+          alert.present();
         }
       });
     }else{

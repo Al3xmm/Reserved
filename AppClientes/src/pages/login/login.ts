@@ -27,7 +27,7 @@ export class LoginPage {
   presentLoadingCustom() {
     let loading = this.loadingCtrl.create({
       content: 'Iniciando sesión',
-      duration: 1500,
+      duration: 3000,
     });
 
     loading.onDidDismiss(() => {
