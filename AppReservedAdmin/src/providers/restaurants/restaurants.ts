@@ -26,7 +26,7 @@ export class RestaurantsProvider {
 
   mostrar_todos(){
 
-    let url="api/allrestaurants";
+    let url="https://reserved.ovh/apireserved/allrestaurants";
     
     this.http.get(url)
       .subscribe(data=>{
@@ -38,7 +38,7 @@ export class RestaurantsProvider {
 
   restaurante_id(id){
     this.restauranteactual=id;
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
         this.inforestaurante=data;
@@ -48,7 +48,7 @@ export class RestaurantsProvider {
   }
 
   comentarios_restaurante(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
     this.storage.get('token').then((val) => {
       this.http.get(url+id+"/comments",{headers: {'token-acceso':val}}).subscribe(data=>{
         this.comentariosrestaurante=data;
@@ -59,7 +59,7 @@ export class RestaurantsProvider {
  
   
   borrar_restaurante(id){
-    let url="api/restaurants/";
+    let url="https://reserved.ovh/apireserved/restaurants/";
 
     this.storage.get('token').then((val) => {
       this.http.delete(url+id,{headers: {'token-acceso':val}}).subscribe(data=>{
@@ -70,7 +70,7 @@ export class RestaurantsProvider {
   }
 
   mostrar_denuncias(){
-    let url="api/restaurants/denunciation/all";
+    let url="https://reserved.ovh/apireserved/restaurants/denunciation/all";
     
     this.http.get(url,{headers: {'token-acceso':this.userService.session.token}})
       .subscribe(data=>{
@@ -81,7 +81,7 @@ export class RestaurantsProvider {
   }
 
   borrar_comentario(id){
-    let url="api/restaurants/denunciation/";
+    let url="https://reserved.ovh/apireserved/restaurants/denunciation/";
 
     this.http.delete(url+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
       this.mostrar_denuncias();
@@ -90,7 +90,7 @@ export class RestaurantsProvider {
   }
 
   permitir_comentario(id){
-    let url="api/restaurants/denunciationallow/";
+    let url="https://reserved.ovh/apireserved/restaurants/denunciationallow/";
 
     this.http.delete(url+id,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
       this.mostrar_denuncias();
@@ -98,7 +98,7 @@ export class RestaurantsProvider {
   }
 
   find_restaurant(nombre){
-    let url="api/restaurants/find/";
+    let url="https://reserved.ovh/apireserved/restaurants/find/";
       this.http.get(url+nombre,{headers: {'token-acceso':this.userService.session.token}}).subscribe(data=>{
         this.restaurantes=data;
       });

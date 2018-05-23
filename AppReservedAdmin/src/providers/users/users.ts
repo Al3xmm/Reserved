@@ -34,7 +34,7 @@ export class UsersProvider {
  
 
   login_user(data){
-    let url="api/loginadmin";
+    let url="https://reserved.ovh/apireserved/loginadmin";
 
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
@@ -69,7 +69,7 @@ export class UsersProvider {
 
   mostrar_todos_usuarios(){
     let promesa=new Promise((resolve,reject)=>{
-      let url="api/users/page/";
+      let url="https://reserved.ovh/apireserved/users/page/";
       this.http.get(url+this.pagina,{headers: {'token-acceso':this.session.token}})
         .subscribe(data=>{
           this.usuarios=data;
@@ -87,7 +87,7 @@ export class UsersProvider {
 
   borrar_usuario(id)
   {
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
 
     this.http.delete(url+id,{headers: {'token-acceso':this.session.token}})
     .subscribe(data=>{
@@ -97,7 +97,7 @@ export class UsersProvider {
   }
 
   find_usuario(nombre){
-    let url="api/users/find/";
+    let url="https://reserved.ovh/apireserved/users/find/";
       this.http.get(url+nombre,{headers: {'token-acceso':this.session.token}}).subscribe(data=>{
         this.users=data;
         this.pagina=0;

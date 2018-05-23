@@ -40,7 +40,7 @@ export class UsersProvider {
   }
 
   add_user(data){
-    let url="api/adduser";
+    let url="https://reserved.ovh/apireserved/adduser";
 
     return this.http.post(url, data, {responseType: 'json'} )
       .map(resp=>{
@@ -65,7 +65,7 @@ export class UsersProvider {
 
 
   login_user(data){
-    let url="api/login";
+    let url="https://reserved.ovh/apireserved/login";
 
     return this.http.post(url,data,{responseType:'json'})
       .map(resp=>{
@@ -95,7 +95,7 @@ export class UsersProvider {
   }
 
   user_profile(id,token){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+id,{headers: {'token-acceso':token}}).subscribe(data=>{
       this.infouser=data;
     });
@@ -103,7 +103,7 @@ export class UsersProvider {
   }
 
   mis_reservas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.storage.get('idUsuario').then((val) => {
       this.storage.get('token').then((val2) => {
         this.http.get(url+val+"/reservations",{headers: {'token-acceso':val2}}).subscribe(data=>{
@@ -115,7 +115,7 @@ export class UsersProvider {
   }
 
   modify_user(data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     return this.http.put(url+this.session.idUsuario, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
           this.modificar_perfil=true;
@@ -127,7 +127,7 @@ export class UsersProvider {
   aforoaux:any;
 
   comprobar_aforo(data){
-    let url = "api/users/comprobaraforo";
+    let url = "https://reserved.ovh/apireserved/users/comprobaraforo";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
       this.aforoaux=resp;
@@ -150,7 +150,7 @@ export class UsersProvider {
   }
 
   add_reserva(data){
-    let url = "api/users/";
+    let url = "https://reserved.ovh/apireserved/users/";
     return this.http.post(url+this.session.idUsuario+"/reservations",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
       this.mis_reservas();
@@ -159,7 +159,7 @@ export class UsersProvider {
   }
 
   pedido_actual(id){
-    let url = "api/users/";
+    let url = "https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/orders/"+id,{headers:{'token-acceso':this.session.token}})
     .subscribe(data=>{
       this.pedidoactual =data;
@@ -170,7 +170,7 @@ export class UsersProvider {
 
 
   add_pedido(data){
-    let url = "api/restaurants/orders/";
+    let url = "https://reserved.ovh/apireserved/restaurants/orders/";
     return this.http.post(url+this.reservation+"/orderproducts",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
       this.nuevopedido = true;
@@ -178,7 +178,7 @@ export class UsersProvider {
 
   }
   modify_reserva(data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     return this.http.put(url+this.session.idUsuario+"/reservation/"+this.reservaactual, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .map(resp=>{
         this.user_profile(this.session.idUsuario, this.session.token);
@@ -188,21 +188,21 @@ export class UsersProvider {
 
   }
   eliminar_reserva(id,data){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.put(url+this.session.idUsuario+"/reservations/"+id,data, {headers: {'token-acceso':this.session.token}}).subscribe(data=>{
       this.user_profile(this.session.idUsuario, this.session.token);
     });
 
   }
   reservasconfirmadas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/confirmadas", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservaconfirmada=data;
       })
   }
   add_pin(data){
-    let url = "api/users/addpin";
+    let url = "https://reserved.ovh/apireserved/users/addpin";
     return this.http.post(url,data, {headers: {'token-acceso':this.session.token} , responseType:'json'})
     .map(resp=>{
       if(resp==='Pin incorrecto'){
@@ -218,7 +218,7 @@ export class UsersProvider {
     })
   }
   reservasfuturas(){
-    let url="api/users/";
+    let url="https://reserved.ovh/apireserved/users/";
     this.http.get(url+this.session.idUsuario+"/reservations/future", {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
       .subscribe(data=>{
           this.reservafutura=data;
@@ -226,7 +226,7 @@ export class UsersProvider {
   }
   
   modificarpin(id,data){
-      let url="api/users/pin/";
+      let url="https://reserved.ovh/apireserved/users/pin/";
       return this.http.put(url+id, data, {headers: {'token-acceso':this.session.token} , responseType: 'json'} )
         .map(resp=>{
             this.pinmodi=true;

@@ -17,7 +17,7 @@
       <hr>
   <ion-item *ngFor="let item of restaurantService.productospedidoagrupados">
       <ion-thumbnail item-left>
-          <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+          <img width="80" height="80" src="https://reserved.ovh/apireserved/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
       </ion-thumbnail>
       <h2>{{item.nombre}} &nbsp;x{{item.cantidad}}</h2>
         <p>
