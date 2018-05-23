@@ -59,7 +59,7 @@
         <ion-list>
         <ion-item *ngFor="let item of restaurantService.restaurantes" (click)="presentLoadingCustom(item.idRestaurante)">
             <ion-thumbnail item-left>
-                <ion-img width="150" height="150" src="https://reserved.ovh/apireserved/{{item.idRestaurante}}/imageprincipal"></ion-img>
+                <ion-img width="150" height="150" src="api/{{item.idRestaurante}}/imageprincipal"></ion-img>
             </ion-thumbnail>
            <h2>{{item.nombre}}</h2>
            <br>

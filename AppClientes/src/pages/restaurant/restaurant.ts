@@ -135,19 +135,19 @@ export class RestaurantPage {
     this.navCtrl.push(CategoriaspedidoPage);
   }
   openImageprincipal(id) {
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imageprincipal" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imageprincipal" });
     modal.present();
   }
   openImagesec1(id) {
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec1" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec1" });
     modal.present();
   }
   openImagesec2(id) {
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec2" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec2" });
     modal.present();
   }
   openImagesec3(id) {
-    let modal = this.modalCtrl.create('PreviewImagePage', { img: "https://reserved.ovh/apireserved/"+id+"/imagesec3" });
+    let modal = this.modalCtrl.create('PreviewImagePage', { img: "api/"+id+"/imagesec3" });
     modal.present();
   }
 

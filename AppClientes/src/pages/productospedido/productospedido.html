@@ -21,12 +21,13 @@
      <h5 id="precio">{{restaurantService.suma}}€</h5> 
     </ion-item>
     <br>
-    <button id="azul" ion-button (click)="pedirCuenta()">Pedir la cuenta</button>
+    <p class="botones"><button id="azul" ion-button (click)="anayadirplato()">Agregar platos</button> 
+    <button id="rojo" ion-button outline (click)="pedirCuenta()">Pedir la cuenta</button></p>
     <br>
     
     <ion-item *ngFor="let item of restaurantService.productospedidoagrupados">
         <ion-thumbnail item-left>
-            <img width="80" height="80" src="https://reserved.ovh/apireserved/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
+            <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
           </ion-thumbnail>
       <ion-col>
         <h2>{{item.nombre}} &nbsp;x{{item.cantidad}}</h2>
@@ -42,11 +43,6 @@
          (click)="eliminarplato(item.idProductoDePedido,item.IdProducto)">
          <ion-icon name="trash"></ion-icon></button>
       
-    </ion-item>
-    <ion-item>
-      <br>
-      <br>
-      <button id="azul" ion-button (click)="anayadirplato()">Agregar platos</button> 
     </ion-item>
   </ion-grid>
   <ion-refresher (ionRefresh)="doRefresh($event)">

@@ -27,7 +27,6 @@ export class ProductospedidoPage {
     subTitle:"El camarero le traera la cuenta enseguida, gracias por su visita",
     buttons:["OK"]
   }).present();
-  this.navCtrl.setRoot(AllrestaurantsPage);
   }
   eliminarplato(id,idproducto){
     this.restaurantService.eliminar_plato(id,idproducto);

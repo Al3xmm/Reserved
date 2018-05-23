@@ -45,7 +45,7 @@ export class IniciarpedidoPage {
     this.userService.pedido_actual(id);
     if(this.userService.idpedido==true){
       this.restaurantService.productospedido();
-      this.navCtrl.setRoot(ProductospedidoPage);
+      this.navCtrl.push(ProductospedidoPage);
     }
   }
 }

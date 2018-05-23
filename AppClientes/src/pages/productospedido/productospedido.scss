@@ -5,7 +5,6 @@ page-productospedido {
     .button-default-md{
         background-color:#76323F;
         width: 45%;
-        height: 2em!important;
     }
     .scroll-content{
         margin-top: 35px!important;
@@ -47,6 +46,13 @@ page-productospedido {
     }
     #azul{
         background-color: #76323F!important;
+        
     }
-
+    #rojo{
+        color:#76323F;
+        border-color:#76323F;
+    }
+    .botones{
+        text-align: center;
+    }
 }
