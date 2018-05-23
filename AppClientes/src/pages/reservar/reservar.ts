@@ -38,26 +38,36 @@ export class ReservarPage {
       this.reserva.turno="Cena";
     }
 
-    if(this.reserva.restauranter !=null){
-      this.reserva.restauranter=this.restaurantService.restauranteactual;
-      this.reserva.usuarior=this.userService.session.idUsuario;
-      this.userService.comprobar_aforo(this.reserva)
-        .subscribe(()=>{
-          if(this.userService.nuevareserva==true){
-            this.userService.add_reserva(this.reserva).subscribe(()=>{
-              let alert = this.alertCtrl.create({
-                title: 'Reserva Creada',
-                subTitle: 'La reserva ha sido creada',
-                buttons: ['Ok']
-              });
-              this.navCtrl.setRoot(AllrestaurantsPage);
-              alert.present(); 
-            })
-            this.userService.nuevareserva = false;
-          }
-      });
+    var regex = /^(0|[1-9][0-9]*)$/;
 
+    if( !regex.test(this.reserva.comensales) ) {
+      let alert = this.alertCtrl.create({
+        title: 'Datos incorrectos',
+        subTitle: 'Error al introducir los comensales',
+        buttons: ['Ok']
+      });
+      alert.present(); 
+    }else{
+      if(this.reserva.restauranter !=null){
+        this.reserva.restauranter=this.restaurantService.restauranteactual;
+        this.reserva.usuarior=this.userService.session.idUsuario;
+        this.userService.comprobar_aforo(this.reserva)
+          .subscribe(()=>{
+            if(this.userService.nuevareserva==true){
+              this.userService.add_reserva(this.reserva).subscribe(()=>{
+                let alert = this.alertCtrl.create({
+                  title: 'Reserva Creada',
+                  subTitle: 'La reserva ha sido creada',
+                  buttons: ['Ok']
+                });
+                this.navCtrl.setRoot(AllrestaurantsPage);
+                alert.present(); 
+              })
+              this.userService.nuevareserva = false;
+            }
+        });
+  
+      }
     }
-    
   }
 }

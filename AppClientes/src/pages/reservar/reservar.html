@@ -40,7 +40,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Comensales</ion-label>
-      <ion-input type="number" [(ngModel)]="reserva.comensales" name="comensales" required></ion-input>
+      <ion-input type="number" min="1" [(ngModel)]="reserva.comensales" name="comensales" required></ion-input>
     </ion-item>
     <button ion-button type="submit" block>Reservar</button>
   </form>

@@ -154,7 +154,6 @@ export class UsersProvider {
     return this.http.post(url+this.session.idUsuario+"/reservations",data, {headers: {'token-acceso':this.session.token} , responseType:'text'})
     .map(resp=>{
       this.mis_reservas();
-      
     })
   }
 

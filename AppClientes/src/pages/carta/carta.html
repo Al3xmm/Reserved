@@ -12,7 +12,7 @@
   </ion-header>
   <ion-content>
       <ion-grid>
-          <button ion-button (click)="restaurante()" block>Otros restaurantes</button>
+          <button ion-button (click)="restaurante()" block>Listado restaurantes</button>
             <ion-item *ngFor="let item of restaurantService.productoscategoria" (click)="presentLoadingCustom(item.idProducto)"> 
               <ion-thumbnail item-left>
               <img width="80" height="80" src="api/{{restaurantService.restauranteactual}}/{{item.nombre}}/imageproducto">
